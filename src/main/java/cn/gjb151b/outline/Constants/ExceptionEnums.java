@@ -6,8 +6,12 @@ package cn.gjb151b.outline.Constants;
  * 抛出异常使用错误类传递消息
  */
 public enum ExceptionEnums {
-    DB_FETCH_ERR(2, "fetch data from database error"),
-    DB_EMPTY_ERR(3, "fetch db is empty");
+    // DB error 1000
+    DB_FETCH_ERR(1001, "fetch data from database error"),
+    DB_EMPTY_ERR(1002, "fetch db is empty"),
+
+    // 参数错误 2000
+    PARAM_PAGE_ID_ERR(2001, "param error, page id illegal");
 
     private int errCode;
     private String errMsg;

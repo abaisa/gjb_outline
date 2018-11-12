@@ -9,13 +9,12 @@
     <title>Basic JSON Editor Example</title>
 </head>
 <body>
-    <div>
-        <%--<s:include value="../_nav.jsp?act=new"/>--%>
-        <s:include value="_nav.jsp?">
-            <s:param name="userName">teng</s:param>
-            <s:param name="act">1</s:param>
-        </s:include>
-    </div>
+    <%--<div>--%>
+        <%--<s:include value="_nav.jsp?">--%>
+            <%--<s:param name="userName">teng</s:param>--%>
+            <%--<s:param name="act">1</s:param>--%>
+        <%--</s:include>--%>
+    <%--</div>--%>
     <h1>Basic JSON Editor Example</h1>
     <%--核心div--%>
     <div id='editor_holder'></div>

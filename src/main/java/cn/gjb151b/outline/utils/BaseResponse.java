@@ -10,21 +10,29 @@ public class BaseResponse<T> {
     private T data;
     private String message;
 
-    //默认设置为失败状态，因此失败情况只需要设置失败信息
     public BaseResponse() {
         this.status = "error";
         this.data = null;
+        this.message = "";
     }
 
-    public BaseResponse(String status, T data, String message) {
-        this.status = status;
-        this.data = data;
-        this.message = message;
+    public BaseResponse(T data) {
+        this.setResponse(data);
     }
 
     public void setError(String msg) {
         this.status = "error";
         this.message = msg;
+    }
+
+    public void setError(ServiceException exception) {
+        this.setError(exception.getExceptionEnums().getErrMsg());
+    }
+
+    public void setResponse(T data) {
+        this.status = "success";
+        this.data = data;
+        this.message = "";
     }
 
     public String getStatus() {

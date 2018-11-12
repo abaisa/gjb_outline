@@ -2,11 +2,11 @@ package cn.gjb151b.outline.action;
 
 import cn.gjb151b.outline.service.CoreService;
 import cn.gjb151b.outline.utils.BaseResponse;
+import cn.gjb151b.outline.utils.ServiceException;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-// todo load少返回了一个下一页的页码
 @Controller
 public class OutlinePageLoadAction  extends ActionSupport {
     private Integer outlineID;
@@ -20,22 +20,23 @@ public class OutlinePageLoadAction  extends ActionSupport {
     OutlinePageLoadAction(CoreService coreService) {
         this.coreService = coreService;
         response = new BaseResponse<>();
-        response.setError("action error");
     }
 
     public String load() {
         String responseData;
         try {
             responseData = coreService.getResponseData(outlineID, currentPageNumber, pageAction);
-        }catch (Exception e){
+        } catch (ServiceException e) {
+            System.out.println(e.getExceptionEnums().getErrMsg());
+            response.setError(e);
+            return SUCCESS;
+        } catch (Exception e){
             System.out.println(e.getMessage());
-            response.setError("service error");
+            response.setError("other service error");
             return SUCCESS;
         }
 
-        response.setStatus("success");
-        response.setMessage("");
-        response.setData(responseData);
+        response.setResponse(responseData);
         return SUCCESS;
     }
 

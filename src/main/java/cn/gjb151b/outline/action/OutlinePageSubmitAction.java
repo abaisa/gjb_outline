@@ -4,15 +4,15 @@ import cn.gjb151b.outline.service.CoreService;
 import cn.gjb151b.outline.utils.BaseResponse;
 import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
-import com.google.common.base.Strings;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class OutlinePageSubmitAction extends ActionSupport {
+    private static Logger logger = Logger.getLogger(OutlinePageLoadAction.class);
 
-    // todo 配一个日志  private final Logger
     private Integer outlineID;
     private Integer pageNumber;
     private String jsonData;
@@ -36,10 +36,12 @@ public class OutlinePageSubmitAction extends ActionSupport {
         try {
             coreService.submitPageData(outlineID, pageNumber, jsonData);
         } catch (ServiceException e){
-          System.out.println(e.getExceptionEnums().getErrMsg());
+            logger.info(String.format("service error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
+                    e.getExceptionEnums().getErrMsg()));
           response.setError("service error");
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            logger.info(String.format("unknown error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
+                    e.getMessage()));
             response.setError("other service error");
         }
 
@@ -53,12 +55,14 @@ public class OutlinePageSubmitAction extends ActionSupport {
      */
     private Boolean checkParamLegal() {
         try {
-            System.out.println(this.jsonData);
             Object parseRes = JSON.parseArray(this.jsonData);
-            System.out.println(parseRes);
+            int i = 1 / 0;
         }catch (Exception e){
-            System.out.println("param check error");
-            System.out.println(e.getMessage());
+            logger.error(String.format("param error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
+                    e.getMessage()));
+
+            logger.warn(String.format("param error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
+                    e.getMessage()));
             return false;
         }
         return true;

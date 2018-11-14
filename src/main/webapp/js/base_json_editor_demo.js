@@ -14,7 +14,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
         disable_properties: true,  //default:false,remove all Edit Properties buttons from objects.
         schema: {
             "type": "array",
-            "title": "Children",
+            "title": "DEMO",
             "items": {
                 "type": "object",
                 "title": "Child",

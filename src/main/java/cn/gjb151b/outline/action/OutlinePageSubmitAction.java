@@ -51,12 +51,10 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     /**
      * 检查页面回传参数pageInfo，合法返回true
-     * todo 需要校验一下data中的所有参数是否合法，当前只对json格式进行了校验
      */
     private Boolean checkParamLegal() {
         try {
             Object parseRes = JSON.parseArray(this.jsonData);
-            int i = 1 / 0;
         }catch (Exception e){
             logger.error(String.format("param error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getMessage()));

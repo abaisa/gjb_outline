@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OutlineDemoMapper {
+public interface ManageSysOutlineMapper {
     // 这都是很不安全的东西！但是很好用！直接无脑注入SQL语句
     void updateCol(@Param("outlineID")int outlineID, @Param("colName")String colName, @Param("data")String data);
 

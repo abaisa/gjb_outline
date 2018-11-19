@@ -2,8 +2,8 @@ package cn.gjb151b.outline.Constants;
 
 public enum DbColnameEnums {
     // 列名前缀常量部分
-    SCHEMA_PREFIX("schema_"),
-    DATA_PREFIX("data_"),
+    SCHEMA_PREFIX("outline_schema_"),
+    DATA_PREFIX("outline_data_"),
 
     // 列名常量部分
     OUTLINE_ID("outline_id");

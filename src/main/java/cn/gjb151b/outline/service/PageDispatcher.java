@@ -15,10 +15,10 @@ public class PageDispatcher {
 
     private PageDispatcher() {
         // 特殊下一页
-        nextPageRouter.put(1, 1);
+        nextPageRouter.put(2, 3);
 
         // 特殊上一页
-        previousPageRouter.put(1, 1);
+//        previousPageRouter.put(4, 3);
     }
 
     public static PageDispatcher getInstance() {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.gjb151b.outline.dao.OutlineDemoMapper">
+<mapper namespace="cn.gjb151b.outline.dao.ManageSysOutlineMapper">
     <update id="updateCol" statementType="STATEMENT">
-		UPDATE outline_demo SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
+		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
     </update>
 
     <select id="selectCol" statementType="STATEMENT" resultType="string">
-        SELECT ${colName} FROM outline_demo WHERE outline_id = ${outlineID};
+        SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
     </select>
 </mapper>

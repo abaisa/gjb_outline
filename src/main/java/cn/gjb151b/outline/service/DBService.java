@@ -1,7 +1,7 @@
 package cn.gjb151b.outline.service;
 
 import cn.gjb151b.outline.Constants.ExceptionEnums;
-import cn.gjb151b.outline.dao.OutlineDemoMapper;
+import cn.gjb151b.outline.dao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.utils.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @Service(value = "DBService")
 public class DBService {
 
-    private final OutlineDemoMapper mapper;
+    private final ManageSysOutlineMapper mapper;
 
     @Autowired
-    public DBService(OutlineDemoMapper outlineDemoMapper) {
-        this.mapper = outlineDemoMapper;
+    public DBService(ManageSysOutlineMapper manageSysOutlineMapper) {
+        this.mapper = manageSysOutlineMapper;
     }
 
     /**

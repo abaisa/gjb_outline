@@ -3,16 +3,24 @@
  */
 
 function monitor() {
-    if(page_number == '3') { //第三页隐藏上一页的按钮
+    if (page_number == '3') { //第三页隐藏上一页的按钮
         $("#pre_page").addClass("hidden");
-    }else {  //其他页显示上一页的按钮
+    } else {  //其他页显示上一页的按钮
         $("#pre_page").removeClass("hidden");
     }
-    switch(page_number) {
-        case '3':
-            watchQuantity('root.参编单位', 5);
-            break;
-        default:
-            break;
+
+    if (page_number == 5) {  //显示分系统即设备信息
+        $("#editor_head").removeClass("hidden");
+    } else {
+        $("#editor_head").addClass("hidden");
     }
+    if (page_number)
+
+        switch (page_number) {
+            case '3':
+                watchQuantity('root.参编单位', 5);
+                break;
+            default:
+                break;
+        }
 }

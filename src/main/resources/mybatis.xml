@@ -6,4 +6,7 @@
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
+    <typeAliases>
+        <typeAlias alias="ManageSysOutline" type="cn.gjb151b.outline.model.ManageSysOutline"/>
+    </typeAliases>
 </configuration>

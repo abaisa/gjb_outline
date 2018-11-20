@@ -17,4 +17,13 @@
         </action>
     </package>
 
+    <package name="dependency" namespace="/dependency" extends="struts-default, json-default">
+        <action name="getSubsysOrEqpHead" class="cn.gjb151b.outline.action.DependencyAction"
+                method="getSubsysOrEqpHead">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
+    </package>
+
 </struts>

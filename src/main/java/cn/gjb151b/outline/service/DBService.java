@@ -14,42 +14,39 @@ import org.springframework.stereotype.Service;
 @Service(value = "DBService")
 public class DBService {
 
-    private final ManageSysOutlineMapper mapper;
+    private final ManageSysOutlineMapper manageSysOutlineMapper;
 
     @Autowired
     public DBService(ManageSysOutlineMapper manageSysOutlineMapper) {
-        this.mapper = manageSysOutlineMapper;
+        this.manageSysOutlineMapper = manageSysOutlineMapper;
     }
 
     /**
-     *
      * @param outlineID 大纲id
      * @param pageID    页码
      * @param data      写入数据
      * @param prefix    列名前缀
      * @throws Exception
      */
-    public void submitData(int outlineID, int pageID, String prefix, String data) throws Exception{
+    public void submitData(int outlineID, int pageID, String prefix, String data) throws Exception {
         String colName = prefix + pageID;
-        if (pageID < 1){
+        if (pageID < 1) {
             throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
         }
-        mapper.updateCol(outlineID, colName, data);
+        manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 
     /**
-     *
      * @param outlineID 大纲id
      * @param data      写入数据
      * @param colName   列名
      * @throws Exception
      */
-    public void submitData(int outlineID, String colName, String data) throws Exception{
-        mapper.updateCol(outlineID, colName, data);
+    public void submitData(int outlineID, String colName, String data) throws Exception {
+        manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 
     /**
-     *
      * @param outlineID 大纲id
      * @param pageID    页码
      * @param prefix    列名前缀,或者
@@ -58,20 +55,20 @@ public class DBService {
      */
     public String fetchData(int outlineID, int pageID, String prefix) throws Exception {
         String colName = prefix + pageID;
-        if (pageID < 1){
+        if (pageID < 1) {
             throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
         }
-        return mapper.selectCol(outlineID, colName);
+
+        return manageSysOutlineMapper.selectCol(outlineID, colName);
     }
 
     /**
-     *
      * @param outlineID 大纲id
      * @param colName   列名
      * @return data
      * @throws Exception
      */
     public String fetchData(int outlineID, String colName) throws Exception {
-        return mapper.selectCol(outlineID, colName);
+        return manageSysOutlineMapper.selectCol(outlineID, colName);
     }
 }

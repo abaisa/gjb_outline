@@ -25,3 +25,40 @@ function watchQuantity(location, limitNum) {
         changeBtnStatus(location, participantNum >= limitNum)
     });
 }
+
+function getSubsysOrEqpHead() {
+    $.ajax({
+        type: "post",
+        url: "dependency/getSubsysOrEqpHead",
+        data: {
+            outlineId: 1
+        },
+        success: function (data) {
+            test = data;
+            var all_data = JSON.parse(data.data);
+            var head_data_str = all_data.data;
+            var head_schema_str = all_data.schema;
+            var head_schema = JSON.parse(head_schema_str);
+            var head_data = JSON.parse(head_data_str);
+
+            var editor_head = new JSONEditor(document.getElementById('editor_head'), {
+                theme: 'bootstrap3',
+                disable_collapse: true, //default:false,remove all collapse buttons from objects and arrays.
+                disable_edit_json: true, //default:false,remove all Edit JSON buttons from objects.
+                disable_properties: true,  //default:false,remove all Edit Properties buttons from objects.
+                required_by_default: true,
+                schema: head_schema
+            });
+
+            that = head_data;
+            editor_head.setValue(head_data);
+            editor_head.disable();
+
+
+            return true
+        },
+        error: function (data) {
+            return false
+        }
+    });
+}

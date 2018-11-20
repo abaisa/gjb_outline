@@ -25,6 +25,9 @@ public class CoreService {
         this.dbService = dbService;
     }
 
+    @Autowired
+    private DependencyService dependencyService;
+
     public String getResponseData(int outlineID, int sourcePageNumber, int pageAction) throws Exception {
         // 获取下一页页码
         int pageNumber;
@@ -45,6 +48,9 @@ public class CoreService {
         if (Strings.isNullOrEmpty(schema) || Strings.isNullOrEmpty(data)) {
             throw new ServiceException(ExceptionEnums.DB_EMPTY_ERR);
         }
+
+        //处理有依赖关系的数据信息
+        data = dependencyService.generateDependencyData(outlineID, pageNumber, data);
 
         // 打包返回数据
         result.put("schema", schema);

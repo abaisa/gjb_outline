@@ -40,7 +40,15 @@ public class DependencyService {
                     String outlineName = manageSysOutlineMapper.selectCol(outlineId, "outline_name");
                     jsonObject.put("任务名称", outlineName);
                 }
-
+                break;
+            case 4:
+                if (jsonObject.size() == 0) {
+                    // 这里是测试代码
+                    ManageSysDevelop devObject = this.getSysDevelopModelByDevItemId("d51ef4b40e5049ccb64402fea308fd47");
+                    String name = devObject.getDevName();
+                    jsonObject.put("demoName", name);
+                }
+                break;
         }
 
         return JSON.toJSONString(jsonObject);
@@ -83,6 +91,13 @@ public class DependencyService {
     }
 
     public ManageSysDevelop getSysDevelopModelByDevItemId(String devItemId){
-        return manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+        try {
+            ManageSysDevelop res = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
+
 }

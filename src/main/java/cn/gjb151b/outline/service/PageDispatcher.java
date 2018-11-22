@@ -16,11 +16,8 @@ public class PageDispatcher {
     private PageDispatcher() {
         // 特殊下一页
         nextPageRouter.put(2, 3);
-        nextPageRouter.put(5, 7);
 
         // 特殊上一页
-//        previousPageRouter.put(4, 3);
-        previousPageRouter.put(7, 5);
     }
 
     public static PageDispatcher getInstance() {

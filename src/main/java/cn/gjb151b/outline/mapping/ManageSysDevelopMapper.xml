@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gjb151b.outline.dao.ManageSysDevelopMapper">
+  <resultMap id="BaseResultMap" type="cn.gjb151b.outline.model.ManageSysDevelop">
+    <id column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="dev_itemid" jdbcType="VARCHAR" property="devItemid" />
+    <result column="dev_name" jdbcType="VARCHAR" property="devName" />
+    <result column="dev_subsys_eqp" jdbcType="INTEGER" property="devSubsysEqp" />
+    <result column="dev_subsys_eqp_name" jdbcType="VARCHAR" property="devSubsysEqpName" />
+    <result column="dev_subsys_eqp_model" jdbcType="VARCHAR" property="devSubsysEqpModel" />
+    <result column="dev_subsys_eqp_num" jdbcType="VARCHAR" property="devSubsysEqpNum" />
+    <result column="dev_supplier" jdbcType="VARCHAR" property="devSupplier" />
+    <result column="dev_primary_platform" jdbcType="INTEGER" property="devPrimaryPlatform" />
+    <result column="dev_secondary_platform" jdbcType="INTEGER" property="devSecondaryPlatform" />
+    <result column="dev_attribute" jdbcType="INTEGER" property="devAttribute" />
+    <result column="dev_key" jdbcType="INTEGER" property="devKey" />
+    <result column="dev_install" jdbcType="INTEGER" property="devInstall" />
+    <result column="dev_GND" jdbcType="INTEGER" property="devGnd" />
+    <result column="dev_special" jdbcType="INTEGER" property="devSpecial" />
+    <result column="dev_interport" jdbcType="INTEGER" property="devInterport" />
+    <result column="dev_lowsensitive" jdbcType="INTEGER" property="devLowsensitive" />
+    <result column="dev_emp" jdbcType="INTEGER" property="devEmp" />
+    <result column="dev_static" jdbcType="INTEGER" property="devStatic" />
+    <result column="dev_powerport" jdbcType="INTEGER" property="devPowerport" />
+    <result column="dev_powersupply" jdbcType="INTEGER" property="devPowersupply" />
+    <result column="dev_voltage" jdbcType="INTEGER" property="devVoltage" />
+    <result column="dev_voltagenum" jdbcType="INTEGER" property="devVoltagenum" />
+    <result column="dev_antenna" jdbcType="INTEGER" property="devAntenna" />
+    <result column="dev_receive_launch" jdbcType="INTEGER" property="devReceiveLaunch" />
+    <result column="dev_modulation" jdbcType="INTEGER" property="devModulation" />
+    <result column="dev_create_time" jdbcType="TIMESTAMP" property="devCreateTime" />
+    <result column="dev_new_time" jdbcType="TIMESTAMP" property="devNewTime" />
+    <result column="dev_modify_time" jdbcType="TIMESTAMP" property="devModifyTime" />
+    <result column="dev_proofread_time" jdbcType="TIMESTAMP" property="devProofreadTime" />
+    <result column="dev_audit_time" jdbcType="TIMESTAMP" property="devAuditTime" />
+    <result column="dev_authorize_time" jdbcType="TIMESTAMP" property="devAuthorizeTime" />
+    <result column="dev_update_time" jdbcType="TIMESTAMP" property="devUpdateTime" />
+    <result column="dev_opeator" jdbcType="INTEGER" property="devOpeator" />
+    <result column="dev_status" jdbcType="INTEGER" property="devStatus" />
+    <result column="dev_freq_optional" jdbcType="LONGVARCHAR" property="devFreqOptional" />
+    <result column="dev_freq_FH_low" jdbcType="LONGVARCHAR" property="devFreqFhLow" />
+    <result column="dev_freq_FH_mid" jdbcType="LONGVARCHAR" property="devFreqFhMid" />
+    <result column="dev_freq_FH_high" jdbcType="LONGVARCHAR" property="devFreqFhHigh" />
+    <result column="dev_freq_DSSS" jdbcType="LONGVARCHAR" property="devFreqDsss" />
+    <result column="dev_CE101" jdbcType="LONGVARCHAR" property="devCe101" />
+    <result column="dev_CE102" jdbcType="LONGVARCHAR" property="devCe102" />
+    <result column="dev_CE106" jdbcType="LONGVARCHAR" property="devCe106" />
+    <result column="dev_CE107" jdbcType="LONGVARCHAR" property="devCe107" />
+    <result column="dev_CS101" jdbcType="LONGVARCHAR" property="devCs101" />
+    <result column="dev_CS102" jdbcType="LONGVARCHAR" property="devCs102" />
+    <result column="dev_CS103" jdbcType="LONGVARCHAR" property="devCs103" />
+    <result column="dev_CS104" jdbcType="LONGVARCHAR" property="devCs104" />
+    <result column="dev_CS105" jdbcType="LONGVARCHAR" property="devCs105" />
+    <result column="dev_CS106" jdbcType="LONGVARCHAR" property="devCs106" />
+    <result column="dev_CS109" jdbcType="LONGVARCHAR" property="devCs109" />
+    <result column="dev_CS112" jdbcType="LONGVARCHAR" property="devCs112" />
+    <result column="dev_CS114" jdbcType="LONGVARCHAR" property="devCs114" />
+    <result column="dev_CS115" jdbcType="LONGVARCHAR" property="devCs115" />
+    <result column="dev_CS116" jdbcType="LONGVARCHAR" property="devCs116" />
+    <result column="dev_RE101" jdbcType="LONGVARCHAR" property="devRe101" />
+    <result column="dev_RE102" jdbcType="LONGVARCHAR" property="devRe102" />
+    <result column="dev_RE103" jdbcType="LONGVARCHAR" property="devRe103" />
+    <result column="dev_RS101" jdbcType="LONGVARCHAR" property="devRs101" />
+    <result column="dev_RS103" jdbcType="LONGVARCHAR" property="devRs103" />
+    <result column="dev_RS105" jdbcType="LONGVARCHAR" property="devRs105" />
+    <result column="dev_advice_proofread" jdbcType="LONGVARCHAR" property="devAdviceProofread" />
+    <result column="dev_advice_audit" jdbcType="LONGVARCHAR" property="devAdviceAudit" />
+    <result column="dev_advice_authorize" jdbcType="LONGVARCHAR" property="devAdviceAuthorize" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT *
+    FROM manage_sys_develop
+    WHERE dev_itemid = #{devItemId}
+  </select>
+</mapper>

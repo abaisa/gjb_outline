@@ -38,15 +38,10 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="manage_sys_outline" enableCountByExample="false"
+        <table tableName="manage_sys_develop" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="schema_1" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="schema_2" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="schema_3" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="data_1" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="data_2" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="data_3" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <!--<columnOverride column="schema_1" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         </table>
     </context>
 </generatorConfiguration>

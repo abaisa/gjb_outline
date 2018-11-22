@@ -2,7 +2,6 @@ package cn.gjb151b.outline.dao;
 
 import cn.gjb151b.outline.model.ManageSysOutline;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository

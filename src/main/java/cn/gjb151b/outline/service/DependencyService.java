@@ -1,7 +1,9 @@
 package cn.gjb151b.outline.service;
 
 import cn.gjb151b.outline.Constants.ExceptionEnums;
+import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
 import cn.gjb151b.outline.dao.ManageSysOutlineMapper;
+import cn.gjb151b.outline.model.ManageSysDevelop;
 import cn.gjb151b.outline.model.ManageSysOutline;
 import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
@@ -24,6 +26,8 @@ public class DependencyService {
 
     @Resource
     private ManageSysOutlineMapper manageSysOutlineMapper;
+    @Resource
+    private ManageSysDevelopMapper manageSysDevelopMapper;
 
     public String generateDependencyData(int outlineId, int pageNumber, String data) {
 
@@ -76,5 +80,9 @@ public class DependencyService {
         result.put("data", JSON.toJSONString(subsysEqpDataJson));
 
         return JSON.toJSONString(result);
+    }
+
+    public ManageSysDevelop getSysDevelopModelByDevItemId(String devItemId){
+        return manageSysDevelopMapper.selectByPrimaryKey(devItemId);
     }
 }

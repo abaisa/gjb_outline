@@ -20,6 +20,8 @@ function monitor() {
             case '3':
                 watchQuantity('root.参编单位', 5);
                 break;
+            case '7':
+                watchQuantity('root.陪试设备清单', 20);
             default:
                 break;
         }

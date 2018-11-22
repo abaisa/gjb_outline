@@ -54,7 +54,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
      */
     private Boolean checkParamLegal() {
         try {
-            Object parseRes = JSON.parseArray(this.jsonData);
+            Object parseRes = JSON.parse(this.jsonData);
         }catch (Exception e){
             logger.error(String.format("param error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getMessage()));

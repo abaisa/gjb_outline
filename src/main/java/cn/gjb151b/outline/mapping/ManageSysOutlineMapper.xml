@@ -22,6 +22,10 @@
         <result column="outline_data_4" property="outlineData4" jdbcType="LONGVARCHAR"/>
         <result column="outline_schema_5" property="outlineSchema5" jdbcType="LONGVARCHAR"/>
         <result column="outline_data_5" property="outlineData5" jdbcType="LONGVARCHAR"/>
+        <result column="outline_schema_7" property="outlineSchema5" jdbcType="LONGVARCHAR"/>
+        <result column="outline_data_7" property="outlineData5" jdbcType="LONGVARCHAR"/>
+        <result column="outline_schema_8" property="outlineSchema5" jdbcType="LONGVARCHAR"/>
+        <result column="outline_data_8" property="outlineData5" jdbcType="LONGVARCHAR"/>
         <result column="outline_schema_subsys_eqp" property="outlineSchemaSubsysEqp" jdbcType="LONGVARCHAR"/>
         <result column="outline_data_subsys_eqp" property="outlineDataSubsysEqp" jdbcType="LONGVARCHAR"/>
         <result column="outline_create_time" property="outlineCreateTime" jdbcType="TIMESTAMP"/>

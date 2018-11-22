@@ -20,6 +20,16 @@ function monitor() {
             case '3':
                 watchQuantity('root.参编单位', 5);
                 break;
+            case '7':
+                watchQuantity('root.陪试设备清单', 20);
+                break;
+            case '8':
+                editor.getEditor('root.电磁环境').disable();
+                editor.getEditor('root.静电放电敏感度试验环境要求.温度').disable();
+                editor.getEditor('root.静电放电敏感度试验环境要求.相对湿度').disable();
+                editor.getEditor('root.静电放电敏感度试验环境要求.大气压力').disable();
+
+                break;
             default:
                 break;
         }

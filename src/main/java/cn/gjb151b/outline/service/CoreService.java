@@ -49,6 +49,9 @@ public class CoreService {
             throw new ServiceException(ExceptionEnums.DB_EMPTY_ERR);
         }
 
+        //处理有依赖关系的schema
+        schema = dependencyService.generateDependencySchema(outlineID, pageNumber, schema);
+
         //处理有依赖关系的数据信息
         data = dependencyService.generateDependencyData(outlineID, pageNumber, data);
 

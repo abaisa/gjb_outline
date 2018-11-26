@@ -33,6 +33,15 @@ function monitor() {
                 editor.getEditor('root.静电放电敏感度试验环境要求.大气压力').disable();
 
                 break;
+            case '10':
+                var load_properties = load_schema.properties;
+                if($.isEmptyObject(load_properties)) {
+                    loadTargetPage(1);
+                }else {
+                    watchQuantity('root.电源端口', 10);
+                    watchQuantity('root.互联端口', 20);
+                }
+                break;
             default:
                 break;
         }

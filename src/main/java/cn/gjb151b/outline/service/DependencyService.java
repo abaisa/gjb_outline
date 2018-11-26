@@ -8,6 +8,7 @@ import cn.gjb151b.outline.model.ManageSysOutline;
 import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.google.common.base.Strings;
 import org.springframework.stereotype.Service;
 
@@ -58,9 +59,35 @@ public class DependencyService {
                     ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
                     jsonData = generateSubsysOrEqpAttrData(develop);
                 }
+                break;
+            default:
+                break;
         }
 
         return JSON.toJSONString(jsonData);
+    }
+
+    public String generateDependencySchema(int outlineId, int pageNumber, String schema) {
+        JSONObject jsonSchema = JSON.parseObject(schema, Feature.OrderedField);
+
+        switch (pageNumber) {
+            case 10:
+                ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+                String devItemId = outline.getOutlineDevItemid();
+                ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+                JSONObject jsonProperties = (JSONObject) jsonSchema.get("properties");
+                if(develop.getDevPowerport() == 0) {
+                    jsonProperties.remove("电源端口");
+                }
+                if(develop.getDevInterport() == 0) {
+                    jsonProperties.remove("互联端口");
+                }
+                break;
+            default:
+                break;
+        }
+
+        return JSON.toJSONString(jsonSchema);
     }
 
     public JSONObject generateSubsysOrEqpAttrData(ManageSysDevelop develop) throws Exception {

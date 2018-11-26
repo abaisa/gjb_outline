@@ -13,17 +13,8 @@ public class EnumTest {
 enum DemoEnums {
     NO(0),
     YES(1);
+
     private int status;
-
-    DemoEnums(int status){
-        this.setValue(status);
-    }
-
-    public int getValue() {
-        return status;
-    }
-
-    private void setValue(int status) {
-        this.status = status;
-    }
+    DemoEnums(int _status){this.status = _status;}
+    public int getValue() {return status;}
 }

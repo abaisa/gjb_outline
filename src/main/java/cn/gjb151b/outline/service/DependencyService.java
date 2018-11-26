@@ -32,26 +32,28 @@ public class DependencyService {
     public String generateDependencyData(int outlineId, int pageNumber, String data) {
 
         System.out.println(pageNumber);
-        JSONObject jsonObject = JSON.parseObject(data);
+        JSONObject jsonData = JSON.parseObject(data);
 
         switch (pageNumber) {
             case 3:
-                if (jsonObject.size() == 0) {
+                if (jsonData.size() == 0) {
                     String outlineName = manageSysOutlineMapper.selectCol(outlineId, "outline_name");
-                    jsonObject.put("任务名称", outlineName);
+                    jsonData.put("任务名称", outlineName);
                 }
                 break;
             case 4:
-                if (jsonObject.size() == 0) {
+                if (jsonData.size() == 0) {
                     // 这里是测试代码
                     ManageSysDevelop devObject = this.getSysDevelopModelByDevItemId("d51ef4b40e5049ccb64402fea308fd47");
-                    String name = devObject.getDevName();
-                    jsonObject.put("demoName", name);
+//                    String name = devObject.getDevName();
+//                    jsonObject.put("demoName", name);
+//                    jsonData.put();
+
                 }
                 break;
         }
 
-        return JSON.toJSONString(jsonObject);
+        return JSON.toJSONString(jsonData);
     }
 
     public String getSubsysOrEqpHead(int outlineId) {

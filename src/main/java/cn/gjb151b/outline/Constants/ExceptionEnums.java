@@ -11,7 +11,8 @@ public enum ExceptionEnums {
     DB_EMPTY_ERR(1002, "fetch db is empty"),
 
     // 参数错误 2000
-    PARAM_PAGE_ID_ERR(2001, "param error, page id illegal");
+    PARAM_PAGE_ID_ERR(2001, "param error, page id illegal"),
+    ENUM_CODE_MISS_ERR(2002, "enum code not found");
 
     private int errCode;
     private String errMsg;

@@ -53,6 +53,7 @@ function getSubsysOrEqpHead() {
             that = head_data;
             editor_head.setValue(head_data);
             editor_head.disable();
+            editor_head.getEditor('root.测试边界(m)').enable();
 
 
             return true

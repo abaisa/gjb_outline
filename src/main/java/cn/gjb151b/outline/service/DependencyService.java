@@ -1,6 +1,6 @@
 package cn.gjb151b.outline.service;
 
-import cn.gjb151b.outline.Constants.ExceptionEnums;
+import cn.gjb151b.outline.Constants.*;
 import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
 import cn.gjb151b.outline.dao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.model.ManageSysDevelop;
@@ -29,7 +29,7 @@ public class DependencyService {
     @Resource
     private ManageSysDevelopMapper manageSysDevelopMapper;
 
-    public String generateDependencyData(int outlineId, int pageNumber, String data) {
+    public String generateDependencyData(int outlineId, int pageNumber, String data) throws Exception {
 
         System.out.println(pageNumber);
         JSONObject jsonData = JSON.parseObject(data);
@@ -51,9 +51,88 @@ public class DependencyService {
 
                 }
                 break;
+            case 5:
+                if (jsonData.size() == 0) {
+                    ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+                    String devItemId = outline.getOutlineDevItemid();
+                    ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+                    jsonData = generateSubsysOrEqpAttrData(develop);
+                }
         }
 
         return JSON.toJSONString(jsonData);
+    }
+
+    public JSONObject generateSubsysOrEqpAttrData(ManageSysDevelop develop) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        AttributeEnums attribute = AttributeEnums.getMsgWithCode(develop.getDevAttribute());
+        if (attribute == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("设备属性", attribute.getMsg());
+        }
+
+        IsEnums isKey = IsEnums.getMsgWithCode(develop.getDevKey());
+        if (isKey == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("任务关键设备", isKey.getMsg());
+        }
+
+        InstallEnums install = InstallEnums.getMsgWithCode(develop.getDevInstall());
+        if (install == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("安装方式", install.getMsg());
+        }
+
+        IsEnums haveGND = IsEnums.getMsgWithCode(develop.getDevGnd());
+        if (haveGND == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("带地线", haveGND.getMsg());
+        }
+
+        SpecialEnums special = SpecialEnums.getMsgWithCode(develop.getDevSpecial());
+        if (special == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("特殊设备", special.getMsg());
+        }
+
+        IsEnums isInterport = IsEnums.getMsgWithCode(develop.getDevInterport());
+        if (isInterport == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("互联端口", isInterport.getMsg());
+        }
+
+        IsEnums isLowsensitive = IsEnums.getMsgWithCode(develop.getDevLowsensitive());
+        if (isInterport == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            jsonObject.put("对低频信号敏感", isLowsensitive.getMsg());
+        }
+
+        JSONObject installPlatform = new JSONObject();
+
+        HaveEnums haveEmp = HaveEnums.getMsgWithCode(develop.getDevEmp());
+        if (haveEmp == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            installPlatform.put("EMP加固措施", haveEmp.getMsg());
+        }
+
+        IsEnums isStatic = IsEnums.getMsgWithCode(develop.getDevStatic());
+        if (isStatic == null) {
+            throw new ServiceException(ExceptionEnums.ENUM_CODE_MISS_ERR);
+        } else {
+            installPlatform.put("静电威胁", isStatic.getMsg());
+        }
+
+        jsonObject.put("安装平台特性", installPlatform);
+
+        return jsonObject;
     }
 
     public String getSubsysOrEqpHead(int outlineId) {
@@ -92,7 +171,7 @@ public class DependencyService {
         return JSON.toJSONString(result);
     }
 
-    public ManageSysDevelop getSysDevelopModelByDevItemId(String devItemId){
+    public ManageSysDevelop getSysDevelopModelByDevItemId(String devItemId) {
         try {
             ManageSysDevelop res = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
             return res;

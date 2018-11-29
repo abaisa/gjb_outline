@@ -208,4 +208,8 @@ public class DependencyService {
         }
     }
 
+    public void submitSubsysOrEqpHead(int outlineId, String subSysOrEqpData) throws Exception{
+        manageSysOutlineMapper.updateCol(outlineId, "outline_data_subsys_eqp", subSysOrEqpData);
+    }
+
 }

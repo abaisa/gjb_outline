@@ -12,7 +12,8 @@ public enum ExceptionEnums {
 
     // 参数错误 2000
     PARAM_PAGE_ID_ERR(2001, "param error, page id illegal"),
-    ENUM_CODE_MISS_ERR(2002, "enum code not found");
+    ENUM_CODE_MISS_ERR(2002, "enum code not found"),
+    PARAM_DATA_PARSE_ERR(2003, "param data parse fail");
 
     private int errCode;
     private String errMsg;

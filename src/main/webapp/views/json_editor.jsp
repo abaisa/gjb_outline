@@ -29,6 +29,7 @@
 
 <%--通用js文件--%>
 <script type="text/javascript" src="repack/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="repack/js/plugin/front.js"></script>
 <script type="text/javascript" src="repack/jsoneditor/jsoneditor.js"></script>
 
 <%--页面方法--%>

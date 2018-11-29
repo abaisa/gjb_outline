@@ -26,6 +26,26 @@ function watchQuantity(location, limitNum) {
     });
 }
 
+function submitSubsysOrEqpHead(subsysOrEqpData) {
+    $.ajax({
+        type: "post",
+        url: "dependency/submitSubsysOrEqpHead",
+        data: {
+            outlineId: 1,
+            subsysOrEqpData: JSON.stringify(subsysOrEqpData)
+        },
+        success: function (data) {
+            if (data.status == 'error') {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+            }
+
+        },
+        error: function (data) {
+            return false
+        }
+    });
+}
+
 function getSubsysOrEqpHead() {
     $.ajax({
         type: "post",
@@ -35,28 +55,40 @@ function getSubsysOrEqpHead() {
         },
         success: function (data) {
             test = data;
-            var all_data = JSON.parse(data.data);
-            var head_data_str = all_data.data;
-            var head_schema_str = all_data.schema;
-            var head_schema = JSON.parse(head_schema_str);
-            var head_data = JSON.parse(head_data_str);
+            if (data.status == 'success') {
+                var all_data = JSON.parse(data.data);
+                var head_data_str = all_data.data;
+                var head_schema_str = all_data.schema;
+                var head_schema = JSON.parse(head_schema_str);
+                var head_data = JSON.parse(head_data_str);
 
-            var editor_head = new JSONEditor(document.getElementById('editor_head'), {
-                theme: 'bootstrap3',
-                disable_collapse: true, //default:false,remove all collapse buttons from objects and arrays.
-                disable_edit_json: true, //default:false,remove all Edit JSON buttons from objects.
-                disable_properties: true,  //default:false,remove all Edit Properties buttons from objects.
-                required_by_default: true,
-                schema: head_schema
-            });
+                var editor_head = new JSONEditor(document.getElementById('editor_head'), {
+                    theme: 'bootstrap3',
+                    disable_collapse: true, //default:false,remove all collapse buttons from objects and arrays.
+                    disable_edit_json: true, //default:false,remove all Edit JSON buttons from objects.
+                    disable_properties: true,  //default:false,remove all Edit Properties buttons from objects.
+                    required_by_default: true,
+                    schema: head_schema
+                });
 
-            that = head_data;
-            editor_head.setValue(head_data);
-            editor_head.disable();
-            editor_head.getEditor('root.测试边界(m)').enable();
+                that = head_data;
+                editor_head.setValue(head_data);
+                editor_head.disable();
+                editor_head.getEditor('root.测试边界(m)').enable();
+                submitSubsysOrEqpHead(editor_head.getValue());
 
+                editor_head.watch('root.测试边界(m)', function () {
+                    var subsysOrEqpData = editor_head.getValue();
+                    var boundaryVal = editor_head.getEditor('root.测试边界(m)').getValue();
+                    subsysOrEqpData['root.测试边界(m)'] = boundaryVal;
+                    submitSubsysOrEqpHead(subsysOrEqpData);
+                });
 
-            return true
+                return true
+            } else {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+            }
+
         },
         error: function (data) {
             return false

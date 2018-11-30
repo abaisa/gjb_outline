@@ -137,7 +137,7 @@ public class DependencyService {
                 JSONObject devFreqFhHighJSONObject = JSON.parseObject(devFreqFhHigh);
                 oneLineObject = new JSONObject();
                 oneLineObject.put("状态序号", String.valueOf(order));
-                oneLineObject.put("用频方式", "跳频低频段");
+                oneLineObject.put("用频方式", "跳频高频段");
                 oneLineObject.put("最低频率", devFreqFhHighJSONObject.get("freq_low"));
                 oneLineObject.put("中间频率", "--");
                 oneLineObject.put("最高频率", devFreqFhHighJSONObject.get("freq_high"));

@@ -79,7 +79,7 @@ public class DependencyService {
                 res = JSON.toJSONString(jsonObject);
                 break;
             case 1001:
-                jsonArray = JSON.parseArray(data);
+                jsonArray = new JSONArray();
                 // 解析所有dev系统中的频段并存入 本项不填则用 - 表示
                 int order = 0;
                 JSONObject oneLineObject;

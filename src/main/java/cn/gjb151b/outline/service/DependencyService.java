@@ -45,10 +45,20 @@ public class DependencyService {
             case 4:
                 if (jsonData.size() == 0) {
                     // 这里是测试代码
-                    ManageSysDevelop devObject = this.getSysDevelopModelByDevItemId("d51ef4b40e5049ccb64402fea308fd47");
-//                    String name = devObject.getDevName();
-//                    jsonObject.put("demoName", name);
-//                    jsonData.put();
+                    ManageSysDevelop devObject = this.getSysDevelopModelByDevItemId("91c747655930407585003425f42811b8");
+                    // 测试写入dev项目中的数据
+                    String name = devObject.getDevName();
+                    jsonData.put("任务名称", name);
+                    String subEqp = devObject.getDevSubsysEqp() == 1 ? "分系统": "设备";
+                    jsonData.put("分系统/设备", subEqp);
+                    String subsysEqpName = devObject.getDevSubsysEqpName();
+                    jsonData.put("分系统名称", subsysEqpName);
+                    String subsysEqpModel = devObject.getDevSubsysEqpModel();
+                    jsonData.put("型号", subsysEqpModel);
+                    String subsysEqpNum = devObject.getDevSubsysEqpNum();
+                    jsonData.put("串号", subsysEqpNum);
+                    String supplier = devObject.getDevSupplier();
+                    jsonData.put("承制单位", supplier);
 
                 }
                 break;

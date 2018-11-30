@@ -9,7 +9,8 @@ JSONEditor.defaults.languages.cn = {
     button_delete_row_title_short: "删除",
     button_move_down_title: "下移",
     button_move_up_title: "上移",
-    button_delete_row_title: "删除"
+    button_delete_row_title: "删除",
+    error_notempty: "若无请填无"
 };
 
 JSONEditor.defaults.language = "cn";

@@ -15,10 +15,18 @@ function monitor() {
         $("#editor_head").addClass("hidden");
     }
     if (page_number)
-
         switch (page_number) {
             case '3':
                 watchQuantity('root.参编单位', 5);
+                break;
+            case '4':
+                editor.getEditor('root.任务名称').disable();
+                editor.getEditor('root.分系统/设备').disable();
+                editor.getEditor('root.分系统/设备名称').disable();
+                editor.getEditor('root.型号').disable();
+                editor.getEditor('root.串号').disable();
+                editor.getEditor('root.承制单位').disable();
+                editor.getEditor('root.预定使用平台').disable();
                 break;
             case '5':
                 editor.disable();
@@ -41,6 +49,9 @@ function monitor() {
                     watchQuantity('root.电源端口', 10);
                     watchQuantity('root.互联端口', 20);
                 }
+                break;
+            case '1001':
+                editor.disable();
                 break;
             default:
                 break;

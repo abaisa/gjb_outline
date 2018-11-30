@@ -80,7 +80,7 @@ function getSubsysOrEqpHead() {
                 editor_head.watch('root.测试边界(m)', function () {
                     var subsysOrEqpData = editor_head.getValue();
                     var boundaryVal = editor_head.getEditor('root.测试边界(m)').getValue();
-                    subsysOrEqpData['root.测试边界(m)'] = boundaryVal;
+                    subsysOrEqpData['测试边界(m)'] = boundaryVal;
                     submitSubsysOrEqpHead(subsysOrEqpData);
                 });
 

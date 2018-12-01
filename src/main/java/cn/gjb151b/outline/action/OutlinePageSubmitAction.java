@@ -17,6 +17,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     private Integer outlineID;
     private Integer pageNumber;
+    private Integer pageAction;
     private String jsonData;
     private BaseResponse<String> response;
 
@@ -51,7 +52,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        }
 
         try {
-            coreService.submitPageData(outlineID, pageNumber, jsonData);
+            coreService.submitPageData(outlineID, pageNumber, pageAction, jsonData);
         } catch (ServiceException e) {
             logger.info(String.format("service error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getExceptionEnums().getErrMsg()));
@@ -116,5 +117,13 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     public void setOutlineID(Integer outlineID) {
         this.outlineID = outlineID;
+    }
+
+    public Integer getPageAction() {
+        return pageAction;
+    }
+
+    public void setPageAction(Integer pageAction) {
+        this.pageAction = pageAction;
     }
 }

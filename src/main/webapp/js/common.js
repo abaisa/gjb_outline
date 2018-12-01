@@ -27,6 +27,16 @@ function watchQuantity(location, limitNum) {
     });
 }
 
+function disableAddAndDelete(location, status) {
+    var locStr = "[data-schemapath='" + location + "'] .json-editor-btn-add";
+    $(locStr).filter(":contains('添加')")[0].disabled = status;
+    locStr = "[data-schemapath='" + location + "'] .json-editor-btn-delete";
+    var deleteButton = $(locStr).filter(":contains('删除')");
+    for (var i = 0; i < deleteButton.length; i++) {
+        deleteButton[i].disabled = true
+    }
+}
+
 function submitSubsysOrEqpHead(subsysOrEqpData) {
     $.ajax({
         type: "post",

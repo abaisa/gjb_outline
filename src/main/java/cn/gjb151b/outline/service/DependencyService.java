@@ -37,7 +37,7 @@ public class DependencyService {
 
         JSONObject jsonObject;
         JSONArray jsonArray;
-        String res;
+        String resultData;
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
         String devItemId = outline.getOutlineDevItemid();
@@ -50,14 +50,14 @@ public class DependencyService {
                 if (jsonObject.size() == 0) {
                     jsonObject.put("任务名称", outline.getOutlineName());
                 }
-                res = JSON.toJSONString(jsonObject);
+                resultData = JSON.toJSONString(jsonObject);
                 break;
             case 4:
                 jsonObject = JSON.parseObject(data);
                 String name = devObject.getDevName();
                 jsonObject.put("任务名称", name);
-                String subEqp = devObject.getDevSubsysEqp() == 1 ? "分系统": "设备";
-                String devPrimaryPlatform = devObject.getDevPrimaryPlatform() == 1?"水面舰船":"其他的一级平台";
+                String subEqp = devObject.getDevSubsysEqp() == 1 ? "分系统" : "设备";
+                String devPrimaryPlatform = devObject.getDevPrimaryPlatform() == 1 ? "水面舰船" : "其他的一级平台";
                 jsonObject.put("预定使用平台", devPrimaryPlatform);
                 jsonObject.put("分系统/设备", subEqp);
                 String subsysEqpName = devObject.getDevSubsysEqpName();
@@ -69,14 +69,14 @@ public class DependencyService {
                 String supplier = devObject.getDevSupplier();
                 jsonObject.put("承制单位", supplier);
 
-                res = JSON.toJSONString(jsonObject);
+                resultData = JSON.toJSONString(jsonObject);
                 break;
             case 5:
                 jsonObject = JSON.parseObject(data);
                 if (jsonObject.size() == 0) {
                     jsonObject = generateSubsysOrEqpAttrData(devObject);
                 }
-                res = JSON.toJSONString(jsonObject);
+                resultData = JSON.toJSONString(jsonObject);
                 break;
             case 1001:
                 jsonArray = new JSONArray();
@@ -86,8 +86,8 @@ public class DependencyService {
 
                 String devFreqOptional = devObject.getDevFreqOptional();
                 JSONArray devFreqOptionalArray = JSON.parseArray(devFreqOptional);
-                for(Object devFreqOptionalArrayObject: devFreqOptionalArray) {
-                    JSONObject devFreqOptionalArrayJSONObject = (JSONObject)devFreqOptionalArrayObject;
+                for (Object devFreqOptionalArrayObject : devFreqOptionalArray) {
+                    JSONObject devFreqOptionalArrayJSONObject = (JSONObject) devFreqOptionalArrayObject;
                     oneLineObject = new JSONObject();
                     oneLineObject.put("状态序号", String.valueOf(order));
                     oneLineObject.put("用频方式", "固定");
@@ -163,14 +163,47 @@ public class DependencyService {
                 jsonArray.add(oneLineObject);
                 order += 1;
 
-                res = JSON.toJSONString(jsonArray);
+                resultData = JSON.toJSONString(jsonArray);
                 break;
             default:
-                res = data;
+                resultData = data;
                 break;
         }
 
-        return res;
+        return resultData;
+    }
+
+    public void generateDataAfterSubmit(int outlineId, int pageNumber, String data) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+
+        ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+
+        switch (pageNumber) {
+            case 10:
+                //第10页的电源端口数据控制着第14页的试验端口即被试品工作状态的数据
+                jsonObject = JSON.parseObject(data);
+                JSONArray powerPortArray = jsonObject.getJSONArray("电源端口");
+
+                JSONArray testPortArray = new JSONArray(); //外部电源输入 试验端口的列表数组
+                String outlineData14 = outline.getOutlineData14();
+                JSONObject outlineData14Object = JSON.parseObject(outlineData14);
+                for(int i = 0; i < powerPortArray.size(); i++) {
+                    JSONObject powerPort = powerPortArray.getJSONObject(i);
+                    if(powerPort.get("外部电源供电").equals("是") && powerPort.get("输入/输出").equals("输入")) {
+                        JSONObject testPortObject = new JSONObject();
+                        testPortObject.put("试验端口", powerPort.get("端口名称或代号"));
+                        testPortArray.add(testPortObject);
+                    }
+
+                }
+                outlineData14Object.put("试验端口及被试品工作状态", testPortArray);
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_14", JSON.toJSONString(outlineData14Object));
+
+                break;
+            default:
+                break;
+        }
     }
 
     public String generateDependencySchema(int outlineId, int pageNumber, String schema) {
@@ -182,10 +215,10 @@ public class DependencyService {
                 String devItemId = outline.getOutlineDevItemid();
                 ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
                 JSONObject jsonProperties = (JSONObject) jsonSchema.get("properties");
-                if(develop.getDevPowerport() == 0) {
+                if (develop.getDevPowerport() == 0) {
                     jsonProperties.remove("电源端口");
                 }
-                if(develop.getDevInterport() == 0) {
+                if (develop.getDevInterport() == 0) {
                     jsonProperties.remove("互联端口");
                 }
                 break;
@@ -304,7 +337,7 @@ public class DependencyService {
         return JSON.toJSONString(result);
     }
 
-    public void submitSubsysOrEqpHead(int outlineId, String subSysOrEqpData) throws Exception{
+    public void submitSubsysOrEqpHead(int outlineId, String subSysOrEqpData) throws Exception {
         manageSysOutlineMapper.updateCol(outlineId, "outline_data_subsys_eqp", subSysOrEqpData);
     }
 

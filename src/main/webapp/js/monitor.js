@@ -56,7 +56,7 @@ function monitor() {
                 }
                 break;
             case '11':
-                watchQuantity('root.敏感度判据及检测方法', 3);
+                watchQuantity('root.敏感度判据及检测方法', 10);
                 break;
             case '14':
                 editor.getEditor('root.试验项目').disable();
@@ -68,7 +68,6 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
-
                 disableAddAndDelete('root.试验端口及被试品工作状态', true);
 
                 break;

@@ -24,6 +24,12 @@
                 <param name="root">response</param>
             </result>
         </action>
+        <action name="submitSubsysOrEqpHead" class="cn.gjb151b.outline.action.DependencyAction"
+                method="submitSubsysOrEqpHead">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
     </package>
 
 </struts>

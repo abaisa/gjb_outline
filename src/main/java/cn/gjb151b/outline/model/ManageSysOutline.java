@@ -49,6 +49,10 @@ public class ManageSysOutline {
 
     private String outlineData10;
 
+    private String outlineSchema14;
+
+    private String outlineData14;
+
     private String outlineSchemaSubsysEqp;
 
     private String outlineDataSubsysEqp;

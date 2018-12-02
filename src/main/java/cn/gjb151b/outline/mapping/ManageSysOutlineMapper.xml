@@ -28,6 +28,8 @@
         <result column="outline_data_8" property="outlineData8" jdbcType="LONGVARCHAR"/>
         <result column="outline_schema_10" property="outlineSchema10" jdbcType="LONGVARCHAR"/>
         <result column="outline_data_10" property="outlineData10" jdbcType="LONGVARCHAR"/>
+        <result column="outline_schema_14" property="outlineSchema14" jdbcType="LONGVARCHAR"/>
+        <result column="outline_data_14" property="outlineData14" jdbcType="LONGVARCHAR"/>
         <result column="outline_schema_subsys_eqp" property="outlineSchemaSubsysEqp" jdbcType="LONGVARCHAR"/>
         <result column="outline_data_subsys_eqp" property="outlineDataSubsysEqp" jdbcType="LONGVARCHAR"/>
         <result column="outline_create_time" property="outlineCreateTime" jdbcType="TIMESTAMP"/>

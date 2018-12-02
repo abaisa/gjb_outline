@@ -15,11 +15,18 @@ function monitor() {
         $("#editor_head").addClass("hidden");
     }
 
-    if (page_number)
-
         switch (page_number) {
             case '3':
                 watchQuantity('root.参编单位', 5);
+                break;
+            case '4':
+                editor.getEditor('root.任务名称').disable();
+                editor.getEditor('root.分系统/设备').disable();
+                editor.getEditor('root.分系统/设备名称').disable();
+                editor.getEditor('root.型号').disable();
+                editor.getEditor('root.串号').disable();
+                editor.getEditor('root.承制单位').disable();
+                editor.getEditor('root.预定使用平台').disable();
                 break;
             case '5':
                 editor.disable();
@@ -51,7 +58,48 @@ function monitor() {
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 3);
                 break;
+            case '14':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.结果评定准则').disable();
+                console.log(load_data);
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
+                    editor.getEditor(editorName).disable();
+                }
+
+                disableAddAndDelete('root.试验端口及被试品工作状态', true);
+
+                break;
+            case '1001':
+                editor.disable();
+                break;
             default:
                 break;
         }
+
+
+}
+function beforeSubmit() {
+    switch (page_number) {
+        case '10':
+            if(modifyPage10) {
+                pageAction = 3;
+                modifyPage10 = false;
+            }
+            break;
+        case '14':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return true;
+
 }

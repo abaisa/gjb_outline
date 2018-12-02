@@ -9,11 +9,12 @@ function monitor() {
         $("#pre_page").removeClass("hidden");
     }
 
-    if (page_number == 5) {  //显示分系统即设备信息
+    if ((page_number == '5')||(page_number == '9')||(page_number == '11')) {  //显示分系统即设备信息
         $("#editor_head").removeClass("hidden");
     } else {
         $("#editor_head").addClass("hidden");
     }
+
     if (page_number)
 
         switch (page_number) {
@@ -31,7 +32,12 @@ function monitor() {
                 editor.getEditor('root.静电放电敏感度试验环境要求.温度').disable();
                 editor.getEditor('root.静电放电敏感度试验环境要求.相对湿度').disable();
                 editor.getEditor('root.静电放电敏感度试验环境要求.大气压力').disable();
-
+                break;
+            case '9':
+                editor.getEditor('root.发射测试工作状态确定原则').disable();
+                editor.getEditor('root.敏感度测试工作状态确定原则').disable();
+                watchQuantity('root.发射测试工作状态', 5);
+                watchQuantity('root.敏感度测试工作状态', 5);
                 break;
             case '10':
                 var load_properties = load_schema.properties;
@@ -41,6 +47,9 @@ function monitor() {
                     watchQuantity('root.电源端口', 10);
                     watchQuantity('root.互联端口', 20);
                 }
+                break;
+            case '11':
+                watchQuantity('root.敏感度判据及检测方法', 3);
                 break;
             default:
                 break;

@@ -37,7 +37,7 @@
 <script type="text/javascript" src="js/monitor.js"></script>
 <script>
     // 页码初始化为2
-    page_number = 2;
+    page_number = 12;
 
     //调用loadTargetPage(1)，后台设置了2的下一页为3，初始化此页面为第三页
     loadTargetPage(1);

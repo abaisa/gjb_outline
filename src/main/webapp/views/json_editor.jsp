@@ -38,7 +38,7 @@
 <script type="text/javascript" src="js/monitor.js"></script>
 <script>
     // 页码初始化为2
-    page_number = 12;
+    page_number = 2;
 
     //pageAction初始化为下一页
     pageAction = 1;

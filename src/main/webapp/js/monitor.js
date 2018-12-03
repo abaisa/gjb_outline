@@ -76,6 +76,9 @@ function monitor() {
             case '1001':
                 editor.disable();
                 break;
+            case '35':
+                editor.disable();
+                break;
             default:
                 break;
         }

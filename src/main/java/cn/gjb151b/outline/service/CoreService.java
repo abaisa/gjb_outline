@@ -43,8 +43,8 @@ public class CoreService {
         Map<String, String> result = new HashMap<>();
         String schema = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
         String data = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.DATA_PREFIX.getValue());
-        System.out.println(schema);
-        System.out.println(data);
+        System.out.println("db fetch schema >>> " + schema);
+        System.out.println("db fetch data >>> " + data);
         if (Strings.isNullOrEmpty(schema) || Strings.isNullOrEmpty(data)) {
             throw new ServiceException(ExceptionEnums.DB_EMPTY_ERR);
         }
@@ -65,8 +65,11 @@ public class CoreService {
     }
 
 
-    public void submitPageData(Integer outlineID, Integer sourcePageNumber, String data) throws Exception {
+    public void submitPageData(Integer outlineID, Integer sourcePageNumber, Integer pageAction, String data) throws Exception {
         dbService.submitData(outlineID, sourcePageNumber, DbColnameEnums.DATA_PREFIX.getValue(), data);
+        if(pageAction == 3) {
+            dependencyService.generateDataAfterSubmit(outlineID, sourcePageNumber, data);
+        }
     }
 }
 

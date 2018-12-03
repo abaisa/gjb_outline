@@ -30,6 +30,7 @@
 
 <%--通用js文件--%>
 <script type="text/javascript" src="repack/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="repack/js/plugin/front.js"></script>
 <script type="text/javascript" src="repack/jsoneditor/jsoneditor.js"></script>
 
 <%--页面方法--%>
@@ -39,6 +40,12 @@
 <script>
     // 页码初始化为2
     page_number = 12;
+
+    //pageAction初始化为下一页
+    pageAction = 1;
+
+    //第十页是否进行修改
+    modifyPage10 = false;
 
     //调用loadTargetPage(1)，后台设置了2的下一页为3，初始化此页面为第三页
     loadTargetPage(1);

@@ -56,8 +56,8 @@ public class DependencyService {
                 jsonObject = JSON.parseObject(data);
                 String name = devObject.getDevName();
                 jsonObject.put("任务名称", name);
-                String subEqp = devObject.getDevSubsysEqp() == 1 ? "分系统" : "设备";
-                String devPrimaryPlatform = devObject.getDevPrimaryPlatform() == 1 ? "水面舰船" : "其他的一级平台";
+                String subEqp = SubSysEnums.getMsgWithCode(devObject.getDevSubsysEqp()).getMsg();
+                String devPrimaryPlatform = PrimaryPlatformEnums.getMsgWithCode(devObject.getDevPrimaryPlatform()).getMsg();
                 jsonObject.put("预定使用平台", devPrimaryPlatform);
                 jsonObject.put("分系统/设备", subEqp);
                 String subsysEqpName = devObject.getDevSubsysEqpName();

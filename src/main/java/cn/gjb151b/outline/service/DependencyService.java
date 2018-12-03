@@ -178,6 +178,25 @@ public class DependencyService {
 
                 resultData = JSON.toJSONString(freqResArray);
                 break;
+            case 14:
+                jsonObject = JSON.parseObject(data);
+                String devCE101 = devObject.getDevCe101();
+                JSONObject devCE101Object = JSON.parseObject(devCE101);
+                String limitValue = devCE101Object.getJSONObject("limit_value").getString("pic");
+                String limitValueCurrent = devCE101Object.getJSONObject("limit_value_current").getString("pic");
+                StringBuilder builder = new StringBuilder();
+                if(limitValue.equals(limitValueCurrent)) {
+                    builder.append("GJB151B-2013标准规定图形：");
+                    builder.append(limitValue);
+                    jsonObject.put("限值", builder.toString());
+                }else {
+                    builder.append("研制要求管理系统生成图形：");
+                    builder.append(limitValueCurrent);
+                    jsonObject.put("限值", builder.toString());
+                }
+
+                resultData = JSON.toJSONString(jsonObject);
+                break;
             default:
                 resultData = data;
                 break;

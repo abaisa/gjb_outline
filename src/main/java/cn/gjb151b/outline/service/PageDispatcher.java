@@ -23,8 +23,8 @@ public class PageDispatcher {
 
 
         // 特殊上一页
-//        previousPageRouter.put(10, 1001);
-//        previousPageRouter.put(1001, 9);
+        previousPageRouter.put(10, 1001);
+        previousPageRouter.put(1001, 9);
         previousPageRouter.put(14, 10);
     }
 

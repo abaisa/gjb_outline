@@ -79,7 +79,7 @@ public class DependencyService {
                 resultData = JSON.toJSONString(jsonObject);
                 break;
             case 1001:
-                jsonArray = new JSONArray();
+                JSONArray freqResArray = new JSONArray();
                 // 解析所有dev系统中的频段并存入 本项不填则用 - 表示
                 int order = 0;
                 JSONObject oneLineObject;
@@ -97,9 +97,22 @@ public class DependencyService {
                     oneLineObject.put("最高传输速率", "--");
                     oneLineObject.put("工作方式", devFreqOptionalArrayJSONObject.get("opt_work_style"));
                     oneLineObject.put("最大发射功率", devFreqOptionalArrayJSONObject.get("opt_ave_pow_transmit_max"));
-                    oneLineObject.put("调制方式", "待定，第一个系统里可能要改");
-                    jsonArray.add(oneLineObject);
-                    order += 1;
+                    // 调制方式，第一个系统如果有修改这里也要调整  oneLineObject.put("调制方式", "待定，第一个系统里可能要改");
+                    // 注意，这个第一个系统中可能是要改的，第一个系统整理好了之后再补后面的，这里先给固定频率的代码
+                    JSONObject modulationMode = (JSONObject)devFreqOptionalArrayJSONObject.get("opt_modulation_mode_num");
+                    String optModulationMode1 = (String)modulationMode.get("opt_modulation_mode_1");
+                    if(!Strings.isNullOrEmpty(optModulationMode1)){
+                        oneLineObject.put("调制方式", optModulationMode1);
+                        freqResArray.add(oneLineObject.clone());
+                        order += 1;
+                    }
+                    String optModulationMode2 = (String)modulationMode.get("opt_modulation_mode_2");
+                    if(!Strings.isNullOrEmpty(optModulationMode2)){
+                        oneLineObject.put("调制方式", optModulationMode2);
+                        oneLineObject.put("状态序号", String.valueOf(order));
+                        freqResArray.add(oneLineObject.clone());
+                        order += 1;
+                    }
                 }
 
 
@@ -115,7 +128,7 @@ public class DependencyService {
                 oneLineObject.put("工作方式", devFreqFhLowJSONObject.get("work_style"));
                 oneLineObject.put("最大发射功率", devFreqFhLowJSONObject.get("ave_pow_transmit_max"));
                 oneLineObject.put("调制方式", "--");
-                jsonArray.add(oneLineObject);
+                freqResArray.add(oneLineObject);
                 order += 1;
 
                 String devFreqFhMid = devObject.getDevFreqFhMid();
@@ -130,7 +143,7 @@ public class DependencyService {
                 oneLineObject.put("工作方式", devFreqFhMidJSONObject.get("work_style"));
                 oneLineObject.put("最大发射功率", devFreqFhMidJSONObject.get("ave_pow_transmit_max"));
                 oneLineObject.put("调制方式", "--");
-                jsonArray.add(oneLineObject);
+                freqResArray.add(oneLineObject);
                 order += 1;
 
                 String devFreqFhHigh = devObject.getDevFreqFhHigh();
@@ -145,7 +158,7 @@ public class DependencyService {
                 oneLineObject.put("工作方式", devFreqFhHighJSONObject.get("work_style"));
                 oneLineObject.put("最大发射功率", devFreqFhHighJSONObject.get("ave_pow_transmit_max"));
                 oneLineObject.put("调制方式", "--");
-                jsonArray.add(oneLineObject);
+                freqResArray.add(oneLineObject);
                 order += 1;
 
                 String devFreqDsss = devObject.getDevFreqDsss();
@@ -160,10 +173,10 @@ public class DependencyService {
                 oneLineObject.put("工作方式", devFreqDsssJSONObject.get("work_style"));
                 oneLineObject.put("最大发射功率", devFreqDsssJSONObject.get("ave_pow_transmit_max"));
                 oneLineObject.put("调制方式", "--");
-                jsonArray.add(oneLineObject);
+                freqResArray.add(oneLineObject);
                 order += 1;
 
-                resultData = JSON.toJSONString(jsonArray);
+                resultData = JSON.toJSONString(freqResArray);
                 break;
             default:
                 resultData = data;

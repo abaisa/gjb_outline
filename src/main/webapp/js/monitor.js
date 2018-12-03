@@ -54,6 +54,9 @@ function monitor() {
                     watchQuantity('root.电源端口', 10);
                     watchQuantity('root.互联端口', 20);
                 }
+                editor.watch('root.电源端口', function () {
+                    modifyPage10 = true;
+                });
                 break;
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);

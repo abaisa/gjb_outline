@@ -58,6 +58,21 @@ function monitor() {
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);
                 break;
+            case '12':
+                $("#editor_holder button").addClass("hidden");
+                for(var i=0 ; i<6; i++){
+                    editor.getEditor('root.发射测试参数.'+i+'.频率范围').disable();
+                    editor.getEditor('root.发射测试参数.'+i+'.6dB带宽(kHz)').disable();
+                    editor.getEditor('root.发射测试参数.'+i+'.驻留时间(s)').disable();
+                    editor.getEditor('root.发射测试参数.'+i+'.最小测量时间(模拟式测量接收机)').disable();
+                }
+                // editor.getEditor('root.发射测试参数.0.频率范围').disable();
+                // $("table button").addClass("hidden");
+                break;
+            case '13':
+                $("#editor_holder button").addClass("hidden");
+                editor.getEditor('root').disable();
+                break;
             case '14':
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
@@ -83,31 +98,6 @@ function monitor() {
                 break;
 
         }
-}
-
-
-function removeButton() {
-      if(page_number){
-          switch (page_number) {
-              case '12':
-                  console.log("到第12页啦！");
-                  $("#editor_holder button").addClass("hidden");
-                  for(var i=0 ; i<6; i++){
-                      editor.getEditor('root.发射测试参数.'+i+'.频率范围').disable();
-                      editor.getEditor('root.发射测试参数.'+i+'.6dB带宽(kHz)').disable();
-                      editor.getEditor('root.发射测试参数.'+i+'.驻留时间(s)').disable();
-                      editor.getEditor('root.发射测试参数.'+i+'.最小测量时间(模拟式测量接收机)').disable();
-                  }
-                  // editor.getEditor('root.发射测试参数.0.频率范围').disable();
-                  // $("table button").addClass("hidden");
-                  break;
-              case '13':
-                  console.log("到第13页啦！");
-                  $("#editor_holder button").addClass("hidden");
-                  editor.getEditor('root').disable();
-                  break;
-          }
-      }
 }
 
 

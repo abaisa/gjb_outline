@@ -60,6 +60,8 @@ function monitor() {
                 break;
             case '14':
                 editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.结果评定准则').disable();
                 console.log(load_data);

@@ -88,7 +88,9 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
-                disableAddAndDelete('root.试验端口及被试品工作状态', true);
+                $("#editor_holder button").addClass("hidden");
+                //这里改成上面的隐藏按钮的方法，之后若是还有别的按钮，可以选择使用底下注释掉的disable方法（应该是有别的按钮的）
+                // disableAddAndDelete('root.试验端口及被试品工作状态', true);
 
                 break;
             case '1001':

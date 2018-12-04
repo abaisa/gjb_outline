@@ -92,9 +92,11 @@ function monitor() {
 
                 break;
             case '1001':
-                editor.disable();
+                $("#editor_holder button").addClass("hidden");
+                editor.getEditor('root').disable();
                 break;
             case '35':
+                $("#editor_holder button").addClass("hidden");
                 editor.disable();
                 break;
             default:

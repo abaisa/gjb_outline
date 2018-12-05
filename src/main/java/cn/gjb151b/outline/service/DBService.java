@@ -45,6 +45,7 @@ public class DBService {
      * @throws Exception
      */
     public void submitData(int outlineID, String colName, String data) throws Exception {
+        data = data.replaceAll("\\\\", "\\\\\\\\");
         manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 

@@ -57,6 +57,9 @@ function monitor() {
                 editor.watch('root.电源端口', function () {
                     modifyPage10 = true;
                 });
+                editor.watch('root.互联端口', function () {
+                    modifyPage10 = true;
+                });
                 break;
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);
@@ -92,6 +95,249 @@ function monitor() {
                 //这里改成上面的隐藏按钮的方法，之后若是还有别的按钮，可以选择使用底下注释掉的disable方法（应该是有别的按钮的）
                 // disableAddAndDelete('root.试验端口及被试品工作状态', true);
 
+                break;
+            case '15':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '16':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '17':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验电源端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+
+            case '18':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测定结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '19':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '20':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '21':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '22':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+
+            case '23':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
+                    editor.getEditor(editorName).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '24':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                // var testPortArray = load_data.试验位置及被试品工作状态;
+                // for(var i = 0; i < testPortArray.length; i++) {
+                //     var editorName = 'root.试验位置及被试品工作状态.'+i+'.试验位置';
+                //     editor.getEditor(editorName).disable();
+                // }
+                $("#editor_holder button").addClass("hidden");
+                break
+            case '25':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '26':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
+                var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
+                for(var i = 0; i < testPortArray1.length; i++) {
+                    var editorName1 = 'root.试验端口及被试品工作状态.电源端口.'+i+'.电源端口';
+                    editor.getEditor(editorName1).disable();
+                }
+                for(var i = 0; i < testPortArray2.length; i++) {
+                    var editorName2 = 'root.试验端口及被试品工作状态.互联端口.'+i+'.互联端口';
+                    editor.getEditor(editorName2).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+
+            case '27':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
+                var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
+                for(var i = 0; i < testPortArray1.length; i++) {
+                    var editorName1 = 'root.试验端口及被试品工作状态.电源端口.'+i+'.电源端口';
+                    editor.getEditor(editorName1).disable();
+                }
+                for(var i = 0; i < testPortArray2.length; i++) {
+                    var editorName2 = 'root.试验端口及被试品工作状态.互联端口.'+i+'.互联端口';
+                    editor.getEditor(editorName2).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '28':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
+                var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
+                for(var i = 0; i < testPortArray1.length; i++) {
+                    var editorName1 = 'root.试验端口及被试品工作状态.电源端口.'+i+'.电源端口';
+                    editor.getEditor(editorName1).disable();
+                }
+                for(var i = 0; i < testPortArray2.length; i++) {
+                    var editorName2 = 'root.试验端口及被试品工作状态.互联端口.'+i+'.互联端口';
+                    editor.getEditor(editorName2).disable();
+                }
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '29':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '30':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '31':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '32':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '33':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
+                break;
+            case '34':
+                editor.getEditor('root.试验项目').disable();
+                editor.getEditor('root.试验内容').disable();
+                editor.getEditor('root.限值').disable();
+                editor.getEditor('root.数据处理方法').disable();
+                editor.getEditor('root.测试结果评定准则').disable();
+                $("#editor_holder button").addClass("hidden");
                 break;
             case '1001':
                 editor.disable();

@@ -51,6 +51,8 @@ function turnPage(action) {
 function submitPageData(action) {
     console.log("call submitPageData");
     console.log(JSON.stringify(editor.getValue()));
+    console.log("page_number:"+page_number);
+    console.log("pageAction:"+action);
     $.ajax({
         type: "post",
         url: "/outline/page_data/submit",
@@ -85,17 +87,18 @@ function loadTargetPage(action) {
             outlineID: 1,
             pageAction: action       // 1 表示下一页，2 表示上一页
         },
+
         success: function (data) {
             console.log("loadTargetPage ajax 请求成功");
-
             if (data.status == "success") {
+
                 var all_data = JSON.parse(data.data);
                 load_data = all_data.data;
                 load_schema = all_data.schema;
                 var load_page_id = all_data.page_id;
+                console.log("未json处理化的load_data"+load_data);
                 load_schema = JSON.parse(load_schema);
-                load_data = JSON.parse(load_data);
-
+                load_data = JSON.parse(load_data.replace(/\n/g,"\\\\n").replace(/\t/g,"\\\\t"));
                 console.log("loadTargetPage data >>");
                 console.log(load_schema);
                 console.log(load_data);

@@ -36,7 +36,7 @@ public class DependencyService {
         System.out.println("generateDependencyData Page ID >> " + pageNumber);
 
         JSONObject jsonObject;
-        JSONArray jsonArray;
+        JSONArray jsonArray = new JSONArray();
         String resultData;
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
@@ -78,6 +78,7 @@ public class DependencyService {
                 }
                 resultData = JSON.toJSONString(jsonObject);
                 break;
+
             case 1001:
                 JSONArray freqResArray = new JSONArray();
                 // 解析所有dev系统中的频段并存入 本项不填则用 - 表示
@@ -179,24 +180,108 @@ public class DependencyService {
                 resultData = JSON.toJSONString(freqResArray);
                 break;
             case 14:
-                jsonObject = JSON.parseObject(data);
+//                jsonObject = JSON.parseObject(data);
                 String devCE101 = devObject.getDevCe101();
-                JSONObject devCE101Object = JSON.parseObject(devCE101);
-                String limitValue = devCE101Object.getJSONObject("limit_value").getString("pic");
-                String limitValueCurrent = devCE101Object.getJSONObject("limit_value_current").getString("pic");
-                StringBuilder builder = new StringBuilder();
-                if(limitValue.equals(limitValueCurrent)) {
-                    builder.append("GJB151B-2013标准规定图形：");
-                    builder.append(limitValue);
-                    jsonObject.put("限值", builder.toString());
-                }else {
-                    builder.append("研制要求管理系统生成图形：");
-                    builder.append(limitValueCurrent);
-                    jsonObject.put("限值", builder.toString());
-                }
-
-                resultData = JSON.toJSONString(jsonObject);
+                resultData = generateLimitPic(data, devCE101);
+//                JSONObject devCE101Object = JSON.parseObject(devCE101);
+//                String limitValue = devCE101Object.getJSONObject("limit_value").getString("pic");
+//                String limitValueCurrent = devCE101Object.getJSONObject("limit_value_current").getString("pic");
+//                StringBuilder builder = new StringBuilder();
+//                if(limitValue.equals(limitValueCurrent)) {
+//                    builder.append("GJB151B-2013标准规定图形：");
+//                    builder.append(limitValue);
+//                    jsonObject.put("限值", builder.toString());
+//                }else {
+//                    builder.append("研制要求管理系统生成图形：");
+//                    builder.append(limitValueCurrent);
+//                    jsonObject.put("限值", builder.toString());
+//                }
+//
+//                resultData = JSON.toJSONString(jsonObject);
                 break;
+            case 15:
+                String devCE102 = devObject.getDevCe102();
+                resultData = generateLimitPic(data, devCE102);
+                break;
+            case 16:
+                String devCE106 = devObject.getDevCe106();
+                resultData = generateAntennaData(devObject,data);
+                resultData = generateLimitText(resultData, devCE106);
+                break;
+            case 17:
+                String devCE107 = devObject.getDevCe107();
+                resultData = generateLimitText(data, devCE107);
+                break;
+            case 18:
+                String devCS101 = devObject.getDevCs101();
+                resultData = generateLimitTwoPic(data, devCS101);
+                break;
+            case 19:
+                String devCS102 = devObject.getDevCs102();
+                resultData = generateLimitText(data, devCS102);
+                break;
+            case 20:
+                resultData = generateAntennaData(devObject,data);
+                break;
+            case 21:
+                resultData = generateAntennaData(devObject,data);
+                break;
+            case 22:
+                resultData = generateAntennaData(devObject,data);
+                break;
+            case 23:
+                String devCS106 = devObject.getDevCs106();
+                resultData = generateLimitText(data, devCS106);
+                break;
+            case 24:
+                String devCS109 = devObject.getDevCs109();
+                resultData = generateLimitPic(data, devCS109);
+                break;
+            case 25:
+                String devCS112 = devObject.getDevCs112();
+                resultData = generateLimitText(data, devCS112);
+                break;
+            case 26:
+                String devCS114 = devObject.getDevCs114();
+                resultData = generateLimitPic(data, devCS114);
+                break;
+            case 27:
+                String devCS115 = devObject.getDevCs115();
+                resultData = generateLimitTextAndPic(data, devCS115);
+                break;
+            case 28:
+                String devCS116 = devObject.getDevCs116();
+                resultData = generateLimitTextAndPic(data, devCS116);
+                break;
+            case 29:
+                String devRE101 = devObject.getDevRe101();
+                resultData = generateLimitPic(data, devRE101);
+                break;
+            case 30:
+                String devRE102 = devObject.getDevRe102();
+                data = generateLimitPic(data, devRE102);
+                resultData = data;
+
+                break;
+            case 31:
+                String devRE103 = devObject.getDevRe103();
+                resultData = generateLimitText(data, devRE103);
+                break;
+            case 32:
+                String devRS101 = devObject.getDevRs101();
+                resultData = generateLimitPic(data, devRS101);
+                break;
+            case 33:
+                String devRS103 = devObject.getDevRs103();
+                resultData = generateLimitPic(data, devRS103);
+                break;
+            case 34:
+                String devRS105 = devObject.getDevRs105();
+                resultData = generateLimitPic(data, devRS105);
+//                resultData = data;
+                System.out.println("resultData:"+resultData);
+                break;
+
             default:
                 resultData = data;
                 break;
@@ -210,16 +295,34 @@ public class DependencyService {
         JSONArray jsonArray;
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
-
         switch (pageNumber) {
             case 10:
                 //第10页的电源端口数据控制着第14页的试验端口即被试品工作状态的数据
                 jsonObject = JSON.parseObject(data);
                 JSONArray powerPortArray = jsonObject.getJSONArray("电源端口");
+                JSONArray interPortArray = jsonObject.getJSONArray("互联端口");
 
                 JSONArray testPortArray = new JSONArray(); //外部电源输入 试验端口的列表数组
+                JSONArray allPowerArray = new JSONArray(); //电源输入端口，包括内部电源输入端口
+                JSONObject allPortObject = new JSONObject(); //所有端口，包括电源端口和互联端口
+                JSONArray powerArray = new JSONArray(); //所有电源端口名称
+                JSONArray interArray = new JSONArray(); //所有互联端口名称
                 String outlineData14 = outline.getOutlineData14();
+                String outlineData15 = outline.getOutlineData15();
+                String outlineData17 = outline.getOutlineData17();
+                String outlineData18 = outline.getOutlineData18();
+                String outlineData23 = outline.getOutlineData23();
+                String outlineData26 = outline.getOutlineData26();
+                String outlineData27 = outline.getOutlineData27();
+                String outlineData28 = outline.getOutlineData28();
                 JSONObject outlineData14Object = JSON.parseObject(outlineData14);
+                JSONObject outlineData15Object = JSON.parseObject(outlineData15);
+                JSONObject outlineData17Object = JSON.parseObject(outlineData17);
+                JSONObject outlineData18Object = JSON.parseObject(outlineData18);
+                JSONObject outlineData23Object = JSON.parseObject(outlineData23);
+                JSONObject outlineData26Object = JSON.parseObject(outlineData26);
+                JSONObject outlineData27Object = JSON.parseObject(outlineData27);
+                JSONObject outlineData28Object = JSON.parseObject(outlineData28);
                 for(int i = 0; i < powerPortArray.size(); i++) {
                     JSONObject powerPort = powerPortArray.getJSONObject(i);
                     if(powerPort.get("外部电源供电").equals("是") && powerPort.get("输入/输出").equals("输入")) {
@@ -227,16 +330,184 @@ public class DependencyService {
                         testPortObject.put("试验端口", powerPort.get("端口名称或代号"));
                         testPortArray.add(testPortObject);
                     }
+                    if(powerPort.get("输入/输出").equals("输入")){
+                        JSONObject allPowerObject = new JSONObject();
+                        allPowerObject.put("试验电源端口", powerPort.get("端口名称或代号"));
+                        allPowerArray.add(allPowerObject);
+                    }
+                    JSONObject singlePower = new JSONObject();
+                    singlePower.put("电源端口",powerPort.get("端口名称或代号"));
+                    powerArray.add(singlePower);
 
                 }
+                for(int i = 0; i < interPortArray.size(); i++){
+                    JSONObject interPort = interPortArray.getJSONObject(i);
+                    JSONObject singleInter = new JSONObject();
+                    singleInter.put("互联端口", interPort.get("端口名称或代号"));
+                    interArray.add(singleInter);
+                }
+                allPortObject.put("电源端口",powerArray);
+                allPortObject.put("互联端口",interArray);
                 outlineData14Object.put("试验端口及被试品工作状态", testPortArray);
+                outlineData15Object.put("试验端口及被试品工作状态", testPortArray);
+                outlineData17Object.put("试验端口及被试品工作状态", allPowerArray);
+                outlineData18Object.put("试验端口及被试品工作状态", testPortArray);
+                outlineData23Object.put("试验端口及被试品工作状态", testPortArray);
+                outlineData26Object.put("试验端口及被试品工作状态", allPortObject);
+                outlineData27Object.put("试验端口及被试品工作状态", allPortObject);
+                outlineData28Object.put("试验端口及被试品工作状态", allPortObject);
+                System.out.println("试验端口及被试品工作状态:"+JSON.toJSONString(outlineData26Object));
                 manageSysOutlineMapper.updateCol(outlineId, "outline_data_14", JSON.toJSONString(outlineData14Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_15", JSON.toJSONString(outlineData15Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_17", JSON.toJSONString(outlineData17Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_18", JSON.toJSONString(outlineData18Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_23", JSON.toJSONString(outlineData23Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_26", JSON.toJSONString(outlineData26Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_27", JSON.toJSONString(outlineData27Object));
+                manageSysOutlineMapper.updateCol(outlineId, "outline_data_28", JSON.toJSONString(outlineData28Object));
 
                 break;
             default:
                 break;
         }
     }
+
+    public String generateAntennaData(ManageSysDevelop devObject, String data){
+        JSONObject jsonObject;
+        JSONArray jsonArray = new JSONArray();
+        jsonObject = JSON.parseObject(data);
+        JSONObject antennaObject = new JSONObject();
+        antennaObject.put("天线端口", "天线端口1");
+        Integer devAntenna = devObject.getDevAntenna();
+        Integer devReceiveLaunch = devObject.getDevReceiveLaunch();
+        Integer devModulation = devObject.getDevModulation();
+        System.out.println("devAntenna:"+devAntenna);
+        System.out.println("devReceiveLaunch:"+devReceiveLaunch);
+        System.out.println("devModulation:"+devModulation);
+        String devString = "";
+        String antennaString = "";
+        String receiveString = "";
+        String modulationString = "";
+        if(devAntenna != null) {
+            if (devAntenna == 0) {
+                antennaString = "无天线端口";
+            } else if (devAntenna == 1) {
+                antennaString = "天线端口可拆卸";
+            } else if (devAntenna == 2) {
+                antennaString = "天线端口不可拆卸";
+            }
+        }
+        if(devReceiveLaunch != null) {
+            if (devReceiveLaunch == 1) {
+                receiveString = "发射";
+            } else if (devReceiveLaunch == 2) {
+                receiveString = "接收";
+            } else if (devReceiveLaunch == 3) {
+                receiveString = "收/发";
+            }
+        }
+        if(devModulation != null) {
+            if (devModulation == 1) {
+                modulationString = "调幅";
+            } else if (devModulation == 2) {
+                modulationString = "非调幅";
+            }
+        }
+        devString = "天线端口:"+antennaString+"; 天线端口模式:"+receiveString+"; 天线调制模式:"+modulationString;
+        antennaObject.put("工作状态", devString);
+        jsonArray.add(antennaObject);
+        jsonObject.put("试验端口及被试品工作状态", jsonArray);
+        String resultData = JSON.toJSONString(jsonObject);
+        return resultData;
+
+    }
+
+
+    public String generateLimitPic(String data, String devProject){
+        JSONObject jsonObject;
+        jsonObject = JSON.parseObject(data);
+        JSONObject devJsonProject = JSON.parseObject(devProject);
+        String limitValue = devJsonProject.getJSONObject("limit_value").getString("pic");
+        String limitValueCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
+        StringBuilder builder = new StringBuilder();
+        if(limitValue.equals(limitValueCurrent)) {
+            builder.append("GJB151B-2013标准规定图形:standard");
+            builder.append(limitValue);
+            jsonObject.put("限值", builder.toString());
+        }else {
+            builder.append("研制要求管理系统生成图形:");
+            builder.append(limitValueCurrent);
+            jsonObject.put("限值", builder.toString());
+        }
+
+        String resultData = JSON.toJSONString(jsonObject);
+        return resultData;
+    }
+
+    public String generateLimitTwoPic(String data, String devProject){
+        JSONObject jsonObject;
+        jsonObject = JSON.parseObject(data);
+        JSONObject devJsonProject = JSON.parseObject(devProject);
+        JSONObject limitValue = devJsonProject.getJSONObject("limit_value");
+        JSONObject limitValueCurrent = devJsonProject.getJSONObject("limit_value_current");
+        String pic1 = limitValue.getString("pic_one");
+        String pic2 = limitValue.getString("pic_two");
+        String picCurrent1 = limitValueCurrent.getString("pic_one");
+        String picCurrent2 = limitValueCurrent.getString("pic_two");
+        StringBuilder builder = new StringBuilder();
+        if(pic1.equals(picCurrent1)) {
+            builder.append("GJB151B-2013标准规定图形:standard");
+            builder.append(pic1);
+        }else{
+            builder.append("研制要求管理系统生成图形:");
+            builder.append(pic1);
+        }
+        if(pic2.equals(picCurrent2)){
+            builder.append("; GJB151B-2013标准规定图形:standard");
+            builder.append(pic2);
+        }else{
+            builder.append("研制要求管理系统生成图形:");
+            builder.append(pic2);
+        }
+        jsonObject.put("限值", builder.toString());
+        String resultData = JSON.toJSONString(jsonObject);
+        return resultData;
+    }
+
+
+    public String generateLimitText(String data, String devProject){
+        JSONObject jsonObject;
+        jsonObject = JSON.parseObject(data);
+        JSONObject devJsonProject = JSON.parseObject(devProject);
+        jsonObject.put("限值", devJsonProject.getJSONObject("limit_value_current").getString("text"));
+        String resultData = JSON.toJSONString(jsonObject);
+        return resultData;
+    }
+
+    public String generateLimitTextAndPic(String data, String devProject){
+        JSONObject jsonObject;
+        jsonObject = JSON.parseObject(data);
+        JSONObject devJsonProject = JSON.parseObject(devProject);
+        String pic = devJsonProject.getJSONObject("limit_value").getString("pic");
+        String picCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
+        String textCurrent = devJsonProject.getJSONObject("limit_value_current").getString("text");
+        StringBuilder builder = new StringBuilder();
+        if(pic.equals(picCurrent)) {
+            builder.append("GJB151B-2013标准规定图形:standard");
+            builder.append(pic);
+            builder.append("\n");
+        }else {
+            builder.append("研制要求管理系统生成图形:");
+            builder.append(picCurrent);
+            builder.append("\n");
+        }
+        builder.append(textCurrent);
+        jsonObject.put("限值", builder.toString());
+        String resultData = JSON.toJSONString(jsonObject);
+        return resultData;
+    }
+
+
 
     public String generateDependencySchema(int outlineId, int pageNumber, String schema) {
         JSONObject jsonSchema = JSON.parseObject(schema, Feature.OrderedField);

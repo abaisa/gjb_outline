@@ -54,6 +54,9 @@ function monitor() {
                     watchQuantity('root.电源端口', 10);
                     watchQuantity('root.互联端口', 20);
                 }
+                editor.watch('root.电源端口', function () {
+                    modifyPage10 = true;
+                });
                 break;
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);
@@ -64,6 +67,21 @@ function monitor() {
                 else {
                     console.log("valid");
                 }
+                break;
+            case '12':
+                $("#editor_holder button").addClass("hidden");
+                for(var i=0 ; i<6; i++){
+                    editor.getEditor('root.发射测试参数.'+i+'.频率范围').disable();
+                    editor.getEditor('root.发射测试参数.'+i+'.6dB带宽(kHz)').disable();
+                    editor.getEditor('root.发射测试参数.'+i+'.驻留时间(s)').disable();
+                    editor.getEditor('root.发射测试参数.'+i+'.最小测量时间(模拟式测量接收机)').disable();
+                }
+                // editor.getEditor('root.发射测试参数.0.频率范围').disable();
+                // $("table button").addClass("hidden");
+                break;
+            case '13':
+                $("#editor_holder button").addClass("hidden");
+                editor.getEditor('root').disable();
                 break;
             case '14':
                 editor.getEditor('root.试验项目').disable();
@@ -77,21 +95,26 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
-                disableAddAndDelete('root.试验端口及被试品工作状态', true);
+                $("#editor_holder button").addClass("hidden");
+                //这里改成上面的隐藏按钮的方法，之后若是还有别的按钮，可以选择使用底下注释掉的disable方法（应该是有别的按钮的）
+                // disableAddAndDelete('root.试验端口及被试品工作状态', true);
 
                 break;
-            case '1001':
-                editor.disable();
+            case '1001':case '1002':case '1003':case '1004':case '1005':
+                $("#editor_holder button").addClass("hidden");
+                editor.getEditor('root').disable();
                 break;
             case '35':
+                $("#editor_holder button").addClass("hidden");
                 editor.disable();
                 break;
             default:
                 break;
+
         }
-
-
 }
+
+
 function beforeSubmit() {
     switch (page_number) {
         case '10':
@@ -112,6 +135,8 @@ function beforeSubmit() {
     }
 
     return true;
+
+
 }
 
 

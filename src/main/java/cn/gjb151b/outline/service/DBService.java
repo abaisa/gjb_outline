@@ -33,6 +33,8 @@ public class DBService {
         if (pageID < 1) {
             throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
         }
+
+        data = data.replaceAll("\\\\", "\\\\\\\\");
         manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 
@@ -43,6 +45,7 @@ public class DBService {
      * @throws Exception
      */
     public void submitData(int outlineID, String colName, String data) throws Exception {
+        data = data.replaceAll("\\\\", "\\\\\\\\");
         manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 

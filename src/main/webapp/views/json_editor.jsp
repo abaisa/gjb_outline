@@ -25,6 +25,7 @@
 
         <%--<button id='submit' class="btn btn-primary">Submit</button>--%>
     </div>
+
 </div>
 
 <%--通用js文件--%>

@@ -75,4 +75,16 @@ public class ManageSysOutline {
 
     private Integer outlineStatus;
 
+    public String getOutlineDevItemid(){return outlineDevItemid;}
+
+    public String getOutlineDataSubsysEqp(){return outlineDataSubsysEqp;}
+
+    public String getOutlineDevSubsysEqpName(){return outlineDevSubsysEqpName;}
+
+    public String getOutlineDevSubsysEqpModel(){return outlineDevSubsysEqpModel;}
+
+    public String getOutlineDevSubsysEqpNum(){return outlineDevSubsysEqpNum;}
+
+    public String getOutlineSchemaSubsysEqp(){return outlineSchemaSubsysEqp;}
+
 }

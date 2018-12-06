@@ -93,7 +93,7 @@ function monitor() {
                 // disableAddAndDelete('root.试验端口及被试品工作状态', true);
 
                 break;
-            case '1001':
+            case '1001':case '1002':case '1003':case '1004':case '1005':
                 $("#editor_holder button").addClass("hidden");
                 editor.getEditor('root').disable();
                 break;

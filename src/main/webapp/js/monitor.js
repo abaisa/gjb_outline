@@ -57,6 +57,13 @@ function monitor() {
                 break;
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);
+                var errors = editor.validate();
+                if(errors.length) {
+                    console.log(errors);
+                }
+                else {
+                    console.log("valid");
+                }
                 break;
             case '14':
                 editor.getEditor('root.试验项目').disable();
@@ -105,5 +112,6 @@ function beforeSubmit() {
     }
 
     return true;
-
 }
+
+

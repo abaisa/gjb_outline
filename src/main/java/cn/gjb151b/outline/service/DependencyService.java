@@ -177,7 +177,6 @@ public class DependencyService {
                 String devRE102 = devObject.getDevRe102();
                 data = generateLimitPic(data, devRE102);
                 resultData = data;
-
                 break;
             case 31:
                 String devRE103 = devObject.getDevRe103();

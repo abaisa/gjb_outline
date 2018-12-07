@@ -63,6 +63,13 @@ function monitor() {
                 break;
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);
+                var errors = editor.validate();
+                if(errors.length) {
+                    console.log(errors);
+                }
+                else {
+                    console.log("valid");
+                }
                 break;
             case '12':
                 $("#editor_holder button").addClass("hidden");
@@ -339,7 +346,7 @@ function monitor() {
                 editor.getEditor('root.测试结果评定准则').disable();
                 $("#editor_holder button").addClass("hidden");
                 break;
-            case '1001':
+            case '1001':case '1002':case '1003':case '1004':case '1005':
                 $("#editor_holder button").addClass("hidden");
                 editor.getEditor('root').disable();
                 break;
@@ -517,3 +524,5 @@ function beforeSubmit() {
 
 
 }
+
+

@@ -369,6 +369,146 @@ function beforeSubmit() {
                 return false;
             }
             break;
+        case '15':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '16':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '17':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '18':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '19':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '20':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '21':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '22':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '23':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '24':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '25':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '26':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '27':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '28':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '29':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '30':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '31':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '32':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '33':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
+        case '34':
+            var errors = editor.validate();
+            if(errors.length > 0) {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+                return false;
+            }
+            break;
         default:
             break;
     }

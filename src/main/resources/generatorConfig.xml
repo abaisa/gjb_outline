@@ -17,7 +17,7 @@
         </commentGenerator>
 
         <!--数据库连接信息 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${jdbc.url}" userId="${jdbc.username}"
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${jdbc.url_2}" userId="${jdbc.username}"
                         password="${jdbc.password}">
         </jdbcConnection>
 
@@ -41,7 +41,7 @@
         <table tableName="manage_sys_develop" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
-            <!--<columnOverride column="schema_1" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+
         </table>
     </context>
 </generatorConfiguration>

@@ -14,8 +14,8 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--扫描外部配置文件-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-    <!--配置连接池-->
-    <!--2.Druid数据池-->
+
+    <!-- develop(数据库1) 数据库源  Druid连接池-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
         <!--配置连接池属性-->
@@ -41,8 +41,6 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <property name="filters" value="stat"/>
     </bean>
 
-
-    <!-- mybatis配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis.xml"/>
@@ -54,8 +52,46 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
-    <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!-- 数据源2 -->
+    <!-- outline 数据库源  Druid连接池-->
+    <bean id="dataSource_2" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url_2}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="3"/>
+        <property name="minIdle" value="3"/>
+        <property name="maxActive" value="20"/>
+        <property name="maxWait" value="60000"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="filters" value="stat"/>
+    </bean>
+
+    <!-- mybatis 相关配置 -->
+    <bean id="sqlSessionFactory_2" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_2"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations" value="classpath:cn/gjb151b/outline/outlineMapping/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.gjb151b.outline.outlineDao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_2" />
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager_2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_2"/>
     </bean>
 </beans>

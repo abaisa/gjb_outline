@@ -1,4 +1,4 @@
-package cn.gjb151b.outline.dao;
+package cn.gjb151b.outline.outlineDao;
 
 import cn.gjb151b.outline.model.ManageSysOutline;
 import org.apache.ibatis.annotations.Param;

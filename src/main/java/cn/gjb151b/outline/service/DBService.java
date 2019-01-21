@@ -1,7 +1,7 @@
 package cn.gjb151b.outline.service;
 
 import cn.gjb151b.outline.Constants.ExceptionEnums;
-import cn.gjb151b.outline.dao.ManageSysOutlineMapper;
+import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.utils.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

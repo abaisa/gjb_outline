@@ -2,7 +2,7 @@ package cn.gjb151b.outline.service;
 
 import cn.gjb151b.outline.Constants.*;
 import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
-import cn.gjb151b.outline.dao.ManageSysOutlineMapper;
+import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.model.ManageSysDevelop;
 import cn.gjb151b.outline.model.ManageSysOutline;
 import cn.gjb151b.outline.utils.ServiceException;
@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.google.common.base.Strings;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -11,5 +11,6 @@ public interface ManageSysOutlineMapper {
 
     String selectCol(@Param("outlineID") int outlineID, @Param("colName") String colName);
 
-    ManageSysOutline selectByPrimaryKey(@Param("outlineId") Integer oulineId);
+    ManageSysOutline selectByPrimaryKey(@Param("outlineId") Integer outlineId);
+    ManageSysOutline selectProjectByItemId(@Param("outlineDevItemId") String outlineDevItemId);
 }

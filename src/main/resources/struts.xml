@@ -31,5 +31,22 @@
             </result>
         </action>
     </package>
+    <package name="login" namespace="/login" extends="struts-default,json-default">
+        <action name="checkUser" class="cn.gjb151b.outline.action.LoginAction" method="checkUser">
+            <result name="success" type="json">
+                <param name="root">checkUserResponse</param>
+            </result>
+        </action>
+        <action name="logout" class="cn.gjb151b.outline.action.LoginAction" method="logout">
+            <result name="success">/views/login.jsp</result>
+        </action>
+    </package>
+    <package name="project" namespace="/project" extends="struts-default,json-default" >
+        <action name="findproject" class="cn.gjb151b.outline.action.FindProjectAction" method="showProject">
+            <result name="success" type="json">
+                <param name="root">projectResultResponse</param>
+            </result>
+        </action>
+    </package>
 
 </struts>

@@ -28,17 +28,17 @@
         </javaModelGenerator>
 
         <!--生成xml mapper文件 路径 -->
-        <sqlMapGenerator targetPackage="${xml.mapper.package}" targetProject="${target.project}">
+        <sqlMapGenerator targetPackage="${xml.mapper.package_2}" targetProject="${target.project}">
             <property name="enableSubPackages" value="ture"/>
         </sqlMapGenerator>
 
         <!-- 生成的Dao接口 的包路径 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="${dao.package}" targetProject="${target.project}">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${dao.package_2}" targetProject="${target.project}">
             <property name="enableSubPackages" value="ture"/>
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="manage_sys_develop" enableCountByExample="false"
+        <table tableName="manage_sys_outline" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
 

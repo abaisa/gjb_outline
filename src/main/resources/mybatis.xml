@@ -8,5 +8,6 @@
     </settings>
     <typeAliases>
         <typeAlias alias="ManageSysOutline" type="cn.gjb151b.outline.model.ManageSysOutline"/>
+        <typeAlias alias="UserProject" type="cn.gjb151b.outline.model.UserProject"/>
     </typeAliases>
 </configuration>

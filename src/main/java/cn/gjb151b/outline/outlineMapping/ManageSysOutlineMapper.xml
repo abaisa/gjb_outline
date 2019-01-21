@@ -72,4 +72,10 @@
         FROM manage_sys_outline
         WHERE outline_id = #{outlineId}
     </select>
+
+    <select id="selectProjectByItemId" parameterType="String" resultMap="BaseResultMap">
+        SELECT *
+        FROM  manage_sys_outline
+        where outline_dev_itemid = #{outlineDevItemId}
+    </select>
 </mapper>

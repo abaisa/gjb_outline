@@ -55,6 +55,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+<!--<<<<<<< Updated upstream-->
 
 
     <!-- 数据源2 -->
@@ -95,3 +96,55 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <property name="dataSource" ref="dataSource_2"/>
     </bean>
 </beans>
+<!--=======-->
+    <!--&lt;!&ndash;gib_outline数据库源配置&ndash;&gt;-->
+    <!--&lt;!&ndash;配置连接池&ndash;&gt;-->
+    <!--&lt;!&ndash;2.Druid数据池&ndash;&gt;-->
+    <!--<bean id="dataSource_2" class="com.alibaba.druid.pool.DruidDataSource"-->
+          <!--init-method="init" destroy-method="close">-->
+        <!--&lt;!&ndash;配置连接池属性&ndash;&gt;-->
+        <!--<property name="driverClassName" value="${jdbc.driverClassName}"/>-->
+        <!--<property name="url" value="${jdbc.url_2}"/>-->
+        <!--<property name="username" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+        <!--&lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;-->
+        <!--<property name="initialSize" value="3"/>-->
+        <!--<property name="minIdle" value="3"/>-->
+        <!--<property name="maxActive" value="20"/>-->
+        <!--&lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;-->
+        <!--<property name="maxWait" value="60000"/>-->
+        <!--&lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="60000"/>-->
+        <!--&lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="300000"/>-->
+        <!--<property name="validationQuery" value="SELECT 1"/>-->
+        <!--<property name="testWhileIdle" value="true"/>-->
+        <!--<property name="testOnBorrow" value="false"/>-->
+        <!--<property name="testOnReturn" value="false"/>-->
+        <!--&lt;!&ndash; 配置监控统计拦截的filters &ndash;&gt;-->
+        <!--<property name="filters" value="stat"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; mybatis配置 &ndash;&gt;-->
+    <!--<bean id="sqlSessionFactory_2" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource_2"/>-->
+        <!--<property name="configLocation" value="classpath:mybatis.xml"/>-->
+        <!--<property name="mapperLocations" value="classpath:cn/gjb151b/outline/mapping2/*.xml"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="cn.gjb151b.outline.dao" />-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_2" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->
+    <!--<bean id="transactionManager_2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource_2"/>-->
+    <!--</bean>-->
+
+
+
+<!--</beans>-->
+
+
+
+<!--&gt;>>>>>> Stashed changes-->

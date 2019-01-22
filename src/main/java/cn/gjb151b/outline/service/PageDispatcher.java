@@ -18,14 +18,8 @@ public class PageDispatcher {
         nextPageRouter.put(9, 1001);
         nextPageRouter.put(1006, 10);
 
-
-
-//        nextPageRouter.put(14, 35);
         nextPageRouter.put(35, 56);
         nextPageRouter.put(58, 3);
-        nextPageRouter.put(3, 36);
-
-
 
 
         // 特殊上一页

@@ -15,6 +15,11 @@
                 <param name="root">response</param>
             </result>
         </action>
+        <action name="loadAdvice" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="loadAdvice">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
     </package>
 
     <package name="dependency" namespace="/dependency" extends="struts-default, json-default">

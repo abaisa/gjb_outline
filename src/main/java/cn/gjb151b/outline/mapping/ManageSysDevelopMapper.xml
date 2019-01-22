@@ -21,10 +21,10 @@
     <result column="dev_lowsensitive" jdbcType="INTEGER" property="devLowsensitive" />
     <result column="dev_emp" jdbcType="INTEGER" property="devEmp" />
     <result column="dev_static" jdbcType="INTEGER" property="devStatic" />
-    <result column="dev_powerport" jdbcType="INTEGER" property="devPowerport" />
-    <result column="dev_powersupply" jdbcType="INTEGER" property="devPowersupply" />
-    <result column="dev_voltage" jdbcType="INTEGER" property="devVoltage" />
-    <result column="dev_voltagenum" jdbcType="INTEGER" property="devVoltagenum" />
+    <result column="dev_powerport" jdbcType="LONGVARCHAR" property="devPowerport" />
+    <result column="dev_powersupply" jdbcType="LONGVARCHAR" property="devPowersupply" />
+    <result column="dev_voltage" jdbcType="LONGVARCHAR" property="devVoltage" />
+    <result column="dev_voltagenum" jdbcType="LONGVARCHAR" property="devVoltagenum" />
     <result column="dev_antenna" jdbcType="INTEGER" property="devAntenna" />
     <result column="dev_receive_launch" jdbcType="INTEGER" property="devReceiveLaunch" />
     <result column="dev_modulation" jdbcType="INTEGER" property="devModulation" />

@@ -43,6 +43,9 @@ public class CoreService {
         Map<String, String> result = new HashMap<>();
         String schema = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
         String data = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.DATA_PREFIX.getValue());
+//        String outlineAdviceProofread = dbService.fetchData(outlineID, "outline_advice_proofread");
+//        String outlineAdviceAudit = dbService.fetchData(outlineID, "outline_advice_audit");
+//        String outlineAdviceAuthorize = dbService.fetchData(outlineID, "outline_advice_authorize");
         System.out.println("db fetch schema >>> " + schema);
         System.out.println("db fetch data >>> " + data);
         if (Strings.isNullOrEmpty(schema) || Strings.isNullOrEmpty(data)) {
@@ -59,8 +62,23 @@ public class CoreService {
         result.put("schema", schema);
         result.put("data", data);
         result.put("page_id", String.valueOf(pageNumber));
+//        result.put("outlineAdviceProofread", outlineAdviceProofread);
+//        result.put("outlineAdviceAudit", outlineAdviceAudit);
+//        result.put("outlineAdviceAuthorize", outlineAdviceAuthorize);
 
         System.out.println("getResponseData return json >>> " + JSON.toJSONString(result));
+        return JSON.toJSONString(result);
+    }
+
+
+    public String getAdvice(int outlineID) throws Exception {
+        Map<String, String> result = new HashMap<>();
+        String outlineAdviceProofread = dbService.fetchData(outlineID, "outline_advice_proofread");
+        String outlineAdviceAudit = dbService.fetchData(outlineID, "outline_advice_audit");
+        String outlineAdviceAuthorize = dbService.fetchData(outlineID, "outline_advice_authorize");
+        result.put("outlineAdviceProofread", outlineAdviceProofread);
+        result.put("outlineAdviceAudit", outlineAdviceAudit);
+        result.put("outlineAdviceAuthorize", outlineAdviceAuthorize);
         return JSON.toJSONString(result);
     }
 

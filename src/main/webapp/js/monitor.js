@@ -3,6 +3,9 @@
  */
 
 function monitor() {
+   if(outlineStatus == 1  ||  outlineStatus == 2  ||  outlineStatus == 3  ||  Status == 1){
+       editor.disable();
+   }
     if (page_number == '3') { //第三页隐藏上一页的按钮
         $("#pre_page").addClass("hidden");
     } else {  //其他页显示上一页的按钮

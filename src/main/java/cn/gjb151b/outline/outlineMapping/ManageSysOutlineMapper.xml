@@ -57,6 +57,9 @@
         <result column="outline_update_time" property="outlineUpdateTime" jdbcType="TIMESTAMP"/>
         <result column="outline_opeator" property="outlineOpeator" jdbcType="INTEGER"/>
         <result column="outline_status" property="outlineStatus" jdbcType="INTEGER"/>
+        <result column="outline_advice_proofread" property="outlineAdviceProofread" jdbcType="LONGVARCHAR"/>
+        <result column="outline_advice_audit" property="outlineAdviceAudit" jdbcType="LONGVARCHAR"/>
+        <result column="outline_advice_authorize" property="outlineAdviceAuthorize" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
     <update id="updateCol" statementType="STATEMENT">

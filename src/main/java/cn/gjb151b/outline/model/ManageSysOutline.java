@@ -107,6 +107,12 @@ public class ManageSysOutline {
 
     private Integer outlineStatus;
 
+    private String outlineAdviceProofread;
+
+    private String outlineAdviceAudit;
+
+    private String outlineAdviceAuthorize;
+
     public String getOutlineDevItemid(){return outlineDevItemid;}
 
     public String getOutlineDataSubsysEqp(){return outlineDataSubsysEqp;}
@@ -118,5 +124,12 @@ public class ManageSysOutline {
     public String getOutlineDevSubsysEqpNum(){return outlineDevSubsysEqpNum;}
 
     public String getOutlineSchemaSubsysEqp(){return outlineSchemaSubsysEqp;}
+
+    public String getOutlineAdviceProofread(){return  outlineAdviceProofread;}
+
+    public String getOutlineAdviceAudit(){return  outlineAdviceAudit;}
+
+    public String getOutlineAdviceAuthorize(){return  outlineAdviceAuthorize;}
+
 
 }

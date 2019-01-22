@@ -4,39 +4,39 @@ package cn.gjb151b.outline.model;
  */
 
 public class ViewProject {
-    private String devName;
-    private int devStatus;
-    private String devItemid;
-    private int devId;
+    private String outlineName;
+    private int outlineStatus;
+    private String outlineItemid;
+    private int outlineId;
 
     public ViewProject() {
     }
 
-    public ViewProject(String devName, int devStatus, String devItemid, int devId) {
-        this.devName = devName;
-        this.devStatus = devStatus;
-        this.devItemid = devItemid;
-        this.devId = devId;
+    public ViewProject(String outlineName, int outlineStatus, String outlineItemid, int outlineId) {
+        this.outlineName = outlineName;
+        this.outlineStatus = outlineStatus;
+        this.outlineItemid = outlineItemid;
+        this.outlineId = outlineId;
     }
 
-    public String getDevName(){return devName;}
+    public String getOutlineName(){return outlineName;}
 
-    public void setDevName(String devName) {
-        this.devName = devName;
+    public void setOutlineName(String outlineName) {
+        this.outlineName = outlineName;
     }
 
-    public int getDevStatus(){return devStatus;}
+    public int getOutlineStatus(){return outlineStatus;}
 
-    public void setDevStatus(int devStatus) {
-        this.devStatus = devStatus;
+    public void setOutlineStatus(int outlineStatus) {
+        this.outlineStatus = outlineStatus;
     }
 
-    public String getDevItemid(){return devItemid;}
+    public String getOutlineItemid(){return outlineItemid;}
 
-    public void  setDevItemid(String devItemid){this.devItemid = devItemid;}
+    public void  setOutlineItemid(String outlineItemid){this.outlineItemid = outlineItemid;}
 
-    public int getDevId(){return  devId;}
+    public int getOutlineId(){return  outlineId;}
 
-    public void setDevId(int devId){this.devId = devId;}
+    public void setOutlineId(int outlineId){this.outlineId = outlineId;}
 }
 

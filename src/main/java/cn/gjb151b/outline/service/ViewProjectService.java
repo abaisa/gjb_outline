@@ -82,8 +82,8 @@ public class ViewProjectService {
             }else {
 
                 for (int i = 0; i < lm.size(); i++) {
-                    projectDic.put(lm.get(i).getDevItemid(), lm.get(i).getDevStatus());
-                    projectIds.put(lm.get(i).getDevItemid(), i);
+                    projectDic.put(lm.get(i).getOutlineItemid(), lm.get(i).getOutlineStatus());
+                    projectIds.put(lm.get(i).getOutlineItemid(), i);
                 }
                 if (newList != null && newList.size() != 0) {
                     for (String str : newList) {

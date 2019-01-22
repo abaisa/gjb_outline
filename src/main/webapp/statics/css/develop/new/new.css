@@ -1,0 +1,44 @@
+/*input设置为圆角样式*/
+.radius {
+    border-radius: 5px !important;
+    width: 100%;
+}
+
+/*设置td内容垂直居中*/
+.table tbody tr td {
+    vertical-align: middle;
+}
+
+/*隐藏tobody,th,td的上边线*/
+.table > tbody, .table > tbody > tr > th,.table > tbody > tr > td {
+    border-top: 0px !important;
+}
+
+/*增加panel-heading的上边线*/
+.panel-heading {
+    border-top: 1px solid transparent;
+}
+
+/*取消panel的上边线，不然会和panel-heading的上边线重合*/
+.panel {
+    border-top: 0px;
+}
+
+/* 意见框控制 */
+textarea{
+    width:8px;   // 控制垂直滚动条宽度
+height:20px;
+    overflow-y:scroll;
+    display:block;
+}
+::-webkit-scrollbar { /*血槽宽度*/
+    width:8px;   // 控制垂直滚动条宽度
+height:20%; // 控制水平高度
+}
+::-webkit-scrollbar-track { /*背景槽*/
+    border-radius:6px
+}
+::-webkit-scrollbar-thumb { /*拖动条*/
+    background-color: rgba(0, 0, 0, .3);
+    border-radius:6px;
+}

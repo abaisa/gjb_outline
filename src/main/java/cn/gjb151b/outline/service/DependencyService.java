@@ -431,8 +431,9 @@ public class DependencyService {
                 ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
                 String devItemId = outline.getOutlineDevItemid();
                 ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+                JSONArray powerPortList = (JSONArray) JSON.parse(develop.getDevPowerport());
                 JSONObject jsonProperties = (JSONObject) jsonSchema.get("properties");
-                if (develop.getDevPowerport() == 0) {
+                if (powerPortList.size() == 0 || noPortSelect(powerPortList) == false) {
                     jsonProperties.remove("电源端口");
                 }
                 if (develop.getDevInterport() == 0) {
@@ -722,5 +723,15 @@ public class DependencyService {
         freqResArray.add(oneLineObject);
 
         return JSON.toJSONString(freqResArray);
+    }
+
+    private  boolean noPortSelect(JSONArray jsonArray){
+        boolean port = false;
+        for(int i=0; i<jsonArray.size(); i++){
+            if(jsonArray.getString(i).equals("0")){
+                port = true;
+            }
+        }
+        return port;
     }
 }

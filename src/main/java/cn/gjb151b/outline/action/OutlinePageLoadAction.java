@@ -40,6 +40,25 @@ public class OutlinePageLoadAction  extends ActionSupport {
         return SUCCESS;
     }
 
+    public String loadAdvice(){
+        String responseData;
+        try{
+            responseData = coreService.getAdvice(outlineID);
+        } catch (ServiceException e) {
+            System.out.println(e.getExceptionEnums().getErrMsg());
+            response.setError(e);
+            return SUCCESS;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            response.setError("other service error");
+            return SUCCESS;
+        }
+        response.setResponse(responseData);
+        return SUCCESS;
+
+    }
+
+
     public Integer getOutlineID() {
         return outlineID;
     }

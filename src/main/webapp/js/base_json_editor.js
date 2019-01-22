@@ -91,8 +91,9 @@ function loadTargetPage(action) {
         success: function (data) {
             console.log("loadTargetPage ajax 请求成功");
             if (data.status == "success") {
-
+                console.log("data:"+data.data);
                 var all_data = JSON.parse(data.data);
+
                 load_data = all_data.data;
                 load_schema = all_data.schema;
                 var load_page_id = all_data.page_id;

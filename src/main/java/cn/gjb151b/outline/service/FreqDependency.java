@@ -41,8 +41,7 @@ class FreqDependency {
                 this.extra = m.extra;
             }
             public outlineFreqModel clone() {
-                outlineFreqModel cloneObj = new outlineFreqModel(this);
-                return cloneObj;
+                return new outlineFreqModel(this);
             }
             private int order;
             private String modulation;

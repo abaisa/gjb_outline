@@ -43,8 +43,8 @@ public class DependencyService {
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
         String devItemId = outline.getOutlineDevItemid();
-        ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
-
+//        ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+        ManageSysDevelop devObject = new ManageSysDevelop();
 
         switch (pageNumber) {
             case 3:

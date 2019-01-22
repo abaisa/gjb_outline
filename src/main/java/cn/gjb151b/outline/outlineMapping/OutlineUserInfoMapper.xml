@@ -24,4 +24,48 @@
     select * from outline_user_info where user_name=#{userName};
   </select>
 
+  <select id="findAllUser"  resultMap="BaseResultMap">
+    select * from outline_user_info ;
+  </select>
+
+  <update id="updateCol" statementType="STATEMENT">
+		UPDATE outline_user_info SET ${colName}= '${data}' WHERE user_id = ${userId};
+  </update>
+
+  <update id="updateUser" statementType="STATEMENT">
+		UPDATE outline_user_info SET ${colName}= '${data}' WHERE user_id = ${userId};
+  </update>
+
+
+  <select id="selectUserById" parameterType="int" resultMap="BaseResultMap">
+    select user_name from outline_user_info where user_id=#{userId};
+  </select>
+
+  <delete id="deleteUserById" parameterType="int">
+    delete from outline_user_info where user_id=#{userId};
+  </delete>
+
+  <insert id="addUser" parameterType="cn.gjb151b.outline.model.OutlineUserInfo" useGeneratedKeys="true">
+    insert into outline_user_info(user_name, user_password, user_level, user_new, user_proofread, user_audit, user_authorize, user_remark)
+    values(#{userName}, #{userPassword}, #{userLevel}, #{userNew}, #{userProofread}, #{userAudit}, #{userAuthorize}, #{userRemark});
+  </insert>
+
+  <select id="selectNewItemOperator" statementType="STATEMENT"  resultType="String">
+        SELECT user_name FROM outline_user_info WHERE user_new like '%${outlineDevItemId}%';
+  </select>
+
+  <select id="selectProofreadItemOperator" statementType="STATEMENT"  resultType="String">
+        SELECT user_name FROM outline_user_info WHERE user_proofread like '%${outlineDevItemId}%';
+  </select>
+
+  <select id="selectAuditItemOperator" statementType="STATEMENT"  resultType="String">
+        SELECT user_name FROM outline_user_info WHERE user_audit like '%${outlineDevItemId}%';
+  </select>
+
+  <select id="selectAuthorizeItemOperator" statementType="STATEMENT"  resultType="List">
+        SELECT user_name FROM outline_user_info WHERE user_authorize like '${outlineDevItemId}';
+  </select>
+
+
+
 </mapper>

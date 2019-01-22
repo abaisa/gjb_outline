@@ -53,5 +53,42 @@
             </result>
         </action>
     </package>
+    <package name="admin" namespace="/admin" extends="struts-default,json-default">
+        <action name="findAllUser" class="cn.gjb151b.outline.action.AdminAction" method="findAllUser">
+            <result name="success" type="json">
+                <param name="root">findAllUserResponse</param>
+            </result>
+        </action>
+        <action name="resetPassword" class="cn.gjb151b.outline.action.AdminAction" method="resetPassword">
+            <result name="success" type="json">
+                <param name="root">resetPasswordResponse</param>
+            </result>
+        </action>
+        <action name="deleteUser" class="cn.gjb151b.outline.action.AdminAction" method="deleteUser">
+            <result name="success" type="json">
+                <param name="root">deleteUserResponse</param>
+            </result>
+        </action>
+        <action name="updateUser" class="cn.gjb151b.outline.action.AdminAction" method="updateUser">
+            <result name="success" type="json">
+                <param name="root">updateUserResponse</param>
+            </result>
+        </action>
+        <action name="addUser" class="cn.gjb151b.outline.action.AdminAction" method="addUser">
+            <result name="success" type="json">
+                <param name="root">addUserResponse</param>
+            </result>
+        </action>
+        <action name="findAllItem" class="cn.gjb151b.outline.action.ItemAction" method="findAllItem">
+            <result name="success" type="json">
+                <param name="root">findAllItemResponse</param>
+            </result>
+        </action>
+        <action name="getAllItem" class="cn.gjb151b.outline.action.ItemAction" method="getAllItem">
+            <result name="success" type="json">
+                <param name="root">getAllItemResponse</param>
+            </result>
+        </action>
+    </package>
 
 </struts>

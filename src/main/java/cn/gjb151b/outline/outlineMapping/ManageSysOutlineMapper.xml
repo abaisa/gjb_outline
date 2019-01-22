@@ -81,4 +81,10 @@
         FROM  manage_sys_outline
         where outline_dev_itemid = #{outlineDevItemId}
     </select>
+
+    <select id="findAllItem" resultMap="BaseResultMap">
+        select * from manage_sys_outline;
+    </select>
+
+
 </mapper>

@@ -83,6 +83,16 @@ public class CoreService {
     }
 
 
+    public void submitAdvice(int outlineID, String colNameAdvice, String advice, String colNameStatus, Integer outlineStatus) throws Exception{
+        if(advice != null) {
+            dbService.submitData(outlineID, colNameAdvice, advice);
+        }
+        dbService.submitStatus(outlineID, colNameStatus, outlineStatus);
+
+    }
+
+
+
     public void submitPageData(Integer outlineID, Integer sourcePageNumber, Integer pageAction, String data) throws Exception {
         dbService.submitData(outlineID, sourcePageNumber, DbColnameEnums.DATA_PREFIX.getValue(), data);
         if(pageAction == 3) {

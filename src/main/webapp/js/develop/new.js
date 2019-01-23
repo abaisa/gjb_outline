@@ -41,6 +41,9 @@ function adviceTitle(devStatus,Status) {
                 var all_data = JSON.parse(data.data);
                 console.log("长度："+JSON.parse(all_data.outlineAdviceProofread.toString()).length);
                 //填充意见框
+                outlineAdviceProofread = JSON.parse(all_data.outlineAdviceProofread.toString());
+                outlineAdviceAudit = JSON.parse(all_data.outlineAdviceAudit.toString());
+                outlineAdviceAuthorize = JSON.parse(all_data.outlineAdviceAuthorize.toString());
                 historyAdviceProofread(JSON.parse(all_data.outlineAdviceProofread.toString()));
                 historyAdviceAudit(JSON.parse(all_data.outlineAdviceAudit.toString()));
                 historyAdviceAuthorize(JSON.parse(all_data.outlineAdviceAuthorize.toString()));
@@ -57,6 +60,103 @@ function adviceTitle(devStatus,Status) {
     });
 
 }
+
+
+/*
+校对/审核/批准通过
+outlineStatus为项目自身状态同数据库同名含义
+审核通过时，项目状态发生改变：
+校对/审核通过时，outlineStatus均加1；批准通过时，outlineStatus由3变为5
+*/
+function  passResult(outlineStatus, result, userName){
+    outlineStatusNow = -1;
+    if(result == 1){
+        //批准通过即项目完成，项目最后状态为5
+        if(outlineStatus == 3){
+            outlineStatusNow = 5;
+        }else{
+            outlineStatusNow = outlineStatus+1;
+        }
+    }else{
+        outlineStatusNow = 4;
+    }
+    //devAdviceString获取意见框输入
+    var outlineAdviceString = $("#advice").val().trim();
+    console.log("outlineAdviceString:"+outlineAdviceString);
+    var data = {"outlineID": 1,"outlineStatus":outlineStatusNow, "outlineStatusOriginal":outlineStatus};
+    if(outlineAdviceString != ""){
+        var myDate = new Date();
+        var adviceDate = myDate.toLocaleString();
+        outlineAdviceString = adviceDate+" "+outlineAdviceString;
+        var adviceJson = "";
+        if(outlineStatus == 1){
+            adviceJson = outlineAdviceProofread;
+        }else if(outlineStatus == 2){
+            adviceJson = outlineAdviceAudit;
+        }else if(outlineStatus == 3){
+            adviceJson = outlineAdviceAuthorize;
+        }
+        adviceJson.push(outlineAdviceString);
+        outlineAdviceString = JSON.stringify(adviceJson);
+        data.outlineAdvice = outlineAdviceString;
+        // if(outlineStatus == 1){
+        //     data.outlineAdviceProofread=outlineAdviceString;
+        // }else if(outlineStatus == 2){
+        //     data.outlineAdviceAudit=outlineAdviceString;
+        // }else if(outlineStatus == 4){
+        //     data.outlineAdviceAuthorize=outlineAdviceString;
+        // }
+    }else{
+        if(outlineStatus == 1){
+            data.outlineAdvice = JSON.stringify(outlineAdviceProofread);
+        }else if(outlineStatus == 2){
+            data.outlineAdvice = JSON.stringify(outlineAdviceAudit);
+        }else if(outlineStatus == 3){
+            data.outlineAdvice = JSON.stringify(outlineAdviceAuthorize);
+        }
+    }
+    console.log(data);
+    $.ajax({
+        type: "POST", // 请求类型（get/post）
+        url:"/outline/page_data/submitAdvice",
+        data:data,
+        async: true, // 是否异步
+        dataType: "json", // 设置数据类型
+        success: function (data){
+            console.log("请求成功");
+            if(data.status === 'success')  {
+                // if(outlineStatus == 1){
+                //     alert("校对结果提交成功！");
+                // }else if(outlineStatus == 2){
+                //     alert("审核结果提交成功！");
+                // }else if(outlineStatus == 3){
+                //     alert("批准结果提交成功！");
+                // }
+                alert("提交成功！");
+                window.onbeforeunload = undefined;
+                // $.fillTipBox({type: 'warning',icon: 'glyphicon-exclamation-sign', content: "校对结果提交成功"});
+                window.location.href = "views/develop/project/project.jsp?act=project&userName="+userName;
+            }else {
+                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+
+            }
+        },
+        error: function (errorMsg){
+            // 请求失败
+            console.log("请求失败");
+            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: "请求失败"});
+        }
+    });
+}
+
+
+//取消操作
+function cancelProofread(userName) {
+    $("#advice_proofread").val("");
+    window.onbeforeunload = undefined;
+    window.location.href = "views/develop/project/project.jsp?act=project&userName="+userName;
+}
+
 
 //实时输入校对意见框展示
 function historyAdviceProofread(json) {
@@ -103,3 +203,5 @@ function historyAdviceAuthorize(json) {
     }
     document.getElementById("advice_history_authorize").innerHTML=text;
 }
+
+

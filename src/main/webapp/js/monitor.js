@@ -357,6 +357,14 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 editor.disable();
                 break;
+            case '58':
+                if(Status != 1) {
+                    if (outlineStatus == 0 || outlineStatus == 4) {
+                        $("#project_submit").removeClass("hidden");
+                        console.log("removeClass");
+                    }
+                }
+                break;
             default:
                 break;
 

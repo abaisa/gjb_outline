@@ -49,6 +49,17 @@ public class DBService {
         manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 
+
+    /**
+     * @param outlineID 大纲id
+     * @param data      写入整型数据
+     * @param colName   列名
+     * @throws Exception
+     */
+    public void submitStatus(int outlineID, String colName, int data) throws Exception {
+        manageSysOutlineMapper.updateColInt(outlineID, colName, data);
+    }
+
     /**
      * @param outlineID 大纲id
      * @param pageID    页码

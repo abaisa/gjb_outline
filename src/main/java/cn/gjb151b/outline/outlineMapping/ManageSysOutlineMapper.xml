@@ -66,6 +66,10 @@
 		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
     </update>
 
+    <update id="updateColInt" statementType="STATEMENT">
+		UPDATE manage_sys_outline SET ${colName}= ${data} WHERE outline_id = ${outlineID};
+    </update>
+
     <select id="selectCol" statementType="STATEMENT" resultType="string">
         SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
     </select>

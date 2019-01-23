@@ -15,7 +15,7 @@
 <div class="front-inner">
     <s:include value="../_nav.jsp?">
         <s:param name="userName">userName</s:param>
-        <s:param name="act">${param.devStatus}</s:param>
+        <s:param name="act">${param.outlineStatus}</s:param>
     </s:include>
     <div class="container">
         <div id="editor_head" class="hidden"></div>
@@ -24,6 +24,13 @@
         <div class="text-right" id="page_button">
             <button class="btn btn-primary" id="pre_page" onclick="turnPage(2)">上一页</button>
             <button class="btn btn-primary" id="next_page" onclick="turnPage(1)">下一页</button>
+        </div>
+        <br>
+        <div class="text-right hidden" id="project_submit" >
+            <button type="button" class="btn btn-default" onclick="cancelProofread('${session.userLogin.userName}')">取消</button>
+            |
+            <button class="btn btn-primary" id="save" onclick="passResult(0, 2, '${session.userLogin.userName}')">保存草稿</button>
+            <button class="btn btn-primary" id="submit" onclick="passResult(0, 1, '${session.userLogin.userName}')">提交报告</button>
         </div>
 
         <br><br><br>
@@ -59,10 +66,10 @@
                 <br>
                 <form class="form-horizontal">
                     <div class="col-lg-offset-8 col-lg-4 text-right" style="padding-right: 12px;">
-                        <button type="button" class="btn btn-default" onclick="cancelProofread()">取消</button>
+                        <button type="button" class="btn btn-default" onclick="cancelProofread('${session.userLogin.userName}')">取消</button>
                         |
-                        <button type="button" id = "fail" class="btn btn-primary" onclick="failProofread('${session.userLogin.userName}',${param.outlineStatus}, ${session.userLogin.userId})">不通过</button>
-                        <button type="button" id = "pass" class="btn btn-primary" onclick="passProofread('${session.userLogin.userName}',${param.outlineStatus}, ${session.userLogin.userId})">通过</button>
+                        <button type="button" id = "fail" class="btn btn-primary" onclick="passResult(${param.outlineStatus}, 2, '${session.userLogin.userName}')">不通过</button>
+                        <button type="button" id = "pass" class="btn btn-primary" onclick="passResult(${param.outlineStatus}, 1, '${session.userLogin.userName}')">通过</button>
                     </div>
                 </form>
             </div>

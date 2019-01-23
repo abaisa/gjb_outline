@@ -20,6 +20,11 @@
                 <param name="root">response</param>
             </result>
         </action>
+        <action name="submitAdvice" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="submitAdvice">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
     </package>
 
     <package name="dependency" namespace="/dependency" extends="struts-default, json-default">

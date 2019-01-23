@@ -340,18 +340,41 @@ public class DependencyService {
     public String generateLimitPic(String data, String devProject){
         JSONObject jsonObject;
         jsonObject = JSON.parseObject(data);
-        JSONObject devJsonProject = JSON.parseObject(devProject);
-        String limitValue = devJsonProject.getJSONObject("limit_value").getString("pic");
-        String limitValueCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
+        JSONObject devJsonProject = (JSONObject) JSON.parse(devProject);
         StringBuilder builder = new StringBuilder();
-        if(limitValue.equals(limitValueCurrent)) {
-            builder.append("GJB151B-2013标准规定图形:standard");
-            builder.append(limitValue);
+        if(devJsonProject.getString("project_id").equals("CE101")) {
+            for (int i = 0; i < devJsonProject.getJSONArray("limit_value").size(); i++) {
+                if(devJsonProject.getJSONArray("limit_value").getJSONObject(i).isEmpty()){
+                    continue;
+                }
+                String limitValue = devJsonProject.getJSONArray("limit_value").getJSONObject(i).getString("pic");
+                String limitValueCurrent = devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).getString("pic");
+                builder.append("第");
+                builder.append(i+1);
+                builder.append("个限值： ");
+                if (limitValue.equals(limitValueCurrent)) {
+                    builder.append("GJB151B-2013标准规定图形:standard");
+                    builder.append(limitValue);
+                    builder.append(" 。");
+                } else {
+                    builder.append("研制要求管理系统生成图形:");
+                    builder.append(limitValueCurrent);
+                    builder.append(" 。");
+                }
+            }
             jsonObject.put("限值", builder.toString());
-        }else {
-            builder.append("研制要求管理系统生成图形:");
-            builder.append(limitValueCurrent);
-            jsonObject.put("限值", builder.toString());
+        }else{
+            String limitValue = devJsonProject.getJSONObject("limit_value").getString("pic");
+            String limitValueCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
+            if (limitValue.equals(limitValueCurrent)) {
+                builder.append("GJB151B-2013标准规定图形:standard");
+                builder.append(limitValue);
+                jsonObject.put("限值", builder.toString());
+            } else {
+                builder.append("研制要求管理系统生成图形:");
+                builder.append(limitValueCurrent);
+                jsonObject.put("限值", builder.toString());
+            }
         }
 
         String resultData = JSON.toJSONString(jsonObject);
@@ -362,26 +385,36 @@ public class DependencyService {
         JSONObject jsonObject;
         jsonObject = JSON.parseObject(data);
         JSONObject devJsonProject = JSON.parseObject(devProject);
-        JSONObject limitValue = devJsonProject.getJSONObject("limit_value");
-        JSONObject limitValueCurrent = devJsonProject.getJSONObject("limit_value_current");
-        String pic1 = limitValue.getString("pic_one");
-        String pic2 = limitValue.getString("pic_two");
-        String picCurrent1 = limitValueCurrent.getString("pic_one");
-        String picCurrent2 = limitValueCurrent.getString("pic_two");
         StringBuilder builder = new StringBuilder();
-        if(pic1.equals(picCurrent1)) {
-            builder.append("GJB151B-2013标准规定图形:standard");
-            builder.append(pic1);
-        }else{
-            builder.append("研制要求管理系统生成图形:");
-            builder.append(pic1);
-        }
-        if(pic2.equals(picCurrent2)){
-            builder.append("; GJB151B-2013标准规定图形:standard");
-            builder.append(pic2);
-        }else{
-            builder.append("研制要求管理系统生成图形:");
-            builder.append(pic2);
+        for(int i=0; i<devJsonProject.getJSONArray("limit_value").size(); i++) {
+            if(devJsonProject.getJSONArray("limit_value").getJSONObject(i).isEmpty()){
+                continue;
+            }
+            builder.append("第");
+            builder.append(i+1);
+            builder.append("个限值： ");
+            JSONObject limitValue = devJsonProject.getJSONArray("limit_value").getJSONObject(i);
+            JSONObject limitValueCurrent = devJsonProject.getJSONArray("limit_value_current").getJSONObject(i);
+            String pic1 = limitValue.getString("pic_one");
+            String pic2 = limitValue.getString("pic_two");
+            String picCurrent1 = limitValueCurrent.getString("pic_one");
+            String picCurrent2 = limitValueCurrent.getString("pic_two");
+            if (pic1.equals(picCurrent1)) {
+                builder.append("GJB151B-2013标准规定图形:standard");
+                builder.append(pic1);
+            } else {
+                builder.append("研制要求管理系统生成图形:");
+                builder.append(pic1);
+            }
+            if (pic2.equals(picCurrent2)) {
+                builder.append("; GJB151B-2013标准规定图形:standard");
+                builder.append(pic2);
+                builder.append(" 。");
+            } else {
+                builder.append("研制要求管理系统生成图形:");
+                builder.append(pic2);
+                builder.append(" 。");
+            }
         }
         jsonObject.put("限值", builder.toString());
         String resultData = JSON.toJSONString(jsonObject);
@@ -393,7 +426,22 @@ public class DependencyService {
         JSONObject jsonObject;
         jsonObject = JSON.parseObject(data);
         JSONObject devJsonProject = JSON.parseObject(devProject);
-        jsonObject.put("限值", devJsonProject.getJSONObject("limit_value_current").getString("text"));
+        if(devJsonProject.getString("project_id").equals("CE107")){
+            StringBuilder builder = new StringBuilder();
+            for(int i=0; i<devJsonProject.getJSONArray("limit_value_current").size(); i++){
+                if(devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).isEmpty()){
+                    continue;
+                }
+                builder.append("第");
+                builder.append(i+1);
+                builder.append("个限值： ");
+                builder.append(devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).getString("text"));
+                builder.append(" 。");
+            }
+            jsonObject.put("限值", builder.toString());
+        }else {
+            jsonObject.put("限值", devJsonProject.getJSONObject("limit_value_current").getString("text"));
+        }
         String resultData = JSON.toJSONString(jsonObject);
         return resultData;
     }

@@ -19,6 +19,9 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private Integer pageNumber;
     private Integer pageAction;
     private String jsonData;
+    private String outlineAdvice;
+    private Integer outlineStatus;
+    private Integer outlineStatusOriginal;
     private BaseResponse<String> response;
 
     private CoreService coreService;
@@ -70,6 +73,31 @@ public class OutlinePageSubmitAction extends ActionSupport {
         return SUCCESS;
     }
 
+
+    public String submitAdvice(){
+        try {
+            if(outlineStatusOriginal == 1){
+                coreService.submitAdvice(outlineID, "outline_advice_proofread", outlineAdvice, "outline_status", outlineStatus);
+            }else if(outlineStatusOriginal == 2){
+                coreService.submitAdvice(outlineID, "outline_advice_audit", outlineAdvice, "outline_status", outlineStatus);
+            }else if(outlineStatusOriginal == 3){
+                coreService.submitAdvice(outlineID, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
+            }else{
+                coreService.submitAdvice(outlineID, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
+            }
+
+        } catch (ServiceException e) {
+            response.setError("service error");
+
+            return SUCCESS;
+        } catch (Exception e) {
+            response.setError("other service error");
+            return SUCCESS;
+        }
+
+        response.setResponse("data from server");
+        return SUCCESS;
+    }
 //    /**
 //     * 检查页面回传参数pageInfo，合法返回true
 //     */
@@ -126,4 +154,17 @@ public class OutlinePageSubmitAction extends ActionSupport {
     public void setPageAction(Integer pageAction) {
         this.pageAction = pageAction;
     }
+
+    public String getOutlineAdvice(){ return  outlineAdvice;}
+
+    public void setOutlineAdvice(String outlineAdvice){ this.outlineAdvice = outlineAdvice;}
+
+    public Integer getOutlineStatus(){ return outlineStatus;}
+
+    public void setOutlineStatus(Integer outlineStatus){ this.outlineStatus = outlineStatus;}
+
+    public Integer getOutlineStatusOriginal(){ return outlineStatusOriginal;}
+
+    public void setOutlineStatusOriginal(Integer outlineStatusOriginal){ this.outlineStatusOriginal = outlineStatusOriginal;}
+
 }

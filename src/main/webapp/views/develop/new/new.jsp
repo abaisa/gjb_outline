@@ -111,7 +111,7 @@
 
 
     // 页码初始化为2
-    page_number = 2;
+    page_number = 15;
 
     //pageAction初始化为下一页
     pageAction = 1;

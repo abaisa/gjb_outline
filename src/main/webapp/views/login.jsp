@@ -41,11 +41,11 @@
                 <div class="form-group">
                     <button id="submit" type="submit" class="btn btn-info btn-block btn-lg" onclick="checkUser()">登录</button>
                 </div>
-                <div class="form-group clearfix text-center">
-                    <div class="checkbox front-remfield">
-                        <label><input type="checkbox" >记住此用户名</label>
-                    </div>
-                </div>
+                <%--<div class="form-group clearfix text-center">--%>
+                    <%--<div class="checkbox front-remfield">--%>
+                        <%--<label><input type="checkbox" >记住此用户名</label>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
                 <div class="front-login-hr"></div>
                 <div class="form-group">
                     <input type="button" class="btn btn-default btn-block btn-lg free_reg" style="border: 1px solid #5bc0de;color: #5bc0de"

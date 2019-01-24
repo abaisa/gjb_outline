@@ -33,7 +33,7 @@ function adviceTitle(devStatus,Status) {
         type: "post",
         url: "/outline/page_data/loadAdvice",
         data: {
-            outlineID: 1
+            outlineID: outlineId
         },
 
         success: function (data) {
@@ -86,7 +86,7 @@ function  passResult(outlineStatus, result, userName){
     //devAdviceString获取意见框输入
     var outlineAdviceString = $("#advice").val().trim();
     console.log("outlineAdviceString:"+outlineAdviceString);
-    var data = {"outlineID": 1,"outlineStatus":outlineStatusNow, "outlineStatusOriginal":outlineStatus};
+    var data = {"outlineID": outlineId,"outlineStatus":outlineStatusNow, "outlineStatusOriginal":outlineStatus};
     if(outlineAdviceString != ""){
         var myDate = new Date();
         var adviceDate = myDate.toLocaleString();

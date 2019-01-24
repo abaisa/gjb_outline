@@ -1,9 +1,6 @@
 package cn.gjb151b.outline.action;
 
-import cn.gjb151b.outline.model.ItemOperater;
-import cn.gjb151b.outline.model.ManageSysOutline;
-import cn.gjb151b.outline.model.OutlineUserInfo;
-import cn.gjb151b.outline.model.ViewProject;
+import cn.gjb151b.outline.model.*;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.service.ItemService;
 import cn.gjb151b.outline.utils.BaseResponse;
@@ -44,39 +41,42 @@ public class ItemAction extends ActionSupport{
     }
 
     public String getAllItem(){
-        List<ItemOperater> itemList = itemService.getAllItem();
-        logger.info(itemList.get(1).getItemName());
+        List<ItemFromFirstSys> itemList = itemService.getAllItem();
         getAllItemResponse = new BaseResponse(itemList);
         return "success";
 
     }
 
-//    public String addItem(){
-//        ManageSysDevelopEntity s = new ManageSysDevelopEntity ();
-//        s.setDevItemid(UUIDUtils.getUUID());
-//        s.setDevName(this.devName);
-//        s.setDevStatus(0);
-//        s.setDevAdviceProofread("[]");
-//        s.setDevAdviceAudit("[]");
-//        s.setDevAdviceAuthorize("[]");
-//        addItemResponse = ItemService.addItem(s, user_new, user_proofread, user_audit, user_authorize);
-//        return "success";
-//    }
-//
-//    public String deleteItem(){
-//        deleteItemResponse=ItemService.deleteItem(this.devName);
-//        return "success";
-//    }
-//
-//    public String updateItemName(){
-//        updateItemNameResponse=ItemService.updateItemName(this.devItemId, this.devName);
-//        return "success";
-//    }
-//
-//    public String updateOperator(){
-//        updateItemResponse=ItemService.updateItem(this.devItemId, this.user_new, this.user_proofread, this.user_audit, this.user_authorize);
-//        return "success";
-//    }
+    public String deleteItem(){
+        itemService.deleteItem(devName);
+        deleteItemResponse.setMessage("删除成功！");
+        deleteItemResponse.setStatus("success");
+        return "success";
+
+    }
+
+    public String addItem(){
+        itemService.addItem(devName,user_new, user_proofread, user_audit, user_authorize);
+        addItemResponse.setStatus("success");
+        addItemResponse.setData(devName);
+        addItemResponse.setMessage("成功添加项目'"+devName+"'");
+        return "success";
+
+    }
+
+
+    public String updateItem(){
+        logger.info(user_authorize);
+        itemService.updateItem(devItemId,user_new,user_proofread,user_audit,user_authorize);
+        updateItemResponse.setStatus("success");
+        updateItemResponse.setData(devItemId);
+        updateItemResponse.setMessage("更新成功");
+
+        return "success";
+
+    }
+
+
 
     public BaseResponse<List<OutlineUserInfo>> getFindAllResponse() {
         return findAllResponse;

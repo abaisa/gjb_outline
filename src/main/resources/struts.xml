@@ -4,6 +4,32 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
+    <!-- 支持动态调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <!-- 设置开发模式 -->
+    <constant name="struts.devMode" value="true"/>
+    <!--&lt;!&ndash; 静态资源不拦截 &ndash;&gt;-->
+    <constant name="struts.action.excludePattern" value="/static/.*?" />
+
+
+    <package name="default" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="cn.gjb151b.outline.utils.LoginInterceptor"/>
+            <interceptor-stack name="authorityStack">
+                <interceptor-ref name="loginInterceptor">
+                    <!--<param name="excludeMethods">login</param>-->
+                </interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="authorityStack"/>
+
+        <!-- 全局转向配置 -->
+        <global-results>
+            <result name="/login">/views/login.jsp</result>
+        </global-results>
+    </package>
     <package name="page_data" namespace="/page_data" extends="struts-default,json-default">
         <action name="submit" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="submit">
             <result name="success" type="json">
@@ -87,6 +113,29 @@
         <action name="getAllItem" class="cn.gjb151b.outline.action.ItemAction" method="getAllItem">
             <result name="success" type="json">
                 <param name="root">getAllItemResponse</param>
+            </result>
+        </action>
+        <action name="updateItem" class="cn.gjb151b.outline.action.ItemAction" method="updateItem">
+            <result name="success" type="json">
+                <param name="root">updateItemResponse</param>
+            </result>
+        </action>
+        <action name="deleteItem" class="cn.gjb151b.outline.action.ItemAction" method="deleteItem">
+            <result name="success" type="json">
+                <param name="root">deleteItemResponse</param>
+            </result>
+        </action>
+        <action name="addItem" class="cn.gjb151b.outline.action.ItemAction" method="addItem">
+            <result name="success" type="json">
+                <param name="root">addItemResponse</param>
+            </result>
+        </action>
+
+    </package>
+    <package name="manage" namespace="/manage" extends="struts-default,json-default">
+        <action name="changePassword" class="cn.gjb151b.outline.action.ManageAction" method="changePassword">
+            <result name="success" type="json">
+                <param name="root">changePasswordResponse</param>
             </result>
         </action>
     </package>

@@ -21,7 +21,7 @@
     </s:include>
     <div class="container">
         <div style="margin-bottom:40px;">
-            <a data-toggle="modal" data-target="#myModal"  class="pull-right btn btn-primary" onclick="findUser()">新建</a>
+            <a data-toggle="modal" data-target="#myModal"  class="pull-right btn btn-primary" onclick="findUserAndItem()">新建</a>
         </div>
         <div class="panel panel-default front-panel">
             <div class="panel-body front-no-padding">
@@ -48,7 +48,8 @@
                         <label class="col-lg-3 col-md-2 control-label">项目名称</label>
                         <div class="col-lg-9 col-md-10">
                             <%--<input id="itemName" class="form-control" type="text" onkeyup="this.value=this.value.replace(/(^\s+)|(\s+$)/g,'');" placeholder="必填。"/>--%>
-                            <select class="form-control" id="outlineItemName"/>
+                            <select class="form-control" id="itemName">
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -105,12 +106,12 @@
 <script type="text/javascript" src="repack/js/plugin/front.js"></script>
 <script type="text/javascript" src="js/develop/admin.js"></script>
 <script>
-    function findUser(){
+    function findUserAndItem(){
         $('#user_new').empty();//先清空避免重复查询，此段也可省略
         $('#user_proofread').empty();
         $('#user_audit').empty();
         $('#user_authorize').empty();
-        $('#outlineItemName').empty();
+        $('#itemName').empty();
     $.ajax( {
         url : "admin/findAllUser",
         type : 'post',
@@ -135,7 +136,7 @@
                 console.log(data);
                 var itemList  =  data.data;
                 for(var i = 0;i<itemList.length;i++){
-                    $('#outlineItemName').append('<option>'+itemList[i].itemName+'</option>');
+                    $('#itemName').append('<option>'+itemList[i].outlineName+'</option>');
 
                 }
 
@@ -144,27 +145,10 @@
         });
 
 
+
+
 }
 </script>
-<%--<script>--%>
-    <%--function getAllItem(){--%>
-        <%--$('#itemName').empty();--%>
-        <%--$.ajax({--%>
-            <%--url: "admin/getAllItem",--%>
-            <%--type: 'post',--%>
-            <%--success : function (data) {--%>
-                <%--console.log(data);--%>
-                <%--var itemList  =  data.data;--%>
-                <%--for(var i = 0;i<itemList.length;i++){--%>
-                    <%--$('#itemName').append('<option>'+itemList[i].itemName+'</option>');--%>
-
-                <%--}--%>
-
-            <%--}--%>
-
-        <%--});--%>
-    <%--}--%>
-<%--</script>--%>
 </body>
 </html>
 

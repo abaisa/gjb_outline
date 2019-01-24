@@ -18,7 +18,8 @@ function changePassword() {
             if(data.status === 'error')  {
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
             }else {
-               window.location.href = "http://localhost:8080/GJB151BSys/login";
+                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: data.message});
+               window.location.href = "views/login.jsp";
             }
         })
     }

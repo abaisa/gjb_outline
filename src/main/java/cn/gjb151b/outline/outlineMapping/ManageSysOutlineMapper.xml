@@ -86,5 +86,21 @@
         select * from manage_sys_outline;
     </select>
 
+    <update id="updateItemCol" parameterType="java.lang.String" >
+        update manage_sys_outline set ${colName} = '${data}' where outline_dev_itemid = '${outlineDevItemid}'
+    </update>
+
+    <select id="selectItemidByName" statementType="STATEMENT" resultType="java.lang.String">
+        select outline_dev_itemid from manage_sys_outline where outline_name = '${outlineName}';
+    </select>
+
+    <delete id="deleteItemByName" statementType="STATEMENT">
+        delete from manage_sys_outline where outline_name = '${outlineName}';
+    </delete>
+
+    <insert id="addItem" statementType="STATEMENT">
+        insert into manage_sys_outline set ${colName1} = '${data1}' ,${colName2} = '${data2}', ${colName3} = '${data3}', ${colName4} = '${data4}';
+    </insert>
+
 
 </mapper>

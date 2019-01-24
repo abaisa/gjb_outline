@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="col-lg-3 col-md-2 control-label">项目名称</label>
             <div class="col-lg-9 col-md-10">
-                <input id="item_name" class="form-control" type="text" value="<%=devName%>" onkeyup="this.value=this.value.replace(/(^\s+)|(\s+$)/g,'');" placeholder="必填"/>
+                <input id="item_name" class="form-control" type="text" value="<%=devName%>" readonly="true"/>
             </div>
         </div>
         <div class="form-group">
@@ -71,6 +71,10 @@
         var user_proofread = $("#userProofread").val();
         var user_audit = $("#userAudit").val();
         var user_authorize = $("#userAuthorize").val();
+        $('#userNew').empty();//先清空避免重复查询，此段也可省略
+        $('#userProofread').empty();
+        $('#userAudit').empty();
+        $('#userAuthorize').empty();
         $.ajax( {
             url : "admin/findAllUser",
             type : 'post',
@@ -95,68 +99,105 @@
     })
 
     function updateItem() {
-        var devItemId ="<%=devItemId%>";
-        var devName="";
-        devName+="<%=devName%>";
-        var itemName = $("#item_name").val();
+        var devItemId = "<%=devItemId%>";
         var user_new = $("#userNew").val();
         var user_proofread = $("#userProofread").val();
         var user_audit = $("#userAudit").val();
         var user_authorize = $("#userAuthorize").val();
-        if(itemName == null || itemName.trim() == "") {
-            $.fillTipBox({type:'warning', icon:'glyphicon-exclamation-sign', content:'项目名称不能为空'});
-        } else if((user_new==user_proofread)||(user_new==user_audit)||(user_new==user_authorize)
-            ||(user_proofread==user_audit)||(user_proofread==user_authorize)||(user_audit==user_authorize)){
+        if ((user_new == user_proofread) || (user_new == user_audit) || (user_new == user_authorize)
+            || (user_proofread == user_audit) || (user_proofread == user_authorize) || (user_audit == user_authorize)) {
             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '需选择不同的用户进行操作'});
-        } else{
-            if(devName!=itemName){
-                $.post("admin/updateItemName", {
-                    devName: itemName,
-                    devItemId: devItemId,
-                }, function (data) {
-                    if(data.status === 'success')  {
-                        $.post("admin/updateOperator", {
-                            devName: devName,
-                            devItemId: devItemId,
-                            user_new: user_new,
-                            user_proofread: user_proofread,
-                            user_audit: user_audit,
-                            user_authorize: user_authorize
-                        }, function (data) {
-                            if(data.status === 'success')  {
-                                $.tipModal('confirm', 'info', data.message, function (result) {
-                                    window.location.reload();
-                                })
-                            }else{
-                                $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
-                            }
-                        });
-                    }else{
-                        $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
-                    }
-                });
-            }
-            else{
-                $.post("admin/updateOperator", {
-                    devName: devName,
-                    devItemId: devItemId,
-                    user_new: user_new,
-                    user_proofread: user_proofread,
-                    user_audit: user_audit,
-                    user_authorize: user_authorize
-                }, function (data) {
-                    if(data.status === 'success')  {
-                        $.tipModal('confirm', 'info', data.message, function (result) {
-                            window.location.reload();
-                        })
-                    }else{
-                        $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
-                    }
-                });
-            }
 
+
+        } else {
+            $.post("admin/updateItem", {
+                devItemId: devItemId,
+                user_new: user_new,
+                user_proofread: user_proofread,
+                user_audit: user_audit,
+                user_authorize: user_authorize
+            }, function (data) {
+                if (data.status === 'success') {
+                    $.tipModal('confirm', 'info', data.message, function (result) {
+                        window.location.reload();
+                    })
+                } else {
+                    $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+
+                }
+            })
         }
     }
+
+
+
+
+
+
+
+    <%--function updateItem() {--%>
+        <%--&lt;%&ndash;var devItemId ="<%=devItemId%>";&ndash;%&gt;--%>
+        <%--&lt;%&ndash;var devName="";&ndash;%&gt;--%>
+        <%--&lt;%&ndash;devName+="<%=devName%>";&ndash;%&gt;--%>
+        <%--// var itemName = $("#item_name").val();--%>
+        <%--var user_new = $("#userNew").val();--%>
+        <%--var user_proofread = $("#userProofread").val();--%>
+        <%--var user_audit = $("#userAudit").val();--%>
+        <%--var user_authorize = $("#userAuthorize").val();--%>
+        <%--if(itemName == null || itemName.trim() == "") {--%>
+            <%--&lt;%&ndash;$.fillTipBox({type:'warning', icon:'glyphicon-exclamation-sign', content:'项目名称不能为空'});&ndash;%&gt;--%>
+        <%--} else if((user_new==user_proofread)||(user_new==user_audit)||(user_new==user_authorize)--%>
+            <%--||(user_proofread==user_audit)||(user_proofread==user_authorize)||(user_audit==user_authorize)){--%>
+            <%--$.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '需选择不同的用户进行操作'});--%>
+        <%--} else{--%>
+            <%--if(devName!=itemName){--%>
+                <%--$.post("admin/updateItemName", {--%>
+                    <%--devName: itemName,--%>
+                    <%--devItemId: devItemId,--%>
+                <%--}, function (data) {--%>
+                    <%--if(data.status === 'success')  {--%>
+                        <%--$.post("admin/updateOperator", {--%>
+                            <%--devName: devName,--%>
+                            <%--devItemId: devItemId,--%>
+                            <%--user_new: user_new,--%>
+                            <%--user_proofread: user_proofread,--%>
+                            <%--user_audit: user_audit,--%>
+                            <%--user_authorize: user_authorize--%>
+                        <%--}, function (data) {--%>
+                            <%--if(data.status === 'success')  {--%>
+                                <%--$.tipModal('confirm', 'info', data.message, function (result) {--%>
+                                    <%--window.location.reload();--%>
+                                <%--})--%>
+                            <%--}else{--%>
+                                <%--$.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});--%>
+                            <%--}--%>
+                        <%--});--%>
+                    <%--}else{--%>
+                        <%--$.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});--%>
+                    <%--}--%>
+                <%--});--%>
+            <%--}--%>
+            <%--else{--%>
+                <%--$.post("admin/updateOperator", {--%>
+                    <%--devName: devName,--%>
+                    <%--devItemId: devItemId,--%>
+                    <%--user_new: user_new,--%>
+                    <%--user_proofread: user_proofread,--%>
+                    <%--user_audit: user_audit,--%>
+                    <%--user_authorize: user_authorize--%>
+                <%--}, function (data) {--%>
+                    <%--if(data.status === 'success')  {--%>
+                        <%--$.tipModal('confirm', 'info', data.message, function (result) {--%>
+                            <%--window.location.reload();--%>
+                        <%--})--%>
+                    <%--}else{--%>
+                        <%--$.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});--%>
+                    <%--}--%>
+                <%--});--%>
+            <%--}--%>
+
+        <%--}--%>
+    <%--}--%>
 </script>
 
 

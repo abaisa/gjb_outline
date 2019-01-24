@@ -32,6 +32,7 @@ AdminAction extends ActionSupport{
     private BaseResponse deleteUserResponse = new BaseResponse<String>();
     private BaseResponse resetPasswordResponse = new BaseResponse<String>();
     private BaseResponse updateUserResponse = new BaseResponse<String>();
+    private BaseResponse changePasswordResponse = new BaseResponse();
     @Autowired
     private AdminService adminService;
 
@@ -69,6 +70,7 @@ AdminAction extends ActionSupport{
         resetPasswordResponse = adminService.resetPassword(this.userId, this.userPassword);
         return "success";
     }
+
 
     public int getUserId() {
         return userId;
@@ -183,6 +185,15 @@ AdminAction extends ActionSupport{
     public void setUserUpdateTime(Timestamp userUpdateTime) {
         this.userUpdateTime = userUpdateTime;
     }
+    public BaseResponse getChangePasswordResponse() {
+        return changePasswordResponse;
+    }
+
+    public void setChangePasswordResponse(BaseResponse changePasswordResponse) {
+        this.changePasswordResponse = changePasswordResponse;
+    }
+
+
 
 
 }

@@ -62,9 +62,47 @@
         SELECT user_name FROM outline_user_info WHERE user_audit like '%${outlineDevItemId}%';
   </select>
 
-  <select id="selectAuthorizeItemOperator" statementType="STATEMENT"  resultType="List">
-        SELECT user_name FROM outline_user_info WHERE user_authorize like '${outlineDevItemId}';
+  <select id="selectAuthorizeItemOperator" statementType="STATEMENT"  resultType="String">
+        SELECT user_name FROM outline_user_info WHERE user_authorize like '%${outlineDevItemId}%';
   </select>
+
+  <update id="updateColByName" statementType="STATEMENT">
+    update outline_user_info set ${colName} = '${data}' where user_name = '${userName}';
+  </update>
+
+  <!--<update id="updateUserNewItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_new = replace(user_new, '${devItemId}', '');-->
+  <!--</update>-->
+
+  <!--<update id="updateUserProofreadItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_proofread = replace(user_proofread, '${devItemId}', '');-->
+  <!--</update>-->
+
+  <!--<update id="updateUserAuditItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_audit = replace(user_audit, '${devItemId}', '');-->
+  <!--</update>-->
+
+  <!--<update id="updateUserAuthorizeItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_authorize = replace(user_authorize, '${devItemId}', '');-->
+  <!--</update>-->
+
+  <!--<update id="addUserItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set ${colName1} = replace(${colName2}, ${data1},${data2}) where user_name = ${userName}-->
+  <!--</update>-->
+
+  <!--<update id="addUserProofreadItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_proofread = concat(user_proofread, '${devItemId}') where user_name = ${userName}-->
+  <!--</update>-->
+
+  <!--<update id="addUserAuditItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_audit = concat(user_audit, '${devItemId}') where user_name = ${userName}-->
+  <!--</update>-->
+
+  <!--<update id="addUserAuthorizeItem" statementType="STATEMENT">-->
+    <!--update outline_user_info set user_authorize = concat(user_authorize, '${devItemId}') where user_name = ${userName}-->
+  <!--</update>-->
+
+
 
 
 

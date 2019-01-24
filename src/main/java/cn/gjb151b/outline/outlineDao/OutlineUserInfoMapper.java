@@ -21,6 +21,8 @@ public interface OutlineUserInfoMapper {
 
     void addUser(OutlineUserInfo outlineUserInfo);
 
+    void updateColByName(@Param("colName") String colName, @Param("data") String data, @Param("userName") String userName);
+
     List<String> selectNewItemOperator(@Param("outlineDevItemId") String OutlineItemId);
 
     List<String> selectProofreadItemOperator(@Param("outlineDevItemId") String OutlineItemId);
@@ -28,6 +30,19 @@ public interface OutlineUserInfoMapper {
     List<String> selectAuditItemOperator(@Param("outlineDevItemId") String OutlineItemId);
 
     List<String> selectAuthorizeItemOperator(@Param("outlineDevItemId") String OutlineItemId);
+
+    void updateUserNewItem(@Param("devItemId") String devItemId);
+
+    void updateUserProofreadItem(@Param("devItemId") String devItemId);
+
+    void updateUserAuditItem(@Param("devItemId") String devItemId);
+
+    void updateUserAuthorizeItem(@Param("devItemId") String devItemId);
+
+    void addUserItem(@Param("cloName1") String cloName1, @Param("colName2") String colName2, @Param("data1") String data1, @Param("data2") String data2, @Param("userName") String userName, @Param("colName3") String colName3,@Param("data3") int data3 );
+
+
+
 
 
 

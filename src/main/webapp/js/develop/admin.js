@@ -160,7 +160,7 @@ function findAllItem(){
                 $("#itemTable").append('<TR><TD>'+ operaterList[i].itemName +'</TD><TD>' + operaterList[i].userNew
                     +'</TD><TD>'+operaterList[i].userProofread+'</TD><TD>'+operaterList[i].userAudit+'</TD><TD>'+operaterList[i].userAuthorize+'</TD><TD>'
                     +'<a href="javascript:void(0);" data-toggle="front-modal" data-title="修改项目信息" ' +
-                    'data-href="/GJB151BSys/views/develop/admin/updateItem.jsp?' +
+                    'data-href="views/develop/admin/updateItem.jsp?' +
                     'devName='+operaterList[i].itemName+'&devItemId='+operaterList[i].itemId+'&userNew='+operaterList[i].userNew+'&userProofread='+operaterList[i].userProofread+
                     '&userAudit='+operaterList[i].userAudit+'&userAuthorize='+operaterList[i].userAuthorize+'">修改</a>'+ '</TD><TD>'
                     +'<a href="javascript:void(0);" onclick="deleteItem(\''+operaterList[i].itemName+'\')">删除</a></TD><TR>');
@@ -203,11 +203,11 @@ function addItem() {
     }
 }
 
-function deleteItem(devName){
+function deleteItem(outlineName){
     $.tipModal('confirm', 'danger', '您确定要删除这个项目吗？', function (result) {
         if (result) {
             $.post("admin/deleteItem", {
-                devName: devName,
+                devName: outlineName,
             }, function (data) {
                 $.tipModal('confirm', 'info', data.message, function (result) {
                     window.location.reload();

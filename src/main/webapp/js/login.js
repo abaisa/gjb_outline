@@ -37,8 +37,7 @@ function checkUser() {
 
 function toChangePassword() {
     var userName = $("#userName").val();
-    window.location.href = "views/develop/manage/change_password.jsp?username="+userName;
-    $.post("view/checkUser",{userName:userName})
+    window.location.href = "views/develop/manage/change_password.jsp";
 }
 
 

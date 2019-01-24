@@ -73,4 +73,16 @@
     FROM manage_sys_develop
     WHERE dev_itemid = #{devItemId}
   </select>
+
+  <select id="findAllItem" statementType="STATEMENT" resultMap="BaseResultMap">
+    select * from manage_sys_develop ;
+  </select>
+
+  <select id="selectColByName" statementType="STATEMENT" resultType="java.lang.String">
+    SELECT ${colName} FROM manage_sys_develop where dev_name = '${devName}';
+  </select>
+
+  <select id="selectDevIdByName" statementType="STATEMENT" resultType="Integer">
+    SELECT dev_id  FROM manage_sys_develop where dev_name = '${devName}';
+  </select>
 </mapper>

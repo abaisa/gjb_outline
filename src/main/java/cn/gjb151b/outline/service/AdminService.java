@@ -4,6 +4,7 @@ package cn.gjb151b.outline.service;
 import cn.gjb151b.outline.model.OutlineUserInfo;
 import cn.gjb151b.outline.outlineDao.OutlineUserInfoMapper;
 import cn.gjb151b.outline.utils.BaseResponse;
+import cn.gjb151b.outline.utils.MD5;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class AdminService{
     }
 
     public BaseResponse resetPassword(int userId,String userPassword ){
-        outlineUserInfoMapper.updateCol(userId,"user_password",userPassword);
+        outlineUserInfoMapper.updateCol(userId,"user_password", MD5.md5(userPassword));
         BaseResponse resetPasswordResponse = new BaseResponse();
         String userName = outlineUserInfoMapper.selectUserById(userId).getUserName();
         if(userName == null){

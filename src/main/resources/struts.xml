@@ -27,10 +27,17 @@
 
         <!-- 全局转向配置 -->
         <global-results>
-            <result name="/login">/views/login.jsp</result>
+            <result name="login">views/login.jsp</result>
         </global-results>
     </package>
-    <package name="page_data" namespace="/page_data" extends="struts-default,json-default">
+
+    <package name="basicstruts" extends="struts-default">
+        <action name="login">
+            <result>/views/login.jsp</result>
+        </action>
+    </package>
+
+    <package name="page_data" namespace="/page_data" extends="default, json-default">
         <action name="submit" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="submit">
             <result name="success" type="json">
                 <param name="root">response</param>
@@ -53,7 +60,7 @@
         </action>
     </package>
 
-    <package name="dependency" namespace="/dependency" extends="struts-default, json-default">
+    <package name="dependency" namespace="/dependency" extends="default, json-default">
         <action name="getSubsysOrEqpHead" class="cn.gjb151b.outline.action.DependencyAction"
                 method="getSubsysOrEqpHead">
             <result name="success" type="json">
@@ -67,7 +74,7 @@
             </result>
         </action>
     </package>
-    <package name="login" namespace="/login" extends="struts-default,json-default">
+    <package name="login" namespace="/login" extends="default, json-default">
         <action name="checkUser" class="cn.gjb151b.outline.action.LoginAction" method="checkUser">
             <result name="success" type="json">
                 <param name="root">checkUserResponse</param>
@@ -77,14 +84,14 @@
             <result name="success">/views/login.jsp</result>
         </action>
     </package>
-    <package name="project" namespace="/project" extends="struts-default,json-default" >
+    <package name="project" namespace="/project" extends="default, json-default" >
         <action name="findproject" class="cn.gjb151b.outline.action.FindProjectAction" method="showProject">
             <result name="success" type="json">
                 <param name="root">projectResultResponse</param>
             </result>
         </action>
     </package>
-    <package name="admin" namespace="/admin" extends="struts-default,json-default">
+    <package name="admin" namespace="/admin" extends="default, json-default">
         <action name="findAllUser" class="cn.gjb151b.outline.action.AdminAction" method="findAllUser">
             <result name="success" type="json">
                 <param name="root">findAllUserResponse</param>
@@ -137,7 +144,7 @@
         </action>
 
     </package>
-    <package name="manage" namespace="/manage" extends="struts-default,json-default">
+    <package name="manage" namespace="/manage" extends="default, json-default">
         <action name="changePassword" class="cn.gjb151b.outline.action.ManageAction" method="changePassword">
             <result name="success" type="json">
                 <param name="root">changePasswordResponse</param>

@@ -39,7 +39,7 @@ public class LoginService {
         }else {
             UserLogin userLogin = new UserLogin(outlineUserInfo.getUserName(),outlineUserInfo.getUserPassword(),outlineUserInfo.getUserLevel(),outlineUserInfo.getUserId());
             String passwordMd5 = MD5.md5(userPassword);
-            if(StringUtils.equals(userPassword, userLogin.getUserPassword())) {
+            if(StringUtils.equals(passwordMd5, userLogin.getUserPassword())) {
                 checkUserResponse.setStatus("success");
                 checkUserResponse.setData(userLogin);
                 checkUserResponse.setMessage("用户登录成功");

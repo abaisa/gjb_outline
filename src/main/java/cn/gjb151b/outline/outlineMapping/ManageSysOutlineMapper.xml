@@ -103,8 +103,9 @@
     </delete>
 
     <insert id="addItem" statementType="STATEMENT">
-        insert into manage_sys_outline set ${colName1} = '${data1}' ,${colName2} = '${data2}', ${colName3} = '${data3}', ${colName4} = '${data4}';
+        insert into manage_sys_outline set ${colName1} = '${data1}' ,${colName2} = '${data2}', ${colName3} = '${data3}', ${colName4} = '${data4}', ${colName5} = '${data5}', ${colName6} = '${data6}', ${colName7} = '${data7}', ${colName8} = '${data8}';
     </insert>
+
 
 
 </mapper>

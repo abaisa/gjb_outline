@@ -329,8 +329,13 @@ public class DependencyService {
         }
         devString = "天线端口:"+antennaString+"; 天线端口模式:"+receiveString+"; 天线调制模式:"+modulationString;
         antennaObject.put("工作状态", devString);
-        jsonArray.add(antennaObject);
-        jsonObject.put("试验端口及被试品工作状态", jsonArray);
+        JSONArray statusList = jsonObject.getJSONArray("试验端口及被试品工作状态");
+        if(statusList.getJSONObject(0).getString("工作状态").equals(devString) == false){
+            jsonArray.add(antennaObject);
+            jsonObject.put("试验端口及被试品工作状态", jsonArray);
+        }
+//        jsonArray.add(antennaObject);
+//        jsonObject.put("试验端口及被试品工作状态", jsonArray);
         String resultData = JSON.toJSONString(jsonObject);
         return resultData;
 
@@ -608,12 +613,18 @@ public class DependencyService {
     }
 
     private  boolean noPortSelect(JSONArray jsonArray){
-        boolean port = false;
+        boolean port = true;
+        int portNum = 0;
         for(int i=0; i<jsonArray.size(); i++){
+            System.out.println("电源端口："+jsonArray.getString(i));
             if(jsonArray.getString(i).equals("0")){
-                port = true;
+                portNum++;
             }
         }
+        if(portNum == jsonArray.size()){
+            port = false;
+        }
+        System.out.println("port:"+port);
         return port;
     }
 }

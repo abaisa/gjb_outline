@@ -51,7 +51,7 @@
                     <div class="front-login-hr"></div>
                     <div class="form-group">
                         <input type="button" class="btn btn-default btn-block btn-lg free_reg" style="border: 1px solid #5bc0de;color: #5bc0de"
-                               value="放弃修改密码" onclick="window.location.href='views/login.jsp'">
+                               value="放弃修改密码" onclick="window.location.href='views/login'">
                     </div>
                 </div>
             <%--</form>--%>

@@ -97,7 +97,7 @@ public class ItemService {
         String devSubsysEqpModel = manageSysDevelop.getDevSubsysEqpModel();
         String devSubsysEqpNum = manageSysDevelop.getDevSubsysEqpNum();
         String outlineItemid = String.valueOf(devId);
-        manageSysOutlineMapper.addItem("outline_dev_itemid", devItemId, "outline_name", devName, "outline_itemid", outlineItemid,"outline_dev_subsys_eqp", devSubsysEqp, "outline_status", 0);
+        manageSysOutlineMapper.addItem("outline_dev_itemid", devItemId, "outline_name", devName, "outline_itemid", outlineItemid,"outline_dev_subsys_eqp", devSubsysEqp, "outline_status", 0, "outline_advice_proofread", "[]", "outline_advice_audit", "[]", "outline_advice_authorize", "[]");
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_name", devSubsysEqpName, devItemId);
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_model", devSubsysEqpModel, devItemId);
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_num", devSubsysEqpNum, devItemId);

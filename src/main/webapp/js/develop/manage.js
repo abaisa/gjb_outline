@@ -19,7 +19,7 @@ function changePassword() {
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
             }else {
                 $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: data.message});
-               window.location.href = "views/login.jsp";
+               window.location.href = "/outline/login";
             }
         })
     }

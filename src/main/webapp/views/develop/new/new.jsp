@@ -15,7 +15,7 @@
 <div class="front-inner">
     <s:include value="../_nav.jsp?">
         <s:param name="userName">userName</s:param>
-        <s:param name="act">${param.devStatus}</s:param>
+        <s:param name="act">${param.outlineStatus}</s:param>
     </s:include>
     <div class="container">
         <div id="editor_head" class="hidden"></div>

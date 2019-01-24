@@ -2,7 +2,6 @@
  * 1.生成一个json editor页面，并保存
  * 2.恢复这个页面
  */
-
 // json editor编辑器
 // var editor = new JSONEditor(document.getElementById('editor_holder'), {
 //         theme: 'bootstrap3',

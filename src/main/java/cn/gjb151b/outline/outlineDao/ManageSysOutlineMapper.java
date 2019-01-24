@@ -25,7 +25,7 @@ public interface ManageSysOutlineMapper {
 
     void deleteItemByName(@Param("outlineName") String outlineName);
 
-    void addItem(@Param("colName1") String colName1, @Param("data1") String data1, @Param("colName2") String colName2, @Param("data2") String data2, @Param("colName3") String colName3, @Param("data3") String data3, @Param("colName4") String colName4, @Param("data4") Integer data4);
+    void addItem(@Param("colName1") String colName1, @Param("data1") String data1, @Param("colName2") String colName2, @Param("data2") String data2, @Param("colName3") String colName3, @Param("data3") String data3, @Param("colName4") String colName4, @Param("data4") Integer data4, @Param("colName5") String colName5, @Param("data5") Integer data5);
 
 
 }

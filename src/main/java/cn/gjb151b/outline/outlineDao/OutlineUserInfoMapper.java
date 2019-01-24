@@ -31,6 +31,8 @@ public interface OutlineUserInfoMapper {
 
     List<String> selectAuthorizeItemOperator(@Param("outlineDevItemId") String OutlineItemId);
 
+
+
     void updateUserNewItem(@Param("devItemId") String devItemId);
 
     void updateUserProofreadItem(@Param("devItemId") String devItemId);

@@ -5,7 +5,7 @@ import lombok.*;
 import java.util.Date;
 
 @Data
-public class ManageSysOutline {
+public class ManageSysSchema {
 
     private Integer outlineId;
 
@@ -113,8 +113,6 @@ public class ManageSysOutline {
 
     private String outlineAdviceAuthorize;
 
-    private Integer currentPageNumber;
-
     public String getOutlineDevItemid(){return outlineDevItemid;}
 
     public String getOutlineDataSubsysEqp(){return outlineDataSubsysEqp;}
@@ -132,14 +130,6 @@ public class ManageSysOutline {
     public String getOutlineAdviceAudit(){return  outlineAdviceAudit;}
 
     public String getOutlineAdviceAuthorize(){return  outlineAdviceAuthorize;}
-
-    public Integer getCurrentPageNumber() {
-        return currentPageNumber;
-    }
-
-    public void setCurrentPageNumber(Integer currentPageNumber) {
-        this.currentPageNumber = currentPageNumber;
-    }
 
 
 }

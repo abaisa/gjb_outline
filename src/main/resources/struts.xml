@@ -10,6 +10,8 @@
     <constant name="struts.devMode" value="true"/>
     <!--&lt;!&ndash; 静态资源不拦截 &ndash;&gt;-->
     <constant name="struts.action.excludePattern" value="/static/.*?" />
+    <!--配置struts2的临时文件的文件夹-->
+    <constant name="struts.multipart.saveDir" value="/tmp"/>
 
 
     <package name="default" extends="struts-default">
@@ -51,6 +53,21 @@
         <action name="loadAdvice" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="loadAdvice">
             <result name="success" type="json">
                 <param name="root">response</param>
+            </result>
+        </action>
+        <action name="upload" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="upload">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
+        <action name="download" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="download">
+            <result name="success" type="json">
+                <param name="root">downloadResponse</param>
+            </result>
+        </action>
+        <action name="getCurrentPageNumber" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="getPageNumber">
+            <result name="success" type="json">
+                <param name="root">getCurrentPageNumberResponse</param>
             </result>
         </action>
     </package>

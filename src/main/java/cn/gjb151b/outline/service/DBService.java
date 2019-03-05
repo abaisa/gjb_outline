@@ -2,6 +2,7 @@ package cn.gjb151b.outline.service;
 
 import cn.gjb151b.outline.Constants.ExceptionEnums;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
+import cn.gjb151b.outline.outlineDao.ManageSysSchemaMapper;
 import cn.gjb151b.outline.utils.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import org.springframework.stereotype.Service;
 public class DBService {
 
     private final ManageSysOutlineMapper manageSysOutlineMapper;
+    private final ManageSysSchemaMapper manageSysSchemaMapper;
 
     @Autowired
-    public DBService(ManageSysOutlineMapper manageSysOutlineMapper) {
+    public DBService(ManageSysOutlineMapper manageSysOutlineMapper, ManageSysSchemaMapper manageSysSchemaMapper) {
+        this.manageSysSchemaMapper = manageSysSchemaMapper;
         this.manageSysOutlineMapper = manageSysOutlineMapper;
     }
 
@@ -49,6 +52,11 @@ public class DBService {
         manageSysOutlineMapper.updateCol(outlineID, colName, data);
     }
 
+    public void updatePageNumber(int outlineID, String colName, int data) throws Exception{
+        manageSysOutlineMapper.updateCol2(outlineID, colName, data);
+
+    }
+
     /**
      * @param outlineID 大纲id
      * @param pageID    页码
@@ -65,6 +73,16 @@ public class DBService {
         return manageSysOutlineMapper.selectCol(outlineID, colName);
     }
 
+    public String fetchSchema(int pageID, String prefix) throws Exception {
+        String colName = prefix + pageID;
+        if (pageID < 1) {
+            throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
+        }
+
+//        return manageSysOutlineMapper.selectCol(1, colName);
+        return manageSysSchemaMapper.selectCol(1,colName);
+    }
+
     /**
      * @param outlineID 大纲id
      * @param colName   列名
@@ -74,4 +92,9 @@ public class DBService {
     public String fetchData(int outlineID, String colName) throws Exception {
         return manageSysOutlineMapper.selectCol(outlineID, colName);
     }
+
+    public Integer fetehPageNumber(int outlineID, String colName) throws Exception{
+        return  manageSysOutlineMapper.selectCol2(outlineID, colName);
+    }
+
 }

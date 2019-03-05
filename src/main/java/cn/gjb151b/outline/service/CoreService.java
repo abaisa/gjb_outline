@@ -41,7 +41,8 @@ public class CoreService {
 
         // 从db取出schema和data
         Map<String, String> result = new HashMap<>();
-        String schema = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
+        String schema = dbService.fetchSchema( pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
+//        String schema = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
         String data = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.DATA_PREFIX.getValue());
 //        String outlineAdviceProofread = dbService.fetchData(outlineID, "outline_advice_proofread");
 //        String outlineAdviceAudit = dbService.fetchData(outlineID, "outline_advice_audit");
@@ -62,6 +63,7 @@ public class CoreService {
         result.put("schema", schema);
         result.put("data", data);
         result.put("page_id", String.valueOf(pageNumber));
+        dbService.updatePageNumber(outlineID, "current_page_number", pageNumber);
 //        result.put("outlineAdviceProofread", outlineAdviceProofread);
 //        result.put("outlineAdviceAudit", outlineAdviceAudit);
 //        result.put("outlineAdviceAuthorize", outlineAdviceAuthorize);

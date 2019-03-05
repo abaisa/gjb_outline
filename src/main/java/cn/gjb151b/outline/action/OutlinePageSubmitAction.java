@@ -1,13 +1,22 @@
 package cn.gjb151b.outline.action;
 
 import cn.gjb151b.outline.service.CoreService;
+import cn.gjb151b.outline.service.DBService;
 import cn.gjb151b.outline.utils.BaseResponse;
 import cn.gjb151b.outline.utils.ServiceException;
+import cn.gjb151b.outline.utils.UUIDUtils;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static cn.gjb151b.outline.utils.CommonUtils.checkParamLegal;
 
@@ -21,7 +30,16 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private String jsonData;
     private BaseResponse<String> response;
 
+    private Integer picNumber;
+
+    private File images;
+
+    private String imagesContentType;
+    private String imagesFileName;
+
     private CoreService coreService;
+    @Autowired
+    private DBService dbService;
 
     @Autowired
     OutlinePageSubmitAction(CoreService coreService) {
@@ -42,7 +60,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
         } catch (Exception e) {
             logger.error(String.format("param parse error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getMessage()));
-
             response.setError(e.getMessage());
             return SUCCESS;
         }
@@ -67,6 +84,96 @@ public class OutlinePageSubmitAction extends ActionSupport {
         }
 
         response.setResponse("data from server");
+        return SUCCESS;
+    }
+
+    public String upload()  {
+        //获得文件类型（可以判断如果不是图片，禁止上传）
+        String contentType = imagesContentType;
+        //获得文件后缀名
+        String suffixName=contentType.substring(contentType.indexOf("/")+1);
+        //使用UUID使得图片名唯一
+        String uuid = UUIDUtils.getUUID();
+        //得到组合的filename
+        String filename = uuid+imagesFileName;
+        //图片存储的相对路径
+        String localPath = "src/main/webapp/statics/imgs";
+        //将照片copy到指定的相对路径下
+        try{
+            FileUtils.copyFile(images, new File(localPath, filename));
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        //mysql中存储相应的图片路径
+        String sql = "statics/imgs"+"/"+filename;
+        logger.info(pageNumber);
+
+        if(pageNumber == 4){
+            if(picNumber == 1){
+                try{
+                    String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                    JSONObject jsonObject;
+                    jsonObject = JSON.parseObject(outlineData4);
+                    List<String> pic1List = (List<String>)jsonObject.get("分系统/设备照片");
+                    pic1List.add(sql);
+                    jsonObject.put("分系统/设备照片", pic1List);
+                    outlineData4 = jsonObject.toJSONString();
+                    dbService.submitData(outlineID, "outline_data_4", outlineData4);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            } else if(picNumber == 2){
+                try{
+                    String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                    JSONObject jsonObject;
+                    jsonObject = JSON.parseObject(outlineData4);
+                    List<String> pic2List = (List<String>)jsonObject.get("分系统/设备关系图");
+                    pic2List.add(sql);
+                    jsonObject.put("分系统/设备关系图", pic2List);
+                    outlineData4 = jsonObject.toJSONString();
+                    dbService.submitData(outlineID, "outline_data_4", outlineData4);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            }
+        response.setMessage("success");
+        return SUCCESS;
+    }
+
+    public String deletePic(){
+        if(pageNumber == 4){
+            if(picNumber == 1){
+                    try{
+                        String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                        JSONObject jsonObject;
+                        jsonObject = JSON.parseObject(outlineData4);
+                        List<String> picList = new ArrayList<>();
+                        jsonObject.put("分系统/设备照片", picList);
+                        dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+            } else if(picNumber == 2) {
+                    try{
+                        String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                        JSONObject jsonObject;
+                        jsonObject = JSON.parseObject(outlineData4);
+                        List<String> picList = new ArrayList<>();
+                        jsonObject.put("分系统/设备关系图", picList);
+                        dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+        }
+        response.setMessage("success");
         return SUCCESS;
     }
 
@@ -126,4 +233,38 @@ public class OutlinePageSubmitAction extends ActionSupport {
     public void setPageAction(Integer pageAction) {
         this.pageAction = pageAction;
     }
+
+    public File getImages() {
+        return images;
+    }
+
+    public void setImages(File images) {
+        this.images = images;
+    }
+
+    public String getImagesContentType() {
+        return imagesContentType;
+    }
+
+    public void setImagesContentType(String imagesContentType) {
+        this.imagesContentType = imagesContentType;
+    }
+
+    public String getImagesFileName() {
+        return imagesFileName;
+    }
+
+    public void setImagesFileName(String imagesFileName) {
+        this.imagesFileName = imagesFileName;
+    }
+
+
+    public Integer getPicNumber() {
+        return picNumber;
+    }
+
+    public void setPicNumber(Integer picNumber) {
+        this.picNumber = picNumber;
+    }
+
 }

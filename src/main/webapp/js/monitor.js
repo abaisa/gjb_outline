@@ -20,9 +20,13 @@ function monitor() {
 
         switch (page_number) {
             case '3':
+                $("#upload1").hide();
+                $("#upload2").hide();
                 watchQuantity('root.参编单位', 5);
                 break;
             case '4':
+                $("#upload1").show();
+                $("#upload2").show();
                 editor.getEditor('root.任务名称').disable();
                 editor.getEditor('root.分系统/设备').disable();
                 editor.getEditor('root.分系统/设备名称').disable();
@@ -30,8 +34,14 @@ function monitor() {
                 editor.getEditor('root.串号').disable();
                 editor.getEditor('root.承制单位').disable();
                 editor.getEditor('root.预定使用平台').disable();
+                // editor.getEditor('root.分系统/设备照片').addClass("hidden");
+                $("div[data-schemapath='root.分系统/设备照片']").hide();
+                $("div[data-schemapath='root.分系统/设备关系图']").hide();
                 break;
             case '5':
+                $("#upload1").hide();
+                $("#upload2").hide();
+
                 editor.disable();
                 break;
             case '7':

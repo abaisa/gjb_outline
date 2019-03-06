@@ -105,4 +105,171 @@ function getSubsysOrEqpHead() {
             return false
         }
     });
+
+}
+//新建页4的上传分系统/设备照片
+function uploadPic() {
+    var fileInput = $('#images').get(0).files[0];
+    if(!fileInput){
+        $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '未选择任何图片'});
+
+    } else {
+        $.ajaxFileUpload({
+            type: "post",
+            url: "/outline/page_data/upload",
+            fileElementId: "images",
+            data: {
+                outlineID: outlineId,
+                pageNumber: 4,
+                picNumber: 1,
+            },
+            success: function(data){
+                console.log(data)
+                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+
+
+            }
+
+        })
+
+    }
+
+}
+//新建页4的上传分系统/设备关系图
+function uploadPic2() {
+    var fileInput = $('#images2').get(0).files[0];
+    if(!fileInput){
+        $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '未选择任何图片'});
+
+    } else {
+        $.ajaxFileUpload({
+            type: "post",
+            url: "/outline/page_data/upload",
+            fileElementId: "images2",
+            data: {
+                outlineID: outlineId,
+                pageNumber: 4,
+                picNumber: 2,
+            },
+            success: function(data){
+                console.log(data)
+                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+
+
+            }
+
+        })
+
+    }
+
+}
+//新建页4的查看分系统/设备照片
+function downloadPic(){
+    $("#showPic1").empty();
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/download",
+        data: {
+            outlineID: outlineId,
+            currentPageNumber: 4,
+            picNumber: 1,
+        },
+        success: function(data){
+            console.log(data);
+            var pic1List = data.data;
+            for(var i = 0; i<pic1List.length; i++){
+                var img = document.createElement("img");
+                var pictureNumber = document.createElement("span");
+                pictureNumber.innerHTML = i+1;
+                var url = pic1List[i];
+                img.src = url;
+                img.className="image";
+                img.width=500;
+
+                $("#showPic1").append(img);
+                $("#showPic1").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                $("#showPic1").append(pictureNumber);
+            }
+
+        }
+    })
+}
+//新建页4的查看分系统/设备关系图
+function downloadPic2(){
+    $("#showPic2").empty();
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/download",
+        data: {
+            outlineID: outlineId,
+            currentPageNumber: 4,
+            picNumber: 2,
+        },
+        success: function(data){
+            console.log(data);
+            var pic1List = data.data;
+            for(var i = 0; i<pic1List.length; i++){
+                var  img = document.createElement("img");
+                var pictureNumber = document.createElement("span");
+                pictureNumber.innerHTML = i+1;
+                var url = pic1List[i];
+                img.src = url;
+                img.className="image";
+                img.width=500;
+
+                $("#showPic2").append(img);
+                $("#showPic2").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                $("#showPic2").append(pictureNumber);
+            }
+
+        }
+    })
+}
+//清空新建页4上传的分系统/设备图片
+function deletePic1() {
+    var myMessage = confirm("确定要清空上传的分系统/设备图片吗？");
+    if(myMessage == true){
+        $.ajax({
+            type: "post",
+            url: "/outline/page_data/deletePic",
+            data: {
+                outlineID: outlineId,
+                PageNumber: 4,
+                picNumber: 1,
+            },
+            success: function (data) {
+                console.log(data);
+                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '清空图片成功'});
+
+
+            }
+        })
+
+    }
+
+
+}
+//清空新建页4上传的分系统/设备关系图
+function deletePic2() {
+    var myMessage = confirm("确定要清空上传的分系统/设备关系图吗？");
+    if(myMessage == true){
+        $.ajax({
+            type: "post",
+            url: "/outline/page_data/deletePic",
+            data: {
+                outlineID: outlineId,
+                PageNumber: 4,
+                picNumber: 2,
+            },
+            success: function (data) {
+                console.log(data);
+                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '清空图片成功'});
+
+
+            }
+        })
+
+    }
+
+
 }

@@ -11,10 +11,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.google.common.base.Strings;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static cn.gjb151b.outline.service.FreqDependency.grnerateData;
@@ -27,11 +31,14 @@ import static cn.gjb151b.outline.service.FreqDependency.grnerateData;
 
 @Service(value = "DependencyService")
 public class DependencyService {
+    @Autowired
+    private DBService dbService;
 
     @Resource
     private ManageSysOutlineMapper manageSysOutlineMapper;
     @Resource
     private ManageSysDevelopMapper manageSysDevelopMapper;
+    Logger logger = Logger.getLogger(DependencyService.class);
 
     public String generateDependencyData(int outlineId, int pageNumber, String data) throws Exception {
 
@@ -53,21 +60,42 @@ public class DependencyService {
                 resultData = JSON.toJSONString(jsonObject);
                 break;
             case 4:
+                List<String> pic1List = new ArrayList<>();
                 jsonObject = JSON.parseObject(data);
+                logger.info("-----------------");
+                logger.info(data);
                 String name = devObject.getDevName();
-                jsonObject.put("任务名称", name);
-                String subEqp = SubSysEnums.getMsgWithCode(devObject.getDevSubsysEqp()).getMsg();
-                String devPrimaryPlatform = PrimaryPlatformEnums.getMsgWithCode(devObject.getDevPrimaryPlatform()).getMsg();
-                jsonObject.put("预定使用平台", devPrimaryPlatform);
-                jsonObject.put("分系统/设备", subEqp);
-                String subsysEqpName = devObject.getDevSubsysEqpName();
-                jsonObject.put("分系统/设备名称", subsysEqpName);
-                String subsysEqpModel = devObject.getDevSubsysEqpModel();
-                jsonObject.put("型号", subsysEqpModel);
-                String subsysEqpNum = devObject.getDevSubsysEqpNum();
-                jsonObject.put("串号", subsysEqpNum);
-                String supplier = devObject.getDevSupplier();
-                jsonObject.put("承制单位", supplier);
+                if(jsonObject.size() == 0){
+                    jsonObject.put("任务名称", name);
+                    String subEqp = SubSysEnums.getMsgWithCode(devObject.getDevSubsysEqp()).getMsg();
+                    String devPrimaryPlatform = PrimaryPlatformEnums.getMsgWithCode(devObject.getDevPrimaryPlatform()).getMsg();
+                    jsonObject.put("预定使用平台", devPrimaryPlatform);
+                    jsonObject.put("分系统/设备", subEqp);
+                    String subsysEqpName = devObject.getDevSubsysEqpName();
+                    jsonObject.put("分系统/设备名称", subsysEqpName);
+                    String subsysEqpModel = devObject.getDevSubsysEqpModel();
+                    jsonObject.put("型号", subsysEqpModel);
+                    String subsysEqpNum = devObject.getDevSubsysEqpNum();
+                    jsonObject.put("串号", subsysEqpNum);
+                    String supplier = devObject.getDevSupplier();
+                    jsonObject.put("承制单位", supplier);
+                    jsonObject.put("分系统/设备照片", pic1List);
+                    jsonObject.put("分系统/设备关系图", pic1List);
+                }
+//                jsonObject.put("任务名称", name);
+//                String subEqp = SubSysEnums.getMsgWithCode(devObject.getDevSubsysEqp()).getMsg();
+//                String devPrimaryPlatform = PrimaryPlatformEnums.getMsgWithCode(devObject.getDevPrimaryPlatform()).getMsg();
+//                jsonObject.put("预定使用平台", devPrimaryPlatform);
+//                jsonObject.put("分系统/设备", subEqp);
+//                String subsysEqpName = devObject.getDevSubsysEqpName();
+//                jsonObject.put("分系统/设备名称", subsysEqpName);
+//                String subsysEqpModel = devObject.getDevSubsysEqpModel();
+//                jsonObject.put("型号", subsysEqpModel);
+//                String subsysEqpNum = devObject.getDevSubsysEqpNum();
+//                jsonObject.put("串号", subsysEqpNum);
+//                String supplier = devObject.getDevSupplier();
+//                jsonObject.put("承制单位", supplier);
+//                jsonObject.put("分系统/设备照片", pic1List);
 
                 resultData = JSON.toJSONString(jsonObject);
                 break;
@@ -200,6 +228,9 @@ public class DependencyService {
                 resultData = data;
                 break;
         }
+        String colName = "outline_data_"+pageNumber;
+        dbService.submitData(outlineId, colName, resultData);
+
 
         return resultData;
     }

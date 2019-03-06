@@ -38,7 +38,7 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="manage_sys_outline" enableCountByExample="false"
+        <table tableName="manage_sys_schema" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
 

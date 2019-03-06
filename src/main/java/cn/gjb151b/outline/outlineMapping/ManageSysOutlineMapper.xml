@@ -60,9 +60,15 @@
         <result column="outline_advice_proofread" property="outlineAdviceProofread" jdbcType="LONGVARCHAR"/>
         <result column="outline_advice_audit" property="outlineAdviceAudit" jdbcType="LONGVARCHAR"/>
         <result column="outline_advice_authorize" property="outlineAdviceAuthorize" jdbcType="LONGVARCHAR"/>
+        <result column="current_page_number" property="currentPageNumber" jdbcType="INTEGER"/>
     </resultMap>
 
     <update id="updateCol" statementType="STATEMENT">
+		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
+    </update>
+
+
+    <update id="updateCol2" statementType="STATEMENT">
 		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
     </update>
 
@@ -71,6 +77,10 @@
     </update>
 
     <select id="selectCol" statementType="STATEMENT" resultType="string">
+        SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
+    </select>
+
+    <select id="selectCol2" statementType="STATEMENT" resultType="Integer">
         SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
     </select>
 

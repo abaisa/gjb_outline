@@ -88,6 +88,7 @@ public class ItemService {
         return itemList;
     }
 
+//新建项目 还需要对字段进行初始化
     public void addItem(String devName, String userNew, String userProofread, String userAudit, String userAuthorize){
         String devItemId = manageSysDevelopMapper.selectColByName("dev_itemid", devName);
         ManageSysDevelop manageSysDevelop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
@@ -101,6 +102,14 @@ public class ItemService {
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_name", devSubsysEqpName, devItemId);
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_model", devSubsysEqpModel, devItemId);
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_num", devSubsysEqpNum, devItemId);
+        for(int i = 3; i < 58; i++){
+            String colName = "outline_data_"+i;
+            manageSysOutlineMapper.updateItemCol(colName, "{}", devItemId);
+        }
+        for(int i = 1001; i < 1006; i++){
+            String colName = "outline_data_"+i;
+            manageSysOutlineMapper.updateItemCol(colName, "{}", devItemId);
+        }
         updateItem(devItemId, userNew, userProofread, userAudit, userAuthorize);
 
 

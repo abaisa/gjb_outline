@@ -13,6 +13,8 @@ public interface ManageSysOutlineMapper {
 
     void updateCol2(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") int data);
 
+    void updateColInt(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") Integer data);
+
     String selectCol(@Param("outlineID") int outlineID, @Param("colName") String colName);
 
     Integer selectCol2(@Param("outlineID") int outlineID, @Param("colName") String colName);

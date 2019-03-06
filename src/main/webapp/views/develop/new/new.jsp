@@ -80,6 +80,13 @@
             <button class="btn btn-primary" id="pre_page" onclick="turnPage(2)">上一页</button>
             <button class="btn btn-primary" id="next_page" onclick="turnPage(1)">下一页</button>
         </div>
+        <br>
+        <div class="text-right hidden" id="project_submit" >
+            <button type="button" class="btn btn-default" onclick="cancelProofread('${session.userLogin.userName}')">取消</button>
+            |
+            <button class="btn btn-primary" id="save" onclick="passResult(0, 2, '${session.userLogin.userName}')">保存草稿</button>
+            <button class="btn btn-primary" id="submit" onclick="passResult(0, 1, '${session.userLogin.userName}')">提交报告</button>
+        </div>
 
         <br><br><br>
         <%--<button id='submit' class="btn btn-primary">Submit</button>--%>
@@ -114,9 +121,16 @@
                 <br>
                 <form class="form-horizontal">
                     <div class="col-lg-offset-8 col-lg-4 text-right" style="padding-right: 12px;">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-default" onclick="cancelProofread()">取消</button>
                         <button type="button" id = "fail" class="btn btn-primary" onclick="failProofread('${session.userLogin.userName}',${param.outlineStatus}, ${session.userLogin.userId})">不通过</button>
                         <button type="button" id = "pass" class="btn btn-primary" onclick="passProofread('${session.userLogin.userName}',${param.outlineStatus}, ${session.userLogin.userId})">通过</button>
+=======
+                        <button type="button" class="btn btn-default" onclick="cancelProofread('${session.userLogin.userName}')">取消</button>
+                        |
+                        <button type="button" id = "fail" class="btn btn-primary" onclick="passResult(${param.outlineStatus}, 2, '${session.userLogin.userName}')">不通过</button>
+                        <button type="button" id = "pass" class="btn btn-primary" onclick="passResult(${param.outlineStatus}, 1, '${session.userLogin.userName}')">通过</button>
+>>>>>>> master
                     </div>
                 </form>
             </div>
@@ -157,21 +171,6 @@
     Status = params['Status'];
 
 
-
-
-
-    // 页码初始化为2
-    // page_number = 2;
-
-    //pageAction初始化为下一页
-    pageAction = 1;
-
-    //第十页是否进行修改
-    modifyPage10 = false;
-
-    // 填充页面意见框标题等内容
-    adviceTitle(outlineStatus,Status);
-
     //调用loadTargetPage(1)，后台设置了2的下一页为3，初始化此页面为第三页
     $.ajax({
         type: "post",
@@ -187,6 +186,20 @@
         }
 
     }),
+
+
+
+
+
+
+
+
+    //第十页是否进行修改
+    modifyPage10 = false;
+
+    // 填充页面意见框标题等内容
+    adviceTitle(outlineStatus,Status);
+
 
 
 

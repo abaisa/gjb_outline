@@ -7,6 +7,10 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
+import javax.servlet.ServletContext;
 
 
 /**
@@ -33,6 +37,7 @@ public class LoginAction extends ActionSupport{
         }else {
             checkUserResponse.setMessage("用户名不能为空");
         }
+
 
         return "success";
     }

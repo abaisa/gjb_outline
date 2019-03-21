@@ -15,7 +15,6 @@ import java.util.List;
 public class
 AdminAction extends ActionSupport{
     private Logger logger = Logger.getLogger(AdminAction.class);
-
     private int userId;
     private String userName;
     private String userPassword;

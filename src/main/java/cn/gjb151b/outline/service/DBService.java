@@ -95,6 +95,15 @@ public class DBService {
         return manageSysSchemaMapper.selectCol(1,colName);
     }
 
+    public String fetchDefaultData(int pageID, String colName) throws Exception {
+        if (pageID < 1) {
+            throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
+        }
+
+//        return manageSysOutlineMapper.selectCol(1, colName);
+        return manageSysSchemaMapper.selectCol(1, colName);
+    }
+
     /**
      * @param outlineID 大纲id
      * @param colName   列名

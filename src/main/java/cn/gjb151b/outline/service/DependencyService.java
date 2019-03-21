@@ -50,7 +50,7 @@ public class DependencyService {
         System.out.println("generateDependencyData Page ID >> " + pageNumber);
 
         JSONObject jsonObject;
-        String resultData;
+        String resultData = new String();
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
         String devItemId = outline.getOutlineDevItemid();
@@ -226,9 +226,329 @@ public class DependencyService {
             case 34:
                 String devRS105 = devObject.getDevRs105();
                 resultData = generateLimitPic(data, devRS105);
-//                resultData = data;
                 System.out.println("resultData:"+resultData);
                 break;
+            case 35:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try{
+                        resultData = dbService.fetchDefaultData(1, "outline_data_35");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 36:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_36");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 37:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_37");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 38:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_38");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 39:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_39");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 40:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_40");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 41:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_41");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 42:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_42");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 43:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_43");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 44:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_44");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 45:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_45");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 46:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_46");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 47:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_47");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 48:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_48");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 49:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_49");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 50:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_50");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 51:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_51");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 52:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_52");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 53:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_53");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 54:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_54");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 55:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_55");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 56:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData56 = dbService.fetchDefaultData(1, "outline_data_56");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData56);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 57:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData57 = dbService.fetchDefaultData(1, "outline_data_57");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData57);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 58:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData58 = dbService.fetchDefaultData(1, "outline_data_58");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData58);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 59:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData59 = dbService.fetchDefaultData(1, "outline_data_59");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData59);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+
+
+
+
 
             default:
                 resultData = data;
@@ -265,52 +585,7 @@ public class DependencyService {
                     fillLaunchWorkStatus(launchArray, outlineId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
                     fillLaunchWorkStatus(launchArray, outlineId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
                     fillLaunchWorkStatus(launchArray, outlineId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
-//                        JSONObject outlineData29Object = JSON.parseObject(outlineData29, Feature.OrderedField);
-//                        outlineData29Object.remove("试验部位及被试品工作状态");
-//                        String outlineSchema29 = manageSysSchemaMapper.selectCol(1, "outline_schema_29");
-//                        JSONObject outlineSchema29Object = JSON.parseObject(outlineSchema29, Feature.OrderedField);
-//                        JSONObject exWorkLaunch = outlineSchema29Object.getJSONObject("properties").getJSONObject("试验部位及被试品工作状态").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
-//                        JSONObject oneExLaunch = exWorkLaunch.getJSONObject("工作状态1");
-//                        JSONObject allWorkLaunch = new JSONObject(true);
-//                        System.out.println("exworkLaunch"+JSON.toJSONString(exWorkLaunch));
-//                        JSONArray workLaunchArray = new JSONArray();
-//                        JSONArray allLaunchArray = new JSONArray();
-//                        JSONObject LaunchObject = new JSONObject();
-//                        for(int i=0; i<launchArray.size(); i++){
-//                            int num = i+1;
-//                            JSONObject workLaunch = new JSONObject();
-//                            JSONObject workProperties = new JSONObject(true);
-//                            JSONObject workDefault = new JSONObject();
-//                            JSONObject ifAction = new JSONObject();
-//                            JSONObject actionReason = new JSONObject();
-//                            workDefault.put("type", "string");
-//                            workDefault.put("default",launchArray.getJSONObject(i).getString("工作状态") );
-//                            workLaunch.put("type", oneExLaunch.getString("type"));
-//                            workLaunch.put("title","工作状态"+num);
-//                            ifAction.put("type", "string");
-//                            ifAction.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
-//                            actionReason.put("type", "string");
-//                            actionReason.put("minLength", 1);
-//                            workProperties.put("工作状态描述", workDefault);
-//                            workProperties.put("是否实施", ifAction);
-//                            workProperties.put("不实施理由", actionReason);
-//                            workLaunch.put("properties", workProperties);
-//
-//
-////                            workLaunch.getJSONObject("properties").getJSONObject("工作状态描述").put("default", launchArray.getJSONObject(i).getString("工作状态"));
-////                            workLaunchArray.add(workLaunch);
-//
-//
-//                            allWorkLaunch.put("工作状态"+num, workLaunch);
-//
-//                        }
-//                        outlineSchema29Object.getJSONObject("properties").getJSONObject("试验部位及被试品工作状态").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").put("properties", allWorkLaunch);
-////                        LaunchObject.put("工作状态", workLaunchArray);
-////                        allLaunchArray.add(LaunchObject);
-////                        outlineData29Object.put("试验部位及被试品工作状态", allLaunchArray);
-//                        manageSysSchemaMapper.updateCol(1, "outline_schema_29", JSON.toJSONString(outlineSchema29Object));
-//                        manageSysOutlineMapper.updateCol(outlineId, "outline_data_29", JSON.toJSONString(outlineData29Object));
-//                        System.out.println("outlineSchema29"+JSON.toJSONString(outlineSchema29Object));
+//                       System.out.println("outlineSchema29"+JSON.toJSONString(outlineSchema29Object));
                     }
                 if(changeLocation ==2 || changeLocation ==3) {
                         JSONArray sensitiveArray = jsonObject.getJSONArray("敏感度测试工作状态");

@@ -61,6 +61,11 @@
                 <param name="root">response</param>
             </result>
         </action>
+        <action name="deletePic" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="deletePic">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
 
 
         <action name="submitAdvice" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="submitAdvice">

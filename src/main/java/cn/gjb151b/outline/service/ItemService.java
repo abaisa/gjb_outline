@@ -102,11 +102,11 @@ public class ItemService {
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_name", devSubsysEqpName, devItemId);
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_model", devSubsysEqpModel, devItemId);
         manageSysOutlineMapper.updateItemCol("outline_dev_subsys_eqp_num", devSubsysEqpNum, devItemId);
-        for(int i = 3; i < 58; i++){
+        for (int i = 3; i < 59; i++) {
             String colName = "outline_data_"+i;
             manageSysOutlineMapper.updateItemCol(colName, "{}", devItemId);
         }
-        for(int i = 1001; i < 1006; i++){
+        for (int i = 1001; i < 1006; i++) {
             String colName = "outline_data_"+i;
             manageSysOutlineMapper.updateItemCol(colName, "{}", devItemId);
         }
@@ -118,7 +118,7 @@ public class ItemService {
     public void updateItem(String devItemId, String userNew, String userProofread, String userAudit, String userAuthorize) {
 
         //项目的原来操作用户清空
-        if(manageSysOutlineMapper.selectProjectByItemId(devItemId) != null){
+        if (manageSysOutlineMapper.selectProjectByItemId(devItemId) != null) {
             List<String> userOldNew = outlineUserInfoMapper.selectNewItemOperator(devItemId);
             List<String> userOldProofread = outlineUserInfoMapper.selectProofreadItemOperator(devItemId);
             List<String> userOldAudit = outlineUserInfoMapper.selectAuditItemOperator(devItemId);

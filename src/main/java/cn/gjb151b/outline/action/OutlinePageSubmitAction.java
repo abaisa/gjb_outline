@@ -150,12 +150,14 @@ public class OutlinePageSubmitAction extends ActionSupport {
     }
 
     public String deletePic(){
+        List<String> pictureList = new ArrayList<>();
         if(pageNumber == 4){
             if(picNumber == 1){
                     try{
                         String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
                         JSONObject jsonObject;
                         jsonObject = JSON.parseObject(outlineData4);
+                        pictureList = (List<String>) jsonObject.get("分系统/设备照片");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备照片", picList);
                         dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
@@ -168,6 +170,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
                         JSONObject jsonObject;
                         jsonObject = JSON.parseObject(outlineData4);
+                        pictureList  = (List<String>) jsonObject.get("分系统/设备关系图");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备关系图", picList);
                         dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
@@ -176,6 +179,12 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     }
                 }
 
+        }
+
+        for(String filename : pictureList){
+            String localPath = "src/main/webapp";
+            File file = new File(localPath+"/"+filename);
+            file.delete();
         }
         response.setMessage("success");
         return SUCCESS;

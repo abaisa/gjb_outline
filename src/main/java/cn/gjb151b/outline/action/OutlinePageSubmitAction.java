@@ -32,6 +32,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private Integer outlineStatus;
     private Integer outlineStatusOriginal;
     private BaseResponse<String> response;
+    private Integer changeLocation;
 
     private Integer picNumber;
 
@@ -72,7 +73,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        }
 
         try {
-            coreService.submitPageData(outlineID, pageNumber, pageAction, jsonData);
+            coreService.submitPageData(outlineID, pageNumber, pageAction, jsonData, changeLocation);
         } catch (ServiceException e) {
             logger.info(String.format("service error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getExceptionEnums().getErrMsg()));
@@ -308,5 +309,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     public void setOutlineStatusOriginal(Integer outlineStatusOriginal){ this.outlineStatusOriginal = outlineStatusOriginal;}
 
+    public Integer getChangeLocation(){ return  changeLocation;}
+
+    public void  setChangeLocation( Integer changeLocation){ this.changeLocation = changeLocation;}
 
 }

@@ -58,6 +58,12 @@ function monitor() {
                 editor.getEditor('root.敏感度测试工作状态确定原则').disable();
                 watchQuantity('root.发射测试工作状态', 5);
                 watchQuantity('root.敏感度测试工作状态', 5);
+                editor.watch('root.发射测试工作状态', function(){
+                    modifyPage9_launch = true;
+                });
+                editor.watch('root.敏感度测试工作状态', function(){
+                    modifyPage9_sensitive = true;
+                });
                 break;
             case '10':
                 var load_properties = load_schema.properties;
@@ -98,6 +104,11 @@ function monitor() {
             case '13':
                 $("#editor_holder button").addClass("hidden");
                 editor.getEditor('root').disable();
+                var stayTime = load_data.敏感度测试参数;
+                for(var i = 0; i < stayTime.length; i++) {
+                    var editorName = 'root.敏感度测试参数.'+i+'.驻留时间';
+                    editor.getEditor(editorName).enable();
+                }
                 break;
             case '14':
                 editor.getEditor('root.试验项目').disable();
@@ -111,6 +122,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 //这里改成上面的隐藏按钮的方法，之后若是还有别的按钮，可以选择使用底下注释掉的disable方法（应该是有别的按钮的）
                 // disableAddAndDelete('root.试验端口及被试品工作状态', true);
@@ -127,6 +139,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '16':
@@ -140,6 +153,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '17':
@@ -153,6 +167,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验电源端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
 
@@ -167,6 +182,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '19':
@@ -176,11 +192,22 @@ function monitor() {
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
                 var testPortArray = load_data.试验端口及被试品工作状态;
-                for(var i = 0; i < testPortArray.length; i++) {
-                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
-                    editor.getEditor(editorName).disable();
+                if(testPortArray != null) {
+                    var workStatusNum = load_data.试验端口及被试品工作状态[0].工作状态;
+                    if(workStatusNum != null) {
+                        // for (var i = 0; i < testPortArray.length; i++) {
+                        //     for(var j=0; j<workStatusNum.length; j++) {
+                        //         var editorName = 'root.试验端口及被试品工作状态.' + i + '.工作状态.工作状态'+j+'.工作状态描述';
+                        //         editor.getEditor(editorName).disable();
+                        //     }
+                        // }
+                        $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    }
                 }
-                $("#editor_holder button").addClass("hidden");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '20':
                 editor.getEditor('root.试验项目').disable();
@@ -193,6 +220,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '21':
@@ -206,6 +234,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '22':
@@ -219,6 +248,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
 
@@ -233,6 +263,7 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
                     editor.getEditor(editorName).disable();
                 }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '24':
@@ -246,7 +277,11 @@ function monitor() {
                 //     var editorName = 'root.试验位置及被试品工作状态.'+i+'.试验位置';
                 //     editor.getEditor(editorName).disable();
                 // }
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break
             case '25':
                 editor.getEditor('root.试验项目').disable();
@@ -254,7 +289,11 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '26':
                 editor.getEditor('root.试验项目').disable();
@@ -262,16 +301,19 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
-                var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
-                for(var i = 0; i < testPortArray1.length; i++) {
-                    var editorName1 = 'root.试验端口及被试品工作状态.电源端口.'+i+'.电源端口';
-                    editor.getEditor(editorName1).disable();
+                if(load_data.试验端口及被试品工作状态 != null) {
+                    var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
+                    var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
+                    for (var i = 0; i < testPortArray1.length; i++) {
+                        var editorName1 = 'root.试验端口及被试品工作状态.电源端口.' + i + '.电源端口';
+                        editor.getEditor(editorName1).disable();
+                    }
+                    for (var i = 0; i < testPortArray2.length; i++) {
+                        var editorName2 = 'root.试验端口及被试品工作状态.互联端口.' + i + '.互联端口';
+                        editor.getEditor(editorName2).disable();
+                    }
                 }
-                for(var i = 0; i < testPortArray2.length; i++) {
-                    var editorName2 = 'root.试验端口及被试品工作状态.互联端口.'+i+'.互联端口';
-                    editor.getEditor(editorName2).disable();
-                }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
 
@@ -281,16 +323,19 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
-                var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
-                for(var i = 0; i < testPortArray1.length; i++) {
-                    var editorName1 = 'root.试验端口及被试品工作状态.电源端口.'+i+'.电源端口';
-                    editor.getEditor(editorName1).disable();
+                if(load_data.试验端口及被试品工作状态 != null) {
+                    var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
+                    var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
+                    for (var i = 0; i < testPortArray1.length; i++) {
+                        var editorName1 = 'root.试验端口及被试品工作状态.电源端口.' + i + '.电源端口';
+                        editor.getEditor(editorName1).disable();
+                    }
+                    for (var i = 0; i < testPortArray2.length; i++) {
+                        var editorName2 = 'root.试验端口及被试品工作状态.互联端口.' + i + '.互联端口';
+                        editor.getEditor(editorName2).disable();
+                    }
                 }
-                for(var i = 0; i < testPortArray2.length; i++) {
-                    var editorName2 = 'root.试验端口及被试品工作状态.互联端口.'+i+'.互联端口';
-                    editor.getEditor(editorName2).disable();
-                }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '28':
@@ -299,16 +344,19 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
-                var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
-                for(var i = 0; i < testPortArray1.length; i++) {
-                    var editorName1 = 'root.试验端口及被试品工作状态.电源端口.'+i+'.电源端口';
-                    editor.getEditor(editorName1).disable();
+                if(load_data.试验端口及被试品工作状态 != null) {
+                    var testPortArray1 = load_data.试验端口及被试品工作状态.电源端口;
+                    var testPortArray2 = load_data.试验端口及被试品工作状态.互联端口;
+                    for (var i = 0; i < testPortArray1.length; i++) {
+                        var editorName1 = 'root.试验端口及被试品工作状态.电源端口.' + i + '.电源端口';
+                        editor.getEditor(editorName1).disable();
+                    }
+                    for (var i = 0; i < testPortArray2.length; i++) {
+                        var editorName2 = 'root.试验端口及被试品工作状态.互联端口.' + i + '.互联端口';
+                        editor.getEditor(editorName2).disable();
+                    }
                 }
-                for(var i = 0; i < testPortArray2.length; i++) {
-                    var editorName2 = 'root.试验端口及被试品工作状态.互联端口.'+i+'.互联端口';
-                    editor.getEditor(editorName2).disable();
-                }
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '29':
@@ -317,7 +365,11 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '30':
                 editor.getEditor('root.试验项目').disable();
@@ -325,7 +377,13 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                $("input[name*='频率（GHz）']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='频率（GHz）']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '31':
                 editor.getEditor('root.试验项目').disable();
@@ -333,7 +391,11 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '32':
                 editor.getEditor('root.试验项目').disable();
@@ -341,7 +403,11 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '33':
                 editor.getEditor('root.试验项目').disable();
@@ -349,7 +415,13 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                $("input[name*='频率（GHz）']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='频率（GHz）']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '34':
                 editor.getEditor('root.试验项目').disable();
@@ -357,7 +429,11 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("#editor_holder button").addClass("hidden");
+                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '1001':case '1002':case '1003':case '1004':case '1005':
                 $("#editor_holder button").addClass("hidden");
@@ -384,6 +460,25 @@ function monitor() {
 
 function beforeSubmit() {
     switch (page_number) {
+        case '9':
+            if(modifyPage9_launch && modifyPage9_sensitive){
+                pageAction = 3;
+                modifyPage9_launch = false;
+                modifyPage9_sensitive = false;
+                changeLocation = 3;
+            }else{
+                if(modifyPage9_launch) {
+                    pageAction = 3;
+                    modifyPage9_launch = false;
+                    changeLocation = 1;
+                }
+                if(modifyPage9_sensitive) {
+                    pageAction = 3;
+                    modifyPage9_sensitive = false;
+                    changeLocation = 2;
+                }
+            }
+            break;
         case '10':
             if(modifyPage10) {
                 pageAction = 3;

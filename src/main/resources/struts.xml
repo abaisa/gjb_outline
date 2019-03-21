@@ -48,6 +48,7 @@
         <action name="load" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="load">
             <result name="success" type="json">
                 <param name="root">response</param>
+                <param name="enableGZIP">true</param>
             </result>
         </action>
         <action name="loadAdvice" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="loadAdvice">

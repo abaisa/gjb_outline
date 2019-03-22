@@ -181,14 +181,14 @@ function downloadPic(){
                 var img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = pic1List[i];
+                var url = "statics/imgs/"+pic1List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
 
                 $("#showPic1").append(img);
-                $("#showPic1").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-                $("#showPic1").append(pictureNumber);
+                $("#showPic1").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                $("#showPic1").append(pic1List[i]);
             }
 
         }
@@ -207,19 +207,19 @@ function downloadPic2(){
         },
         success: function(data){
             console.log(data);
-            var pic1List = data.data;
-            for(var i = 0; i<pic1List.length; i++){
+            var pic2List = data.data;
+            for(var i = 0; i<pic2List.length; i++){
                 var  img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = pic1List[i];
+                var url = "statics/imgs/"+pic2List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
 
                 $("#showPic2").append(img);
-                $("#showPic2").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-                $("#showPic2").append(pictureNumber);
+                $("#showPic2").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                $("#showPic2").append(pic2List[i]);
             }
 
         }

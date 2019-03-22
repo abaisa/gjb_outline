@@ -45,6 +45,12 @@
                 <param name="root">response</param>
             </result>
         </action>
+        <!--删除新建页3上传的照片-->
+        <action name="deletePic" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="deletePic">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
         <action name="load" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="load">
             <result name="success" type="json">
                 <param name="root">response</param>

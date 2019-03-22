@@ -60,7 +60,8 @@ function submitPageData(action) {
             outlineID: outlineId,
             pageNumber: page_number,
             pageAction: action,       // 1 表示下一页，2 表示上一页，3表示其他依赖页触发的提交
-            jsonData: JSON.stringify(editor.getValue())
+            jsonData: JSON.stringify(editor.getValue()),
+            changeLocation: changeLocation
         },
         success: function (data) {
             console.log("submitPageData ajax 请求成功");
@@ -116,6 +117,7 @@ function loadTargetPage(action) {
                     required_by_default: true,
                     disable_array_reorder: true,
                     show_errors: true,
+                    // ajax: true,
                     schema: load_schema
                 });
 

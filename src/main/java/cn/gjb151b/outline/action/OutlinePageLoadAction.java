@@ -96,7 +96,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
                 downloadResponse.setError("other service error");
             }
 
-        }else if(picNumber == 2){
+        } else if (picNumber == 2) {
             try{
                 String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
                 JSONObject jsonObject = JSON.parseObject(outlineData4);

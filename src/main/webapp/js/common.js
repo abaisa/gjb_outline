@@ -229,6 +229,7 @@ function downloadPic2(){
 function deletePic1() {
     var myMessage = confirm("确定要清空上传的分系统/设备图片吗？");
     if(myMessage == true){
+        $("#showPic1").empty();
         $.ajax({
             type: "post",
             url: "/outline/page_data/deletePic",
@@ -253,6 +254,7 @@ function deletePic1() {
 function deletePic2() {
     var myMessage = confirm("确定要清空上传的分系统/设备关系图吗？");
     if(myMessage == true){
+        $("#showPic2").empty();
         $.ajax({
             type: "post",
             url: "/outline/page_data/deletePic",

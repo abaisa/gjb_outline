@@ -2,9 +2,11 @@ package cn.gjb151b.outline.service;
 
 import cn.gjb151b.outline.Constants.*;
 import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
+import cn.gjb151b.outline.model.ManageSysSchema;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.model.ManageSysDevelop;
 import cn.gjb151b.outline.model.ManageSysOutline;
+import cn.gjb151b.outline.outlineDao.ManageSysSchemaMapper;
 import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import static cn.gjb151b.outline.service.FreqDependency.grnerateData;
 
@@ -38,6 +41,8 @@ public class DependencyService {
     private ManageSysOutlineMapper manageSysOutlineMapper;
     @Resource
     private ManageSysDevelopMapper manageSysDevelopMapper;
+    @Resource
+    private ManageSysSchemaMapper manageSysSchemaMapper;
     Logger logger = Logger.getLogger(DependencyService.class);
 
     public String generateDependencyData(int outlineId, int pageNumber, String data) throws Exception {
@@ -45,11 +50,12 @@ public class DependencyService {
         System.out.println("generateDependencyData Page ID >> " + pageNumber);
 
         JSONObject jsonObject;
-        String resultData;
+        String resultData = new String();
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
         String devItemId = outline.getOutlineDevItemid();
         ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+
 
         switch (pageNumber) {
             case 3:
@@ -220,9 +226,329 @@ public class DependencyService {
             case 34:
                 String devRS105 = devObject.getDevRs105();
                 resultData = generateLimitPic(data, devRS105);
-//                resultData = data;
                 System.out.println("resultData:"+resultData);
                 break;
+            case 35:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try{
+                        resultData = dbService.fetchDefaultData(1, "outline_data_35");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 36:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_36");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 37:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_37");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 38:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_38");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 39:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_39");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 40:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_40");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 41:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_41");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 42:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_42");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 43:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_43");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 44:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_44");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 45:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_45");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 46:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_46");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 47:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_47");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 48:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_48");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 49:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_49");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 50:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_50");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 51:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_51");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 52:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_52");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 53:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_53");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 54:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_54");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 55:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        resultData = dbService.fetchDefaultData(1, "outline_data_55");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 56:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData56 = dbService.fetchDefaultData(1, "outline_data_56");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData56);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 57:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData57 = dbService.fetchDefaultData(1, "outline_data_57");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData57);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 58:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData58 = dbService.fetchDefaultData(1, "outline_data_58");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData58);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+            case 59:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    try {
+                        String outlineData59 = dbService.fetchDefaultData(1, "outline_data_59");
+                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        jsonObject = JSON.parseObject(outlineData59);
+                        jsonObject.put("任务名称", outlineName);
+                        resultData = jsonObject.toJSONString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    resultData = data;
+                }
+                break;
+
+
+
+
 
             default:
                 resultData = data;
@@ -235,12 +561,64 @@ public class DependencyService {
         return resultData;
     }
 
-    public void generateDataAfterSubmit(int outlineId, int pageNumber, String data) {
+    public void generateDataAfterSubmit(int outlineId, int pageNumber, String data, int changeLocation) {
         JSONObject jsonObject;
         JSONArray jsonArray;
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
         switch (pageNumber) {
+            case 9:
+                jsonObject = JSON.parseObject(data);
+                if (changeLocation ==1 || changeLocation == 3) {
+                    JSONArray launchArray = jsonObject.getJSONArray("发射测试工作状态");
+                    String outlineData14 = outline.getOutlineData14();
+                    String outlineData15 = outline.getOutlineData15();
+                    String outlineData16 = outline.getOutlineData16();
+                    String outlineData17 = outline.getOutlineData17();
+                    String outlineData29 = outline.getOutlineData29();
+                    String outlineData30 = outline.getOutlineData30();
+                    String outlineData31 = outline.getOutlineData31();
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData14, "试验端口及被试品工作状态", "outline_schema_14", "outline_data_14");
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData15, "试验端口及被试品工作状态", "outline_schema_15", "outline_data_15");
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData16, "试验端口及被试品工作状态", "outline_schema_16", "outline_data_16");
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData17, "试验端口及被试品工作状态", "outline_schema_17", "outline_data_17");
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
+                    fillLaunchWorkStatus(launchArray, outlineId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
+//                       System.out.println("outlineSchema29"+JSON.toJSONString(outlineSchema29Object));
+                    }
+                if(changeLocation ==2 || changeLocation ==3) {
+                        JSONArray sensitiveArray = jsonObject.getJSONArray("敏感度测试工作状态");
+                        String outlineData18 = outline.getOutlineData18();
+                        String outlineData19 = outline.getOutlineData19();
+                        String outlineData20 = outline.getOutlineData20();
+                        String outlineData21 = outline.getOutlineData21();
+                        String outlineData22 = outline.getOutlineData22();
+                        String outlineData23 = outline.getOutlineData23();
+                        String outlineData24 = outline.getOutlineData24();
+                        String outlineData25 = outline.getOutlineData25();
+                        String outlineData26 = outline.getOutlineData26();
+                        String outlineData27 = outline.getOutlineData27();
+                        String outlineData28 = outline.getOutlineData28();
+                        String outlineData32 = outline.getOutlineData32();
+                        String outlineData33 = outline.getOutlineData33();
+                        String outlineData34 = outline.getOutlineData34();
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData18, "试验端口及被试品工作状态", "outline_schema_18", "outline_data_18");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData19, "试验端口及被试品工作状态", "outline_schema_19", "outline_data_19");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData20, "试验端口及被试品工作状态", "outline_schema_20", "outline_data_20");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData21, "试验端口及被试品工作状态", "outline_schema_21", "outline_data_21");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData22, "试验端口及被试品工作状态", "outline_schema_22", "outline_data_22");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData23, "试验端口及被试品工作状态", "outline_schema_23", "outline_data_23");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData24, "试验位置及被试品工作状态", "outline_schema_24", "outline_data_24");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData25, "试验位置及被试品工作状态", "outline_schema_25", "outline_data_25");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData26, "试验端口及被试品工作状态", "outline_schema_26", "outline_data_26");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData27, "试验端口及被试品工作状态", "outline_schema_27", "outline_data_27");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData28, "试验端口及被试品工作状态", "outline_schema_28", "outline_data_28");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData32, "试验端口及被试品工作状态", "outline_schema_32", "outline_data_32");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData33, "试验端口及被试品工作状态", "outline_schema_33", "outline_data_33");
+                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData34, "试验端口及被试品工作状态", "outline_schema_34", "outline_data_34");
+                    }
+                break;
             case 10:
                 //第10页的电源端口数据控制着第14页的试验端口即被试品工作状态的数据
                 jsonObject = JSON.parseObject(data);
@@ -361,7 +739,7 @@ public class DependencyService {
         devString = "天线端口:"+antennaString+"; 天线端口模式:"+receiveString+"; 天线调制模式:"+modulationString;
         antennaObject.put("工作状态", devString);
         JSONArray statusList = jsonObject.getJSONArray("试验端口及被试品工作状态");
-        if(statusList.getJSONObject(0).getString("工作状态").equals(devString) == false){
+        if(statusList == null || statusList.getJSONObject(0).getString("工作状态").equals(devString) == false){
             jsonArray.add(antennaObject);
             jsonObject.put("试验端口及被试品工作状态", jsonArray);
         }
@@ -378,38 +756,56 @@ public class DependencyService {
         jsonObject = JSON.parseObject(data);
         JSONObject devJsonProject = (JSONObject) JSON.parse(devProject);
         StringBuilder builder = new StringBuilder();
+        int CE101Num = 0;
         if(devJsonProject.getString("project_id").equals("CE101")) {
-            for (int i = 0; i < devJsonProject.getJSONArray("limit_value").size(); i++) {
-                if(devJsonProject.getJSONArray("limit_value").getJSONObject(i).isEmpty()){
-                    continue;
+            if(devJsonProject.getJSONArray("limit_value").size() != 0) {
+                for (int i = 0; i < devJsonProject.getJSONArray("limit_value").size(); i++) {
+                    if (devJsonProject.getJSONArray("limit_value").getJSONObject(i).isEmpty()) {
+                        CE101Num++;
+                        continue;
+                    }
+                    String limitValue = devJsonProject.getJSONArray("limit_value").getJSONObject(i).getString("pic");
+                    String limitValueCurrent = devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).getString("pic");
+                    if(limitValue != null && limitValueCurrent != null) {
+                        builder.append("第");
+                        builder.append(i + 1);
+                        builder.append("个限值： ");
+                        if (limitValue.equals(limitValueCurrent)) {
+                            builder.append("GJB151B-2013标准规定图形:standard");
+                            builder.append(limitValue);
+                            builder.append(" 。");
+                        } else {
+                            builder.append("研制要求管理系统生成图形:");
+                            builder.append(limitValueCurrent);
+                            builder.append(" 。");
+                        }
+                    }else{
+                        CE101Num++;
+                    }
                 }
-                String limitValue = devJsonProject.getJSONArray("limit_value").getJSONObject(i).getString("pic");
-                String limitValueCurrent = devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).getString("pic");
-                builder.append("第");
-                builder.append(i+1);
-                builder.append("个限值： ");
-                if (limitValue.equals(limitValueCurrent)) {
-                    builder.append("GJB151B-2013标准规定图形:standard");
-                    builder.append(limitValue);
-                    builder.append(" 。");
-                } else {
-                    builder.append("研制要求管理系统生成图形:");
-                    builder.append(limitValueCurrent);
-                    builder.append(" 。");
+                if(CE101Num == 3){
+                    builder.append("无限值");
                 }
+            }else{
+                builder.append("无限值");
             }
             jsonObject.put("限值", builder.toString());
         }else{
             String limitValue = devJsonProject.getJSONObject("limit_value").getString("pic");
             String limitValueCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
-            if (limitValue.equals(limitValueCurrent)) {
-                builder.append("GJB151B-2013标准规定图形:standard");
-                builder.append(limitValue);
+            if(limitValue == null || limitValueCurrent == null) {
+                builder.append("无限值");
                 jsonObject.put("限值", builder.toString());
-            } else {
-                builder.append("研制要求管理系统生成图形:");
-                builder.append(limitValueCurrent);
-                jsonObject.put("限值", builder.toString());
+            }else{
+                if (limitValue.equals(limitValueCurrent)) {
+                    builder.append("GJB151B-2013标准规定图形:standard");
+                    builder.append(limitValue);
+                    jsonObject.put("限值", builder.toString());
+                } else {
+                    builder.append("研制要求管理系统生成图形:");
+                    builder.append(limitValueCurrent);
+                    jsonObject.put("限值", builder.toString());
+                }
             }
         }
 
@@ -421,9 +817,11 @@ public class DependencyService {
         JSONObject jsonObject;
         jsonObject = JSON.parseObject(data);
         JSONObject devJsonProject = JSON.parseObject(devProject);
+        int CS101Num = 0;
         StringBuilder builder = new StringBuilder();
         for(int i=0; i<devJsonProject.getJSONArray("limit_value").size(); i++) {
             if(devJsonProject.getJSONArray("limit_value").getJSONObject(i).isEmpty()){
+                CS101Num++;
                 continue;
             }
             builder.append("第");
@@ -452,7 +850,11 @@ public class DependencyService {
                 builder.append(" 。");
             }
         }
-        jsonObject.put("限值", builder.toString());
+        if(CS101Num == 2){
+            jsonObject.put("限值", "无限值");
+        }else {
+            jsonObject.put("限值", builder.toString());
+        }
         String resultData = JSON.toJSONString(jsonObject);
         return resultData;
     }
@@ -462,22 +864,33 @@ public class DependencyService {
         JSONObject jsonObject;
         jsonObject = JSON.parseObject(data);
         JSONObject devJsonProject = JSON.parseObject(devProject);
-        if(devJsonProject.getString("project_id").equals("CE107")){
+        int CE107Num = 0;
+        if (devJsonProject.getString("project_id").equals("CE107")) {
             StringBuilder builder = new StringBuilder();
-            for(int i=0; i<devJsonProject.getJSONArray("limit_value_current").size(); i++){
-                if(devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).isEmpty()){
+            for (int i = 0; i < devJsonProject.getJSONArray("limit_value_current").size(); i++) {
+                if (devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).isEmpty()) {
+                    CE107Num++;
                     continue;
                 }
                 builder.append("第");
-                builder.append(i+1);
+                builder.append(i + 1);
                 builder.append("个限值： ");
                 builder.append(devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).getString("text"));
                 builder.append(" 。");
             }
-            jsonObject.put("限值", builder.toString());
-        }else {
-            jsonObject.put("限值", devJsonProject.getJSONObject("limit_value_current").getString("text"));
+            if(CE107Num == 2){
+                jsonObject.put("限值","无限值");
+            }else {
+                jsonObject.put("限值", builder.toString());
+            }
+        } else {
+            if(devJsonProject.getJSONObject("limit_value_current").getString("text") != null) {
+                jsonObject.put("限值", devJsonProject.getJSONObject("limit_value_current").getString("text"));
+            }else{
+                jsonObject.put("限值","无限值");
+            }
         }
+
         String resultData = JSON.toJSONString(jsonObject);
         return resultData;
     }
@@ -490,16 +903,24 @@ public class DependencyService {
         String picCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
         String textCurrent = devJsonProject.getJSONObject("limit_value_current").getString("text");
         StringBuilder builder = new StringBuilder();
-        if(pic.equals(picCurrent)) {
-            builder.append("GJB151B-2013标准规定图形:standard");
-            builder.append(pic);
-            builder.append("\n");
+        if(pic == null || picCurrent == null){
+            if(textCurrent == null){
+                builder.append("无限值");
+            }else{
+                builder.append(textCurrent);
+            }
         }else {
-            builder.append("研制要求管理系统生成图形:");
-            builder.append(picCurrent);
-            builder.append("\n");
+            if (pic.equals(picCurrent)) {
+                builder.append("GJB151B-2013标准规定图形:standard");
+                builder.append(pic);
+                builder.append("\n");
+            } else {
+                builder.append("研制要求管理系统生成图形:");
+                builder.append(picCurrent);
+                builder.append("\n");
+            }
+            builder.append(textCurrent);
         }
-        builder.append(textCurrent);
         jsonObject.put("限值", builder.toString());
         String resultData = JSON.toJSONString(jsonObject);
         return resultData;
@@ -529,6 +950,75 @@ public class DependencyService {
         }
 
         return JSON.toJSONString(jsonSchema);
+    }
+
+    public void fillLaunchWorkStatus( JSONArray launchArray, int outlineId, String outlineData, String title, String schema, String data){
+        JSONObject outlineData29Object = JSON.parseObject(outlineData, Feature.OrderedField);
+        outlineData29Object.remove(title);
+        String outlineSchema = manageSysSchemaMapper.selectCol(1, schema);
+        JSONObject outlineSchemaObject = JSON.parseObject(outlineSchema, Feature.OrderedField);
+        JSONObject exWorkLaunch;
+        if(schema.equals("outline_schema_26") || schema.equals("outline_schema_27") || schema.equals("outline_schema_28")){
+            exWorkLaunch = outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("properties").getJSONObject("电源端口").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
+        }else {
+            exWorkLaunch = outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
+        }
+        JSONObject oneExLaunch = exWorkLaunch.getJSONObject("工作状态1");
+        JSONObject allWorkLaunch = new JSONObject(true);
+        System.out.println("exworkLaunch"+JSON.toJSONString(exWorkLaunch));
+        for(int i=0; i<launchArray.size(); i++){
+            int num = i+1;
+            JSONObject workLaunch = new JSONObject();
+            JSONObject workProperties = new JSONObject(true);
+            JSONObject workDefault = new JSONObject();
+            JSONObject ifAction = new JSONObject();
+            JSONObject actionReason = new JSONObject();
+            workDefault.put("type", "string");
+            workDefault.put("default",launchArray.getJSONObject(i).getString("工作状态") );
+            workLaunch.put("type", oneExLaunch.getString("type"));
+            workLaunch.put("title","工作状态"+num);
+            ifAction.put("type", "string");
+            ifAction.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+            actionReason.put("type", "string");
+            actionReason.put("minLength", 1);
+            workProperties.put("工作状态描述", workDefault);
+            workProperties.put("是否实施", ifAction);
+            workProperties.put("不实施理由", actionReason);
+            workLaunch.put("properties", workProperties);
+            allWorkLaunch.put("工作状态"+num, workLaunch);
+        }
+        if(schema.equals("outline_schema_26") || schema.equals("outline_schema_27") || schema.equals("outline_schema_28")){
+//            JSONObject allWorkLaunchConnected = (JSONObject) allWorkLaunch.clone();
+            JSONObject allWorkLaunchConnected = new JSONObject();
+            for(int i=0; i<launchArray.size(); i++){
+                int numConnected = i+1;
+                JSONObject workLaunchConnected = new JSONObject();
+                JSONObject workPropertiesConnected = new JSONObject(true);
+                JSONObject workDefaultConnected = new JSONObject();
+                JSONObject ifActionConnected = new JSONObject();
+                JSONObject actionReasonConnected = new JSONObject();
+                workDefaultConnected.put("type", "string");
+                workDefaultConnected.put("default",launchArray.getJSONObject(i).getString("工作状态") );
+                workLaunchConnected.put("type", oneExLaunch.getString("type"));
+                workLaunchConnected.put("title","工作状态"+numConnected);
+                ifActionConnected.put("type", "string");
+                ifActionConnected.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+                actionReasonConnected.put("type", "string");
+                actionReasonConnected.put("minLength", 1);
+                workPropertiesConnected.put("工作状态描述", workDefaultConnected);
+                workPropertiesConnected.put("是否实施", ifActionConnected);
+                workPropertiesConnected.put("不实施理由", actionReasonConnected);
+                workLaunchConnected.put("properties", workPropertiesConnected);
+                allWorkLaunchConnected.put("工作状态"+numConnected, workLaunchConnected);
+            }
+            outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("properties").getJSONObject("电源端口").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").put("properties", allWorkLaunch);
+            outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("properties").getJSONObject("互联端口").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").put("properties", allWorkLaunchConnected);
+        }else {
+            outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").put("properties", allWorkLaunch);
+        }
+        manageSysSchemaMapper.updateCol(1, schema, JSON.toJSONString(outlineSchemaObject));
+        manageSysOutlineMapper.updateCol(outlineId, data, JSON.toJSONString(outlineData29Object));
+        System.out.println(schema+JSON.toJSONString(outlineSchemaObject));
     }
 
     public JSONObject generateSubsysOrEqpAttrData(ManageSysDevelop develop) throws Exception {

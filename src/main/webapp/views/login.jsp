@@ -26,36 +26,31 @@
     <%--<style>--%>
     <%--.picClass{width: 100%;height: 300px;background:url("../statics/imgs/coverDevelopment.png") no-repeat left top;}--%>
     <%--</style>--%>
-    <div class="container" style="padding-top: 20px">
-        <div class="row">
-            <%--<form>--%>
-            <br>
-            <br>
-            <div class="col-md-offset-4 col-md-4" >
-                <div class="form-group">
-                    <input type="text" name="userName" id="userName" class="form-control input-lg" placeholder="账户"/>
+        <div class="container" style="padding-top: 20px">
+            <div class="row">
+                <%--<form>--%>
+                <br>
+                <br>
+                <div class="col-md-offset-4 col-md-4" >
+                    <div class="form-group">
+                        <input type="text" name="userName" id="userName" class="form-control input-lg" placeholder="账户"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="userPassword" id="userPassword" class="form-control input-lg" placeholder="密码"/>
+                    </div>
+                    <div class="form-group">
+                        <button id="submit" type="submit" class="btn btn-info btn-block btn-lg" onclick="checkUser()">登录</button>
+                    </div>
+                    <div class="front-login-hr"></div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-default btn-block btn-lg free_reg" style="border: 1px solid #5bc0de;color: #5bc0de"
+                               value="修改账户密码" onclick="toChangePassword()">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" name="userPassword" id="userPassword" class="form-control input-lg" placeholder="密码"/>
-                </div>
-                <div class="form-group">
-                    <button id="submit" type="submit" class="btn btn-info btn-block btn-lg" onclick="checkUser()">登录</button>
-                </div>
-                <%--<div class="form-group clearfix text-center">--%>
-                    <%--<div class="checkbox front-remfield">--%>
-                        <%--<label><input type="checkbox" >记住此用户名</label>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <div class="front-login-hr"></div>
-                <div class="form-group">
-                    <input type="button" class="btn btn-default btn-block btn-lg free_reg" style="border: 1px solid #5bc0de;color: #5bc0de"
-                           value="修改账户密码" onclick="toChangePassword()">
-                </div>
+                <%--</form>--%>
             </div>
-            <%--</form>--%>
-        </div>
 
-    </div>
+        </div>
 
     <s:include value="_footer.jsp"/>
 </div>

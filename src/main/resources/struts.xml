@@ -54,6 +54,7 @@
         <action name="load" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="load">
             <result name="success" type="json">
                 <param name="root">response</param>
+                <param name="enableGZIP">true</param>
             </result>
         </action>
         <action name="loadAdvice" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="loadAdvice">
@@ -62,6 +63,11 @@
             </result>
         </action>
         <action name="upload" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="upload">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
+        <action name="deletePic" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="deletePic">
             <result name="success" type="json">
                 <param name="root">response</param>
             </result>

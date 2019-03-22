@@ -32,6 +32,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private Integer outlineStatus;
     private Integer outlineStatusOriginal;
     private BaseResponse<String> response;
+    private Integer changeLocation;
 
     private Integer picNumber;
 
@@ -72,7 +73,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        }
 
         try {
-            coreService.submitPageData(outlineID, pageNumber, pageAction, jsonData);
+            coreService.submitPageData(outlineID, pageNumber, pageAction, jsonData, changeLocation);
         } catch (ServiceException e) {
             logger.info(String.format("service error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getExceptionEnums().getErrMsg()));
@@ -174,6 +175,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     public String deletePic(){
         String pathsuff = "src/main/webapp/statics/imgs/";
+        List<String> pictureList = new ArrayList<>();
         if(pageNumber == 4){
             if(picNumber == 1){
                     try{
@@ -184,6 +186,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         for (String filename : picList1) {
                             FileUtils.deleteQuietly(new File(pathsuff+filename));
                         }
+                        pictureList = (List<String>) jsonObject.get("分系统/设备照片");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备照片", picList);
                         dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
@@ -200,6 +203,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         for (String filename : picList2) {
                             FileUtils.deleteQuietly(new File(pathsuff+filename));
                         }
+
+                        pictureList  = (List<String>) jsonObject.get("分系统/设备关系图");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备关系图", picList);
                         dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
@@ -208,6 +213,12 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     }
                 }
 
+        }
+
+        for(String filename : pictureList){
+            String localPath = "src/main/webapp";
+            File file = new File(localPath+"/"+filename);
+            file.delete();
         }
         response.setMessage("success");
         return SUCCESS;
@@ -341,5 +352,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     public void setOutlineStatusOriginal(Integer outlineStatusOriginal){ this.outlineStatusOriginal = outlineStatusOriginal;}
 
+    public Integer getChangeLocation(){ return  changeLocation;}
+
+    public void  setChangeLocation( Integer changeLocation){ this.changeLocation = changeLocation;}
 
 }

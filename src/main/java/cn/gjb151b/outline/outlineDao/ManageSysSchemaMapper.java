@@ -13,6 +13,8 @@ public interface ManageSysSchemaMapper {
 
     String selectCol(@Param("outlineID") int outlineID, @Param("colName") String colName);
 
+    void updateCol(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") String data);
+
 //    ManageSysOutline selectByPrimaryKey(@Param("outlineId") Integer outlineId);
 //
 //    ManageSysOutline selectProjectByItemId(@Param("outlineDevItemId") String outlineDevItemId);

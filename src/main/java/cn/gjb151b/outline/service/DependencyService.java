@@ -6,6 +6,7 @@ import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.model.ManageSysDevelop;
 import cn.gjb151b.outline.model.ManageSysOutline;
 import cn.gjb151b.outline.utils.ServiceException;
+import cn.gjb151b.outline.utils.StrInsertString;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -223,7 +224,10 @@ public class DependencyService {
 //                resultData = data;
                 System.out.println("resultData:"+resultData);
                 break;
-
+            case 35:
+                devCE101 = devObject.getDevCe101();
+                resultData = generateLimitPic2(data, devCE101);
+                break;
             default:
                 resultData = data;
                 break;
@@ -415,6 +419,55 @@ public class DependencyService {
 
         String resultData = JSON.toJSONString(jsonObject);
         return resultData;
+    }
+    public String generateLimitPic2(String data, String devProject){
+        JSONObject jsonObject;
+        jsonObject = JSON.parseObject(data);
+        JSONObject devJsonProject = (JSONObject) JSON.parse(devProject);
+        StringBuilder builder = new StringBuilder();
+        StrInsertString strInsertString = new StrInsertString();
+        if(devJsonProject.getString("project_id").equals("CE101")) {
+            for (int i = 0; i < devJsonProject.getJSONArray("limit_value").size(); i++) {
+                if(devJsonProject.getJSONArray("limit_value").getJSONObject(i).isEmpty()){
+                    continue;
+                }
+                String limitValue = devJsonProject.getJSONArray("limit_value").getJSONObject(i).getString("pic");
+                String limitValueCurrent = devJsonProject.getJSONArray("limit_value_current").getJSONObject(i).getString("pic");
+                builder.append("第");
+                builder.append(i+1);
+                builder.append("个限值： ");
+                if (limitValue.equals(limitValueCurrent)) {
+                    builder.append("GJB151B-2013标准规定图形:standard");
+                    builder.append(limitValue);
+                    builder.append(" 。");
+                } else {
+                    builder.append("研制要求管理系统生成图形:");
+                    builder.append(limitValueCurrent);
+                    builder.append(" 。");
+                }
+            }
+//            jsonObject.put("", builder.toString());
+            return strInsertString.strInsertString(devProject, builder.toString());
+        }else{
+            String limitValue = devJsonProject.getJSONObject("limit_value").getString("pic");
+            String limitValueCurrent = devJsonProject.getJSONObject("limit_value_current").getString("pic");
+            if (limitValue.equals(limitValueCurrent)) {
+                builder.append("GJB151B-2013标准规定图形:standard");
+                builder.append(limitValue);
+//                jsonObject.put("限值", builder.toString());
+                return strInsertString.strInsertString(devProject, builder.toString());
+
+            } else {
+                builder.append("研制要求管理系统生成图形:");
+                builder.append(limitValueCurrent);
+//                jsonObject.put("限值", builder.toString());
+                return strInsertString.strInsertString(devProject, builder.toString());
+
+            }
+        }
+
+//        String resultData = JSON.toJSONString(jsonObject);
+//
     }
 
     public String generateLimitTwoPic(String data, String devProject){

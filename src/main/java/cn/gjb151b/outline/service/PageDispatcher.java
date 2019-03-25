@@ -21,7 +21,6 @@ public class PageDispatcher {
 //        nextPageRouter.put(35, 56);
         nextPageRouter.put(58, 3);
 
-
         // 特殊上一页
 //        previousPageRouter.put(10, 1006);
 //        previousPageRouter.put(1001, 9);

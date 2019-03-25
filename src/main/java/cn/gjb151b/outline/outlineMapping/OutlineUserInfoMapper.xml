@@ -105,5 +105,10 @@
 
 
 
+  <select id="selectAuthorizeItemOperator" statementType="STATEMENT"  resultType="List">
+        SELECT user_name FROM outline_user_info WHERE user_authorize like '${outlineDevItemId}';
+  </select>
+
+
 
 </mapper>

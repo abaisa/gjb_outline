@@ -121,16 +121,10 @@
                 <br>
                 <form class="form-horizontal">
                     <div class="col-lg-offset-8 col-lg-4 text-right" style="padding-right: 12px;">
-<<<<<<< HEAD
-                        <button type="button" class="btn btn-default" onclick="cancelProofread()">取消</button>
-                        <button type="button" id = "fail" class="btn btn-primary" onclick="failProofread('${session.userLogin.userName}',${param.outlineStatus}, ${session.userLogin.userId})">不通过</button>
-                        <button type="button" id = "pass" class="btn btn-primary" onclick="passProofread('${session.userLogin.userName}',${param.outlineStatus}, ${session.userLogin.userId})">通过</button>
-=======
                         <button type="button" class="btn btn-default" onclick="cancelProofread('${session.userLogin.userName}')">取消</button>
                         |
                         <button type="button" id = "fail" class="btn btn-primary" onclick="passResult(${param.outlineStatus}, 2, '${session.userLogin.userName}')">不通过</button>
                         <button type="button" id = "pass" class="btn btn-primary" onclick="passResult(${param.outlineStatus}, 1, '${session.userLogin.userName}')">通过</button>
->>>>>>> master
                     </div>
                 </form>
             </div>
@@ -193,9 +187,21 @@
 
 
 
+    // 页码初始化为2
+    // page_number = 2;
+
+
 
     //第十页是否进行修改
     modifyPage10 = false;
+
+    //第九页是否进行修改
+    modifyPage9_launch = false;   //9页的发射参数
+    modifyPage9_sensitive = false;  //9页的敏感参数
+
+    //判断更改页的位置
+    changeLocation = 0; //0代表没有位置更改，1代表从上至下第一个位置更改，以此类推
+
 
     // 填充页面意见框标题等内容
     adviceTitle(outlineStatus,Status);

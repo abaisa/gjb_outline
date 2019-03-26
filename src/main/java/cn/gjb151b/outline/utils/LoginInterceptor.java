@@ -18,6 +18,7 @@ public class LoginInterceptor extends AbstractInterceptor {
         UserLogin user = (UserLogin) session.get("userLogin");
         if(user == null) {
             return Action.LOGIN;
+
         }
 
         return invocation.invoke();

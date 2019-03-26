@@ -95,10 +95,10 @@ public class CoreService {
 
 
 
-    public void submitPageData(Integer outlineID, Integer sourcePageNumber, Integer pageAction, String data) throws Exception {
+    public void submitPageData(Integer outlineID, Integer sourcePageNumber, Integer pageAction, String data, int changeLocation) throws Exception {
         dbService.submitData(outlineID, sourcePageNumber, DbColnameEnums.DATA_PREFIX.getValue(), data);
         if(pageAction == 3) {
-            dependencyService.generateDataAfterSubmit(outlineID, sourcePageNumber, data);
+            dependencyService.generateDataAfterSubmit(outlineID, sourcePageNumber, data, changeLocation);
         }
     }
 }

@@ -16,6 +16,7 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
+
     <!-- Struts2框架核心过滤器配置 -->
     <filter>
         <filter-name>struts2</filter-name>
@@ -25,6 +26,8 @@
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>

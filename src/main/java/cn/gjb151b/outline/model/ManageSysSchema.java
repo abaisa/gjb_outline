@@ -61,6 +61,10 @@ public class ManageSysSchema {
 
     private String outlineData15;
 
+    private String outlineSchema16;
+
+    private String outlineData16;
+
     private String outlineSchema17;
 
     private String outlineData17;
@@ -69,9 +73,33 @@ public class ManageSysSchema {
 
     private String outlineData18;
 
+    private String outlineSchema19;
+
+    private String outlineData19;
+
+    private String outlineSchema20;
+
+    private String outlineData20;
+
+    private String outlineSchema21;
+
+    private String outlineData21;
+
+    private String outlineSchema22;
+
+    private String outlineData22;
+
     private String outlineSchema23;
 
     private String outlineData23;
+
+    private String outlineSchema24;
+
+    private String outlineData24;
+
+    private String outlineSchema25;
+
+    private String outlineData25;
 
     private String outlineSchema26;
 
@@ -84,6 +112,30 @@ public class ManageSysSchema {
     private String outlineSchema28;
 
     private String outlineData28;
+
+    private String outlineSchema29;
+
+    private String outlineData29;
+
+    private String outlineSchema30;
+
+    private String outlineData30;
+
+    private String outlineSchema31;
+
+    private String outlineData31;
+
+    private String outlineSchema32;
+
+    private String outlineData32;
+
+    private String outlineSchema33;
+
+    private String outlineData33;
+
+    private String outlineSchema34;
+
+    private String outlineData34;
 
     private String outlineSchemaSubsysEqp;
 

@@ -18,7 +18,7 @@ public class StrInsertString {
         System.out.println(indexStr.size());
 
         for (int i = 0; i < indexStr.size(); i++) {
-            stringBuilder.insert(indexStr.get(i) + i * 5 + 5, str);
+            stringBuilder.insert(indexStr.get(i) + i * str.length() + 5, str);
         }
         return stringBuilder.toString();
     }

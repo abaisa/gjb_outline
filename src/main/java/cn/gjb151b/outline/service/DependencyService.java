@@ -57,6 +57,9 @@ public class DependencyService {
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
         String devItemId = outline.getOutlineDevItemid();
         ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+        String outlineData10 = outline.getOutlineData10();
+        JSONObject outlineData1Object = JSONObject.parseObject(outlineData10);
+        String phasePosition = (String)outlineData1Object.getJSONArray("电源端口").getJSONObject(0).get("两相/三相");
 
 
         switch (pageNumber) {
@@ -231,8 +234,6 @@ public class DependencyService {
                 System.out.println("resultData:"+resultData);
                 break;
             case 35:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try{
                         resultData = dbService.fetchDefaultData(1, "outline_data_35");
                         devCE101 = devObject.getDevCe101();
@@ -240,17 +241,25 @@ public class DependencyService {
                         int[] nums = {0, 1, 2, 3};
                         String keyName = "限值";
                         resultData = generateLimitPic2(resultData, devCE101, equipment, nums, keyName );
+//                        根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData35Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(6).put("数量", 2);
+                            outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(7).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(6).put("数量", 3);
+                            outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(7).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(6).put("数量", 4);
+                            outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(7).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData35Object);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-                } else {
-                    resultData = data;
-                }
                 break;
             case 36:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_36");
                         devCE102 = devObject.getDevCe102();
@@ -258,12 +267,22 @@ public class DependencyService {
                         int[] nums = {0, 1, 3};
                         String keyName = "限值";
                         resultData = generateLimitPic2(resultData, devCE102, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData36Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(4).put("数量", 2);
+                            outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(5).put("数量", 1);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(4).put("数量", 3);
+                            outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(5).put("数量", 2);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(4).put("数量", 4);
+                            outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(5).put("数量", 3);
+                        }
+                        resultData = JSON.toJSONString(outlineData36Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 37:
                 jsonObject = JSON.parseObject(data);
@@ -283,20 +302,26 @@ public class DependencyService {
                 }
                 break;
             case 38:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_38");
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData38Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData38Object.getJSONArray("CE107 测试设备").getJSONObject(2).put("数量", 2);
+                            outlineData38Object.getJSONArray("CE107 测试设备").getJSONObject(3).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData38Object.getJSONArray("CE107 测试设备").getJSONObject(2).put("数量", 3);
+                            outlineData38Object.getJSONArray("CE107 测试设备").getJSONObject(3).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData38Object.getJSONArray("CE107 测试设备").getJSONObject(2).put("数量", 4);
+                            outlineData38Object.getJSONArray("CE107 测试设备").getJSONObject(3).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData38Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 39:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devCS101 = devObject.getDevCs101();
                         String equipment = "CS101 测试设备";
@@ -304,16 +329,27 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_39");
                         resultData = generateLimitTwoPic2(resultData, devCS101, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData39Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(4).put("数量", 2);
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(5).put("数量", 2);
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(6).put("数量", 1);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(4).put("数量", 3);
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(5).put("数量", 3);
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(6).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(4).put("数量", 4);
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(5).put("数量", 4);
+                            outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(6).put("数量", 3);
+                        }
+                        resultData = JSON.toJSONString(outlineData39Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 40:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devCS102 = devObject.getDevCs102();
                         String equipment = "CS102 测试设备";
@@ -321,12 +357,22 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_40");
                         resultData = generateLimitText2(resultData, devCS102, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData40Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData40Object.getJSONArray("CS102 测试设备").getJSONObject(4).put("数量", 2);
+                            outlineData40Object.getJSONArray("CS102 测试设备").getJSONObject(5).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData40Object.getJSONArray("CS102 测试设备").getJSONObject(4).put("数量", 3);
+                            outlineData40Object.getJSONArray("CS102 测试设备").getJSONObject(5).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData40Object.getJSONArray("CS102 测试设备").getJSONObject(4).put("数量", 4);
+                            outlineData40Object.getJSONArray("CS102 测试设备").getJSONObject(5).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData40Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 41:
                 jsonObject = JSON.parseObject(data);
@@ -365,16 +411,27 @@ public class DependencyService {
                 }
                 break;
             case 44:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_44");
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData44Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(2).put("数量", 2);
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(3).put("数量", 2);
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(4).put("数量", 1);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(2).put("数量", 3);
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(3).put("数量", 3);
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(4).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(2).put("数量", 4);
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(3).put("数量", 4);
+                            outlineData44Object.getJSONArray("CS106 测试设备").getJSONObject(4).put("数量", 3);
+                        }
+                        resultData = JSON.toJSONString(outlineData44Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 45:
                 jsonObject = JSON.parseObject(data);
@@ -406,8 +463,6 @@ public class DependencyService {
                 }
                 break;
             case 47:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devCS114 = devObject.getDevCs114();
                         String equipment = "CS114 测试设备";
@@ -415,40 +470,64 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_47");
                         resultData = generateLimitPic2(resultData, devCS114, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData47Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(10).put("数量", 2);
+                            outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(11).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(10).put("数量", 3);
+                            outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(11).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(10).put("数量", 4);
+                            outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(11).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData47Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 48:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_48");
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData48Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(7).put("数量", 2);
+                            outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(8).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(7).put("数量", 3);
+                            outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(8).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(7).put("数量", 4);
+                            outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(8).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData48Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 49:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_49");
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData49Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData49Object.getJSONArray("CS116 测试设备").getJSONObject(8).put("数量", 2);
+                            outlineData49Object.getJSONArray("CS116 测试设备").getJSONObject(9).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData49Object.getJSONArray("CS116 测试设备").getJSONObject(8).put("数量", 3);
+                            outlineData49Object.getJSONArray("CS116 测试设备").getJSONObject(9).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData49Object.getJSONArray("CS116 测试设备").getJSONObject(8).put("数量", 4);
+                            outlineData49Object.getJSONArray("CS116 测试设备").getJSONObject(9).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData49Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
-                break;
+                    break;
             case 50:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devRE101 = devObject.getDevRe101();
                         String equipment = "RE101 测试设备";
@@ -456,16 +535,24 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_50");
                         resultData = generateLimitPic2(resultData, devRE101, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData50Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(3).put("数量", 2);
+                            outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(4).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(3).put("数量", 3);
+                            outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(4).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(3).put("数量", 4);
+                            outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(4).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData50Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 51:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devRE102 = devObject.getDevRe102();
                         String equipment = "RE102 测试设备";
@@ -473,16 +560,24 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_51");
                         resultData = generateLimitPic2(resultData, devRE102, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData51Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(6).put("数量", 2);
+                            outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(7).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(6).put("数量", 3);
+                            outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(7).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(6).put("数量", 4);
+                            outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(7).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData51Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 52:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devRE103 = devObject.getDevRe103();
                         String equipment = "RE103 测试设备";
@@ -490,33 +585,49 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_52");
                         resultData = generateLimitText2(resultData, devRE103, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData52Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData52Object.getJSONArray("RE103 测试设备").getJSONObject(9).put("数量", 2);
+                            outlineData52Object.getJSONArray("RE103 测试设备").getJSONObject(10).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData52Object.getJSONArray("RE103 测试设备").getJSONObject(9).put("数量", 3);
+                            outlineData52Object.getJSONArray("RE103 测试设备").getJSONObject(10).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData52Object.getJSONArray("RE103 测试设备").getJSONObject(9).put("数量", 4);
+                            outlineData52Object.getJSONArray("RE103 测试设备").getJSONObject(10).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData52Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 53:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devRS101 = devObject.getDevRs101();
                         String equipment = "RS101 测试设备";
-                        int nums[] = {0, 1, 2, 3, 4, 6};
+                        int nums[] = {0, 1, 2, 3, 4, 7};
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_53");
                         resultData = generateLimitPic2(resultData, devRS101, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData53Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(5).put("数量", 2);
+                            outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(6).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(5).put("数量", 3);
+                            outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(6).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(5).put("数量", 4);
+                            outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(6).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData53Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 54:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         devRS103 = devObject.getDevRs103();
                         String equipment = "RS103 测试设备";
@@ -524,24 +635,42 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_54");
                         resultData = generateLimitPic2(resultData, devRS103, equipment, nums, keyName);
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData54Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(4).put("数量", 2);
+                            outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(5).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(4).put("数量", 3);
+                            outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(5).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(4).put("数量", 4);
+                            outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(5).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData54Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 55:
-                jsonObject = JSON.parseObject(data);
-                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_55");
+                        //根据新建10 单相、三相拉选所填，确定相应测试设备数量
+                        JSONObject outlineData55Object = JSONObject.parseObject(resultData);
+                        if (phasePosition.equals("两相")) {
+                            outlineData55Object.getJSONArray("RS105 测试设备").getJSONObject(5).put("数量", 2);
+                            outlineData55Object.getJSONArray("RS105 测试设备").getJSONObject(6).put("数量", 2);
+                        } else if (phasePosition.equals("三相∆")) {
+                            outlineData55Object.getJSONArray("RS105 测试设备").getJSONObject(5).put("数量", 3);
+                            outlineData55Object.getJSONArray("RS105 测试设备").getJSONObject(6).put("数量", 3);
+                        } else if (phasePosition.equals("三相Y")) {
+                            outlineData55Object.getJSONArray("RS105 测试设备").getJSONObject(5).put("数量", 4);
+                            outlineData55Object.getJSONArray("RS105 测试设备").getJSONObject(6).put("数量", 4);
+                        }
+                        resultData = JSON.toJSONString(outlineData55Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    resultData = data;
-                }
                 break;
             case 56:
                 jsonObject = JSON.parseObject(data);

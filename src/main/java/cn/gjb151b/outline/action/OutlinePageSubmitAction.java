@@ -101,7 +101,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        //得到组合的filename
 //        String filename = uuid+imagesFileName;
         //图片存储的相对路径
-        String localPath = "src/main/webapp/statics/imgs";
+//        String localPath = "src/main/webapp/statics/imgs/";
+        String localPath = "d://gjb_outline//img//";
         //将照片copy到指定的相对路径下
 //        try{
 //            FileUtils.copyFile(images, new File(localPath, filename));
@@ -121,7 +122,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     jsonObject = JSON.parseObject(outlineData4);
                     List<String> pic1List = (List<String>)jsonObject.get("分系统/设备照片");
 //                    人工指定唯一图片名称,防止重复
-                    String filename = "分系统设备照片"+ (pic1List.size() + 1) +":"+imagesFileName;
+                    String filename = imagesFileName;
+//                    String filename = "分系统设备照片"+ (pic1List.size() + 1) +":"+imagesFileName;
                     //将照片copy到指定的相对路径下
                     try{
                         FileUtils.copyFile(images, new File(localPath, filename));
@@ -148,7 +150,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     jsonObject = JSON.parseObject(outlineData4);
                     List<String> pic2List = (List<String>)jsonObject.get("分系统/设备关系图");
                     //                    人工指定唯一图片名称,防止重复
-                    String filename = "分系统设备关系图" + (pic2List.size() + 1) + ":" + imagesFileName;
+                    String filename = imagesFileName;
+//                    String filename = "分系统设备关系图" + (pic2List.size() + 1) + ":" + imagesFileName;
                     //将照片copy到指定的相对路径下
                     try{
                         FileUtils.copyFile(images, new File(localPath, filename));
@@ -174,7 +177,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
     }
 
     public String deletePic(){
-        String pathsuff = "src/main/webapp/statics/imgs/";
+        String pathsuff = "d://gjb_outline//img//";
         List<String> pictureList = new ArrayList<>();
         if(pageNumber == 4){
             if(picNumber == 1){
@@ -216,8 +219,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
         }
 
         for(String filename : pictureList){
-            String localPath = "src/main/webapp";
-            File file = new File(localPath+"/"+filename);
+            String localPath = "d://gjb_outline//img//";
+            File file = new File(localPath+filename);
             file.delete();
         }
         response.setMessage("success");

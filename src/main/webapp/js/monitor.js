@@ -91,8 +91,7 @@ function monitor() {
                 break;
             case '12':
                 $("#editor_holder button").addClass("hidden");
-                console.log("发射测试参数"+editor.getEditor('root.发射测试参数').size());
-                if(editor.getEditor('root.发射测试参数')``) {
+                if(editor.getEditor('root.发射测试参数')) {
                     for (var i = 0; i < 6; i++) {
                         editor.getEditor('root.发射测试参数.' + i + '.频率范围').disable();
                         editor.getEditor('root.发射测试参数.' + i + '.6dB带宽(kHz)').disable();
@@ -465,8 +464,8 @@ function monitor() {
             case '37':
                 editor.getEditor('root.CE106 测试设备').disable();
                 $("div[data-schemapath='root.CE106 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CE106 测试设备][2][主要性能指标']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][5][主要性能指标']").prop('disabled', false);
+                $("textarea[name='root[CE106 测试设备][2][主要性能指标]']").prop('disabled', false);
+                $("textarea[name='root[CE106 测试设备][5][主要性能指标]']").prop('disabled', false);
                 $("textarea[name='root[CE106 测试设备][0][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE106 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE106 测试设备][2][备注]']").prop('disabled', false);
@@ -487,7 +486,7 @@ function monitor() {
             case '39':
                 editor.getEditor('root.CS101 测试设备').disable();
                 $("div[data-schemapath='root.CS101 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS101 测试设备][7][主要性能指标]']").prop('disabled', false);
+                $("textarea[name='root[CS101 测试设备][8][主要性能指标]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][0][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][2][备注]']").prop('disabled', false);
@@ -496,6 +495,7 @@ function monitor() {
                 $("textarea[name='root[CS101 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][7][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS101 测试设备][8][备注]']").prop('disabled', false);
                 break;
             case '40':
                 editor.getEditor('root.CS102 测试设备').disable();
@@ -505,6 +505,7 @@ function monitor() {
                 $("textarea[name='root[CS102 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS102 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS102 测试设备][4][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS102 测试设备][5][备注]']").prop('disabled', false);
                 break;
             case '41':
                 editor.getEditor('root.CS103 测试设备').disable();
@@ -534,13 +535,14 @@ function monitor() {
             case '44':
                 editor.getEditor('root.CS106 测试设备').disable();
                 $("div[data-schemapath='root.CS106 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS106 测试设备][5][主要性能指标]']").prop('disabled', false);
+                $("textarea[name='root[CS106 测试设备][6][主要性能指标]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][0][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][5][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS106 测试设备][6][备注]']").prop('disabled', false);
                 break;
             case '45':
                 editor.getEditor('root.CS109 测试设备').disable();
@@ -572,6 +574,7 @@ function monitor() {
                 $("textarea[name='root[CS114 测试设备][8][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS114 测试设备][9][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS114 测试设备][10][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS114 测试设备][11][备注]']").prop('disabled', false);
                 break;
             case '48':
                 editor.getEditor('root.CS115 测试设备').disable();
@@ -585,19 +588,21 @@ function monitor() {
                 $("textarea[name='root[CS115 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS115 测试设备][7][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS115 测试设备][8][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS115 测试设备][9][备注]']").prop('disabled', false);
                 break;
             case '49':
-                    editor.getEditor('root.CS116 测试设备').disable();
-                    $("div[data-schemapath='root.CS116 测试设备'] button").addClass("hidden");
-                    $("textarea[name='root[CS116 测试设备][0][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][1][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][2][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][3][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][4][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][5][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][6][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][7][备注]']").prop('disabled', false);
-                    $("textarea[name='root[CS116 测试设备][8][备注]']").prop('disabled', false);
+                editor.getEditor('root.CS116 测试设备').disable();
+                $("div[data-schemapath='root.CS116 测试设备'] button").addClass("hidden");
+                $("textarea[name='root[CS116 测试设备][0][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][1][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][2][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][3][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][4][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][5][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][6][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][7][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][8][备注]']").prop('disabled', false);
+                $("textarea[name='root[CS116 测试设备][9][备注]']").prop('disabled', false);
                 break;
             case '50':
                 editor.getEditor('root.RE101 测试设备').disable();
@@ -606,6 +611,7 @@ function monitor() {
                 $("textarea[name='root[RE101 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE101 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE101 测试设备][3][备注]']").prop('disabled', false);
+                $("textarea[name='root[RE101 测试设备][4][备注]']").prop('disabled', false);
                 break;
             case '51':
                 editor.getEditor('root.RE102 测试设备').disable();
@@ -617,6 +623,7 @@ function monitor() {
                 $("textarea[name='root[RE102 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE102 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE102 测试设备][6][备注]']").prop('disabled', false);
+                $("textarea[name='root[RE102 测试设备][7][备注]']").prop('disabled', false);
                 break;
             case '52':
                 editor.getEditor('root.RE103 测试设备').disable();
@@ -631,6 +638,8 @@ function monitor() {
                 $("textarea[name='root[RE103 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE103 测试设备][7][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE103 测试设备][8][备注]']").prop('disabled', false);
+                $("textarea[name='root[RE103 测试设备][9][备注]']").prop('disabled', false);
+                $("textarea[name='root[RE103 测试设备][10][备注]']").prop('disabled', false);
                 break;
             case '53':
                 editor.getEditor('root.RS101 测试设备').disable();
@@ -642,6 +651,7 @@ function monitor() {
                 $("textarea[name='root[RS101 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS101 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS101 测试设备][6][备注]']").prop('disabled', false);
+                $("textarea[name='root[RS101 测试设备][7][备注]']").prop('disabled', false);
                 break;
             case '54':
                 editor.getEditor('root.RS103 测试设备').disable();
@@ -651,6 +661,7 @@ function monitor() {
                 $("textarea[name='root[RS103 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS103 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS103 测试设备][4][备注]']").prop('disabled', false);
+                $("textarea[name='root[RS103 测试设备][5][备注]']").prop('disabled', false);
                 break;
             case '55':
                 editor.getEditor('root.RS105 测试设备').disable();
@@ -661,6 +672,7 @@ function monitor() {
                 $("textarea[name='root[RS105 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS105 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS105 测试设备][5][备注]']").prop('disabled', false);
+                $("textarea[name='root[RS105 测试设备][6][备注]']").prop('disabled', false);
                 break;
             // case '56':
             //     editor.getEditor('root').disable();

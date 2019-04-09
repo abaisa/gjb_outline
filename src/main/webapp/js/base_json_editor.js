@@ -91,15 +91,15 @@ function loadTargetPage(action) {
         success: function (data) {
             console.log("loadTargetPage ajax 请求成功");
             if (data.status == "success") {
-                console.log("data:"+data.data);
+                console.log("data:" + data.data);
                 var all_data = JSON.parse(data.data);
 
                 load_data = all_data.data;
                 load_schema = all_data.schema;
                 var load_page_id = all_data.page_id;
-                console.log("未json处理化的load_data"+load_data);
+                console.log("未json处理化的load_data" + load_data);
                 load_schema = JSON.parse(load_schema);
-                load_data = JSON.parse(load_data.replace(/\n/g,"\\\\n").replace(/\t/g,"\\\\t"));
+                load_data = JSON.parse(load_data.replace(/\n/g, "\\\\n").replace(/\t/g, "\\\\t"));
                 console.log("loadTargetPage data >>");
                 console.log(load_schema);
                 console.log(load_data);
@@ -127,6 +127,7 @@ function loadTargetPage(action) {
 
                 //设置当前页的监听事件
                 monitor();
+
             } else {
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
             }

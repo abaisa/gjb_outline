@@ -42,7 +42,7 @@ function submitSubsysOrEqpHead(subsysOrEqpData) {
         type: "post",
         url: "dependency/submitSubsysOrEqpHead",
         data: {
-            outlineId: 1,
+            outlineId: outlineId,
             subsysOrEqpData: JSON.stringify(subsysOrEqpData)
         },
         success: function (data) {
@@ -62,7 +62,7 @@ function getSubsysOrEqpHead() {
         type: "post",
         url: "dependency/getSubsysOrEqpHead",
         data: {
-            outlineId: 1
+            outlineId: outlineId
         },
         success: function (data) {
             test = data;
@@ -181,14 +181,16 @@ function downloadPic(){
                 var img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = "statics/imgs/"+pic1List[i];
+                // var url = "statics/imgs/"+pic1List[i];
+                var url = "/image/"+pic1List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
+                var number = i + 1;
 
                 $("#showPic1").append(img);
                 $("#showPic1").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-                $("#showPic1").append(pic1List[i]);
+                $("#showPic1").append("分系统/设备照片"+number+": "+pic1List[i]);
             }
 
         }
@@ -212,14 +214,16 @@ function downloadPic2(){
                 var  img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = "statics/imgs/"+pic2List[i];
+                // var url = "statics/imgs/"+pic2List[i];
+                var url = "/image/"+pic2List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
+                var number = i + 1;
 
                 $("#showPic2").append(img);
                 $("#showPic2").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-                $("#showPic2").append(pic2List[i]);
+                $("#showPic2").append("分系统/设备关系图"+number+": "+pic2List[i]);
             }
 
         }

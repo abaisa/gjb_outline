@@ -205,6 +205,8 @@
 
     // 填充页面意见框标题等内容
     adviceTitle(outlineStatus,Status);
+    monitor();
+
 
 
 

@@ -112,6 +112,32 @@ function monitor() {
                 }
                 break;
             case '14':
+                // $("select[name*='是否实施']").val("否");
+                // $("input[name='root[试验端口及被试品工作状态][0][工作状态][工作状态1][不实施理由]']").val('hhhh');
+                // var selectList = $("select[name*='是否实施']").children('option:selected').val();
+                // console.log("selectList:"+selectList);
+                page14 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page14 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page14 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page14 = false;
+                                    }else{
+                                        page14 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -130,6 +156,28 @@ function monitor() {
 
                 break;
             case '15':
+                page15 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page15 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page15 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page15 = false;
+                                    }else{
+                                        page15 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -144,6 +192,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '16':
+                page16 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page16 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page16 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page16 = false;
+                                    }else{
+                                        page16 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -158,6 +228,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '17':
+                page17 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page17 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page17 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page17 = false;
+                                    }else{
+                                        page17 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -173,6 +265,28 @@ function monitor() {
                 break;
 
             case '18':
+                page18 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page18 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page18 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page18 = false;
+                                    }else{
+                                        page18 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -187,6 +301,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '19':
+                page19 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page19 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page19 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page19 = false;
+                                    }else{
+                                        page19 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -211,6 +347,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '20':
+                page20 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page20 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page20 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page20 = false;
+                                    }else{
+                                        page20 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -225,6 +383,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '21':
+                page21 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page21 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page21 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page21 = false;
+                                    }else{
+                                        page21 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -239,6 +419,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '22':
+                page22 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page22 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page22 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page22 = false;
+                                    }else{
+                                        page22 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -254,6 +456,28 @@ function monitor() {
                 break;
 
             case '23':
+                page23 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page23 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page23 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page23 = false;
+                                    }else{
+                                        page23 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -268,6 +492,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '24':
+                page24 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page24 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page24 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page24 = false;
+                                    }else{
+                                        page24 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -285,6 +531,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break
             case '25':
+                page25 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page25 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page25 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page25 = false;
+                                    }else{
+                                        page25 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -297,6 +565,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '26':
+                page26 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page26 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page26 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page26 = false;
+                                    }else{
+                                        page26 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -319,6 +609,28 @@ function monitor() {
                 break;
 
             case '27':
+                page27 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page27 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page27 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page27 = false;
+                                    }else{
+                                        page27 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -340,6 +652,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '28':
+                page28 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page28 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page28 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page28 = false;
+                                    }else{
+                                        page28 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -361,6 +695,28 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '29':
+                page29 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page29 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page29 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page29 = false;
+                                    }else{
+                                        page29 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -373,6 +729,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '30':
+                page30 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page30 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page30 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page30 = false;
+                                    }else{
+                                        page30 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -387,6 +765,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '31':
+                page31 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page31 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page31 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page31 = false;
+                                    }else{
+                                        page31 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -399,6 +799,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '32':
+                page32 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page32 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page32 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page32 = false;
+                                    }else{
+                                        page32 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -411,6 +833,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '33':
+                page33 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page33 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page33 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page33 = false;
+                                    }else{
+                                        page33 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -425,6 +869,28 @@ function monitor() {
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '34':
+                page34 = false;
+                $("select[name*='是否实施']").on('change',
+                    function () {
+                        var selectName = $(this).children('option:selected').val();
+                        console.log("selectName:"+selectName);
+                        if(selectName == "是") {
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+                            page34 = false;
+                        }else{
+                            $(this).parent().parent().parent().next("div").children().children().children("input").val('');
+                            page34 = true;
+                            $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
+                                function () {
+                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                        page34 = false;
+                                    }else{
+                                        page34 = true;
+                                    }
+                                });
+                            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
+                        }
+                    });
                 editor.getEditor('root.试验项目').disable();
                 editor.getEditor('root.试验内容').disable();
                 editor.getEditor('root.限值').disable();
@@ -448,6 +914,12 @@ function monitor() {
                 $("textarea[name='root[CE101 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE101 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE101 测试设备][7][备注]']").prop('disabled', false);
+                // for (var i = 0; i < 8; i++) {
+                //     var limitName = 'root.CE101 测试设备.' + i + '.限值';
+                //     editor.getEditor(limitName).hide();
+                // }
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '36':
                 editor.getEditor('root.CE102 测试设备').disable();
@@ -732,148 +1204,151 @@ function beforeSubmit() {
             }
             break;
         case '14':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            // $("select[name*='是否实施']").on('change',
+            //     function () {
+            //         $(this).parent().parent().parent().next("div").children().children().children("input").val('无');
+            //     });
+            // $("label:contains('是否实施')").on('change',
+            //     function () {
+            //         $(this).parent().children("select").val('无');
+            //     });
+
+
+            // var errors = editor.validate();
+            // if(errors.length > 0) {
+            //     $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+            //     return false;
+            // }
+            if(page14){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
+
             break;
         case '15':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page15){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '16':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page16){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '17':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            // if($("input[name*='理由']").length==0){
+            //     console.log("可以找到那个等于0的");
+            // }
+            // var errors = editor.validate();
+            // if(errors.length > 0) {
+            //     $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
+            //     return false;
+            // }
+            if(page17){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '18':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page18){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '19':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page19){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '20':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page20){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '21':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page21){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '22':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page22){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '23':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page23){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '24':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page24){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '25':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page25){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '26':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page26){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '27':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page27){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '28':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page28){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '29':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page29){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '30':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page30){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '31':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page31){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '32':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page32){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '33':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page33){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }
             break;
         case '34':
-            var errors = editor.validate();
-            if(errors.length > 0) {
+            if(page34){
                 $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '不实施理由项不能为空，若无理由请填无'});
                 return false;
             }

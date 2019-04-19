@@ -1305,10 +1305,11 @@ public class DependencyService {
             workLaunch.put("title","工作状态"+num);
             ifAction.put("type", "string");
             ifAction.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+            ifAction.put("default","是");
             actionReason.put("type", "string");
-            actionReason.put("minLength", 1);
+            actionReason.put("default", "无");
             workProperties.put("工作状态描述", workDefault);
-            workProperties.put("是否实施", ifAction);
+            workProperties.put("状态是否实施", ifAction);
             workProperties.put("不实施理由", actionReason);
             workLaunch.put("properties", workProperties);
             allWorkLaunch.put("工作状态"+num, workLaunch);
@@ -1329,10 +1330,11 @@ public class DependencyService {
                 workLaunchConnected.put("title","工作状态"+numConnected);
                 ifActionConnected.put("type", "string");
                 ifActionConnected.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+                ifActionConnected.put("default","是");
                 actionReasonConnected.put("type", "string");
-                actionReasonConnected.put("minLength", 1);
+                actionReasonConnected.put("default", "无");
                 workPropertiesConnected.put("工作状态描述", workDefaultConnected);
-                workPropertiesConnected.put("是否实施", ifActionConnected);
+                workPropertiesConnected.put("状态是否实施", ifActionConnected);
                 workPropertiesConnected.put("不实施理由", actionReasonConnected);
                 workLaunchConnected.put("properties", workPropertiesConnected);
                 allWorkLaunchConnected.put("工作状态"+numConnected, workLaunchConnected);

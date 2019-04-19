@@ -66,12 +66,19 @@
     <result column="dev_advice_proofread" jdbcType="LONGVARCHAR" property="devAdviceProofread" />
     <result column="dev_advice_audit" jdbcType="LONGVARCHAR" property="devAdviceAudit" />
     <result column="dev_advice_authorize" jdbcType="LONGVARCHAR" property="devAdviceAuthorize" />
+    <result column="project_list" jdbcType="LONGVARCHAR" property="projectList"/>
   </resultMap>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT *
     FROM manage_sys_develop
     WHERE dev_itemid = #{devItemId}
+  </select>
+
+  <select id="selectColByDevItemId" parameterType="java.lang.String" resultType="string">
+    SELECT ${colName}
+    FROM manage_sys_develop
+    WHERE dev_itemid = #{devItemId};
   </select>
 
   <select id="findAllItem" statementType="STATEMENT" resultMap="BaseResultMap">

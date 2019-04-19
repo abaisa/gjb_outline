@@ -932,6 +932,8 @@ function monitor() {
                 $("textarea[name='root[CE102 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE102 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE102 测试设备][7][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '37':
                 editor.getEditor('root.CE106 测试设备').disable();
@@ -946,6 +948,8 @@ function monitor() {
                 $("textarea[name='root[CE106 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE106 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE106 测试设备][7][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '38':
                 editor.getEditor('root.CE107 测试设备').disable();
@@ -954,6 +958,8 @@ function monitor() {
                 $("textarea[name='root[CE107 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE107 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[CE107 测试设备][3][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '39':
                 editor.getEditor('root.CS101 测试设备').disable();
@@ -968,6 +974,8 @@ function monitor() {
                 $("textarea[name='root[CS101 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][7][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS101 测试设备][8][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '40':
                 editor.getEditor('root.CS102 测试设备').disable();
@@ -978,6 +986,8 @@ function monitor() {
                 $("textarea[name='root[CS102 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS102 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS102 测试设备][5][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '41':
                 editor.getEditor('root.CS103 测试设备').disable();
@@ -987,6 +997,8 @@ function monitor() {
                 $("textarea[name='root[CS103 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS103 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS103 测试设备][4][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '42':
                 editor.getEditor('root.CS104 测试设备').disable();
@@ -995,6 +1007,8 @@ function monitor() {
                 $("textarea[name='root[CS104 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS104 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS104 测试设备][3][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '43':
                 editor.getEditor('root.CS105 测试设备').disable();
@@ -1003,6 +1017,8 @@ function monitor() {
                 $("textarea[name='root[CS105 测试设备][1][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS105 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS105 测试设备][3][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '44':
                 editor.getEditor('root.CS106 测试设备').disable();
@@ -1015,6 +1031,8 @@ function monitor() {
                 $("textarea[name='root[CS106 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS106 测试设备][6][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '45':
                 editor.getEditor('root.CS109 测试设备').disable();
@@ -1026,11 +1044,15 @@ function monitor() {
                 $("textarea[name='root[CS109 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS109 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS109 测试设备][5][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '46':
                 editor.getEditor('root.CS112 测试设备').disable();
                 $("div[data-schemapath='root.CS112 测试设备'] button").addClass("hidden");
                 $("textarea[name='root[CS112 测试设备][0][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '47':
                 editor.getEditor('root.CS114 测试设备').disable();
@@ -1047,6 +1069,8 @@ function monitor() {
                 $("textarea[name='root[CS114 测试设备][9][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS114 测试设备][10][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS114 测试设备][11][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '48':
                 editor.getEditor('root.CS115 测试设备').disable();
@@ -1061,6 +1085,8 @@ function monitor() {
                 $("textarea[name='root[CS115 测试设备][7][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS115 测试设备][8][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS115 测试设备][9][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '49':
                 editor.getEditor('root.CS116 测试设备').disable();
@@ -1075,6 +1101,8 @@ function monitor() {
                 $("textarea[name='root[CS116 测试设备][7][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS116 测试设备][8][备注]']").prop('disabled', false);
                 $("textarea[name='root[CS116 测试设备][9][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '50':
                 editor.getEditor('root.RE101 测试设备').disable();
@@ -1084,6 +1112,8 @@ function monitor() {
                 $("textarea[name='root[RE101 测试设备][2][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE101 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE101 测试设备][4][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '51':
                 editor.getEditor('root.RE102 测试设备').disable();
@@ -1096,6 +1126,8 @@ function monitor() {
                 $("textarea[name='root[RE102 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE102 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE102 测试设备][7][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '52':
                 editor.getEditor('root.RE103 测试设备').disable();
@@ -1112,6 +1144,8 @@ function monitor() {
                 $("textarea[name='root[RE103 测试设备][8][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE103 测试设备][9][备注]']").prop('disabled', false);
                 $("textarea[name='root[RE103 测试设备][10][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '53':
                 editor.getEditor('root.RS101 测试设备').disable();
@@ -1124,6 +1158,8 @@ function monitor() {
                 $("textarea[name='root[RS101 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS101 测试设备][6][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS101 测试设备][7][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '54':
                 editor.getEditor('root.RS103 测试设备').disable();
@@ -1134,6 +1170,8 @@ function monitor() {
                 $("textarea[name='root[RS103 测试设备][3][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS103 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS103 测试设备][5][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             case '55':
                 editor.getEditor('root.RS105 测试设备').disable();
@@ -1145,12 +1183,15 @@ function monitor() {
                 $("textarea[name='root[RS105 测试设备][4][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS105 测试设备][5][备注]']").prop('disabled', false);
                 $("textarea[name='root[RS105 测试设备][6][备注]']").prop('disabled', false);
+                $("textarea[name*='限值']").addClass("hidden");
+                $("th:contains('限值')").text("");
                 break;
             // case '56':
             //     editor.getEditor('root').disable();
             case '57':
-                $("#project_submit").addClass("hidden");
-                $("#next_page").removeClass("hidden");
+                // $("#project_submit").addClass("hidden");
+                // $("#next_page").removeClass("hidden");
+                break;
 
 
 
@@ -1160,7 +1201,21 @@ function monitor() {
                 // editor.getEditor('root').disable();
                 break;
             case '58':
+                // editor.getEditor('root.试验项目').disable();
                     // $("#editor_holder button").addClass("hidden");
+                // if (Status != 1) {
+                //     if (outlineStatus == 0 || outlineStatus == 4) {
+                //         $("#project_submit").removeClass("hidden");
+                //         $("#next_page").addClass("hidden");
+                //         console.log("removeClass");
+                //     }
+                // }
+                $("input[name='root[试验项目][0][试验项目序号]']").val(1);
+                $("input[name='root[试验项目][1][试验项目序号]']").val(2);
+                $("#project_submit").addClass("hidden");
+                $("#next_page").removeClass("hidden");
+                break;
+            case '59':
                 if (Status != 1) {
                     if (outlineStatus == 0 || outlineStatus == 4) {
                         $("#project_submit").removeClass("hidden");

@@ -69,7 +69,8 @@ outlineStatus为项目自身状态同数据库同名含义
 审核通过时，项目状态发生改变：
 校对/审核通过时，outlineStatus均加1；批准通过时，outlineStatus由3变为5
 */
-function  passResult(outlineStatus, result, userName){
+function
+passResult(outlineStatus, result, userName){
     if(outlineStatus == 0){
         turnPage(1);
     }

@@ -3,6 +3,10 @@ package cn.gjb151b.outline.service;
 import cn.gjb151b.outline.Constants.DbColnameEnums;
 import cn.gjb151b.outline.Constants.ExceptionEnums;
 import cn.gjb151b.outline.Constants.PageActionEnums;
+import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
+import cn.gjb151b.outline.model.ManageSysDevelop;
+import cn.gjb151b.outline.model.ManageSysOutline;
+import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
@@ -26,15 +30,35 @@ public class CoreService {
     }
 
     @Autowired
+    private ManageSysOutlineMapper manageSysOutlineMapper;
+
+    @Autowired
+    private ManageSysDevelopMapper manageSysDevelopMapper;
+
+    @Autowired
     private DependencyService dependencyService;
 
     public String getResponseData(int outlineID, int sourcePageNumber, int pageAction) throws Exception {
+        //从研制要求系统中获取可用项目的列表 projectList
+        ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineID);
+        String devItemId = outline.getOutlineDevItemid();
+        ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
+        String projectList = develop.getProjectList();
+//        String projectList = manageSysDevelopMapper.selectColByDevItemId("project_list", devItemId);
         // 获取下一页页码
         int pageNumber;
+//        if (pageAction == PageActionEnums.NEXT.getValue()) {
+//            pageNumber = PageDispatcher.getInstance().next(sourcePageNumber);
+//        } else if (pageAction == PageActionEnums.PREVIOUS.getValue()) {
+//            pageNumber = PageDispatcher.getInstance().previous(sourcePageNumber);
+//        } else {
+//            throw new ServiceException(ExceptionEnums.PARAM_PAGE_ID_ERR);
+//        }
+        //这里判断特殊下一页 主要是依据研制要求中的可用项目来 项目不可用则页面跳过
         if (pageAction == PageActionEnums.NEXT.getValue()) {
-            pageNumber = PageDispatcher.getInstance().next(sourcePageNumber);
+            pageNumber = PageDispatcher.getInstance().nextPageNumber(projectList, sourcePageNumber);
         } else if (pageAction == PageActionEnums.PREVIOUS.getValue()) {
-            pageNumber = PageDispatcher.getInstance().previous(sourcePageNumber);
+            pageNumber = PageDispatcher.getInstance().previousPageNumber(projectList, sourcePageNumber);
         } else {
             throw new ServiceException(ExceptionEnums.PARAM_PAGE_ID_ERR);
         }

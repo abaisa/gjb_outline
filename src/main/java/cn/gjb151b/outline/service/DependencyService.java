@@ -7,6 +7,7 @@ import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.model.ManageSysDevelop;
 import cn.gjb151b.outline.model.ManageSysOutline;
 import cn.gjb151b.outline.outlineDao.ManageSysSchemaMapper;
+import cn.gjb151b.outline.utils.DoubleIntoInteger;
 import cn.gjb151b.outline.utils.JsonByPositon;
 import cn.gjb151b.outline.utils.ServiceException;
 import cn.gjb151b.outline.utils.StrInsertString;
@@ -38,6 +39,8 @@ import static cn.gjb151b.outline.service.FreqDependency.grnerateData;
 public class DependencyService {
     @Autowired
     private DBService dbService;
+    @Autowired
+    private StandardLimitValueService standardLimitValueService;
 
     @Resource
     private ManageSysOutlineMapper manageSysOutlineMapper;
@@ -59,7 +62,20 @@ public class DependencyService {
         ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         String outlineData10 = outline.getOutlineData10();
         JSONObject outlineData1Object = JSONObject.parseObject(outlineData10);
-        String phasePosition = (String)outlineData1Object.getJSONArray("电源端口").getJSONObject(0).get("两相/三相");
+        String phasePosition = "两相";
+        if (outlineData1Object.size() != 0) {
+            List<String> phasePositionList = new ArrayList<>();
+            for (int i = 0; i < outlineData1Object.getJSONArray("电源端口").size(); i++) {
+                phasePositionList.add((String)outlineData1Object.getJSONArray("电源端口").getJSONObject(i).get("两相/三相"));
+            }
+            if (phasePositionList.contains("三相Y")) {
+                phasePosition = "三相Y";
+            } else if (phasePositionList.contains("三相∆")) {
+                phasePosition = "三相∆";
+            } else if (phasePositionList.contains("两相")) {
+                phasePosition = "两相";
+            }
+        }
 
 
         switch (pageNumber) {
@@ -234,6 +250,8 @@ public class DependencyService {
                 System.out.println("resultData:"+resultData);
                 break;
             case 35:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try{
                         resultData = dbService.fetchDefaultData(1, "outline_data_35");
                         devCE101 = devObject.getDevCe101();
@@ -253,13 +271,26 @@ public class DependencyService {
                             outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(6).put("数量", 4);
                             outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(7).put("数量", 4);
                         }
+                        //根据manage_sys_develop中项目对应测试项目所填写的图片，确定限值的当前范围
+                        JSONObject devCE101JsonObject = JSONObject.parseObject(devCE101);
+                        JSONArray limitValueJsonArray = devCE101JsonObject.getJSONArray("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        for (int i = 0; i < limitValueJsonArray.size(); i++) {
+                            imgNumList.add((String)limitValueJsonArray.getJSONObject(i).get("pic"));
+                        }
+                        int[] positionNums = {0, 1, 2, 3, 6};
+                        outlineData35Object = putLimitRangeValue(outlineData35Object, positionNums, imgNumList, "CE101 测试设备");
                         resultData = JSON.toJSONString(outlineData35Object);
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 36:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_36");
                         devCE102 = devObject.getDevCe102();
@@ -279,10 +310,23 @@ public class DependencyService {
                             outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(4).put("数量", 4);
                             outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(5).put("数量", 3);
                         }
+                        //根据manage_sys_develop中项目对应测试项目所填写的图片，确定限值的当前范围
+                        JSONObject devCE102JsonObject = JSONObject.parseObject(devCE102);
+                        JSONObject limitValueJsonObject = devCE102JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 1, 3};
+                        outlineData36Object = putLimitRangeValue(outlineData36Object, positionNums, imgNumList, "CE102 测试设备");
+                        String Dimmer20db = (String)outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(3).get("主要性能指标");
+                        Dimmer20db = Dimmer20db + "\n" + "阻抗：" + "50Ω";
+                        outlineData36Object.getJSONArray("CE102 测试设备").getJSONObject(3).put("主要性能指标", Dimmer20db);
                         resultData = JSON.toJSONString(outlineData36Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 37:
                 jsonObject = JSON.parseObject(data);
@@ -302,6 +346,8 @@ public class DependencyService {
                 }
                 break;
             case 38:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_38");
                         //根据新建10 单相、三相拉选所填，确定相应测试设备数量
@@ -320,8 +366,13 @@ public class DependencyService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 39:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devCS101 = devObject.getDevCs101();
                         String equipment = "CS101 测试设备";
@@ -344,12 +395,34 @@ public class DependencyService {
                             outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(5).put("数量", 4);
                             outlineData39Object.getJSONArray("CS101 测试设备").getJSONObject(6).put("数量", 3);
                         }
+                        JSONObject devCS101JsonObject = JSONObject.parseObject(devCS101);
+                        JSONArray devCS101JsonArray = devCS101JsonObject.getJSONArray("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        for (int i = 0; i < devCS101JsonArray.size(); i++) {
+                            if (devCS101JsonArray.getJSONObject(i).containsKey("pic_one")) {
+                                imgNumList.add((String)devCS101JsonArray.getJSONObject(i).get("pic_one"));
+                            }
+                            if (devCS101JsonArray.getJSONObject(i).containsKey("pic_two")) {
+                                imgNumList.add((String)devCS101JsonArray.getJSONObject(i).get("pic_two"));
+                            }
+                            if (devCS101JsonArray.getJSONObject(i).containsKey("pic_three")) {
+                                imgNumList.add((String)devCS101JsonArray.getJSONObject(i).get("pic_three"));
+                            }
+
+                        }
+                        int[] positionNums = {0, 1, 3};
+                        outlineData39Object = putLimitRangeValue(outlineData39Object, positionNums, imgNumList, "CS101 测试设备");
                         resultData = JSON.toJSONString(outlineData39Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 40:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devCS102 = devObject.getDevCs102();
                         String equipment = "CS102 测试设备";
@@ -373,14 +446,22 @@ public class DependencyService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 41:
                 jsonObject = JSON.parseObject(data);
                 if (jsonObject.size() == 0) {
-                    try {
-                        resultData = dbService.fetchDefaultData(1, "outline_data_41");
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    jsonObject = JSON.parseObject(data);
+                    if (jsonObject.size() == 0) {
+                        try {
+                            resultData = dbService.fetchDefaultData(1, "outline_data_41");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        resultData = data;
                     }
                 } else {
                     resultData = data;
@@ -411,6 +492,8 @@ public class DependencyService {
                 }
                 break;
             case 44:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_44");
                         //根据新建10 单相、三相拉选所填，确定相应测试设备数量
@@ -432,6 +515,9 @@ public class DependencyService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 45:
                 jsonObject = JSON.parseObject(data);
@@ -443,6 +529,15 @@ public class DependencyService {
                         String keyName = "限值";
                         resultData = dbService.fetchDefaultData(1, "outline_data_45");
                         resultData = generateLimitPic2(resultData, devCS109, equipment, nums, keyName);
+                        JSONObject outlineData45Object = JSONObject.parseObject(resultData);
+                        JSONObject devCS109JsonObject = JSONObject.parseObject(devCS109);
+                        JSONObject limitValueJsonObject = devCS109JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 1, 2, 3};
+                        outlineData45Object = putLimitRangeValue(outlineData45Object, positionNums, imgNumList, "CS109 测试设备");
+                        resultData = JSON.toJSONString(outlineData45Object);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -463,6 +558,8 @@ public class DependencyService {
                 }
                 break;
             case 47:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devCS114 = devObject.getDevCs114();
                         String equipment = "CS114 测试设备";
@@ -482,12 +579,23 @@ public class DependencyService {
                             outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(10).put("数量", 4);
                             outlineData47Object.getJSONArray("CS114 测试设备").getJSONObject(11).put("数量", 4);
                         }
+                        JSONObject devCS114JsonObject = JSONObject.parseObject(devCS114);
+                        JSONObject limitValueJsonObject = devCS114JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 1, 2, 3, 5, 6, 7, 8, 9};
+                        outlineData47Object = putLimitRangeValue(outlineData47Object, positionNums, imgNumList, "CS114 测试设备");
                         resultData = JSON.toJSONString(outlineData47Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 48:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_48");
                         //根据新建10 单相、三相拉选所填，确定相应测试设备数量
@@ -502,12 +610,24 @@ public class DependencyService {
                             outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(7).put("数量", 4);
                             outlineData48Object.getJSONArray("CS115 测试设备").getJSONObject(8).put("数量", 4);
                         }
+//                        devCS115 = devObject.getDevCs115();
+//                        JSONObject devCS115JsonObject = JSONObject.parseObject(devCS115);
+//                        JSONObject limitValueJsonObject = devCS115JsonObject.getJSONObject("limit_value");
+//                        List<String> imgNumList = new ArrayList<>();
+//                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+//                        int[] positionNums = {1, 2, 5};
+//                        outlineData48Object = putLimitRangeValue(outlineData48Object, positionNums, imgNumList, "CS115 测试设备");
                         resultData = JSON.toJSONString(outlineData48Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 49:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_49");
                         //根据新建10 单相、三相拉选所填，确定相应测试设备数量
@@ -526,8 +646,13 @@ public class DependencyService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                     break;
             case 50:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devRE101 = devObject.getDevRe101();
                         String equipment = "RE101 测试设备";
@@ -547,12 +672,24 @@ public class DependencyService {
                             outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(3).put("数量", 4);
                             outlineData50Object.getJSONArray("RE101 测试设备").getJSONObject(4).put("数量", 4);
                         }
+                        devRE101 = devObject.getDevRe101();
+                        JSONObject devCS115JsonObject = JSONObject.parseObject(devRE101);
+                        JSONObject limitValueJsonObject = devCS115JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 1, 2};
+                        outlineData50Object = putLimitRangeValue(outlineData50Object, positionNums, imgNumList, "RE101 测试设备");
                         resultData = JSON.toJSONString(outlineData50Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 51:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devRE102 = devObject.getDevRe102();
                         String equipment = "RE102 测试设备";
@@ -572,12 +709,24 @@ public class DependencyService {
                             outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(6).put("数量", 4);
                             outlineData51Object.getJSONArray("RE102 测试设备").getJSONObject(7).put("数量", 4);
                         }
+                        devRE102 = devObject.getDevRe102();
+                        JSONObject devRE102JsonObject = JSONObject.parseObject(devRE102);
+                        JSONObject limitValueJsonObject = devRE102JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 5};
+                        outlineData51Object = putLimitRangeValue(outlineData51Object, positionNums, imgNumList, "RE102 测试设备");
                         resultData = JSON.toJSONString(outlineData51Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 52:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devRE103 = devObject.getDevRe103();
                         String equipment = "RE103 测试设备";
@@ -601,8 +750,13 @@ public class DependencyService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 53:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devRS101 = devObject.getDevRs101();
                         String equipment = "RS101 测试设备";
@@ -622,12 +776,24 @@ public class DependencyService {
                             outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(5).put("数量", 4);
                             outlineData53Object.getJSONArray("RS101 测试设备").getJSONObject(6).put("数量", 4);
                         }
+                        devRS101 = devObject.getDevRs101();
+                        JSONObject devRS101JsonObject = JSONObject.parseObject(devRS101);
+                        JSONObject limitValueJsonObject = devRS101JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 1, 2, 3, 4, 7};
+                        outlineData53Object = putLimitRangeValue(outlineData53Object, positionNums, imgNumList, "RS101 测试设备");
                         resultData = JSON.toJSONString(outlineData53Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 54:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         devRS103 = devObject.getDevRs103();
                         String equipment = "RS103 测试设备";
@@ -647,12 +813,24 @@ public class DependencyService {
                             outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(4).put("数量", 4);
                             outlineData54Object.getJSONArray("RS103 测试设备").getJSONObject(5).put("数量", 4);
                         }
+                        devRS103 = devObject.getDevRs103();
+                        JSONObject devRE103JsonObject = JSONObject.parseObject(devRS103);
+                        JSONObject limitValueJsonObject = devRE103JsonObject.getJSONObject("limit_value");
+                        List<String> imgNumList = new ArrayList<>();
+                        imgNumList.add((String)limitValueJsonObject.get("pic"));
+                        int[] positionNums = {0, 1, 2, 3};
+                        outlineData54Object = putLimitRangeValue(outlineData54Object, positionNums, imgNumList, "RS103 测试设备");
                         resultData = JSON.toJSONString(outlineData54Object);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 55:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
                     try {
                         resultData = dbService.fetchDefaultData(1, "outline_data_55");
                         //根据新建10 单相、三相拉选所填，确定相应测试设备数量
@@ -671,6 +849,9 @@ public class DependencyService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    resultData = data;
+                }
                 break;
             case 56:
                 jsonObject = JSON.parseObject(data);
@@ -1271,6 +1452,16 @@ public class DependencyService {
                     jsonProperties.remove("互联端口");
                 }
                 break;
+            case 58:
+                ManageSysOutline outline58 = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+                String devItemId58 = outline58.getOutlineDevItemid();
+                ManageSysDevelop develop58  = manageSysDevelopMapper.selectByPrimaryKey(devItemId58);
+                String projectList = develop58.getProjectList();
+                String outlineSchema58 = manageSysSchemaMapper.selectCol(1, "outline_schema_58");
+                JSONObject outlineSchema58Object = JSON.parseObject(outlineSchema58, Feature.OrderedField);
+                outlineSchema58Object.getJSONObject("properties").getJSONObject("试验项目").getJSONObject("items").getJSONObject("properties").getJSONObject("试验项目名称").put("enum", (JSONArray)JSON.parse(projectList));
+                jsonSchema = outlineSchema58Object;
+                break;
             default:
                 break;
         }
@@ -1473,5 +1664,16 @@ public class DependencyService {
         }
         System.out.println("port:"+port);
         return port;
+    }
+    //设置新建35-58页的限值范围值
+    public JSONObject putLimitRangeValue(JSONObject jsonObject, int[] positionNums, List<String> imgNumList, String equipName) {
+        double[] limitValueRange;
+        limitValueRange = standardLimitValueService.getImgDetails(imgNumList);
+        String[] limitValue = DoubleIntoInteger.doubleIntoInteger(limitValueRange);
+        String putLimitValueRes = "频率范围：" + "\n" + limitValue[0] + "Hz" + "~" +  limitValue[1] + "Hz";
+        for (int position : positionNums) {
+            jsonObject.getJSONArray(equipName).getJSONObject(position).put("主要性能指标", putLimitValueRes);
+        }
+        return jsonObject;
     }
 }

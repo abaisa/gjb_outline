@@ -677,8 +677,9 @@ function monitor() {
             // case '56':
             //     editor.getEditor('root').disable();
             case '57':
-                $("#project_submit").addClass("hidden");
-                $("#next_page").removeClass("hidden");
+                // $("#project_submit").addClass("hidden");
+                // $("#next_page").removeClass("hidden");
+                break;
 
 
 
@@ -688,7 +689,21 @@ function monitor() {
                 // editor.getEditor('root').disable();
                 break;
             case '58':
+                // editor.getEditor('root.试验项目').disable();
                     // $("#editor_holder button").addClass("hidden");
+                // if (Status != 1) {
+                //     if (outlineStatus == 0 || outlineStatus == 4) {
+                //         $("#project_submit").removeClass("hidden");
+                //         $("#next_page").addClass("hidden");
+                //         console.log("removeClass");
+                //     }
+                // }
+                $("input[name='root[试验项目][0][试验项目序号]']").val(1);
+                $("input[name='root[试验项目][1][试验项目序号]']").val(2);
+                $("#project_submit").addClass("hidden");
+                $("#next_page").removeClass("hidden");
+                break;
+            case '59':
                 if (Status != 1) {
                     if (outlineStatus == 0 || outlineStatus == 4) {
                         $("#project_submit").removeClass("hidden");

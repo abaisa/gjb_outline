@@ -15,4 +15,6 @@ public interface ManageSysDevelopMapper {
     String selectColByName(@Param("colName") String colName, @Param("devName") String devName);
 
     Integer selectDevIdByName(@Param("devName") String denName);
+
+    String selectColByDevItemId(@Param("colName") String colName, @Param("devItemId") String devItemId);
 }

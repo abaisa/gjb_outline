@@ -149,6 +149,26 @@ public class DependencyService {
             case 1005:
                 resultData = grnerateData(devObject, true, false);
                 break;
+            case 13:
+                String outlineData11 = manageSysOutlineMapper.selectCol(outlineId, "outline_data_11");
+                JSONArray outlineData11JsonArray = JSON.parseObject(outlineData11).getJSONArray("敏感度判据及检测方法");
+                jsonObject = JSON.parseObject(data);
+                if (outlineData11JsonArray != null && outlineData11JsonArray.size() > 0) {
+                    String stopTime = "";
+                    for (int i = 0; i < outlineData11JsonArray.size(); i++) {
+                        stopTime = stopTime + String.valueOf((int)outlineData11JsonArray.getJSONObject(i).get("驻留时间(s)")) + "s" +  "、";
+                    }
+                    stopTime = stopTime.substring(0, stopTime.length() - 1);
+                    JSONArray outlineData13JsonArray = jsonObject.getJSONArray("敏感度测试参数");
+                    if (outlineData13JsonArray != null && outlineData13JsonArray.size() > 0) {
+                        for (int i = 0; i < outlineData13JsonArray.size(); i++) {
+                            outlineData13JsonArray.getJSONObject(i).put("驻留时间", stopTime);
+                        }
+                        jsonObject.put("敏感度测试参数", outlineData13JsonArray);
+                    }
+                }
+                resultData = JSON.toJSONString(jsonObject);
+                break;
             case 14:
 //                jsonObject = JSON.parseObject(data);
                 String devCE101 = devObject.getDevCe101();
@@ -175,8 +195,8 @@ public class DependencyService {
                 break;
             case 16:
                 String devCE106 = devObject.getDevCe106();
-                resultData = generateAntennaData(devObject,data);
-                resultData = generateLimitText(resultData, devCE106);
+//                resultData = generateAntennaData(devObject,data);
+                resultData = generateLimitText(data, devCE106);
                 break;
             case 17:
                 String devCE107 = devObject.getDevCe107();
@@ -191,13 +211,16 @@ public class DependencyService {
                 resultData = generateLimitText(data, devCS102);
                 break;
             case 20:
-                resultData = generateAntennaData(devObject,data);
+//                resultData = generateAntennaData(devObject,data);
+                resultData = data;
                 break;
             case 21:
-                resultData = generateAntennaData(devObject,data);
+//                resultData = generateAntennaData(devObject,data);
+                resultData = data;
                 break;
             case 22:
-                resultData = generateAntennaData(devObject,data);
+//                resultData = generateAntennaData(devObject,data);
+                resultData = data;
                 break;
             case 23:
                 String devCS106 = devObject.getDevCs106();
@@ -902,6 +925,8 @@ public class DependencyService {
                 }
                 break;
             case 59:
+                String outlineStandardData59 = manageSysSchemaMapper.selectCol(1, "outline_data_59");
+                JSONObject outlineStandardData59Object = JSON.parseObject(outlineStandardData59);
                 jsonObject = JSON.parseObject(data);
                 if (jsonObject.size() == 0) {
                     try {
@@ -916,6 +941,99 @@ public class DependencyService {
                 } else {
                     resultData = data;
                 }
+                jsonObject = JSON.parseObject(resultData);
+                JSONArray cutAndDeflectArray = new JSONArray();
+                JSONObject standardCutObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(0);
+                JSONObject standardDeflectObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(1);
+                String outlineData14To34 = "";
+                String standardDeflect = "";
+                String standardDeflectReason = "";
+                ArrayList<String> projectList = new ArrayList<>();
+                projectList.add("CE101");
+                projectList.add("CE102");
+                projectList.add("CE106");
+                projectList.add("CE107");
+                projectList.add("CS101");
+                projectList.add("CS102");
+                projectList.add("CS103");
+                projectList.add("CS104");
+                projectList.add("CS105");
+                projectList.add("CS106");
+                projectList.add("CS109");
+                projectList.add("CS112");
+                projectList.add("CS114");
+                projectList.add("CS115");
+                projectList.add("CS116");
+                projectList.add("RE101");
+                projectList.add("RE102");
+                projectList.add("RE103");
+                projectList.add("RS101");
+                projectList.add("RS103");
+                projectList.add("RS105");
+                //添加每个项目的标准偏离
+                for (int i = 14; i <= 34; i++) {
+                    String projectName = projectList.get(i - 14);
+                    String colName = "outline_data_" + i;
+                    outlineData14To34 = manageSysOutlineMapper.selectCol(outlineId, colName);
+                    JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
+                    if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
+                        JSONArray testPortAndWorkStatusArray;
+                        if (i >= 26 && i <= 28) {
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("电源端口");
+                        } else {
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
+                        }
+                        for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                            JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                            if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                    int number = j + 1;
+                                    standardDeflect = projectName + "试验端口" + number + "不实施";
+                                    standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                    newJsonObject.put("内容", standardDeflect);
+                                    newJsonObject.put("理由", standardDeflectReason);
+                                    cutAndDeflectArray.add(newJsonObject);
+                                }
+                            }
+                            if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                for (int k = 0; k < workStatusObject.size(); k++) {
+                                    String workStatusKey = "工作状态" + (k + 1);
+                                    JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                    if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                        int portNumber = j + 1;
+                                        int workStatusNumber = k + 1;
+                                        standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                        standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (outlineData14To34Object.containsKey("项目试验图")) {
+                        standardDeflect = projectName + "项目试验图修改";
+                        standardDeflectReason = outlineData14To34Object.getString("修改图形理由");
+                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                        newJsonObject.put("内容", standardDeflect);
+                        newJsonObject.put("理由", standardDeflectReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (outlineData14To34Object.containsKey("修改方法")) {
+                        standardDeflect = projectName + "试验方法修改";
+                        standardDeflectReason = "无";
+                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                        newJsonObject.put("内容", standardDeflect);
+                        newJsonObject.put("理由", standardDeflectReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                }
+                jsonObject.put("标准剪裁与偏离说明", cutAndDeflectArray);
+                resultData = jsonObject.toJSONString();
                 break;
 
             default:
@@ -1496,10 +1614,11 @@ public class DependencyService {
             workLaunch.put("title","工作状态"+num);
             ifAction.put("type", "string");
             ifAction.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+            ifAction.put("default","是");
             actionReason.put("type", "string");
-            actionReason.put("minLength", 1);
+            actionReason.put("default", "无");
             workProperties.put("工作状态描述", workDefault);
-            workProperties.put("是否实施", ifAction);
+            workProperties.put("状态是否实施", ifAction);
             workProperties.put("不实施理由", actionReason);
             workLaunch.put("properties", workProperties);
             allWorkLaunch.put("工作状态"+num, workLaunch);
@@ -1520,10 +1639,11 @@ public class DependencyService {
                 workLaunchConnected.put("title","工作状态"+numConnected);
                 ifActionConnected.put("type", "string");
                 ifActionConnected.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+                ifActionConnected.put("default","是");
                 actionReasonConnected.put("type", "string");
-                actionReasonConnected.put("minLength", 1);
+                actionReasonConnected.put("default", "无");
                 workPropertiesConnected.put("工作状态描述", workDefaultConnected);
-                workPropertiesConnected.put("是否实施", ifActionConnected);
+                workPropertiesConnected.put("状态是否实施", ifActionConnected);
                 workPropertiesConnected.put("不实施理由", actionReasonConnected);
                 workLaunchConnected.put("properties", workPropertiesConnected);
                 allWorkLaunchConnected.put("工作状态"+numConnected, workLaunchConnected);

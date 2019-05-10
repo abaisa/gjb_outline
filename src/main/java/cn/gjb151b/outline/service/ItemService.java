@@ -121,12 +121,11 @@ public class ItemService {
         eqpJson.put("串号", devSubsysEqpNum);
         eqpJson.put("测试边界(m)", "");
         manageSysOutlineMapper.updateItemCol("outline_data_subsys_eqp", eqpJson.toJSONString(), devItemId);
-        for (int i = 1001; i < 1006; i++) {
+        for (int i = 1001; i <= 1006; i++) {
             String colName = "outline_data_"+i;
             manageSysOutlineMapper.updateItemCol(colName, "{}", devItemId);
         }
         updateItem(devItemId, userNew, userProofread, userAudit, userAuthorize);
-
 
     }
 

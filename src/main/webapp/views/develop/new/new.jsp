@@ -76,6 +76,69 @@
             </div><!-- /.modal -->
         </div>
         </div>
+        <div id="page_14-34">
+            <div id="upload3" style="display: none">
+                <%--<input type="file" id="images3" name="images" class="input-lg">--%>
+                <%--<button class="btn-primary" id="uploadpic3" onclick="uploadPic3()">上传试验图</button>--%>
+                <button data-toggle="modal" data-target="#myModal3"  class="btn-primary" onclick="downloadPic3()">修改图形</button>
+                    <button data-toggle="modal" data-target="#myModal4"  class="btn-primary" onclick="downloadPic3()">修改方法</button>
+
+            </div>
+        </div>
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel3">项目试验图</h4>
+                    </div>
+                    <br><br>
+                    <div class="row" style="margin: 20px; width: 95%" id="showPic3">
+
+                    </div>
+                    <input type="file" id="images3" name="images" class="input-lg">
+                    <button class="btn-primary" id="uploadpic3" onclick="uploadPic3()">上传试验图</button>
+                    <br><br>
+                    <div class="row" style="margin:20px; width: 95%" id="changeText1" name="changeText">
+                        <p style="font-weight: bold">修改图形理由</p>
+                        <textarea id="textNew1" class="form-control radius" rows="5" style="width: 100%" name="textNew"></textarea><br>
+                        <br><br><br><br><br><br>
+                    </div>
+                    <%--<div class="row" style="margin:20px; width: 95%" id="changeText2" name="changeText">--%>
+                        <%--<p style="font-weight: bold">修改方法</p>--%>
+                        <%--<textarea id="textNew2" class="form-control radius" rows="5" style="width: 100%" name="textNew"></textarea><br>--%>
+                        <%--<br><br><br><br><br><br>--%>
+                    <%--</div>--%>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="submitText()">确认提交</button>
+                        <a href="javascript:void(0)" class="btn btn-default" data-dismiss="modal">关闭</a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel4">试验方法</h4>
+                    </div>
+                    <div class="modal-body" id="showTextNew2">
+                        <div class="row" style="margin:20px; width: 95%" id="changeText2" name="changeText">
+                            <p style="font-weight: bold">修改方法</p>
+                            <textarea id="textNew2" class="form-control radius" rows="5" style="width: 100%" name="textNew"></textarea><br>
+                            <br><br><br><br><br><br>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="submitText()">确认提交</button>
+                        <a href="javascript:void(0)" class="btn btn-default" data-dismiss="modal">关闭</a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <button class="btn btn-primary" id="showEchartsPic1" onclick="showEchartsPic1()">查看试验实施网络图</button>
+        <div id="echartsPic1" style="height: 600px; width: 600px" class="hidden"></div>
         <div class="text-right" id="page_button">
             <button class="btn btn-primary" id="pre_page" onclick="turnPage(2)">上一页</button>
             <button class="btn btn-primary" id="next_page" onclick="turnPage(1)">下一页</button>
@@ -146,6 +209,7 @@
 <script type="text/javascript" src="js/develop/new.js"></script>
 <script type="text/javascript" src="repack/js/jquery/ajaxfileupload.js"></script>
 <script type="text/javascript" src="repack/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="repack/js/echarts/echarts.min.js"></script>
 
 <%--页面方法--%>
 <script type="text/javascript" src="js/base_json_editor.js"></script>
@@ -205,6 +269,8 @@
 
     // 填充页面意见框标题等内容
     adviceTitle(outlineStatus,Status);
+    monitor();
+
 
 
 
@@ -212,6 +278,9 @@
 
     //加载分系统或设备的头部内容
     getSubsysOrEqpHead();
+
+
+
 
 
 

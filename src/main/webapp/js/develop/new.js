@@ -1,3 +1,4 @@
+
 function adviceTitle(devStatus,Status) {
     if(Status == 1){
         $("#advice_title_div").hide();

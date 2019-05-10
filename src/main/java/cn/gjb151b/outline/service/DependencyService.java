@@ -37,6 +37,13 @@ import static cn.gjb151b.outline.service.FreqDependency.grnerateData;
 
 @Service(value = "DependencyService")
 public class DependencyService {
+    private int sensitiveNum =0;
+    private JSONArray array1001 = new JSONArray();
+    private JSONArray array1002 = new JSONArray();
+    private JSONArray array1003 = new JSONArray();
+    private JSONArray array1004 = new JSONArray();
+    private JSONArray array1005 = new JSONArray();
+    private JSONArray array1006 = new JSONArray();
     @Autowired
     private DBService dbService;
     @Autowired
@@ -149,25 +156,45 @@ public class DependencyService {
             case 1005:
                 resultData = grnerateData(devObject, true, false);
                 break;
-            case 13:
-                String outlineData11 = manageSysOutlineMapper.selectCol(outlineId, "outline_data_11");
-                JSONArray outlineData11JsonArray = JSON.parseObject(outlineData11).getJSONArray("敏感度判据及检测方法");
-                jsonObject = JSON.parseObject(data);
-                if (outlineData11JsonArray != null && outlineData11JsonArray.size() > 0) {
-                    String stopTime = "";
-                    for (int i = 0; i < outlineData11JsonArray.size(); i++) {
-                        stopTime = stopTime + String.valueOf((int)outlineData11JsonArray.getJSONObject(i).get("驻留时间(s)")) + "s" +  "、";
-                    }
-                    stopTime = stopTime.substring(0, stopTime.length() - 1);
-                    JSONArray outlineData13JsonArray = jsonObject.getJSONArray("敏感度测试参数");
-                    if (outlineData13JsonArray != null && outlineData13JsonArray.size() > 0) {
-                        for (int i = 0; i < outlineData13JsonArray.size(); i++) {
-                            outlineData13JsonArray.getJSONObject(i).put("驻留时间", stopTime);
+            case 10:
+                JSONArray powerArray = new JSONArray();
+                if(outline.getOutlineStatus() == 0){
+                    JSONArray powerPortArray = JSON.parseArray(devObject.getDevPowerport());
+                    JSONArray powerSupplyArray = JSON.parseArray(devObject.getDevPowersupply());
+                    JSONArray voltageArray = JSON.parseArray(devObject.getDevVoltage());
+                    JSONArray voltageNumArray = JSON.parseArray(devObject.getDevVoltagenum());
+                    for(int i=0; i<powerPortArray.size(); i++){
+                        JSONObject singlePower = new JSONObject();
+                        if(powerPortArray.getString(i).equals("1")){
+                            singlePower.put("输入/输出", "输入");
+                            singlePower.put("外部电源供电", "是");
+                            if(voltageArray.getString(i).equals("1")){
+                                singlePower.put("交流/直流", "直流");
+                            }else{
+                                singlePower.put("交流/直流", "交流");
+                            }
+                            if(powerSupplyArray.getString(i).equals("1")){
+                                if(voltageNumArray.getString(i).equals("1")){
+                                    singlePower.put("电压(V)", "<=28V");
+                                }else if(voltageNumArray.getString(i).equals("2")){
+                                    singlePower.put("电压(V)", ">28V");
+                                }
+                            }else{
+                                singlePower.put("电压(V)", "<=28V 或 >28V");
+                            }
+                        }else if(powerPortArray.getString(i).equals("2")){
+                            singlePower.put("外部电源供电", "否");
+                        }else{
+                            continue;
                         }
-                        jsonObject.put("敏感度测试参数", outlineData13JsonArray);
+                        powerArray.add(singlePower);
                     }
+                    JSONObject page10JsonObject = JSON.parseObject(data);
+                    page10JsonObject.put("电源端口", powerArray);
+                    resultData = JSON.toJSONString(page10JsonObject);
+                }else{
+                    resultData = data;
                 }
-                resultData = JSON.toJSONString(jsonObject);
                 break;
             case 14:
 //                jsonObject = JSON.parseObject(data);
@@ -211,16 +238,16 @@ public class DependencyService {
                 resultData = generateLimitText(data, devCS102);
                 break;
             case 20:
-//                resultData = generateAntennaData(devObject,data);
                 resultData = data;
+//                resultData = generateAntennaData(devObject,data);
                 break;
             case 21:
-//                resultData = generateAntennaData(devObject,data);
                 resultData = data;
+//                resultData = generateAntennaData(devObject,data);
                 break;
             case 22:
-//                resultData = generateAntennaData(devObject,data);
                 resultData = data;
+//                resultData = generateAntennaData(devObject,data);
                 break;
             case 23:
                 String devCS106 = devObject.getDevCs106();
@@ -925,8 +952,6 @@ public class DependencyService {
                 }
                 break;
             case 59:
-                String outlineStandardData59 = manageSysSchemaMapper.selectCol(1, "outline_data_59");
-                JSONObject outlineStandardData59Object = JSON.parseObject(outlineStandardData59);
                 jsonObject = JSON.parseObject(data);
                 if (jsonObject.size() == 0) {
                     try {
@@ -941,99 +966,6 @@ public class DependencyService {
                 } else {
                     resultData = data;
                 }
-                jsonObject = JSON.parseObject(resultData);
-                JSONArray cutAndDeflectArray = new JSONArray();
-                JSONObject standardCutObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(0);
-                JSONObject standardDeflectObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(1);
-                String outlineData14To34 = "";
-                String standardDeflect = "";
-                String standardDeflectReason = "";
-                ArrayList<String> projectList = new ArrayList<>();
-                projectList.add("CE101");
-                projectList.add("CE102");
-                projectList.add("CE106");
-                projectList.add("CE107");
-                projectList.add("CS101");
-                projectList.add("CS102");
-                projectList.add("CS103");
-                projectList.add("CS104");
-                projectList.add("CS105");
-                projectList.add("CS106");
-                projectList.add("CS109");
-                projectList.add("CS112");
-                projectList.add("CS114");
-                projectList.add("CS115");
-                projectList.add("CS116");
-                projectList.add("RE101");
-                projectList.add("RE102");
-                projectList.add("RE103");
-                projectList.add("RS101");
-                projectList.add("RS103");
-                projectList.add("RS105");
-                //添加每个项目的标准偏离
-                for (int i = 14; i <= 34; i++) {
-                    String projectName = projectList.get(i - 14);
-                    String colName = "outline_data_" + i;
-                    outlineData14To34 = manageSysOutlineMapper.selectCol(outlineId, colName);
-                    JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
-                    if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
-                        JSONArray testPortAndWorkStatusArray;
-                        if (i >= 26 && i <= 28) {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("电源端口");
-                        } else {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
-                        }
-                        for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                            JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                            if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                    int number = j + 1;
-                                    standardDeflect = projectName + "试验端口" + number + "不实施";
-                                    standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                    newJsonObject.put("内容", standardDeflect);
-                                    newJsonObject.put("理由", standardDeflectReason);
-                                    cutAndDeflectArray.add(newJsonObject);
-                                }
-                            }
-                            if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                for (int k = 0; k < workStatusObject.size(); k++) {
-                                    String workStatusKey = "工作状态" + (k + 1);
-                                    JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                    if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                        int portNumber = j + 1;
-                                        int workStatusNumber = k + 1;
-                                        standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                        standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (outlineData14To34Object.containsKey("项目试验图")) {
-                        standardDeflect = projectName + "项目试验图修改";
-                        standardDeflectReason = outlineData14To34Object.getString("修改图形理由");
-                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                        newJsonObject.put("内容", standardDeflect);
-                        newJsonObject.put("理由", standardDeflectReason);
-                        cutAndDeflectArray.add(newJsonObject);
-                    }
-                    if (outlineData14To34Object.containsKey("修改方法")) {
-                        standardDeflect = projectName + "试验方法修改";
-                        standardDeflectReason = "无";
-                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                        newJsonObject.put("内容", standardDeflect);
-                        newJsonObject.put("理由", standardDeflectReason);
-                        cutAndDeflectArray.add(newJsonObject);
-                    }
-                }
-                jsonObject.put("标准剪裁与偏离说明", cutAndDeflectArray);
-                resultData = jsonObject.toJSONString();
                 break;
 
             default:
@@ -1050,9 +982,65 @@ public class DependencyService {
     public void generateDataAfterSubmit(int outlineId, int pageNumber, String data, int changeLocation) {
         JSONObject jsonObject;
         JSONArray jsonArray;
+//        int sensitiveNum = 0;
 
         ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+        String devItemId = outline.getOutlineDevItemid();
+        ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         switch (pageNumber) {
+            case 8:
+                if(devObject.getDevAttribute() == 1){
+                    String outlineData14 = outline.getOutlineData14();
+                    String outlineData15 = outline.getOutlineData15();
+                    String outlineData16 = outline.getOutlineData16();
+                    String outlineData17 = outline.getOutlineData17();
+                    String outlineData29 = outline.getOutlineData29();
+                    String outlineData30 = outline.getOutlineData30();
+                    String outlineData31 = outline.getOutlineData31();
+                    String outlineData18 = outline.getOutlineData18();
+                    String outlineData19 = outline.getOutlineData19();
+                    String outlineData20 = outline.getOutlineData20();
+                    String outlineData21 = outline.getOutlineData21();
+                    String outlineData22 = outline.getOutlineData22();
+                    String outlineData23 = outline.getOutlineData23();
+                    String outlineData24 = outline.getOutlineData24();
+                    String outlineData25 = outline.getOutlineData25();
+                    String outlineData26 = outline.getOutlineData26();
+                    String outlineData27 = outline.getOutlineData27();
+                    String outlineData28 = outline.getOutlineData28();
+                    String outlineData32 = outline.getOutlineData32();
+                    String outlineData33 = outline.getOutlineData33();
+                    String outlineData34 = outline.getOutlineData34();
+                    getFreqWorkStatus(devObject);
+                    fillLaunchWorkStatus(array1001, outlineId, outlineData14, "试验端口及被试品工作状态", "outline_schema_14", "outline_data_14");
+                    fillLaunchWorkStatus(array1001, outlineId, outlineData15, "试验端口及被试品工作状态", "outline_schema_15", "outline_data_15");
+                    fillLaunchWorkStatus(array1004, outlineId, outlineData16, "试验端口及被试品工作状态", "outline_schema_16", "outline_data_16");
+//                    fillLaunchWorkStatus(array1006, outlineId, outlineData17, "试验端口及被试品工作状态", "outline_schema_17", "outline_data_17");
+                    //更新17页项目信息
+                    JSONObject outlineData17Object = JSON.parseObject(outlineData17, Feature.OrderedField);
+                    outlineData17Object.remove("试验端口及被试品工作状态");
+                    manageSysSchemaMapper.updateCol(1, "outline_schema_17", array1006.getString(0));
+                    manageSysOutlineMapper.updateCol(outlineId, "outline_data_17", JSON.toJSONString(outlineData17Object));
+
+                    fillLaunchWorkStatus(array1001, outlineId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
+                    fillLaunchWorkStatus(array1003, outlineId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
+                    fillLaunchWorkStatus(array1004, outlineId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData18, "试验端口及被试品工作状态", "outline_schema_18", "outline_data_18");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData19, "试验端口及被试品工作状态", "outline_schema_19", "outline_data_19");
+                    fillLaunchWorkStatus(array1005, outlineId, outlineData20, "试验端口及被试品工作状态", "outline_schema_20", "outline_data_20");
+                    fillLaunchWorkStatus(array1005, outlineId, outlineData21, "试验端口及被试品工作状态", "outline_schema_21", "outline_data_21");
+                    fillLaunchWorkStatus(array1005, outlineId, outlineData22, "试验端口及被试品工作状态", "outline_schema_22", "outline_data_22");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData23, "试验端口及被试品工作状态", "outline_schema_23", "outline_data_23");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData24, "试验位置及被试品工作状态", "outline_schema_24", "outline_data_24");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData25, "试验位置及被试品工作状态", "outline_schema_25", "outline_data_25");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData26, "试验端口及被试品工作状态", "outline_schema_26", "outline_data_26");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData27, "试验端口及被试品工作状态", "outline_schema_27", "outline_data_27");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData28, "试验端口及被试品工作状态", "outline_schema_28", "outline_data_28");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData32, "试验端口及被试品工作状态", "outline_schema_32", "outline_data_32");
+                    fillLaunchWorkStatus(array1004, outlineId, outlineData33, "试验端口及被试品工作状态", "outline_schema_33", "outline_data_33");
+                    fillLaunchWorkStatus(array1002, outlineId, outlineData34, "试验端口及被试品工作状态", "outline_schema_34", "outline_data_34");
+                }
+                break;
             case 9:
                 jsonObject = JSON.parseObject(data);
                 if (changeLocation ==1 || changeLocation == 3) {
@@ -1075,6 +1063,7 @@ public class DependencyService {
                     }
                 if(changeLocation ==2 || changeLocation ==3) {
                         JSONArray sensitiveArray = jsonObject.getJSONArray("敏感度测试工作状态");
+//                        sensitiveNum = sensitiveArray.size();
                         String outlineData18 = outline.getOutlineData18();
                         String outlineData19 = outline.getOutlineData19();
                         String outlineData20 = outline.getOutlineData20();
@@ -1110,12 +1099,19 @@ public class DependencyService {
                 jsonObject = JSON.parseObject(data);
                 JSONArray powerPortArray = jsonObject.getJSONArray("电源端口");
                 JSONArray interPortArray = jsonObject.getJSONArray("互联端口");
-
+                if(devObject.getDevAttribute() == 0) {
+                    sensitiveNum = JSON.parseObject(manageSysOutlineMapper.selectCol(outlineId, "outline_data_9")).getJSONArray("敏感度测试工作状态").size();
+                }else{
+                    sensitiveNum = array1002.size();
+                }
                 JSONArray testPortArray = new JSONArray(); //外部电源输入 试验端口的列表数组
                 JSONArray allPowerArray = new JSONArray(); //电源输入端口，包括内部电源输入端口
-                JSONObject allPortObject = new JSONObject(); //所有端口，包括电源端口和互联端口
-                JSONArray powerArray = new JSONArray(); //所有电源端口名称
-                JSONArray interArray = new JSONArray(); //所有互联端口名称
+                JSONObject allPortObjectCS114 = new JSONObject(); //所有端口，包括电源端口和互联端口
+                JSONArray powerArrayCS114 = new JSONArray(); //所有电源端口名称
+                JSONObject allPortObjectCS116 = new JSONObject(); //所有端口，包括电源端口和互联端口
+                JSONArray powerArrayCS116 = new JSONArray(); //所有电源端口名称
+                JSONArray interArrayCS114 = new JSONArray(); //所有互联端口名称
+                JSONArray interArrayCS116 = new JSONArray();
                 String outlineData14 = outline.getOutlineData14();
                 String outlineData15 = outline.getOutlineData15();
                 String outlineData17 = outline.getOutlineData17();
@@ -1132,6 +1128,16 @@ public class DependencyService {
                 JSONObject outlineData26Object = JSON.parseObject(outlineData26);
                 JSONObject outlineData27Object = JSON.parseObject(outlineData27);
                 JSONObject outlineData28Object = JSON.parseObject(outlineData28);
+                JSONObject CS114Status = new JSONObject();
+                JSONObject CS116Status = new JSONObject();
+                for(int i=1; i<sensitiveNum+1; i++){
+                    JSONObject CS114Power = new JSONObject();
+                    JSONObject CS116Power = new JSONObject();
+                    CS114Power.put("施加电缆束", "完整电源线，所有高电位线");
+                    CS116Power.put("施加电缆束", "完整电源线，每根高电位线");
+                    CS114Status.put("工作状态"+i, CS114Power);
+                    CS116Status.put("工作状态"+i, CS116Power);
+                }
                 for(int i = 0; i < powerPortArray.size(); i++) {
                     JSONObject powerPort = powerPortArray.getJSONObject(i);
                     if(powerPort.get("外部电源供电").equals("是") && powerPort.get("输入/输出").equals("输入")) {
@@ -1144,27 +1150,54 @@ public class DependencyService {
                         allPowerObject.put("试验电源端口", powerPort.get("端口名称或代号"));
                         allPowerArray.add(allPowerObject);
                     }
-                    JSONObject singlePower = new JSONObject();
-                    singlePower.put("电源端口",powerPort.get("端口名称或代号"));
-                    powerArray.add(singlePower);
+                    JSONObject singlePowerCS114 = new JSONObject();
+                    JSONObject singlePowerCS116 = new JSONObject();
+                    singlePowerCS114.put("电源端口",powerPort.get("端口名称或代号"));
+                    singlePowerCS114.put("工作状态", CS114Status );
+                    singlePowerCS116.put("电源端口",powerPort.get("端口名称或代号"));
+                    singlePowerCS116.put("工作状态", CS116Status );
+                    powerArrayCS114.add(singlePowerCS114);
+                    powerArrayCS116.add(singlePowerCS116);
 
                 }
                 for(int i = 0; i < interPortArray.size(); i++){
                     JSONObject interPort = interPortArray.getJSONObject(i);
-                    JSONObject singleInter = new JSONObject();
-                    singleInter.put("互联端口", interPort.get("端口名称或代号"));
-                    interArray.add(singleInter);
+                    JSONObject singleInterCS114 = new JSONObject();
+                    JSONObject singleInterCS116 = new JSONObject();
+                    JSONObject CS114ConnectStatus = new JSONObject();
+                    JSONObject CS116ConnectStatus = new JSONObject();
+                    for(int j=1; j<sensitiveNum+1; j++){
+                        JSONObject CS114Connect = new JSONObject();
+                        JSONObject CS116Connect = new JSONObject();
+                        if(interPort.get("端口类型").equals("互联")){
+                            CS114Connect.put("施加电缆束", "完整互联线");
+                            CS116Connect.put("施加电缆束", "完整互联线");
+                        }else {
+                            CS114Connect.put("施加电缆束", "互联线，所有电源线，所有高电位线");
+                            CS116Connect.put("施加电缆束", "互联线，所有电源线，每根高电位线");
+                        }
+                        CS114ConnectStatus.put("工作状态"+j, CS114Connect);
+                        CS116ConnectStatus.put("工作状态"+j, CS116Connect);
+                    }
+                    singleInterCS114.put("互联端口", interPort.get("端口名称或代号"));
+                    singleInterCS114.put("工作状态", CS114ConnectStatus);
+                    interArrayCS114.add(singleInterCS114);
+                    singleInterCS116.put("互联端口", interPort.get("端口名称或代号"));
+                    singleInterCS116.put("工作状态", CS116ConnectStatus);
+                    interArrayCS116.add(singleInterCS116);
                 }
-                allPortObject.put("电源端口",powerArray);
-                allPortObject.put("互联端口",interArray);
+                allPortObjectCS114.put("电源端口",powerArrayCS114);
+                allPortObjectCS114.put("互联端口",interArrayCS114);
+                allPortObjectCS116.put("电源端口",powerArrayCS116);
+                allPortObjectCS116.put("互联端口",interArrayCS116);
                 outlineData14Object.put("试验端口及被试品工作状态", testPortArray);
                 outlineData15Object.put("试验端口及被试品工作状态", testPortArray);
                 outlineData17Object.put("试验端口及被试品工作状态", allPowerArray);
                 outlineData18Object.put("试验端口及被试品工作状态", testPortArray);
                 outlineData23Object.put("试验端口及被试品工作状态", testPortArray);
-                outlineData26Object.put("试验端口及被试品工作状态", allPortObject);
-                outlineData27Object.put("试验端口及被试品工作状态", allPortObject);
-                outlineData28Object.put("试验端口及被试品工作状态", allPortObject);
+                outlineData26Object.put("试验端口及被试品工作状态", allPortObjectCS114);
+                outlineData27Object.put("试验端口及被试品工作状态", allPortObjectCS114);
+                outlineData28Object.put("试验端口及被试品工作状态", allPortObjectCS116);
                 System.out.println("试验端口及被试品工作状态:"+JSON.toJSONString(outlineData26Object));
                 manageSysOutlineMapper.updateCol(outlineId, "outline_data_14", JSON.toJSONString(outlineData14Object));
                 manageSysOutlineMapper.updateCol(outlineId, "outline_data_15", JSON.toJSONString(outlineData15Object));
@@ -1613,11 +1646,16 @@ public class DependencyService {
             workLaunch.put("type", oneExLaunch.getString("type"));
             workLaunch.put("title","工作状态"+num);
             ifAction.put("type", "string");
-            ifAction.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+            ifAction.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("状态是否实施").get("enum"));
             ifAction.put("default","是");
             actionReason.put("type", "string");
             actionReason.put("default", "无");
             workProperties.put("工作状态描述", workDefault);
+            if(schema.equals("outline_schema_26") || schema.equals("outline_schema_27") || schema.equals("outline_schema_28")){
+                JSONObject cableBundle = new JSONObject();
+                cableBundle.put("type", "string");
+                workProperties.put("施加电缆束", cableBundle);
+            }
             workProperties.put("状态是否实施", ifAction);
             workProperties.put("不实施理由", actionReason);
             workLaunch.put("properties", workProperties);
@@ -1631,18 +1669,22 @@ public class DependencyService {
                 JSONObject workLaunchConnected = new JSONObject();
                 JSONObject workPropertiesConnected = new JSONObject(true);
                 JSONObject workDefaultConnected = new JSONObject();
+                JSONObject cableBundleConnected = new JSONObject();
                 JSONObject ifActionConnected = new JSONObject();
                 JSONObject actionReasonConnected = new JSONObject();
                 workDefaultConnected.put("type", "string");
                 workDefaultConnected.put("default",launchArray.getJSONObject(i).getString("工作状态") );
                 workLaunchConnected.put("type", oneExLaunch.getString("type"));
                 workLaunchConnected.put("title","工作状态"+numConnected);
+                cableBundleConnected.put("type", "string");
+                cableBundleConnected.put("default", "");
                 ifActionConnected.put("type", "string");
-                ifActionConnected.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("是否实施").get("enum"));
+                ifActionConnected.put("enum", oneExLaunch.getJSONObject("properties").getJSONObject("状态是否实施").get("enum"));
                 ifActionConnected.put("default","是");
                 actionReasonConnected.put("type", "string");
                 actionReasonConnected.put("default", "无");
                 workPropertiesConnected.put("工作状态描述", workDefaultConnected);
+                workPropertiesConnected.put("施加电缆束", cableBundleConnected);
                 workPropertiesConnected.put("状态是否实施", ifActionConnected);
                 workPropertiesConnected.put("不实施理由", actionReasonConnected);
                 workLaunchConnected.put("properties", workPropertiesConnected);
@@ -1795,5 +1837,213 @@ public class DependencyService {
             jsonObject.getJSONArray(equipName).getJSONObject(position).put("主要性能指标", putLimitValueRes);
         }
         return jsonObject;
+    }
+
+
+    //获取14-34页用频设备工作状态描述
+    public void getFreqWorkStatus(ManageSysDevelop manageSysDevelop){
+        array1006.add("{\"type\":\"object\",\"title\":\"CE107-17\",\"properties\":{\"试验项目\":{\"type\":\"string\",\"default\":\"CE107\"},\"试验目的\":{\"type\":\"string\",\"default\":\"考核被试品因开关操作在输入电源线上产生的上的传导发射是否符合GJB151B规定。\"},\"试验内容\":{\"type\":\"string\",\"default\":\"电源线尖峰信号传导发射\"},\"限值\":{\"type\":\"string\",\"format\":\"textarea\"},\"数据处理方法\":{\"type\":\"string\",\"format\":\"textarea\",\"default\":\"测试数据为尖峰信号的电压幅度、极性、半峰值脉冲宽度，并提供波形图。\"},\"测试结果评定准则\":{\"type\":\"string\",\"default\":\"被试品传导发射实测值不超过限值要求，则判为合格，否则为不合格。\"},\"试验端口及被试品工作状态\":{\"type\":\"array\",\"format\":\"tab\",\"items\":{\"type\":\"object\",\"headerTemplate\":\"试验电源端口{{ i1 }}\",\"properties\":{\"试验电源端口\":{\"type\":\"string\"},\"工作状态\":{\"type\":\"array\",\"format\":\"tab\",\"items\":{\"type\":\"object\",\"headerTemplate\":\"工作状态{{ i1 }}\",\"properties\":{\"\":{\"type\":\"object\",\"properties\":{\"工作状态描述\":{\"type\":\"string\"},\"状态是否实施\":{\"type\":\"string\",\"enum\":[\"是\",\"否\"],\"default\":\"是\"},\"不实施理由\":{\"type\":\"string\",\"default\":\"无\"}}}}}},\"开关状态\":{\"type\":\"string\"},\"端口是否实施\":{\"type\":\"string\",\"enum\":[\"是\",\"否\"],\"default\":\"是\"},\"不实施理由\":{\"type\":\"string\",\"default\":\"无\"},\"备注\":{\"type\":\"string\"}}}}}}");
+        JSONArray devFreqOptional = (JSONArray)JSON.parse(manageSysDevelop.getDevFreqOptional());
+        JSONObject devFreqFHLow = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhLow());
+        JSONObject devFreqFHMid = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhMid());
+        JSONObject devFreqFHHigh = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhHigh());
+        JSONObject devFreqDSSS = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqDsss());
+        int devReceiveLaunch = manageSysDevelop.getDevReceiveLaunch();
+        if(!devFreqOptional.isEmpty()){
+            if(devReceiveLaunch == 1 || devReceiveLaunch == 3){
+                for (int i = 0; i < devFreqOptional.size(); i++) {
+                    JSONObject freqOptional = devFreqOptional.getJSONObject(i);
+                    StringBuilder string1001 = new StringBuilder();
+                    StringBuilder string1003_low = new StringBuilder();
+                    StringBuilder string1003_mid = new StringBuilder();
+                    StringBuilder string1003_high = new StringBuilder();
+                    StringBuilder string1005_low = new StringBuilder();
+                    StringBuilder string1005_mid = new StringBuilder();
+                    StringBuilder string1005_high = new StringBuilder();
+                    string1001.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1003_low.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+                    string1003_mid.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1003_high.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+                    string1005_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+                    string1005_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1005_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+                    JSONObject json1001 = new JSONObject();
+                    JSONObject json1003_low = new JSONObject();
+                    JSONObject json1003_mid = new JSONObject();
+                    JSONObject json1003_high = new JSONObject();
+                    JSONObject json1005_low = new JSONObject();
+                    JSONObject json1005_mid = new JSONObject();
+                    JSONObject json1005_high = new JSONObject();
+                    json1001.put("工作状态",string1001.toString());
+                    json1003_low.put("工作状态",string1003_low.toString());
+                    json1003_mid.put("工作状态",string1003_mid.toString());
+                    json1003_high.put("工作状态",string1003_high.toString());
+                    json1005_low.put("工作状态",string1005_low.toString());
+                    json1005_mid.put("工作状态",string1005_mid.toString());
+                    json1005_high.put("工作状态",string1005_high.toString());
+                    array1001.add(json1001);   //累加一样的代表此种情况下工作状态相同
+                    array1002.add(json1001);
+                    array1003.add(json1003_low);
+                    array1003.add(json1003_mid);
+                    array1003.add(json1003_high);
+                    array1004.add(json1003_low);
+                    array1004.add(json1003_mid);
+                    array1004.add(json1003_high);
+                    array1005.add(json1005_low);
+                    array1005.add(json1005_mid);
+                    array1005.add(json1005_high);
+                }
+            }
+            if(devReceiveLaunch == 2 || devReceiveLaunch == 3) {
+                for (int i = 0; i < devFreqOptional.size(); i++) {
+                    JSONObject freqOptional = devFreqOptional.getJSONObject(i);
+                    StringBuilder string1001 = new StringBuilder();
+                    StringBuilder string1003_low = new StringBuilder();
+                    StringBuilder string1003_mid = new StringBuilder();
+                    StringBuilder string1003_high = new StringBuilder();
+                    string1001.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1003_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+                    string1003_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1003_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+                    JSONObject json1001 = new JSONObject();
+                    JSONObject json1003_low = new JSONObject();
+                    JSONObject json1003_mid = new JSONObject();
+                    JSONObject json1003_high = new JSONObject();
+                    json1001.put("工作状态",string1001.toString());
+                    json1003_low.put("工作状态",string1003_low.toString());
+                    json1003_mid.put("工作状态",string1003_mid.toString());
+                    json1003_high.put("工作状态",string1003_high.toString());
+                    array1002.add(json1001);
+                    array1004.add(json1003_low);
+                    array1004.add(json1003_mid);
+                    array1004.add(json1003_high);
+                    if(devReceiveLaunch == 2) {
+                        array1001.add(json1001);   //累加一样的代表此种情况下工作状态相同
+                        array1003.add(json1003_low);
+                        array1003.add(json1003_mid);
+                        array1003.add(json1003_high);
+                        array1005.add(json1003_low);
+                        array1005.add(json1003_mid);
+                        array1005.add(json1003_high);
+                    }
+                }
+            }
+//            if(devReceiveLaunch == 3){
+//                for (int i = 0; i < devFreqOptional.size(); i++){
+//                    JSONObject freqOptional = devFreqOptional.getJSONObject(i);
+//                    StringBuilder string1002 = new StringBuilder();
+//                    StringBuilder string1004_low = new StringBuilder();
+//                    StringBuilder string1004_mid = new StringBuilder();
+//                    StringBuilder string1004_high = new StringBuilder();
+//                    string1002.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+//                    string1004_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+//                    string1004_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+//                    string1004_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+//                }
+//            }
+        }else if(!devFreqFHLow.isEmpty()){
+            if(devReceiveLaunch == 1 || devReceiveLaunch == 3){
+                StringBuilder string1001_low = new StringBuilder();
+                StringBuilder string1001_mid = new StringBuilder();
+                StringBuilder string1001_high = new StringBuilder();
+                StringBuilder string1005_low = new StringBuilder();
+                StringBuilder string1005_mid = new StringBuilder();
+                StringBuilder string1005_high = new StringBuilder();
+                string1001_low.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW）").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_mid.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_high.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1005_low.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1005_mid.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1005_high.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                JSONObject json1001_low = new JSONObject();
+                JSONObject json1001_mid = new JSONObject();
+                JSONObject json1001_high = new JSONObject();
+                JSONObject json1005_low = new JSONObject();
+                JSONObject json1005_mid = new JSONObject();
+                JSONObject json1005_high = new JSONObject();
+                json1001_low.put("工作状态",string1001_low.toString());
+                json1001_mid.put("工作状态",string1001_mid.toString());
+                json1001_high.put("工作状态",string1001_high.toString());
+                json1005_low.put("工作状态",string1005_low.toString());
+                json1005_mid.put("工作状态",string1005_mid.toString());
+                json1005_high.put("工作状态",string1005_high.toString());
+                array1001.add(json1001_low);
+                array1001.add(json1001_mid);
+                array1001.add(json1001_high);
+                array1002.add(json1001_low);
+                array1002.add(json1001_mid);
+                array1002.add(json1001_high);
+                array1003.add(json1001_low);
+                array1003.add(json1001_mid);
+                array1003.add(json1001_high);
+                array1004.add(json1001_low);
+                array1004.add(json1001_mid);
+                array1004.add(json1001_high);
+                array1005.add(json1005_low);
+                array1005.add(json1005_mid);
+                array1005.add(json1005_high);
+            }
+            if(devReceiveLaunch == 2 || devReceiveLaunch == 3){
+                StringBuilder string1001_low = new StringBuilder();
+                StringBuilder string1001_mid = new StringBuilder();
+                StringBuilder string1001_high = new StringBuilder();
+                string1001_low.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_mid.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_high.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                JSONObject json1001_low = new JSONObject();
+                JSONObject json1001_mid = new JSONObject();
+                JSONObject json1001_high = new JSONObject();
+                json1001_low.put("工作状态",string1001_low.toString());
+                json1001_mid.put("工作状态",string1001_mid.toString());
+                json1001_high.put("工作状态",string1001_high.toString());
+                array1002.add(json1001_low);
+                array1002.add(json1001_mid);
+                array1002.add(json1001_high);
+                array1004.add(json1001_low);
+                array1004.add(json1001_mid);
+                array1004.add(json1001_high);
+                if(devReceiveLaunch == 2) {
+                    array1001.add(json1001_low);
+                    array1001.add(json1001_mid);
+                    array1001.add(json1001_high);
+                    array1003.add(json1001_low);
+                    array1003.add(json1001_mid);
+                    array1003.add(json1001_high);
+                    array1005.add(json1001_low);
+                    array1005.add(json1001_mid);
+                    array1005.add(json1001_high);
+                }
+            }
+        }else {
+            if(devReceiveLaunch == 1 || devReceiveLaunch == 3){
+                StringBuilder string1001 = new StringBuilder();
+                StringBuilder string1005 = new StringBuilder();
+                string1001.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+                string1005.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+                JSONObject json1001 = new JSONObject();
+                JSONObject json1005 = new JSONObject();
+                json1001.put("工作状态",string1001.toString());
+                json1005.put("工作状态",string1005.toString());
+                array1001.add(json1001);
+                array1002.add(json1001);
+                array1003.add(json1001);
+                array1004.add(json1001);
+                array1005.add(json1005);
+            }
+            if(devReceiveLaunch == 2 || devReceiveLaunch == 3){
+                StringBuilder string1001 = new StringBuilder();
+                string1001.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+                JSONObject json1001 = new JSONObject();
+                json1001.put("工作状态",string1001.toString());
+                array1002.add(json1001);
+                array1004.add(json1001);
+                if(devReceiveLaunch == 2) {
+                    array1001.add(json1001);
+                    array1003.add(json1001);
+                    array1005.add(json1001);
+                }
+            }
+        }
+
     }
 }

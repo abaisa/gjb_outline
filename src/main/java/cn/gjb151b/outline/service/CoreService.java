@@ -9,7 +9,6 @@ import cn.gjb151b.outline.model.ManageSysOutline;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,12 +44,6 @@ public class CoreService {
         String devItemId = outline.getOutlineDevItemid();
         ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         String projectList = develop.getProjectList();
-        //判断对应第一个项目中dev_attribute值为1，则需要眺页
-        if (develop.getDevAttribute() == 1) {
-            JSONArray projectJsonArray = (JSONArray) JSON.parse(projectList);
-            projectJsonArray.add("1");
-            projectList = projectJsonArray.toJSONString();
-        }
 //        String projectList = manageSysDevelopMapper.selectColByDevItemId("project_list", devItemId);
         // 获取下一页页码
         int pageNumber;

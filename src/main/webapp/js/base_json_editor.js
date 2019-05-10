@@ -43,7 +43,7 @@ function turnPage(action) {
     if (submitSuccess) {
         submitSuccess = false;
         pageAction = action;
-        loadTargetPage(pageAction);
+        loadTargetPage(pageAction)
     }
 }
 

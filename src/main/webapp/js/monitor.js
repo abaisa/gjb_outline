@@ -329,7 +329,7 @@ function monitor() {
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
                 var testPortArray = load_data.试验端口及被试品工作状态;
-                if(testPortArray != null) {
+                if(testPortArray.length != 0) {
                     var workStatusNum = load_data.试验端口及被试品工作状态[0].工作状态;
                     if(workStatusNum != null) {
                         // for (var i = 0; i < testPortArray.length; i++) {
@@ -604,6 +604,7 @@ function monitor() {
                         editor.getEditor(editorName2).disable();
                     }
                 }
+                $("input[name*='施加电缆束']").attr("readonly", "readonly");
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
@@ -648,6 +649,7 @@ function monitor() {
                         editor.getEditor(editorName2).disable();
                     }
                 }
+                $("input[name*='施加电缆束']").attr("readonly", "readonly");
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
@@ -691,6 +693,7 @@ function monitor() {
                         editor.getEditor(editorName2).disable();
                     }
                 }
+                $("input[name*='施加电缆束']").attr("readonly", "readonly");
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 $("#editor_holder button").addClass("hidden");
                 break;
@@ -1233,6 +1236,9 @@ function monitor() {
 
 function beforeSubmit() {
     switch (page_number) {
+        case '8':
+            pageAction = 3;
+            break;
         case '9':
             if(modifyPage9_launch && modifyPage9_sensitive){
                 pageAction = 3;

@@ -174,13 +174,13 @@ public class PageDispatcher {
         }
         Collections.sort(pageNumberList);
         nextPageRouter.clear();
-        nextPageRouter.put(9, 1001);
-        nextPageRouter.put(1001, 1002);
-        nextPageRouter.put(1002, 1003);
-        nextPageRouter.put(1003, 1004);
-        nextPageRouter.put(1004, 1005);
-        nextPageRouter.put(1005, 1006);
-        nextPageRouter.put(1006, 10);
+//        nextPageRouter.put(9, 1001);
+//        nextPageRouter.put(1001, 1002);
+//        nextPageRouter.put(1002, 1003);
+//        nextPageRouter.put(1003, 1004);
+//        nextPageRouter.put(1004, 1005);
+//        nextPageRouter.put(1005, 1006);
+        nextPageRouter.put(9, 10);
         nextPageRouter.put(13, pageNumberList.get(0));
         for (int i = 0; i < pageNumberList.size() - 1; i++) {
             nextPageRouter.put(pageNumberList.get(i), pageNumberList.get(i + 1));
@@ -298,13 +298,13 @@ public class PageDispatcher {
             previousPageRouter.put(pageNumberList.get(i), pageNumberList.get(i - 1));
         }
         previousPageRouter.put(pageNumberList.get(0), 13);
-        previousPageRouter.put(10, 1006);
-        previousPageRouter.put(1006, 1005);
-        previousPageRouter.put(1005, 1004);
-        previousPageRouter.put(1004, 1003);
-        previousPageRouter.put(1003, 1002);
-        previousPageRouter.put(1002, 1001);
-        previousPageRouter.put(1001, 9);
+//        previousPageRouter.put(10, 1006);
+//        previousPageRouter.put(1006, 1005);
+//        previousPageRouter.put(1005, 1004);
+//        previousPageRouter.put(1004, 1003);
+//        previousPageRouter.put(1003, 1002);
+//        previousPageRouter.put(1002, 1001);
+        previousPageRouter.put(10, 9);
         return previous(sourcePageNumber);
     }
 

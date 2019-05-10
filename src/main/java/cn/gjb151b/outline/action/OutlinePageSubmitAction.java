@@ -41,6 +41,9 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private String imagesContentType;
     private String imagesFileName;
 
+    private String textNew1;
+    private String textNew2;
+
     private CoreService coreService;
     @Autowired
     private DBService dbService;
@@ -102,6 +105,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        String filename = uuid+imagesFileName;
         //图片存储的相对路径
         String localPath = "src/main/webapp/statics/imgs/";
+//        String localPath = "d://gjb_outline//img//";
         if(pageNumber == 4){
             if(picNumber == 1){
                 try{
@@ -160,6 +164,23 @@ public class OutlinePageSubmitAction extends ActionSupport {
             }
 
             }
+            if (pageNumber >= 14 && pageNumber <= 34) {
+                try {
+                    String colName = "outline_data_" + pageNumber;
+                    String outlineData14To34 = dbService.fetchData(outlineID, colName);
+                    JSONObject jsonObject = JSON.parseObject(outlineData14To34);
+                    String filename = imagesFileName;
+                    try {
+                        FileUtils.copyFile(images, new File(localPath, filename));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    jsonObject.put("项目试验图", filename);
+                    dbService.submitData(outlineID, colName, jsonObject.toJSONString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         response.setMessage("success");
         return SUCCESS;
     }
@@ -207,12 +228,27 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
         }
 
-        for(String filename : pictureList){
-            String localPath = "d://gjb_outline//img//";
-            File file = new File(localPath+filename);
-            file.delete();
-        }
+//        for(String filename : pictureList){
+//            String localPath = "d://gjb_outline//img//";
+//            File file = new File(localPath+filename);
+//            file.delete();
+//        }
         response.setMessage("success");
+        return SUCCESS;
+    }
+
+    public String submitText() {
+        String colName = "outline_data_" + pageNumber;
+        try {
+            String outlineData14To34 = dbService.fetchData(outlineID, colName);
+            JSONObject jsonObject = JSON.parseObject(outlineData14To34);
+            jsonObject.put("修改图形理由", textNew1);
+            jsonObject.put("修改方法", textNew2);
+            dbService.submitData(outlineID, colName, jsonObject.toJSONString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        response.setMessage("文本保存成功！");
         return SUCCESS;
     }
 
@@ -347,5 +383,21 @@ public class OutlinePageSubmitAction extends ActionSupport {
     public Integer getChangeLocation(){ return  changeLocation;}
 
     public void  setChangeLocation( Integer changeLocation){ this.changeLocation = changeLocation;}
+
+    public String getTextNew1() {
+        return textNew1;
+    }
+
+    public void setTextNew1(String textNew1) {
+        this.textNew1 = textNew1;
+    }
+
+    public String getTextNew2() {
+        return textNew2;
+    }
+
+    public void setTextNew2(String textNew2) {
+        this.textNew2 = textNew2;
+    }
 
 }

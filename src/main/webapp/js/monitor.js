@@ -17,6 +17,20 @@ function monitor() {
     } else {
         $("#editor_head").addClass("hidden");
     }
+    if (page_number >= 14 && page_number <= 34) {
+        $("#upload3").show();
+        $("div[data-schemapath='root.项目试验图']").hide();
+        $("div[data-schemapath='root.修改图形理由']").hide();
+        $("div[data-schemapath='root.修改方法']").hide();
+    }
+    if (page_number > 34) {
+        $("#upload3").hide();
+    }
+    if (page_number != 58) {
+        $("#showEchartsPic1").addClass("hidden");
+    } else {
+        $("#showEchartsPic1").removeClass("hidden");
+    }
 
         switch (page_number) {
             case '3':
@@ -43,6 +57,15 @@ function monitor() {
 
                 editor.disable();
                 break;
+            case '6':
+                $("input[name*='连接电缆ID']").width(50);
+                $("input[name*='名称']").width(50);
+                $("input[name*='型号']").width(50);
+                $("input[name*='生产厂']").width(50);
+                $("input[name*='长度']").width(50);
+                $("input[name*='连接端口ID']").width(50);
+                $("input[name*='备注']").width(50);
+
             case '7':
                 watchQuantity('root.陪试设备清单', 20);
                 break;
@@ -103,6 +126,7 @@ function monitor() {
                 // $("table button").addClass("hidden");
                 break;
             case '13':
+                $("#upload3").hide();
                 $("#editor_holder button").addClass("hidden");
                 editor.getEditor('root').disable();
                 var stayTime = load_data.敏感度测试参数;
@@ -116,7 +140,6 @@ function monitor() {
                 // $("input[name='root[试验端口及被试品工作状态][0][工作状态][工作状态1][不实施理由]']").val('hhhh');
                 // var selectList = $("select[name*='是否实施']").children('option:selected').val();
                 // console.log("selectList:"+selectList);
-                page14 = false;
                 $("select[name*='是否实施']").on('change',
                     function () {
                         var selectName = $(this).children('option:selected').val();
@@ -153,6 +176,8 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 //这里改成上面的隐藏按钮的方法，之后若是还有别的按钮，可以选择使用底下注释掉的disable方法（应该是有别的按钮的）
                 // disableAddAndDelete('root.试验端口及被试品工作状态', true);
+                // var beforeMode = $("input[name='root[限值]']");
+                // beforeMode.prop("disabled", false);
 
                 break;
             case '15':
@@ -189,6 +214,8 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                $("input[name*='']").width(200);
+
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '16':
@@ -652,6 +679,7 @@ function monitor() {
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '28':
+
                 page28 = false;
                 $("select[name*='是否实施']").on('change',
                     function () {
@@ -1189,6 +1217,7 @@ function monitor() {
             // case '56':
             //     editor.getEditor('root').disable();
             case '57':
+                $("#echartsPic1").addClass("hidden");
                 // $("#project_submit").addClass("hidden");
                 // $("#next_page").removeClass("hidden");
                 break;
@@ -1210,12 +1239,15 @@ function monitor() {
                 //         console.log("removeClass");
                 //     }
                 // }
-                $("input[name='root[试验项目][0][试验项目序号]']").val(1);
-                $("input[name='root[试验项目][1][试验项目序号]']").val(2);
+                // $("input[name='root[试验项目][0][试验项目序号]']").val(1);
+                // $("input[name='root[试验项目][1][试验项目序号]']").val(2);
                 $("#project_submit").addClass("hidden");
                 $("#next_page").removeClass("hidden");
+                $("#echartsPic1").removeClass("hidden");
                 break;
             case '59':
+                // $("#showEchartsPic1").addClass("hidden");
+                $("#echartsPic1").addClass("hidden");
                 if (Status != 1) {
                     if (outlineStatus == 0 || outlineStatus == 4) {
                         $("#project_submit").removeClass("hidden");

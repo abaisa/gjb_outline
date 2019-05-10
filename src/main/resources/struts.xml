@@ -2,7 +2,7 @@
 
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
-        "http://struts.apache.org/dtds/struts-2.5.dtd">
+        "struts-2.5.dtd">
 <struts>
     <!-- 支持动态调用 -->
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
@@ -55,6 +55,16 @@
             <result name="success" type="json">
                 <param name="root">response</param>
                 <param name="enableGZIP">true</param>
+            </result>
+        </action>
+        <action name="submitText" class="cn.gjb151b.outline.action.OutlinePageSubmitAction" method="submitText">
+            <result name="success" type="json">
+                <param name="root">response</param>
+            </result>
+        </action>
+        <action name="loadText" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="loadText">
+            <result name="success" type="json">
+                <param name="root">response</param>
             </result>
         </action>
         <action name="loadAdvice" class="cn.gjb151b.outline.action.OutlinePageLoadAction" method="loadAdvice">

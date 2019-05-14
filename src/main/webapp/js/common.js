@@ -163,6 +163,34 @@ function uploadPic2() {
     }
 
 }
+//新建14-34的上传实验图形
+function uploadPic3() {
+    var fileInput = $('#images3').get(0).files[0];
+    if(!fileInput){
+        $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '未选择任何图片'});
+
+    } else {
+        $.ajaxFileUpload({
+            type: "post",
+            url: "/outline/page_data/upload",
+            fileElementId: "images3",
+            data: {
+                outlineID: outlineId,
+                pageNumber: page_number,
+            },
+            success: function(data){
+                console.log(data)
+                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+
+
+            }
+
+        });
+        $("#myModal3").modal("hide");
+
+    }
+
+}
 //新建页4的查看分系统/设备照片
 function downloadPic(){
     $("#showPic1").empty();
@@ -229,6 +257,62 @@ function downloadPic2(){
         }
     })
 }
+
+//新建页14-34查看试验图
+function downloadPic3(){
+    $("#showPic3").empty();
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/download",
+        data: {
+            outlineID: outlineId,
+            currentPageNumber: page_number,
+            picNumber: -1,
+        },
+        success: function(data){
+            console.log(data);
+            var pic3List = data.data;
+            for(var i = 0; i<pic3List.length; i++){
+                var  img = document.createElement("img");
+                var pictureNumber = document.createElement("span");
+                pictureNumber.innerHTML = i+1;
+                var url = "statics/imgs/"+pic3List[i];
+                // var url = "/image/"+pic2List[i];
+                img.src = url;
+                img.className="image";
+                img.width=500;
+                var number = i + 1;
+
+                $("#showPic3").append(img);
+                $("#showPic3").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                $("#showPic3").append("项目试验图" +": " +pic3List[i]);
+            }
+
+        }
+    });
+    downloadText();
+}
+
+//获取对应文本文字 根据textNumber
+function downloadText() {
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/loadText",
+        data: {
+            outlineID: outlineId,
+            currentPageNumber: page_number,
+        },
+        success: function (data) {
+            console.log(data);
+            var textNew1AndTextNew2 = JSON.parse(data.data);
+            var textNew1 = textNew1AndTextNew2["修改图形理由"];
+            var textNew2 = textNew1AndTextNew2["修改方法"];
+            $("#textNew1").val(textNew1);
+            $("#textNew2").val(textNew2);
+        }
+    })
+}
+
 //清空新建页4上传的分系统/设备图片
 function deletePic1() {
     var myMessage = confirm("确定要清空上传的分系统/设备图片吗？");
@@ -276,6 +360,186 @@ function deletePic2() {
         })
 
     }
+
+
+}
+
+function submitText() {
+    var textNew1 = $("#textNew1").val();
+    var textNew2 = $("#textNew2").val();
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/submitText",
+        data: {
+            outlineID: outlineId,
+            PageNumber: page_number,
+            textNew1: textNew1,
+            textNew2: textNew2,
+        },
+        success: function (data) {
+            console.log(data);
+            $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '提交成功'});
+        }
+    })
+
+}
+
+function showEchartsPic1() {
+    submitPageData(1);
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/load",
+        data: {
+            currentPageNumber: 57,
+            outlineID: outlineId,
+            pageAction: 1       // 1 表示下一页，2 表示上一页
+        },
+        success: function (data) {
+            console.log("loadTargetPage ajax 请求成功");
+            if (data.status == 'success') {
+                var myCharts = echarts.init(document.getElementById('echartsPic1'));
+                var projectNameList = [];
+                var projectStartTimeList = [];
+                var projectEndTimeList = [];
+                var all_data = JSON.parse(data.data);
+                console.log('all_data'+":"+all_data);
+                var load_data = all_data.data;
+                console.log('load_data'+load_data);
+                var load_dataObj = JSON.parse(load_data);
+                var projectListObj = load_dataObj.试验项目;
+                for (var i = 0; i < projectListObj.length; i++) {
+                    var startTime = projectListObj[i].计划起始时间.replace(/-/g, '/');
+                    var endTime = projectListObj[i].计划结束时间.replace(/-/g, '/');
+                    projectNameList.push(projectListObj[i].试验项目名称);
+                    projectStartTimeList.push(new Date(startTime));
+                    projectEndTimeList.push(new Date(endTime));
+
+
+                }
+                // projectStartTimeList = [new Date('2019/05/12')];
+                // projectEndTimeList = [new Date('2019/05/17')];
+                console.log(projectNameList);
+                console.log(projectStartTimeList);
+                console.log(projectEndTimeList);
+                option = {
+                    title: {
+                        text: '试验实施网络图',
+                        left: 10
+                    },
+                    legend: {
+                        data: ['计划实施时间', '实际实施时间']
+
+                    },
+                    grid: {
+                        containLabel: true,
+                        left: 20
+                    },
+                    xAxis: {
+                        type: 'time'
+                    },
+
+                    yAxis: [{
+                        data: projectNameList
+                    }, {
+                        position: 'left',
+                        offset: 50,
+                        type: 'category',
+                        axisTick: {
+                            lineStyle: {
+                                color: '#000'
+                            },
+                            interval: function(index, value) {
+                                return value !== '';
+                            }
+                        },
+                        axisLabel: {
+                            // height: 56,
+                            // lineHeight:56,
+                            color: '#000',
+                            // show: 'middle',
+
+                        },
+                        // splitLine: {
+                        //     interval: function(index, value) {
+                        //         console.log(value)
+                        //         return value !== '';
+                        //     }
+                        // },
+                        // axisPointer: {
+                        //     show: true
+                        // },
+                        // splitArea: {
+                        //     show: true,
+                        //     interval: function(index, value) {
+                        //         return value !== '';
+                        //     }
+                        // },
+
+                    }],
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: function(params) {
+                            // console.log('params', params)
+                            var res = params[0].name + "</br>"
+                            var date0 = params[0].data;
+                            var date1 = params[1].data;
+                            // var date2 = params[2].data;
+                            // var date3 = params[3].data;
+                            date0 = date0.getFullYear() + "-" + (date0.getMonth() + 1) + "-" + date0.getDate();
+                            date1 = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-" + date1.getDate();
+                            // date2 = date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate();
+                            // date3 = date3.getFullYear() + "-" + (date3.getMonth() + 1) + "-" + date3.getDate();
+                            res += params[0].seriesName + "~" + params[1].seriesName + ":</br>" + date0 + "~" + date1 + "</br>"
+                            // res += params[2].seriesName + "~" + params[3].seriesName + ":</br>" + date2 + "~" + date3 + "</br>"
+                            return res;
+                        }
+                    },
+                    series: [
+
+                        {
+                            name: '计划开始时间',
+                            type: 'bar',
+                            stack: 'test1',
+                            itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,0,0,0)'
+                                }
+                            },
+                            // data: [
+                            //     // new Date("2017/09/15"),
+                            //     // new Date("2017/09/15"),
+                            //     // new Date("2017/10/03"),
+                            //     // new Date("2017/10/04"),
+                            //     // new Date("2017/10/05"),
+                            //     // new Date("2017/10/06")
+                            //     new Date(time1)
+                            // ]
+                            data: projectStartTimeList
+                        },
+                        {
+                            name: '计划完成时间',
+                            type: 'bar',
+                            stack: 'test1',
+                            // data: [
+                            //     // // new Date("2015/09/12"),
+                            //     // new Date("2017/09/20"),
+                            //     // new Date("2017/09/25"),
+                            //     // new Date("2017/10/05"),
+                            //     // new Date("2017/10/07"),
+                            //     // new Date("2017/10/09"),
+                            //     // new Date("2017/10/12")
+                            //     new Date(time2)
+                            // ]
+                            data: projectEndTimeList
+                        },
+                    ]
+                };
+                myCharts.setOption(option);
+
+            }
+
+        }
+    })
 
 
 }

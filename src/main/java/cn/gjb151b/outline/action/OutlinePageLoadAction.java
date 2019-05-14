@@ -108,10 +108,40 @@ public class OutlinePageLoadAction  extends ActionSupport {
             }
 
         }
+        if (currentPageNumber >= 14 && currentPageNumber <= 34) {
+            try {
+                String colName = "outline_data_" + currentPageNumber;
+                String outlineData14To34 = dbService.fetchData(outlineID, colName);
+                if (JSON.parseObject(outlineData14To34).getString("项目试验图") != null) {
+                    String picName = JSON.parseObject(outlineData14To34).getString("项目试验图");
+                    picList.add(picName);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         downloadResponse = new BaseResponse<>();
         downloadResponse.setResponse(picList);
         return SUCCESS;
 
+    }
+
+    public String loadText() {
+        String responseData = "";
+        String colName = "outline_data_" + currentPageNumber;
+        try {
+            String outlineData14To34 = dbService.fetchData(outlineID, colName);
+            String textNew1 = JSON.parseObject(outlineData14To34).getString("修改图形理由");
+            String textNew2 = JSON.parseObject(outlineData14To34).getString("修改方法");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("修改图形理由", textNew1);
+            jsonObject.put("修改方法", textNew2);
+            responseData = jsonObject.toJSONString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        response.setData(responseData);
+        return SUCCESS;
     }
 
     public String getPageNumber(){

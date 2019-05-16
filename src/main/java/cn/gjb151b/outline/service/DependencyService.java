@@ -140,6 +140,12 @@ public class DependencyService {
                 }
                 resultData = JSON.toJSONString(jsonObject);
                 break;
+            case 6:
+                jsonObject = JSON.parseObject(data);
+                if (jsonObject.size() == 0) {
+                    resultData = manageSysSchemaMapper.selectCol(1, "outline_data_6");
+                }
+                break;
 
             case 1001:
                 resultData = grnerateData(devObject, true, true);
@@ -965,6 +971,18 @@ public class DependencyService {
                         String outlineName = dbService.fetchData(outlineId, "outline_name");
                         jsonObject = JSON.parseObject(outlineData58);
                         jsonObject.put("任务名称", outlineName);
+                        String projectList = devObject.getProjectList();
+                        JSONArray projectArray = JSON.parseArray(projectList);
+                        JSONArray testProjectArray = new JSONArray();
+                        for (int i = 0; i < projectArray.size(); i++) {
+                            JSONObject projectObject = new JSONObject();
+                            projectObject.put("试验项目序号", (i + 1));
+                            projectObject.put("试验项目名称", projectArray.getString(i));
+                            projectObject.put("计划起始时间", "");
+                            projectObject.put("计划结束时间", "");
+                            testProjectArray.add(projectObject);
+                        }
+                        jsonObject.put("试验项目", testProjectArray);
                         resultData = jsonObject.toJSONString();
                     } catch (Exception e) {
                         e.printStackTrace();

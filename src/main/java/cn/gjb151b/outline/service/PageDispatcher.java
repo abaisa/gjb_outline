@@ -174,7 +174,7 @@ public class PageDispatcher {
         }
         Collections.sort(pageNumberList);
         nextPageRouter.clear();
-        if (projectList.contains("1")) {
+        if (projectJsonArray.contains("1")) {
             nextPageRouter.put(8, 10);
         } else {
             nextPageRouter.put(9, 1001);
@@ -302,7 +302,7 @@ public class PageDispatcher {
             previousPageRouter.put(pageNumberList.get(i), pageNumberList.get(i - 1));
         }
         previousPageRouter.put(pageNumberList.get(0), 13);
-        if (projectList.contains("1")) {
+        if (projectJsonArray.contains("1")) {
             previousPageRouter.put(10, 8);
         } else {
             previousPageRouter.put(10, 1006);

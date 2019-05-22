@@ -58,16 +58,58 @@ function monitor() {
                 editor.disable();
                 break;
             case '6':
+                equipmentListNum = 0;
+                configurationListNum = 0;
                 $("input[name*='连接电缆ID']").width(50);
-                $("input[name*='名称']").width(50);
-                $("input[name*='型号']").width(50);
+                $("input[name*='名称']").width(20);
+                $("input[name*='型号']").width(20);
                 $("input[name*='生产厂']").width(50);
                 $("input[name*='长度']").width(50);
                 $("input[name*='连接端口ID']").width(50);
                 $("input[name*='备注']").width(50);
+                $("div[data-schemapath*='root.分系统主要设备清单'] button:contains('添加')").on('click',
+                    function () {
+                        editor.getEditor('root.分系统主要设备清单.' + equipmentListNum + '.序号').setValue(equipmentListNum+1);
+                        equipmentListNum++;
+                    });
+                $("div[data-schemapath*='root.分系统主要设备清单'] button:contains('最后一行')").on('click',
+                    function () {
+                        equipmentListNum--;
+                    });
+                $("div[data-schemapath*='root.分系统主要设备清单'] button:contains('所有')").on('click',
+                    function () {
+                        equipmentListNum = 0;
+                    });
+                $("div[data-schemapath*='root.产品软件配置清单'] button:contains('添加')").on('click',
+                    function () {
+                        editor.getEditor('root.产品软件配置清单.' + configurationListNum + '.序号').setValue(configurationListNum+1);
+                        configurationListNum++;
+                    });
+                $("div[data-schemapath*='root.产品软件配置清单'] button:contains('最后一行')").on('click',
+                    function () {
+                        configurationListNum--;
+                    });
+                $("div[data-schemapath*='root.产品软件配置清单'] button:contains('所有')").on('click',
+                    function () {
+                        configurationListNum = 0;
+                    });
 
             case '7':
+                accompanyEquipmentListNum = 0;
                 watchQuantity('root.陪试设备清单', 20);
+                $("div[data-schemapath*='root.陪试设备清单'] button:contains('添加')").on('click',
+                    function () {
+                        editor.getEditor('root.陪试设备清单.' + accompanyEquipmentListNum + '.序号').setValue(accompanyEquipmentListNum+1);
+                        accompanyEquipmentListNum++;
+                    });
+                $("div[data-schemapath*='root.陪试设备清单'] button:contains('最后一行')").on('click',
+                    function () {
+                        accompanyEquipmentListNum--;
+                    });
+                $("div[data-schemapath*='root.陪试设备清单'] button:contains('所有')").on('click',
+                    function () {
+                        accompanyEquipmentListNum = 0;
+                    });
                 break;
             case '8':
                 editor.getEditor('root.电磁环境').disable();

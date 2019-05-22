@@ -227,6 +227,7 @@
     outlineId = params['outlineId'];
     outlineStatus = params['outlineStatus'];
     Status = params['Status'];
+    var pageData;
 
 
     //调用loadTargetPage(1)，后台设置了2的下一页为3，初始化此页面为第三页

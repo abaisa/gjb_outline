@@ -104,7 +104,7 @@ function loadTargetPage(action) {
                 console.log(load_schema);
                 console.log(load_data);
                 console.log(load_page_id);
-
+                pageData = data;
                 page_number = load_page_id;
                 pageAction = load_page_id;
 

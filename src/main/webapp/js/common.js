@@ -407,6 +407,43 @@ function showEchartsPic1() {
                 console.log('load_data'+load_data);
                 var load_dataObj = JSON.parse(load_data);
                 var projectListObj = load_dataObj.试验项目;
+                for (var i = 0; i < projectListObj.length - 1; i++) {
+                    for (var j = 0; j < projectListObj.length - i - 1; j++) {
+                        var switchObj;
+                        var fStartTime = projectListObj[j].计划起始时间;
+                        var sStartTime = projectListObj[j + 1].计划起始时间;
+                        var farr = fStartTime.split("-");
+                        var sarr = sStartTime.split("-");
+                        var fyear = parseInt(farr[0]);
+                        var fmonth = parseInt(farr[1]);
+                        var fday = parseInt(farr[2]);
+                        var syear = parseInt(sarr[0])
+                        var smonth = parseInt(sarr[1]);
+                        var sday = parseInt(sarr[2]);
+                        if (fyear > syear) {
+                            switchObj = projectListObj[j];
+                            projectListObj[j] = projectListObj[j + 1];
+                            projectListObj[j + 1] = switchObj;
+                            continue;
+                        }
+                        if (fyear == syear && fmonth > smonth) {
+                            switchObj = projectListObj[j];
+                            projectListObj[j] = projectListObj[j + 1];
+                            projectListObj[j + 1] = switchObj;
+                            continue;
+                        }
+                        if (fyear == syear && fmonth == smonth && fday > sday) {
+                            switchObj = projectListObj[j];
+                            projectListObj[j] = projectListObj[j + 1];
+                            projectListObj[j + 1] = switchObj;
+                            continue;
+                        }
+
+                    }
+                }
+                // var fStartTime = projectListObj[0].计划起始时间;
+                // var arr = fStartTime.split("-");
+                // console.log("年份"+ " " + arr[0]);
                 for (var i = 0; i < projectListObj.length; i++) {
                     var startTime = projectListObj[i].计划起始时间.replace(/-/g, '/');
                     var endTime = projectListObj[i].计划结束时间.replace(/-/g, '/');

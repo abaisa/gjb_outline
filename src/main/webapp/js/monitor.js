@@ -93,6 +93,17 @@ function monitor() {
                     function () {
                         configurationListNum = 0;
                     });
+                $("#editor_holder button").click(function() {
+                    $("input[name*='连接电缆ID']").width(50);
+                    $("input[name*='名称']").width(50);
+                    $("input[name*='型号']").width(50);
+                    $("input[name*='生产厂']").width(50);
+                    $("input[name*='长度']").width(50);
+                    $("input[name*='连接端口ID']").width(50);
+                    $("input[name*='备注']").width(50);
+
+                });
+
 
             case '7':
                 accompanyEquipmentListNum = 0;
@@ -1290,6 +1301,55 @@ function monitor() {
                 $("#project_submit").addClass("hidden");
                 $("#next_page").removeClass("hidden");
                 $("#echartsPic1").removeClass("hidden");
+                var all_data = JSON.parse(pageData.data);
+                console.log('all_data'+":"+all_data);
+                var load_data = all_data.data;
+                console.log('load_data'+load_data);
+                var load_dataObj = JSON.parse(load_data);
+                var projectListObj = load_dataObj.试验项目;
+                for (var i = 0; i < projectListObj.length - 1; i++) {
+                    for (var j = 0; j < projectListObj.length - i - 1; j++) {
+                        var switchObj;
+                        var fStartTime = projectListObj[j].计划起始时间;
+                        var sStartTime = projectListObj[j + 1].计划起始时间;
+                        var farr = fStartTime.split("-");
+                        var sarr = sStartTime.split("-");
+                        var fyear = parseInt(farr[0]);
+                        var fmonth = parseInt(farr[1]);
+                        var fday = parseInt(farr[2]);
+                        var syear = parseInt(sarr[0])
+                        var smonth = parseInt(sarr[1]);
+                        var sday = parseInt(sarr[2]);
+                        if (fyear > syear) {
+                            switchObj = projectListObj[j];
+                            projectListObj[j] = projectListObj[j + 1];
+                            projectListObj[j + 1] = switchObj;
+                            continue;
+                        }
+                        if (fyear == syear && fmonth > smonth) {
+                            switchObj = projectListObj[j];
+                            projectListObj[j] = projectListObj[j + 1];
+                            projectListObj[j + 1] = switchObj;
+                            continue;
+                        }
+                        if (fyear == syear && fmonth == smonth && fday > sday) {
+                            switchObj = projectListObj[j];
+                            projectListObj[j] = projectListObj[j + 1];
+                            projectListObj[j + 1] = switchObj;
+                            continue;
+                        }
+
+                    }
+                }
+                // console.log("最早开始时间" + " " + projectListObj[0].计划起始时间);
+                // console.log("最晚结束时间" + " " + projectListObj[projectListObj.length  - 1].计划结束时间);
+                var mostEarlyTime = projectListObj[0].计划起始时间;
+                var mostLateTime = projectListObj[projectListObj.length - 1].计划结束时间;
+                console.log("最早开始时间" + " " + mostEarlyTime);
+                console.log("最晚结束时间" + " " + mostLateTime);
+                $("input[name='root[试验计划开始时间]']").val(mostEarlyTime);
+                $("input[name='root[试验计划结束时间]']").val(mostLateTime);
+
                 break;
             case '59':
                 // $("#showEchartsPic1").addClass("hidden");

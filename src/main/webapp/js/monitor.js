@@ -1260,9 +1260,9 @@ function monitor() {
                 $("#echartsPic1").removeClass("hidden");
                 var all_data = JSON.parse(pageData.data);
                 console.log('all_data'+":"+all_data);
-                var load_data = all_data.data;
+                var load_data_58 = all_data.data;
                 console.log('load_data'+load_data);
-                var load_dataObj = JSON.parse(load_data);
+                var load_dataObj = JSON.parse(load_data_58);
                 var projectListObj = load_dataObj.试验项目;
                 for (var i = 0; i < projectListObj.length - 1; i++) {
                     for (var j = 0; j < projectListObj.length - i - 1; j++) {

@@ -104,8 +104,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        //得到组合的filename
 //        String filename = uuid+imagesFileName;
         //图片存储的相对路径
-        String localPath = "src/main/webapp/statics/imgs/";
-//        String localPath = "d://gjb_outline//img//";
+//        String localPath = "src/main/webapp/statics/imgs/";
+        String localPath = "d://gjb_outline//img//";
         if(pageNumber == 4){
             if(picNumber == 1){
                 try{
@@ -186,8 +186,8 @@ public class OutlinePageSubmitAction extends ActionSupport {
     }
 
     public String deletePic(){
-        String pathsuff = "src/main/webapp/statics/imgs/";
-//        String pathsuff = "d://gjb_outline//img//";
+//        String pathsuff = "src/main/webapp/statics/imgs/";
+        String pathsuff = "d://gjb_outline//img//";
         List<String> pictureList = new ArrayList<>();
         if(pageNumber == 4){
             if(picNumber == 1){

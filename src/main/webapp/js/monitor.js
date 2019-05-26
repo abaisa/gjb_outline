@@ -207,11 +207,12 @@ function monitor() {
                             page14 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page14 = false;
-                                    }else{
-                                        page14 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page14 = false;
+                                    // }else{
+                                    //     page14 = true;
+                                    // }
+                                    page14 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -249,11 +250,12 @@ function monitor() {
                             page15 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page15 = false;
-                                    }else{
-                                        page15 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page15 = false;
+                                    // }else{
+                                    //     page15 = true;
+                                    // }
+                                    page15 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -287,11 +289,12 @@ function monitor() {
                             page16 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page16 = false;
-                                    }else{
-                                        page16 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page16 = false;
+                                    // }else{
+                                    //     page16 = true;
+                                    // }
+                                    page16 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -323,11 +326,12 @@ function monitor() {
                             page17 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page17 = false;
-                                    }else{
-                                        page17 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page17 = false;
+                                    // }else{
+                                    //     page17 = true;
+                                    // }
+                                    page17 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -360,11 +364,12 @@ function monitor() {
                             page18 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page18 = false;
-                                    }else{
-                                        page18 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page18 = false;
+                                    // }else{
+                                    //     page18 = true;
+                                    // }
+                                    page18 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -396,11 +401,12 @@ function monitor() {
                             page19 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page19 = false;
-                                    }else{
-                                        page19 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page19 = false;
+                                    // }else{
+                                    //     page19 = true;
+                                    // }
+                                    page19 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -442,11 +448,12 @@ function monitor() {
                             page20 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page20 = false;
-                                    }else{
-                                        page20 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page20 = false;
+                                    // }else{
+                                    //     page20 = true;
+                                    // }
+                                    page20 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -456,12 +463,15 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                var testPortArray = load_data.试验端口及被试品工作状态;
-                for(var i = 0; i < testPortArray.length; i++) {
-                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
-                    editor.getEditor(editorName).disable();
-                }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                var testPortArray = load_data.试验端口及被试品工作状态;
+                // if(testPortArray != null) {
+                    for (var i = 0; i < testPortArray.length; i++) {
+                        var editorName = 'root.试验端口及被试品工作状态.' + i + '.天线端口';
+                        editor.getEditor(editorName).disable();
+                    }
+                // }
+
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '21':
@@ -478,11 +488,12 @@ function monitor() {
                             page21 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page21 = false;
-                                    }else{
-                                        page21 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page21 = false;
+                                    // }else{
+                                    //     page21 = true;
+                                    // }
+                                    page21 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -514,11 +525,12 @@ function monitor() {
                             page22 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page22 = false;
-                                    }else{
-                                        page22 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page22 = false;
+                                    // }else{
+                                    //     page22 = true;
+                                    // }
+                                    page22 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -551,11 +563,12 @@ function monitor() {
                             page23 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page23 = false;
-                                    }else{
-                                        page23 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page23 = false;
+                                    // }else{
+                                    //     page23 = true;
+                                    // }
+                                    page23 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -587,11 +600,12 @@ function monitor() {
                             page24 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page24 = false;
-                                    }else{
-                                        page24 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page24 = false;
+                                    // }else{
+                                    //     page24 = true;
+                                    // }
+                                    page24 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -601,11 +615,11 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                // var testPortArray = load_data.试验位置及被试品工作状态;
-                // for(var i = 0; i < testPortArray.length; i++) {
-                //     var editorName = 'root.试验位置及被试品工作状态.'+i+'.试验位置';
-                //     editor.getEditor(editorName).disable();
-                // }
+                var testPortArray = load_data.试验位置及被试品工作状态;
+                for(var i = 0; i < testPortArray.length; i++) {
+                    var editorName = 'root.试验位置及被试品工作状态.'+i+'.试验位置';
+                    editor.getEditor(editorName).disable();
+                }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 editor.on('change',function() {
                     $("input[name*='工作状态描述']").attr("readonly", "readonly");
@@ -626,11 +640,12 @@ function monitor() {
                             page25 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page25 = false;
-                                    }else{
-                                        page25 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page25 = false;
+                                    // }else{
+                                    //     page25 = true;
+                                    // }
+                                    page25 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -660,11 +675,12 @@ function monitor() {
                             page26 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page26 = false;
-                                    }else{
-                                        page26 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page26 = false;
+                                    // }else{
+                                    //     page26 = true;
+                                    // }
+                                    page26 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -705,11 +721,12 @@ function monitor() {
                             page27 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page27 = false;
-                                    }else{
-                                        page27 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page27 = false;
+                                    // }else{
+                                    //     page27 = true;
+                                    // }
+                                    page27 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -749,11 +766,12 @@ function monitor() {
                             page28 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page28 = false;
-                                    }else{
-                                        page28 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page28 = false;
+                                    // }else{
+                                    //     page28 = true;
+                                    // }
+                                    page28 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -793,11 +811,12 @@ function monitor() {
                             page29 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page29 = false;
-                                    }else{
-                                        page29 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page29 = false;
+                                    // }else{
+                                    //     page29 = true;
+                                    // }
+                                    page29 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -827,11 +846,12 @@ function monitor() {
                             page30 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page30 = false;
-                                    }else{
-                                        page30 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page30 = false;
+                                    // }else{
+                                    //     page30 = true;
+                                    // }
+                                    page30 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -863,11 +883,12 @@ function monitor() {
                             page31 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page31 = false;
-                                    }else{
-                                        page31 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page31 = false;
+                                    // }else{
+                                    //     page31 = true;
+                                    // }
+                                    page31 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -897,11 +918,12 @@ function monitor() {
                             page32 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page32 = false;
-                                    }else{
-                                        page32 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page32 = false;
+                                    // }else{
+                                    //     page32 = true;
+                                    // }
+                                    page32 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -931,11 +953,12 @@ function monitor() {
                             page33 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page33 = false;
-                                    }else{
-                                        page33 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page33 = false;
+                                    // }else{
+                                    //     page33 = true;
+                                    // }
+                                    page33 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -967,11 +990,12 @@ function monitor() {
                             page34 = true;
                             $(this).parent().parent().parent().next("div").children().children().children("input").on('change',
                                 function () {
-                                    if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
-                                        page34 = false;
-                                    }else{
-                                        page34 = true;
-                                    }
+                                    // if($(this).parent().parent().parent().next("div").children().children().children("input").val() != "") {
+                                    //     page34 = false;
+                                    // }else{
+                                    //     page34 = true;
+                                    // }
+                                    page34 = false;
                                 });
                             $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '若不实施，则不实施理由必填'});
                         }
@@ -1298,14 +1322,17 @@ function monitor() {
                 // }
                 // $("input[name='root[试验项目][0][试验项目序号]']").val(1);
                 // $("input[name='root[试验项目][1][试验项目序号]']").val(2);
+
+
+
                 $("#project_submit").addClass("hidden");
                 $("#next_page").removeClass("hidden");
                 $("#echartsPic1").removeClass("hidden");
                 var all_data = JSON.parse(pageData.data);
                 console.log('all_data'+":"+all_data);
-                var load_data = all_data.data;
-                console.log('load_data'+load_data);
-                var load_dataObj = JSON.parse(load_data);
+                var load_data_58 = all_data.data;
+                console.log('load_data'+load_data_58);
+                var load_dataObj = JSON.parse(load_data_58);
                 var projectListObj = load_dataObj.试验项目;
                 for (var i = 0; i < projectListObj.length - 1; i++) {
                     for (var j = 0; j < projectListObj.length - i - 1; j++) {

@@ -181,6 +181,11 @@ public class DependencyService {
                                 singlePower.put("交流/直流", "直流");
                             }else{
                                 singlePower.put("交流/直流", "交流");
+                                if(voltageArray.getString(i).equals("2")){
+                                    singlePower.put("频率(Hz)", "50");
+                                }else if (voltageArray.getString(i).equals("3")){
+                                    singlePower.put("频率(Hz)", "400");
+                                }
                             }
                             if(powerSupplyArray.getString(i).equals("1")){
                                 if(voltageNumArray.getString(i).equals("1")){
@@ -2169,6 +2174,12 @@ public class DependencyService {
 
     //获取14-34页用频设备工作状态描述
     public void getFreqWorkStatus(ManageSysDevelop manageSysDevelop){
+        array1001 = new JSONArray();
+        array1002 = new JSONArray();
+        array1003 = new JSONArray();
+        array1004 = new JSONArray();
+        array1005 = new JSONArray();
+        array1006 = new JSONArray();
         array1006.add("{\"type\":\"object\",\"title\":\"CE107-17\",\"properties\":{\"试验项目\":{\"type\":\"string\",\"default\":\"CE107\"},\"试验目的\":{\"type\":\"string\",\"default\":\"考核被试品因开关操作在输入电源线上产生的上的传导发射是否符合GJB151B规定。\"},\"试验内容\":{\"type\":\"string\",\"default\":\"电源线尖峰信号传导发射\"},\"限值\":{\"type\":\"string\",\"format\":\"textarea\"},\"数据处理方法\":{\"type\":\"string\",\"format\":\"textarea\",\"default\":\"测试数据为尖峰信号的电压幅度、极性、半峰值脉冲宽度，并提供波形图。\"},\"测试结果评定准则\":{\"type\":\"string\",\"default\":\"被试品传导发射实测值不超过限值要求，则判为合格，否则为不合格。\"},\"试验端口及被试品工作状态\":{\"type\":\"array\",\"format\":\"tab\",\"items\":{\"type\":\"object\",\"headerTemplate\":\"试验电源端口{{ i1 }}\",\"properties\":{\"试验电源端口\":{\"type\":\"string\"},\"工作状态\":{\"type\":\"array\",\"format\":\"tab\",\"items\":{\"type\":\"object\",\"headerTemplate\":\"工作状态{{ i1 }}\",\"properties\":{\"\":{\"type\":\"object\",\"properties\":{\"工作状态描述\":{\"type\":\"string\"},\"状态是否实施\":{\"type\":\"string\",\"enum\":[\"是\",\"否\"],\"default\":\"是\"},\"不实施理由\":{\"type\":\"string\",\"default\":\"无\"}}}}}},\"开关状态\":{\"type\":\"string\"},\"端口是否实施\":{\"type\":\"string\",\"enum\":[\"是\",\"否\"],\"default\":\"是\"},\"不实施理由\":{\"type\":\"string\",\"default\":\"无\"},\"备注\":{\"type\":\"string\"}}}}}}");
         JSONArray devFreqOptional = (JSONArray)JSON.parse(manageSysDevelop.getDevFreqOptional());
         JSONObject devFreqFHLow = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhLow());
@@ -2191,9 +2202,12 @@ public class DependencyService {
                     string1003_low.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
                     string1003_mid.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
                     string1003_high.append("受试设备处于发射状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
-                    string1005_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
-                    string1005_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
-                    string1005_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+//                    string1005_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+//                    string1005_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+//                    string1005_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+                    string1005_low.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+                    string1005_mid.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1005_high.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
                     JSONObject json1001 = new JSONObject();
                     JSONObject json1003_low = new JSONObject();
                     JSONObject json1003_mid = new JSONObject();
@@ -2228,10 +2242,14 @@ public class DependencyService {
                     StringBuilder string1003_low = new StringBuilder();
                     StringBuilder string1003_mid = new StringBuilder();
                     StringBuilder string1003_high = new StringBuilder();
-                    string1001.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
-                    string1003_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
-                    string1003_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
-                    string1003_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+//                    string1001.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+//                    string1003_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+//                    string1003_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+//                    string1003_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
+                    string1001.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1003_low.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
+                    string1003_mid.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
+                    string1003_high.append("受试设备处于接收状态，调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
                     JSONObject json1001 = new JSONObject();
                     JSONObject json1003_low = new JSONObject();
                     JSONObject json1003_mid = new JSONObject();
@@ -2255,19 +2273,6 @@ public class DependencyService {
                     }
                 }
             }
-//            if(devReceiveLaunch == 3){
-//                for (int i = 0; i < devFreqOptional.size(); i++){
-//                    JSONObject freqOptional = devFreqOptional.getJSONObject(i);
-//                    StringBuilder string1002 = new StringBuilder();
-//                    StringBuilder string1004_low = new StringBuilder();
-//                    StringBuilder string1004_mid = new StringBuilder();
-//                    StringBuilder string1004_high = new StringBuilder();
-//                    string1002.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
-//                    string1004_low.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_low")).append("MHz。");
-//                    string1004_mid.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_mid")).append("MHz。");
-//                    string1004_high.append("受试设备处于接收状态，最大发射平均功率为").append(freqOptional.getString("opt_ave_pow_transmit_max")).append("(dBW)；调制方式为").append(freqOptional.getJSONObject("opt_modulation_mode_num").getString("opt_modulation_mode_1")).append("；工作频率：").append(freqOptional.getString("opt_freq_high")).append("MHz。");
-//                }
-//            }
         }else if(!devFreqFHLow.isEmpty()){
             if(devReceiveLaunch == 1 || devReceiveLaunch == 3){
                 StringBuilder string1001_low = new StringBuilder();
@@ -2279,9 +2284,12 @@ public class DependencyService {
                 string1001_low.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW）").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
                 string1001_mid.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
                 string1001_high.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
-                string1005_low.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
-                string1005_mid.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
-                string1005_high.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+//                string1005_low.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+//                string1005_mid.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+//                string1005_high.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1005_low.append("受试设备处于接收状态，工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1005_mid.append("受试设备处于接收状态，工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1005_high.append("受试设备处于接收状态，工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
                 JSONObject json1001_low = new JSONObject();
                 JSONObject json1001_mid = new JSONObject();
                 JSONObject json1001_high = new JSONObject();
@@ -2314,9 +2322,12 @@ public class DependencyService {
                 StringBuilder string1001_low = new StringBuilder();
                 StringBuilder string1001_mid = new StringBuilder();
                 StringBuilder string1001_high = new StringBuilder();
-                string1001_low.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
-                string1001_mid.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
-                string1001_high.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+//                string1001_low.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHLow.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+//                string1001_mid.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHMid.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+//                string1001_high.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqFHHigh.getString("ave_pow_transmit_max")).append("(dBW)").append("；工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_low.append("受试设备处于接收状态，工作频率范围：").append(devFreqFHLow.getString("freq_low")).append("～").append(devFreqFHLow.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_mid.append("受试设备处于接收状态，工作频率范围：").append(devFreqFHMid.getString("freq_low")).append("～").append(devFreqFHMid.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
+                string1001_high.append("受试设备处于接收状态，工作频率范围：").append(devFreqFHHigh.getString("freq_low")).append("～").append(devFreqFHHigh.getString("freq_high")).append("MHz，至少覆盖30%可用频率组。");
                 JSONObject json1001_low = new JSONObject();
                 JSONObject json1001_mid = new JSONObject();
                 JSONObject json1001_high = new JSONObject();
@@ -2346,7 +2357,8 @@ public class DependencyService {
                 StringBuilder string1001 = new StringBuilder();
                 StringBuilder string1005 = new StringBuilder();
                 string1001.append("受试设备处于发射状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
-                string1005.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+//                string1005.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+                string1005.append("受试设备处于接收状态，最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
                 JSONObject json1001 = new JSONObject();
                 JSONObject json1005 = new JSONObject();
                 json1001.put("工作状态",string1001.toString());
@@ -2359,7 +2371,8 @@ public class DependencyService {
             }
             if(devReceiveLaunch == 2 || devReceiveLaunch == 3){
                 StringBuilder string1001 = new StringBuilder();
-                string1001.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+//                string1001.append("受试设备处于接收状态，最大发射平均功率为").append(devFreqDSSS.getString("ave_pow_transmit_max")).append("(dBW)").append("；最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
+                string1001.append("受试设备处于接收状态，最高传输速率：").append(devFreqDSSS.getString("trans_rate_max")).append("bit/s。");
                 JSONObject json1001 = new JSONObject();
                 json1001.put("工作状态",string1001.toString());
                 array1002.add(json1001);

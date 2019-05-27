@@ -310,7 +310,10 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                $("#editor_holder button").addClass("hidden");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '17':
                 page17 = false;

@@ -144,6 +144,8 @@ public class DependencyService {
                 jsonObject = JSON.parseObject(data);
                 if (jsonObject.size() == 0) {
                     resultData = manageSysSchemaMapper.selectCol(1, "outline_data_6");
+                } else {
+                    resultData = data;
                 }
                 break;
 

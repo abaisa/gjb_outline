@@ -95,8 +95,8 @@ function monitor() {
                     });
                 $("#editor_holder button").click(function() {
                     $("input[name*='连接电缆ID']").width(50);
-                    $("input[name*='名称']").width(50);
-                    $("input[name*='型号']").width(50);
+                    $("input[name*='名称']").width(20);
+                    $("input[name*='型号']").width(20);
                     $("input[name*='生产厂']").width(50);
                     $("input[name*='长度']").width(50);
                     $("input[name*='连接端口ID']").width(50);
@@ -1333,7 +1333,7 @@ function monitor() {
                 $("#echartsPic1").removeClass("hidden");
                 var all_data = JSON.parse(pageData.data);
                 console.log('all_data'+":"+all_data);
-                var load_data_58 = all_data.data;
+                var load_data_58 = all_data.data;+
                 console.log('load_data'+load_data_58);
                 var load_dataObj = JSON.parse(load_data_58);
                 var projectListObj = load_dataObj.试验项目;

@@ -209,8 +209,8 @@ function downloadPic(){
                 var img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = "statics/imgs/"+pic1List[i];
-                // var url = "/image/"+pic1List[i];
+                // var url = "statics/imgs/"+pic1List[i];
+                var url = "/image/"+pic1List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
@@ -242,8 +242,8 @@ function downloadPic2(){
                 var  img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = "statics/imgs/"+pic2List[i];
-                // var url = "/image/"+pic2List[i];
+                // var url = "statics/imgs/"+pic2List[i];
+                var url = "/image/"+pic2List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
@@ -276,8 +276,8 @@ function downloadPic3(){
                 var  img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                var url = "statics/imgs/"+pic3List[i];
-                // var url = "/image/"+pic2List[i];
+                // var url = "statics/imgs/"+pic3List[i];
+                var url = "/image/"+pic3List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;

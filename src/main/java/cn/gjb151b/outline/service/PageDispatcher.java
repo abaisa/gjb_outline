@@ -177,13 +177,13 @@ public class PageDispatcher {
         if (projectJsonArray.contains("1")) {
             nextPageRouter.put(8, 10);
         } else {
-            nextPageRouter.put(9, 1001);
-            nextPageRouter.put(1001, 1002);
-            nextPageRouter.put(1002, 1003);
-            nextPageRouter.put(1003, 1004);
-            nextPageRouter.put(1004, 1005);
-            nextPageRouter.put(1005, 1006);
-            nextPageRouter.put(1006, 10);
+            nextPageRouter.put(9, 10);
+//            nextPageRouter.put(1001, 1002);
+//            nextPageRouter.put(1002, 1003);
+//            nextPageRouter.put(1003, 1004);
+//            nextPageRouter.put(1004, 1005);
+//            nextPageRouter.put(1005, 1006);
+//            nextPageRouter.put(1006, 10);
         }
         nextPageRouter.put(13, pageNumberList.get(0));
         for (int i = 0; i < pageNumberList.size() - 1; i++) {
@@ -305,13 +305,13 @@ public class PageDispatcher {
         if (projectJsonArray.contains("1")) {
             previousPageRouter.put(10, 8);
         } else {
-            previousPageRouter.put(10, 1006);
-            previousPageRouter.put(1006, 1005);
-            previousPageRouter.put(1005, 1004);
-            previousPageRouter.put(1004, 1003);
-            previousPageRouter.put(1003, 1002);
-            previousPageRouter.put(1002, 1001);
-            previousPageRouter.put(1001, 9);
+            previousPageRouter.put(10, 9);
+//            previousPageRouter.put(1006, 1005);
+//            previousPageRouter.put(1005, 1004);
+//            previousPageRouter.put(1004, 1003);
+//            previousPageRouter.put(1003, 1002);
+//            previousPageRouter.put(1002, 1001);
+//            previousPageRouter.put(1001, 9);
         }
         return previous(sourcePageNumber);
     }

@@ -515,6 +515,12 @@ public class ManageSysDevelop {
      */
     private String devAdviceAuthorize;
 
+    private Integer devFreSelect;
+
+    public Integer getDevFreSelect() {return  devFreSelect;}
+
+    public  void setDevFreSelect(Integer devFreSelect) {this.devFreSelect = devFreSelect;}
+
     public String getProjectList() {
         return projectList;
     }

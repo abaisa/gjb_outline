@@ -1457,16 +1457,14 @@ public class DependencyService {
                 JSONObject outlineData26Object = JSON.parseObject(outlineData26);
                 JSONObject outlineData27Object = JSON.parseObject(outlineData27);
                 JSONObject outlineData28Object = JSON.parseObject(outlineData28);
-                JSONObject CS114Status = new JSONObject();
-                JSONObject CS116Status = new JSONObject();
-                for(int i=1; i<sensitiveNum+1; i++){
-                    JSONObject CS114Power = new JSONObject();
-                    JSONObject CS116Power = new JSONObject();
-                    CS114Power.put("施加电缆束", "完整电源线，所有高电位线");
-                    CS116Power.put("施加电缆束", "完整电源线，每根高电位线");
-                    CS114Status.put("工作状态"+i, CS114Power);
-                    CS116Status.put("工作状态"+i, CS116Power);
-                }
+//                for(int i=1; i<sensitiveNum+1; i++){
+//                    JSONObject CS114Power = new JSONObject();
+//                    JSONObject CS116Power = new JSONObject();
+//                    CS114Power.put("施加电缆束", "完整电源线，所有高电位线");
+//                    CS116Power.put("施加电缆束", "完整电源线，每根高电位线");
+//                    CS114Status.put("工作状态"+i, CS114Power);
+//                    CS116Status.put("工作状态"+i, CS116Power);
+//                }
                 for(int i = 0; i < powerPortArray.size(); i++) {
                     JSONObject powerPort = powerPortArray.getJSONObject(i);
                     if(powerPort.get("外部电源供电").equals("是") && powerPort.get("输入/输出").equals("输入")) {
@@ -1479,6 +1477,18 @@ public class DependencyService {
                         allPowerObject.put("试验电源端口", powerPort.get("端口名称或代号"));
                         allPowerArray.add(allPowerObject);
                     }
+                    //添加电源电缆束
+                    JSONObject CS114Status = new JSONObject();
+                    JSONObject CS116Status = new JSONObject();
+                    for(int j=1; j<sensitiveNum+1; j++){
+                        JSONObject CS114Power = new JSONObject();
+                        JSONObject CS116Power = new JSONObject();
+                        CS114Power.put("施加电缆束", "完整电源线，所有高电位线");
+                        CS116Power.put("施加电缆束", "完整电源线，每根高电位线");
+                        CS114Status.put("工作状态"+j, CS114Power);
+                        CS116Status.put("工作状态"+j, CS116Power);
+                    }
+                    //所有电源端口
                     JSONObject singlePowerCS114 = new JSONObject();
                     JSONObject singlePowerCS116 = new JSONObject();
                     singlePowerCS114.put("电源端口",powerPort.get("端口名称或代号"));
@@ -1954,15 +1964,15 @@ public class DependencyService {
         outlineData29Object.remove(title);
         String outlineSchema = manageSysSchemaMapper.selectCol(1, schema);
         JSONObject outlineSchemaObject = JSON.parseObject(outlineSchema, Feature.OrderedField);
-        JSONObject exWorkLaunch;
-        if(schema.equals("outline_schema_26") || schema.equals("outline_schema_27") || schema.equals("outline_schema_28")){
-            exWorkLaunch = outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("properties").getJSONObject("电源端口").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
-        }else {
-            exWorkLaunch = outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
-        }
-        JSONObject oneExLaunch = exWorkLaunch.getJSONObject("工作状态1");
+//        JSONObject exWorkLaunch;
+//        if(schema.equals("outline_schema_26") || schema.equals("outline_schema_27") || schema.equals("outline_schema_28")){
+//            exWorkLaunch = outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("properties").getJSONObject("电源端口").getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
+//        }else {
+//            exWorkLaunch = outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").getJSONObject("properties");
+//        }
+//        JSONObject oneExLaunch = exWorkLaunch.getJSONObject("工作状态1");
+        JSONObject oneExLaunch = (JSONObject)JSON.parse("{\"type\":\"object\",\"title\":\"工作状态1\",\"properties\":{\"工作状态描述\":{\"default\":\"受试设备处于接收状态，调制方式为调频；工作频率：1MHz。\",\"type\":\"string\"},\"状态是否实施\":{\"default\":\"是\",\"type\":\"string\",\"enum\":[\"是\",\"否\"]},\"不实施理由\":{\"default\":\"无\",\"type\":\"string\"}}}");
         JSONObject allWorkLaunch = new JSONObject(true);
-        System.out.println("exworkLaunch"+JSON.toJSONString(exWorkLaunch));
         for(int i=0; i<launchArray.size(); i++){
             int num = i+1;
             JSONObject workLaunch = new JSONObject();
@@ -2184,8 +2194,10 @@ public class DependencyService {
         JSONObject devFreqFHMid = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhMid());
         JSONObject devFreqFHHigh = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhHigh());
         JSONObject devFreqDSSS = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqDsss());
+        int devFreSelect = manageSysDevelop.getDevFreSelect();
         int devReceiveLaunch = manageSysDevelop.getDevReceiveLaunch();
-        if(!devFreqOptional.isEmpty()){
+//        if(!devFreqOptional.isEmpty()){
+        if(devFreSelect == 1){
             if(devReceiveLaunch == 1 || devReceiveLaunch == 3){
                 for (int i = 0; i < devFreqOptional.size(); i++) {
                     JSONObject freqOptional = devFreqOptional.getJSONObject(i);
@@ -2271,7 +2283,8 @@ public class DependencyService {
                     }
                 }
             }
-        }else if(!devFreqFHLow.isEmpty()){
+//        }else if(!devFreqFHLow.isEmpty()){
+        }else if(devFreSelect == 2){
             if(devReceiveLaunch == 1 || devReceiveLaunch == 3){
                 StringBuilder string1001_low = new StringBuilder();
                 StringBuilder string1001_mid = new StringBuilder();

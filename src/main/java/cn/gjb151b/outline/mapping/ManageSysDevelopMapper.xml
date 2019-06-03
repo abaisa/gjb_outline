@@ -67,6 +67,7 @@
     <result column="dev_advice_audit" jdbcType="LONGVARCHAR" property="devAdviceAudit" />
     <result column="dev_advice_authorize" jdbcType="LONGVARCHAR" property="devAdviceAuthorize" />
     <result column="project_list" jdbcType="LONGVARCHAR" property="projectList"/>
+    <result column="dev_fre_select" jdbcType="LONGVARCHAR" property="devFreSelect"/>
   </resultMap>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

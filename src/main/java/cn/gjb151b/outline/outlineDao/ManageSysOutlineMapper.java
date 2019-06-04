@@ -9,20 +9,28 @@ import java.util.List;
 @Repository
 public interface ManageSysOutlineMapper {
     // 这都是很不安全的东西！但是很好用！直接无脑注入SQL语句
-    void updateCol(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") String data);
+//    void updateCol(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") String data);
 
-    void updateCol2(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") int data);
+    void updateColByOutlineDevItemId(@Param("outlineDevItemId") String outlineDevItemId, @Param("colName") String colName, @Param("data") String data);
 
-    void updateColInt(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") Integer data);
+//    void updateCol2(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") int data);
 
-    String selectCol(@Param("outlineID") int outlineID, @Param("colName") String colName);
+    void updateCol2ByOutlineDevItemId(@Param("outlineDevItemId") String outlineDevItemId, @Param("colName") String colName, @Param("data") int data);
 
-    Integer selectCol2(@Param("outlineID") int outlineID, @Param("colName") String colName);
+//    void updateColInt(@Param("outlineID") int outlineID, @Param("colName") String colName, @Param("data") Integer data);
+
+//    String selectCol(@Param("outlineID") int outlineID, @Param("colName") String colName);
+
+    String selectColByOutlineDevItemId(@Param("outlineDevItemId") String outlineDecItemId, @Param("colName") String colName);
+
+//    Integer selectCol2(@Param("outlineID") int outlineID, @Param("colName") String colName);
 
 
-    ManageSysOutline selectByPrimaryKey(@Param("outlineId") Integer outlineId);
 
-    ManageSysOutline selectProjectByItemId(@Param("outlineDevItemId") String outlineDevItemId);
+
+//    ManageSysOutline selectByPrimaryKey(@Param("outlineId") Integer outlineId);
+
+    ManageSysOutline selectProjectByDevItemId(@Param("outlineDevItemId") String outlineDevItemId);
 
     List<ManageSysOutline> findAllItem();
 

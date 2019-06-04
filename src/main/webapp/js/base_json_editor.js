@@ -57,7 +57,7 @@ function submitPageData(action) {
         url: "/outline/page_data/submit",
         async: false, // 获取下一页页码在后端进行，避免数据不完整，提交试用同步方式
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             pageNumber: page_number,
             pageAction: action,       // 1 表示下一页，2 表示上一页，3表示其他依赖页触发的提交
             jsonData: JSON.stringify(editor.getValue()),
@@ -84,7 +84,7 @@ function loadTargetPage(action) {
         url: "/outline/page_data/load",
         data: {
             currentPageNumber: page_number,
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             pageAction: action       // 1 表示下一页，2 表示上一页
         },
 

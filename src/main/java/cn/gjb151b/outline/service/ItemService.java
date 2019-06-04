@@ -81,7 +81,7 @@ public class ItemService {
         List<ItemFromFirstSys> itemList = new ArrayList<>();
         for(ManageSysDevelop manageSysDevelop : item){
             String devItemid = manageSysDevelop.getDevItemid();
-            if(manageSysDevelop.getDevStatus() == 5 && manageSysOutlineMapper.selectProjectByItemId(devItemid) == null){
+            if(manageSysDevelop.getDevStatus() == 5 && manageSysOutlineMapper.selectProjectByDevItemId(devItemid) == null){
                 ItemFromFirstSys itemFromFirstSys = new ItemFromFirstSys();
                 itemFromFirstSys.setOutlineItemid(manageSysDevelop.getDevId());
                 itemFromFirstSys.setOutlineDevItemid(manageSysDevelop.getDevItemid());
@@ -132,7 +132,7 @@ public class ItemService {
     public void updateItem(String devItemId, String userNew, String userProofread, String userAudit, String userAuthorize) {
 
         //项目的原来操作用户清空
-        if (manageSysOutlineMapper.selectProjectByItemId(devItemId) != null) {
+        if (manageSysOutlineMapper.selectProjectByDevItemId(devItemId) != null) {
             List<String> userOldNew = outlineUserInfoMapper.selectNewItemOperator(devItemId);
             List<String> userOldProofread = outlineUserInfoMapper.selectProofreadItemOperator(devItemId);
             List<String> userOldAudit = outlineUserInfoMapper.selectAuditItemOperator(devItemId);

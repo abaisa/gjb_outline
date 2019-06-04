@@ -93,9 +93,17 @@
 		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
     </update>
 
+    <update id="updateColByOutlineDevItemId" statementType="STATEMENT">
+		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_dev_itemid = '${outlineDevItemId}';
+    </update>
+
 
     <update id="updateCol2" statementType="STATEMENT">
 		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
+    </update>
+
+    <update id="updateCol2ByOutlineDevItemId" statementType="STATEMENT">
+		UPDATE manage_sys_outline SET ${colName}= '${data}' WHERE outline_dev_itemid = '${outlineDevItemId}';
     </update>
 
     <update id="updateColInt" statementType="STATEMENT">
@@ -104,6 +112,10 @@
 
     <select id="selectCol" statementType="STATEMENT" resultType="string">
         SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
+    </select>
+
+    <select id="selectColByOutlineDevItemId" statementType="STATEMENT" resultType="string">
+        SELECT ${colName} FROM manage_sys_outline WHERE outline_dev_itemid = '${outlineDevItemId}';
     </select>
 
     <select id="selectCol2" statementType="STATEMENT" resultType="Integer">
@@ -116,7 +128,7 @@
         WHERE outline_id = #{outlineId}
     </select>
 
-    <select id="selectProjectByItemId" parameterType="String" resultMap="BaseResultMap">
+    <select id="selectProjectByDevItemId" parameterType="String" resultMap="BaseResultMap">
         SELECT *
         FROM  manage_sys_outline
         where outline_dev_itemid = #{outlineDevItemId}

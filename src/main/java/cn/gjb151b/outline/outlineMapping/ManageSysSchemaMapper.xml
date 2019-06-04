@@ -96,6 +96,8 @@
         SELECT ${colName} FROM manage_sys_schema WHERE outline_id = ${outlineID};
     </select>
 
+
+
   <update id="updateCol" statementType="STATEMENT">
 		UPDATE manage_sys_schema SET ${colName}= '${data}' WHERE outline_id = ${outlineID};
     </update>

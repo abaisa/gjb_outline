@@ -33,6 +33,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private Integer outlineStatusOriginal;
     private BaseResponse<String> response;
     private Integer changeLocation;
+    private String outlineDevItemId;
 
     private Integer picNumber;
 
@@ -76,7 +77,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        }
 
         try {
-            coreService.submitPageData(outlineID, pageNumber, pageAction, jsonData, changeLocation);
+            coreService.submitPageData(outlineDevItemId, pageNumber, pageAction, jsonData, changeLocation);
         } catch (ServiceException e) {
             logger.info(String.format("service error, outlineID:%d pageNumber:%d errInfo:%s", outlineID, pageNumber,
                     e.getExceptionEnums().getErrMsg()));
@@ -109,7 +110,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
         if(pageNumber == 4){
             if(picNumber == 1){
                 try{
-                    String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                    String outlineData4 = dbService.fetchData(outlineDevItemId, "outline_data_4");
                     JSONObject jsonObject;
                     jsonObject = JSON.parseObject(outlineData4);
                     List<String> pic1List = (List<String>)jsonObject.get("分系统/设备照片");
@@ -130,14 +131,14 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     pic1List.add(filename);
                     jsonObject.put("分系统/设备照片", pic1List);
                     outlineData4 = jsonObject.toJSONString();
-                    dbService.submitData(outlineID, "outline_data_4", outlineData4);
+                    dbService.submitData(outlineDevItemId, "outline_data_4", outlineData4);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
 
             } else if(picNumber == 2){
                 try{
-                    String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                    String outlineData4 = dbService.fetchData(outlineDevItemId, "outline_data_4");
                     JSONObject jsonObject;
                     jsonObject = JSON.parseObject(outlineData4);
                     List<String> pic2List = (List<String>)jsonObject.get("分系统/设备关系图");
@@ -156,7 +157,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     pic2List.add(filename);
                     jsonObject.put("分系统/设备关系图", pic2List);
                     outlineData4 = jsonObject.toJSONString();
-                    dbService.submitData(outlineID, "outline_data_4", outlineData4);
+                    dbService.submitData(outlineDevItemId, "outline_data_4", outlineData4);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -167,7 +168,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
             if (pageNumber >= 14 && pageNumber <= 34) {
                 try {
                     String colName = "outline_data_" + pageNumber;
-                    String outlineData14To34 = dbService.fetchData(outlineID, colName);
+                    String outlineData14To34 = dbService.fetchData(outlineDevItemId, colName);
                     JSONObject jsonObject = JSON.parseObject(outlineData14To34);
                     String filename = imagesFileName;
                     try {
@@ -176,7 +177,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         e.printStackTrace();
                     }
                     jsonObject.put("项目试验图", filename);
-                    dbService.submitData(outlineID, colName, jsonObject.toJSONString());
+                    dbService.submitData(outlineDevItemId, colName, jsonObject.toJSONString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -192,7 +193,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
         if(pageNumber == 4){
             if(picNumber == 1){
                     try{
-                        String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                        String outlineData4 = dbService.fetchData(outlineDevItemId, "outline_data_4");
                         JSONObject jsonObject;
                         jsonObject = JSON.parseObject(outlineData4);
                         List<String> picList1 = (List<String>) jsonObject.get("分系统/设备照片");
@@ -202,14 +203,14 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         pictureList = (List<String>) jsonObject.get("分系统/设备照片");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备照片", picList);
-                        dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
+                        dbService.submitData(outlineDevItemId, "outline_data_4", jsonObject.toJSONString());
                     }catch (Exception e){
                         e.printStackTrace();
                     }
 
             } else if(picNumber == 2) {
                     try{
-                        String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                        String outlineData4 = dbService.fetchData(outlineDevItemId, "outline_data_4");
                         JSONObject jsonObject;
                         jsonObject = JSON.parseObject(outlineData4);
                         List<String> picList2 = (List<String>) jsonObject.get("分系统/设备关系图");
@@ -220,7 +221,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         pictureList  = (List<String>) jsonObject.get("分系统/设备关系图");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备关系图", picList);
-                        dbService.submitData(outlineID, "outline_data_4", jsonObject.toJSONString());
+                        dbService.submitData(outlineDevItemId, "outline_data_4", jsonObject.toJSONString());
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -240,11 +241,11 @@ public class OutlinePageSubmitAction extends ActionSupport {
     public String submitText() {
         String colName = "outline_data_" + pageNumber;
         try {
-            String outlineData14To34 = dbService.fetchData(outlineID, colName);
+            String outlineData14To34 = dbService.fetchData(outlineDevItemId, colName);
             JSONObject jsonObject = JSON.parseObject(outlineData14To34);
             jsonObject.put("修改图形理由", textNew1);
             jsonObject.put("修改方法", textNew2);
-            dbService.submitData(outlineID, colName, jsonObject.toJSONString());
+            dbService.submitData(outlineDevItemId, colName, jsonObject.toJSONString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -257,13 +258,13 @@ public class OutlinePageSubmitAction extends ActionSupport {
     public String submitAdvice(){
         try {
             if(outlineStatusOriginal == 1){
-                coreService.submitAdvice(outlineID, "outline_advice_proofread", outlineAdvice, "outline_status", outlineStatus);
+                coreService.submitAdvice(outlineDevItemId, "outline_advice_proofread", outlineAdvice, "outline_status", outlineStatus);
             }else if(outlineStatusOriginal == 2){
-                coreService.submitAdvice(outlineID, "outline_advice_audit", outlineAdvice, "outline_status", outlineStatus);
+                coreService.submitAdvice(outlineDevItemId, "outline_advice_audit", outlineAdvice, "outline_status", outlineStatus);
             }else if(outlineStatusOriginal == 3){
-                coreService.submitAdvice(outlineID, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
+                coreService.submitAdvice(outlineDevItemId, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
             }else{
-                coreService.submitAdvice(outlineID, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
+                coreService.submitAdvice(outlineDevItemId, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
             }
 
         } catch (ServiceException e) {
@@ -398,6 +399,15 @@ public class OutlinePageSubmitAction extends ActionSupport {
 
     public void setTextNew2(String textNew2) {
         this.textNew2 = textNew2;
+    }
+
+
+    public String getOutlineDevItemId() {
+        return outlineDevItemId;
+    }
+
+    public void setOutlineDevItemId(String outlineDevItemId) {
+        this.outlineDevItemId = outlineDevItemId;
     }
 
 }

@@ -67,7 +67,7 @@ public class ViewProjectService {
             List <ViewProject> lm = new ArrayList<>();
             if(ids != null && ids.size() != 0 ){
                 for(String str : ids){
-                    ManageSysOutline manageSysOutline = manageSysOutlineMapper.selectProjectByItemId(str);
+                    ManageSysOutline manageSysOutline = manageSysOutlineMapper.selectProjectByDevItemId(str);
                     if(manageSysOutline != null){
                         ViewProject viewProject= new ViewProject(manageSysOutline.getOutlineName(),manageSysOutline.getOutlineStatus(),manageSysOutline.getOutlineDevItemid(),manageSysOutline.getOutlineId());
                         lm.add(viewProject);
@@ -82,8 +82,8 @@ public class ViewProjectService {
             }else {
 
                 for (int i = 0; i < lm.size(); i++) {
-                    projectDic.put(lm.get(i).getOutlineItemid(), lm.get(i).getOutlineStatus());
-                    projectIds.put(lm.get(i).getOutlineItemid(), i);
+                    projectDic.put(lm.get(i).getOutlineDevItemId(), lm.get(i).getOutlineStatus());
+                    projectIds.put(lm.get(i).getOutlineDevItemId(), i);
                 }
                 if (newList != null && newList.size() != 0) {
                     for (String str : newList) {

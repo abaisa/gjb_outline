@@ -81,44 +81,44 @@ function showText(data,act) {
     {
 
         // newtext += new1+i+text1+data.showNew[i].devName+text2+new2+i+newn;
-    newtext += new1+i+text1+data.showNew[i].outlineName+text2+new2+data.showNew[i].outlineName+new3+data.showNew[i].outlineStatus+new4+data.showNew[i].outlineId+new5+newn;
+    newtext += new1+i+text1+data.showNew[i].outlineName+text2+new2+data.showNew[i].outlineName+new3+data.showNew[i].outlineStatus+new4+data.showNew[i].outlineDevItemId+new5+newn;
     }
     for (var i=0;i<data.showProofread.length;i++)
     {
         // proofreadtext += proofread1+i+text1+data.showProofread[i].devName+text2+proofread2;
-        proofreadtext += proofread1+i+text1+data.showProofread[i].outlineName+text2+proofread2+data.showProofread[i].outlineName+proofread3+data.showProofread[i].outlineStatus+proofread4+data.showProofread[i].outlineId+proofread5+proofreadn;
+        proofreadtext += proofread1+i+text1+data.showProofread[i].outlineName+text2+proofread2+data.showProofread[i].outlineName+proofread3+data.showProofread[i].outlineStatus+proofread4+data.showProofread[i].outlineDevItemId+proofread5+proofreadn;
 
     }
     for (var i=0;i<data.showAudit.length;i++)
     {
         // audittext += audit1+i+text1+data.showAudit[i].outlineName+text2+audit2;
-        audittext += audit1+i+text1+data.showAudit[i].outlineName+text2+audit2+data.showAudit[i].outlineName+audit3+data.showAudit[i].outlineStatus+audit4+data.showAudit[i].outlineId+audit5+auditn;
+        audittext += audit1+i+text1+data.showAudit[i].outlineName+text2+audit2+data.showAudit[i].outlineName+audit3+data.showAudit[i].outlineStatus+audit4+data.showAudit[i].outlineDevItemId+audit5+auditn;
     }
     for (var i=0;i<data.showAuthorize.length;i++)
     {
         // authorizetext += authorize1+i+text1+data.showAuthorize[i].outlineName+text2+authorize2;
-        authorizetext += authorize1+i+text1+data.showAuthorize[i].outlineName+text2+authorize2+data.showAuthorize[i].outlineName+authorize3+data.showAuthorize[i].outlineStatus+authorize4+data.showAuthorize[i].outlineId+authorize5+authorizen;
+        authorizetext += authorize1+i+text1+data.showAuthorize[i].outlineName+text2+authorize2+data.showAuthorize[i].outlineName+authorize3+data.showAuthorize[i].outlineStatus+authorize4+data.showAuthorize[i].outlineDevItemId+authorize5+authorizen;
     }
     for (var i=0;i<data.showModify.length;i++)
     {
         // modifytext += modify1+i+text1+data.showModify[i].outlineName+text2+modify2;
-        modifytext += modify1+i+text1+data.showModify[i].outlineName+text2+modify2+data.showModify[i].outlineName+modify3+data.showModify[i].outlineStatus+modify4+data.showModify[i].outlineId+modify5+modifyn;
+        modifytext += modify1+i+text1+data.showModify[i].outlineName+text2+modify2+data.showModify[i].outlineName+modify3+data.showModify[i].outlineStatus+modify4+data.showModify[i].outlineDevItemId+modify5+modifyn;
 
     }
     for (var i=0;i<data.endNew.length;i++){
-        endnew += endnew1+data.endNew[i].outlineName+endnew2+data.endNew[i].outlineName+endnew3+data.endNew[i].outlineStatus+endnew4+data.endNew[i].outlineId+endnew5;
+        endnew += endnew1+data.endNew[i].outlineName+endnew2+data.endNew[i].outlineName+endnew3+data.endNew[i].outlineStatus+endnew4+data.endNew[i].outlineDevItemId+endnew5;
     }
     for (var i=0;i<data.endProofread.length;i++){
         // endproofread += endproofread1+data.endProofread[i].outlineName+endproofread2;
-        endproofread += endproofread1+data.endProofread[i].outlineName+endproofread2+data.endProofread[i].outlineName+endproofread3+data.endProofread[i].outlineStatus+endproofread4+data.endProofread[i].outlineId+endproofread5;
+        endproofread += endproofread1+data.endProofread[i].outlineName+endproofread2+data.endProofread[i].outlineName+endproofread3+data.endProofread[i].outlineStatus+endproofread4+data.endProofread[i].outlineDevItemId+endproofread5;
     }
     for (var i=0;i<data.endAudit.length;i++){
         // endaudit += endaudit1+data.endAudit[i].outlineName+endaudit2;
-        endaudit += endaudit1+data.endAudit[i].outlineName+endaudit2+data.endAudit[i].outlineName+endaudit3+data.endAudit[i].outlineStatus+endaudit4+data.endAudit[i].outlineId+endaudit5;
+        endaudit += endaudit1+data.endAudit[i].outlineName+endaudit2+data.endAudit[i].outlineName+endaudit3+data.endAudit[i].outlineStatus+endaudit4+data.endAudit[i].outlineDevItemId+endaudit5;
     }
     for (var i=0;i<data.endAuthorize.length;i++){
         // endauthorize += endauthorize1+data.endAuthorize[i].outlineName+endauthorize2;
-        endauthorize += endauthorize1+data.endAuthorize[i].outlineName+endauthorize2+data.endAuthorize[i].outlineName+endauthorize3+data.endAuthorize[i].outlineStatus+endauthorize4+data.endAuthorize[i].outlineId+endauthorize5;
+        endauthorize += endauthorize1+data.endAuthorize[i].outlineName+endauthorize2+data.endAuthorize[i].outlineName+endauthorize3+data.endAuthorize[i].outlineStatus+endauthorize4+data.endAuthorize[i].outlineDevItemId+endauthorize5;
     }
     if(act == "0"){
         $("#nav-left-offcanvas").hide();

@@ -216,7 +216,8 @@
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/monitor.js"></script>
 <script>
-    outlineId = -1;
+    // outlineId = -1;
+    outlineDevItemId = "";
     outlineStatus = -1;
     outlineName = -1;
     Status = 0;
@@ -224,7 +225,8 @@
     //获取url传递的参数
     var params = getParams();
     outlineName = params['outlineName'];
-    outlineId = params['outlineId'];
+    // outlineId = params['outlineId'];
+    outlineDevItemId = params['outlineId'];
     outlineStatus = params['outlineStatus'];
     Status = params['Status'];
     var pageData;
@@ -235,7 +237,7 @@
         type: "post",
         url: "/outline/page_data/getCurrentPageNumber",
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
         },
         success: function(data){
             console.log(data);

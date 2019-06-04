@@ -39,9 +39,9 @@ public class CoreService {
     @Autowired
     private DependencyService dependencyService;
 
-    public String getResponseData(int outlineID, int sourcePageNumber, int pageAction) throws Exception {
+    public String getResponseData(String outlineDevItemId, int sourcePageNumber, int pageAction) throws Exception {
         //从研制要求系统中获取可用项目的列表 projectList
-        ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineID);
+        ManageSysOutline outline = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
         String devItemId = outline.getOutlineDevItemid();
         ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         String projectList = develop.getProjectList();
@@ -74,7 +74,7 @@ public class CoreService {
         Map<String, String> result = new HashMap<>();
         String schema = dbService.fetchSchema( pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
 //        String schema = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());
-        String data = dbService.fetchData(outlineID, pageNumber, DbColnameEnums.DATA_PREFIX.getValue());
+        String data = dbService.fetchData(outlineDevItemId, pageNumber, DbColnameEnums.DATA_PREFIX.getValue());
 //        String outlineAdviceProofread = dbService.fetchData(outlineID, "outline_advice_proofread");
 //        String outlineAdviceAudit = dbService.fetchData(outlineID, "outline_advice_audit");
 //        String outlineAdviceAuthorize = dbService.fetchData(outlineID, "outline_advice_authorize");
@@ -85,16 +85,16 @@ public class CoreService {
         }
 
         //处理有依赖关系的schema
-        schema = dependencyService.generateDependencySchema(outlineID, pageNumber, schema);
+        schema = dependencyService.generateDependencySchema(outlineDevItemId, pageNumber, schema);
 
         //处理有依赖关系的数据信息
-        data = dependencyService.generateDependencyData(outlineID, pageNumber, data);
+        data = dependencyService.generateDependencyData(outlineDevItemId, pageNumber, data);
 
         // 打包返回数据
         result.put("schema", schema);
         result.put("data", data);
         result.put("page_id", String.valueOf(pageNumber));
-        dbService.updatePageNumber(outlineID, "current_page_number", pageNumber);
+        dbService.updatePageNumber(outlineDevItemId, "current_page_number", pageNumber);
 //        result.put("outlineAdviceProofread", outlineAdviceProofread);
 //        result.put("outlineAdviceAudit", outlineAdviceAudit);
 //        result.put("outlineAdviceAuthorize", outlineAdviceAuthorize);
@@ -104,11 +104,11 @@ public class CoreService {
     }
 
 
-    public String getAdvice(int outlineID) throws Exception {
+    public String getAdvice(String outlineDevItemId) throws Exception {
         Map<String, String> result = new HashMap<>();
-        String outlineAdviceProofread = dbService.fetchData(outlineID, "outline_advice_proofread");
-        String outlineAdviceAudit = dbService.fetchData(outlineID, "outline_advice_audit");
-        String outlineAdviceAuthorize = dbService.fetchData(outlineID, "outline_advice_authorize");
+        String outlineAdviceProofread = dbService.fetchData(outlineDevItemId, "outline_advice_proofread");
+        String outlineAdviceAudit = dbService.fetchData(outlineDevItemId, "outline_advice_audit");
+        String outlineAdviceAuthorize = dbService.fetchData(outlineDevItemId, "outline_advice_authorize");
         result.put("outlineAdviceProofread", outlineAdviceProofread);
         result.put("outlineAdviceAudit", outlineAdviceAudit);
         result.put("outlineAdviceAuthorize", outlineAdviceAuthorize);
@@ -116,20 +116,20 @@ public class CoreService {
     }
 
 
-    public void submitAdvice(int outlineID, String colNameAdvice, String advice, String colNameStatus, Integer outlineStatus) throws Exception{
+    public void submitAdvice(String outlineDevItemId, String colNameAdvice, String advice, String colNameStatus, Integer outlineStatus) throws Exception{
         if(advice != null) {
-            dbService.submitData(outlineID, colNameAdvice, advice);
+            dbService.submitData(outlineDevItemId, colNameAdvice, advice);
         }
-        dbService.submitStatus(outlineID, colNameStatus, outlineStatus);
+        dbService.submitStatus(outlineDevItemId, colNameStatus, outlineStatus);
 
     }
 
 
 
-    public void submitPageData(Integer outlineID, Integer sourcePageNumber, Integer pageAction, String data, int changeLocation) throws Exception {
-        dbService.submitData(outlineID, sourcePageNumber, DbColnameEnums.DATA_PREFIX.getValue(), data);
+    public void submitPageData(String outlineDevItemId, Integer sourcePageNumber, Integer pageAction, String data, int changeLocation) throws Exception {
+        dbService.submitData(outlineDevItemId, sourcePageNumber, DbColnameEnums.DATA_PREFIX.getValue(), data);
         if(pageAction == 3) {
-            dependencyService.generateDataAfterSubmit(outlineID, sourcePageNumber, data, changeLocation);
+            dependencyService.generateDataAfterSubmit(outlineDevItemId, sourcePageNumber, data, changeLocation);
         }
     }
 }

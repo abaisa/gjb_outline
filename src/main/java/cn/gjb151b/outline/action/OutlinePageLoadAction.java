@@ -21,6 +21,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
     private Integer outlineID;
     private Integer currentPageNumber;
     private Integer pageAction;
+    private String outlineDevItemId;
 
     private BaseResponse<String> response;
     private CoreService coreService;
@@ -44,9 +45,10 @@ public class OutlinePageLoadAction  extends ActionSupport {
     public String load() {
         String responseData;
         try {
-            responseData = coreService.getResponseData(outlineID, currentPageNumber, pageAction);
-            logger.info(outlineID+" "+currentPageNumber+" "+pageAction);
+            responseData = coreService.getResponseData(outlineDevItemId, currentPageNumber, pageAction);
+            logger.info(outlineDevItemId+" "+currentPageNumber+" "+pageAction);
         } catch (ServiceException e) {
+            e.printStackTrace();
             System.out.println(e.getExceptionEnums().getErrMsg());
             response.setError(e);
             return SUCCESS;
@@ -70,7 +72,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
     public String loadAdvice(){
         String responseData;
         try{
-            responseData = coreService.getAdvice(outlineID);
+            responseData = coreService.getAdvice(outlineDevItemId);
         } catch (ServiceException e) {
             System.out.println(e.getExceptionEnums().getErrMsg());
             response.setError(e);
@@ -89,7 +91,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
         List<String> picList = new ArrayList<>();
         if(picNumber == 1){
             try{
-                String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                String outlineData4 = dbService.fetchData(outlineDevItemId, "outline_data_4");
                 JSONObject jsonObject = JSON.parseObject(outlineData4);
                 picList = (List<String>) jsonObject.get("分系统/设备照片");
             } catch (Exception e){
@@ -99,7 +101,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
 
         } else if (picNumber == 2) {
             try{
-                String outlineData4 = dbService.fetchData(outlineID, "outline_data_4");
+                String outlineData4 = dbService.fetchData(outlineDevItemId, "outline_data_4");
                 JSONObject jsonObject = JSON.parseObject(outlineData4);
                 picList = (List<String>) jsonObject.get("分系统/设备关系图");
             } catch (Exception e){
@@ -111,7 +113,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
         if (currentPageNumber >= 14 && currentPageNumber <= 34) {
             try {
                 String colName = "outline_data_" + currentPageNumber;
-                String outlineData14To34 = dbService.fetchData(outlineID, colName);
+                String outlineData14To34 = dbService.fetchData(outlineDevItemId, colName);
                 if (JSON.parseObject(outlineData14To34).getString("项目试验图") != null) {
                     String picName = JSON.parseObject(outlineData14To34).getString("项目试验图");
                     picList.add(picName);
@@ -130,7 +132,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
         String responseData = "";
         String colName = "outline_data_" + currentPageNumber;
         try {
-            String outlineData14To34 = dbService.fetchData(outlineID, colName);
+            String outlineData14To34 = dbService.fetchData(outlineDevItemId, colName);
             String textNew1 = JSON.parseObject(outlineData14To34).getString("修改图形理由");
             String textNew2 = JSON.parseObject(outlineData14To34).getString("修改方法");
             JSONObject jsonObject = new JSONObject();
@@ -148,7 +150,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
         Integer pageNumber;
         getCurrentPageNumberResponse = new BaseResponse<>();
         try{
-            pageNumber =  dbService.fetehPageNumber(outlineID, "current_page_number");
+            pageNumber =  dbService.fetehPageNumber(outlineDevItemId, "current_page_number");
             getCurrentPageNumberResponse.setData(pageNumber-1);
         }catch (Exception e){
             e.printStackTrace();
@@ -156,6 +158,14 @@ public class OutlinePageLoadAction  extends ActionSupport {
         return  SUCCESS;
 
 
+    }
+
+    public String getOutlineDevItemId() {
+        return outlineDevItemId;
+    }
+
+    public void setOutlineDevItemId(String outlineDevItemId) {
+        this.outlineDevItemId = outlineDevItemId;
     }
 
 

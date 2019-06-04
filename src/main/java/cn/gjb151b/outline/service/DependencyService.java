@@ -57,14 +57,14 @@ public class DependencyService {
     private ManageSysSchemaMapper manageSysSchemaMapper;
     Logger logger = Logger.getLogger(DependencyService.class);
 
-    public String generateDependencyData(int outlineId, int pageNumber, String data) throws Exception {
+    public String generateDependencyData(String outlineDevItemId, int pageNumber, String data) throws Exception {
 
         System.out.println("generateDependencyData Page ID >> " + pageNumber);
 
         JSONObject jsonObject;
         String resultData = new String();
 
-        ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+        ManageSysOutline outline = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
         String devItemId = outline.getOutlineDevItemid();
         ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         String outlineData10 = outline.getOutlineData10();
@@ -211,7 +211,7 @@ public class DependencyService {
                 }
                 break;
             case 13:
-                String outlineData11 = manageSysOutlineMapper.selectCol(outlineId, "outline_data_11");
+                String outlineData11 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, "outline_data_11");
                 JSONArray outlineData11JsonArray = JSON.parseObject(outlineData11).getJSONArray("敏感度判据及检测方法");
                 jsonObject = JSON.parseObject(data);
                 if (outlineData11JsonArray != null && outlineData11JsonArray.size() > 0) {
@@ -943,7 +943,7 @@ public class DependencyService {
                 if (jsonObject.size() == 0) {
                     try {
                         String outlineData56 = dbService.fetchDefaultData(1, "outline_data_56");
-                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        String outlineName = dbService.fetchData(outlineDevItemId, "outline_name");
                         jsonObject = JSON.parseObject(outlineData56);
                         jsonObject.put("任务名称", outlineName);
                         resultData = jsonObject.toJSONString();
@@ -959,7 +959,7 @@ public class DependencyService {
                 if (jsonObject.size() == 0) {
                     try {
                         String outlineData57 = dbService.fetchDefaultData(1, "outline_data_57");
-                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        String outlineName = dbService.fetchData(outlineDevItemId, "outline_name");
                         jsonObject = JSON.parseObject(outlineData57);
                         jsonObject.put("任务名称", outlineName);
                         resultData = jsonObject.toJSONString();
@@ -975,7 +975,7 @@ public class DependencyService {
                 if (jsonObject.size() == 0) {
                     try {
                         String outlineData58 = dbService.fetchDefaultData(1, "outline_data_58");
-                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        String outlineName = dbService.fetchData(outlineDevItemId, "outline_name");
                         jsonObject = JSON.parseObject(outlineData58);
                         jsonObject.put("任务名称", outlineName);
                         String projectList = devObject.getProjectList();
@@ -1005,7 +1005,7 @@ public class DependencyService {
                 if (jsonObject.size() == 0) {
                     try {
                         String outlineData59 = dbService.fetchDefaultData(1, "outline_data_59");
-                        String outlineName = dbService.fetchData(outlineId, "outline_name");
+                        String outlineName = dbService.fetchData(outlineDevItemId, "outline_name");
                         jsonObject = JSON.parseObject(outlineData59);
                         jsonObject.put("任务名称", outlineName);
                         resultData = jsonObject.toJSONString();
@@ -1219,7 +1219,7 @@ public class DependencyService {
                 for (int i = 14; i <= 34; i++) {
                     String projectName = projectList.get(i - 14);
                     String colName = "outline_data_" + i;
-                    outlineData14To34 = manageSysOutlineMapper.selectCol(outlineId, colName);
+                    outlineData14To34 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
                     JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
                     if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
                         JSONArray testPortAndWorkStatusArray;
@@ -1304,18 +1304,18 @@ public class DependencyService {
                 break;
         }
         String colName = "outline_data_"+pageNumber;
-        dbService.submitData(outlineId, colName, resultData);
+        dbService.submitData(outlineDevItemId, colName, resultData);
 
 
         return resultData;
     }
 
-    public void generateDataAfterSubmit(int outlineId, int pageNumber, String data, int changeLocation) {
+    public void generateDataAfterSubmit(String outlineDevItemId, int pageNumber, String data, int changeLocation) {
         JSONObject jsonObject;
         JSONArray jsonArray;
 //        int sensitiveNum = 0;
 
-        ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+        ManageSysOutline outline = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
         String devItemId = outline.getOutlineDevItemid();
         ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         switch (pageNumber) {
@@ -1343,33 +1343,33 @@ public class DependencyService {
                     String outlineData33 = outline.getOutlineData33();
                     String outlineData34 = outline.getOutlineData34();
                     getFreqWorkStatus(devObject);
-                    fillLaunchWorkStatus(array1001, outlineId, outlineData14, "试验端口及被试品工作状态", "outline_schema_14", "outline_data_14");
-                    fillLaunchWorkStatus(array1001, outlineId, outlineData15, "试验端口及被试品工作状态", "outline_schema_15", "outline_data_15");
-                    fillLaunchWorkStatus(array1004, outlineId, outlineData16, "试验端口及被试品工作状态", "outline_schema_16", "outline_data_16");
+                    fillLaunchWorkStatus(array1001, outlineDevItemId, outlineData14, "试验端口及被试品工作状态", "outline_schema_14", "outline_data_14");
+                    fillLaunchWorkStatus(array1001, outlineDevItemId, outlineData15, "试验端口及被试品工作状态", "outline_schema_15", "outline_data_15");
+                    fillLaunchWorkStatus(array1004, outlineDevItemId, outlineData16, "试验端口及被试品工作状态", "outline_schema_16", "outline_data_16");
 //                    fillLaunchWorkStatus(array1006, outlineId, outlineData17, "试验端口及被试品工作状态", "outline_schema_17", "outline_data_17");
                     //更新17页项目信息
                     JSONObject outlineData17Object = JSON.parseObject(outlineData17, Feature.OrderedField);
                     outlineData17Object.remove("试验端口及被试品工作状态");
                     manageSysSchemaMapper.updateCol(1, "outline_schema_17", array1006.getString(0));
-                    manageSysOutlineMapper.updateCol(outlineId, "outline_data_17", JSON.toJSONString(outlineData17Object));
+                    manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_17", JSON.toJSONString(outlineData17Object));
 
-                    fillLaunchWorkStatus(array1001, outlineId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
-                    fillLaunchWorkStatus(array1003, outlineId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
-                    fillLaunchWorkStatus(array1004, outlineId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData18, "试验端口及被试品工作状态", "outline_schema_18", "outline_data_18");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData19, "试验端口及被试品工作状态", "outline_schema_19", "outline_data_19");
-                    fillLaunchWorkStatus(array1005, outlineId, outlineData20, "试验端口及被试品工作状态", "outline_schema_20", "outline_data_20");
-                    fillLaunchWorkStatus(array1005, outlineId, outlineData21, "试验端口及被试品工作状态", "outline_schema_21", "outline_data_21");
-                    fillLaunchWorkStatus(array1005, outlineId, outlineData22, "试验端口及被试品工作状态", "outline_schema_22", "outline_data_22");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData23, "试验端口及被试品工作状态", "outline_schema_23", "outline_data_23");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData24, "试验位置及被试品工作状态", "outline_schema_24", "outline_data_24");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData25, "试验位置及被试品工作状态", "outline_schema_25", "outline_data_25");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData26, "试验端口及被试品工作状态", "outline_schema_26", "outline_data_26");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData27, "试验端口及被试品工作状态", "outline_schema_27", "outline_data_27");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData28, "试验端口及被试品工作状态", "outline_schema_28", "outline_data_28");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData32, "试验端口及被试品工作状态", "outline_schema_32", "outline_data_32");
-                    fillLaunchWorkStatus(array1004, outlineId, outlineData33, "试验端口及被试品工作状态", "outline_schema_33", "outline_data_33");
-                    fillLaunchWorkStatus(array1002, outlineId, outlineData34, "试验端口及被试品工作状态", "outline_schema_34", "outline_data_34");
+                    fillLaunchWorkStatus(array1001, outlineDevItemId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
+                    fillLaunchWorkStatus(array1003, outlineDevItemId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
+                    fillLaunchWorkStatus(array1004, outlineDevItemId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData18, "试验端口及被试品工作状态", "outline_schema_18", "outline_data_18");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData19, "试验端口及被试品工作状态", "outline_schema_19", "outline_data_19");
+                    fillLaunchWorkStatus(array1005, outlineDevItemId, outlineData20, "试验端口及被试品工作状态", "outline_schema_20", "outline_data_20");
+                    fillLaunchWorkStatus(array1005, outlineDevItemId, outlineData21, "试验端口及被试品工作状态", "outline_schema_21", "outline_data_21");
+                    fillLaunchWorkStatus(array1005, outlineDevItemId, outlineData22, "试验端口及被试品工作状态", "outline_schema_22", "outline_data_22");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData23, "试验端口及被试品工作状态", "outline_schema_23", "outline_data_23");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData24, "试验位置及被试品工作状态", "outline_schema_24", "outline_data_24");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData25, "试验位置及被试品工作状态", "outline_schema_25", "outline_data_25");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData26, "试验端口及被试品工作状态", "outline_schema_26", "outline_data_26");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData27, "试验端口及被试品工作状态", "outline_schema_27", "outline_data_27");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData28, "试验端口及被试品工作状态", "outline_schema_28", "outline_data_28");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData32, "试验端口及被试品工作状态", "outline_schema_32", "outline_data_32");
+                    fillLaunchWorkStatus(array1004, outlineDevItemId, outlineData33, "试验端口及被试品工作状态", "outline_schema_33", "outline_data_33");
+                    fillLaunchWorkStatus(array1002, outlineDevItemId, outlineData34, "试验端口及被试品工作状态", "outline_schema_34", "outline_data_34");
                 }
                 break;
             case 9:
@@ -1383,13 +1383,13 @@ public class DependencyService {
                     String outlineData29 = outline.getOutlineData29();
                     String outlineData30 = outline.getOutlineData30();
                     String outlineData31 = outline.getOutlineData31();
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData14, "试验端口及被试品工作状态", "outline_schema_14", "outline_data_14");
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData15, "试验端口及被试品工作状态", "outline_schema_15", "outline_data_15");
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData16, "试验端口及被试品工作状态", "outline_schema_16", "outline_data_16");
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData17, "试验端口及被试品工作状态", "outline_schema_17", "outline_data_17");
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
-                    fillLaunchWorkStatus(launchArray, outlineId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData14, "试验端口及被试品工作状态", "outline_schema_14", "outline_data_14");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData15, "试验端口及被试品工作状态", "outline_schema_15", "outline_data_15");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData16, "试验端口及被试品工作状态", "outline_schema_16", "outline_data_16");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData17, "试验端口及被试品工作状态", "outline_schema_17", "outline_data_17");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData29, "试验部位及被试品工作状态", "outline_schema_29", "outline_data_29");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData30, "被试品工作状态", "outline_schema_30", "outline_data_30");
+                    fillLaunchWorkStatus(launchArray, outlineDevItemId, outlineData31, "被试品工作状态", "outline_schema_31", "outline_data_31");
 //                       System.out.println("outlineSchema29"+JSON.toJSONString(outlineSchema29Object));
                     }
                 if(changeLocation ==2 || changeLocation ==3) {
@@ -1409,20 +1409,20 @@ public class DependencyService {
                         String outlineData32 = outline.getOutlineData32();
                         String outlineData33 = outline.getOutlineData33();
                         String outlineData34 = outline.getOutlineData34();
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData18, "试验端口及被试品工作状态", "outline_schema_18", "outline_data_18");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData19, "试验端口及被试品工作状态", "outline_schema_19", "outline_data_19");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData20, "试验端口及被试品工作状态", "outline_schema_20", "outline_data_20");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData21, "试验端口及被试品工作状态", "outline_schema_21", "outline_data_21");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData22, "试验端口及被试品工作状态", "outline_schema_22", "outline_data_22");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData23, "试验端口及被试品工作状态", "outline_schema_23", "outline_data_23");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData24, "试验位置及被试品工作状态", "outline_schema_24", "outline_data_24");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData25, "试验位置及被试品工作状态", "outline_schema_25", "outline_data_25");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData26, "试验端口及被试品工作状态", "outline_schema_26", "outline_data_26");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData27, "试验端口及被试品工作状态", "outline_schema_27", "outline_data_27");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData28, "试验端口及被试品工作状态", "outline_schema_28", "outline_data_28");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData32, "试验端口及被试品工作状态", "outline_schema_32", "outline_data_32");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData33, "试验端口及被试品工作状态", "outline_schema_33", "outline_data_33");
-                        fillLaunchWorkStatus(sensitiveArray, outlineId, outlineData34, "试验端口及被试品工作状态", "outline_schema_34", "outline_data_34");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData18, "试验端口及被试品工作状态", "outline_schema_18", "outline_data_18");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData19, "试验端口及被试品工作状态", "outline_schema_19", "outline_data_19");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData20, "试验端口及被试品工作状态", "outline_schema_20", "outline_data_20");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData21, "试验端口及被试品工作状态", "outline_schema_21", "outline_data_21");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData22, "试验端口及被试品工作状态", "outline_schema_22", "outline_data_22");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData23, "试验端口及被试品工作状态", "outline_schema_23", "outline_data_23");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData24, "试验位置及被试品工作状态", "outline_schema_24", "outline_data_24");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData25, "试验位置及被试品工作状态", "outline_schema_25", "outline_data_25");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData26, "试验端口及被试品工作状态", "outline_schema_26", "outline_data_26");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData27, "试验端口及被试品工作状态", "outline_schema_27", "outline_data_27");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData28, "试验端口及被试品工作状态", "outline_schema_28", "outline_data_28");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData32, "试验端口及被试品工作状态", "outline_schema_32", "outline_data_32");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData33, "试验端口及被试品工作状态", "outline_schema_33", "outline_data_33");
+                        fillLaunchWorkStatus(sensitiveArray, outlineDevItemId, outlineData34, "试验端口及被试品工作状态", "outline_schema_34", "outline_data_34");
                     }
                 break;
             case 10:
@@ -1431,7 +1431,7 @@ public class DependencyService {
                 JSONArray powerPortArray = jsonObject.getJSONArray("电源端口");
                 JSONArray interPortArray = jsonObject.getJSONArray("互联端口");
                 if(devObject.getDevAttribute() == 0) {
-                    sensitiveNum = JSON.parseObject(manageSysOutlineMapper.selectCol(outlineId, "outline_data_9")).getJSONArray("敏感度测试工作状态").size();
+                    sensitiveNum = JSON.parseObject(manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, "outline_data_9")).getJSONArray("敏感度测试工作状态").size();
                 }else{
                     sensitiveNum = array1002.size();
                 }
@@ -1540,14 +1540,14 @@ public class DependencyService {
                 outlineData27Object.put("试验端口及被试品工作状态", allPortObjectCS114);
                 outlineData28Object.put("试验端口及被试品工作状态", allPortObjectCS116);
                 System.out.println("试验端口及被试品工作状态:"+JSON.toJSONString(outlineData26Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_14", JSON.toJSONString(outlineData14Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_15", JSON.toJSONString(outlineData15Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_17", JSON.toJSONString(outlineData17Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_18", JSON.toJSONString(outlineData18Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_23", JSON.toJSONString(outlineData23Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_26", JSON.toJSONString(outlineData26Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_27", JSON.toJSONString(outlineData27Object));
-                manageSysOutlineMapper.updateCol(outlineId, "outline_data_28", JSON.toJSONString(outlineData28Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_14", JSON.toJSONString(outlineData14Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_15", JSON.toJSONString(outlineData15Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_17", JSON.toJSONString(outlineData17Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_18", JSON.toJSONString(outlineData18Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_23", JSON.toJSONString(outlineData23Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_26", JSON.toJSONString(outlineData26Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_27", JSON.toJSONString(outlineData27Object));
+                manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_28", JSON.toJSONString(outlineData28Object));
 
                 break;
             default:
@@ -1927,12 +1927,12 @@ public class DependencyService {
 
 
 
-    public String generateDependencySchema(int outlineId, int pageNumber, String schema) {
+    public String generateDependencySchema(String outlineDevItemId, int pageNumber, String schema) {
         JSONObject jsonSchema = JSON.parseObject(schema, Feature.OrderedField);
 
         switch (pageNumber) {
             case 10:
-                ManageSysOutline outline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+                ManageSysOutline outline = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
                 String devItemId = outline.getOutlineDevItemid();
                 ManageSysDevelop develop = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
                 JSONArray powerPortList = (JSONArray) JSON.parse(develop.getDevPowerport());
@@ -1945,7 +1945,7 @@ public class DependencyService {
                 }
                 break;
             case 58:
-                ManageSysOutline outline58 = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+                ManageSysOutline outline58 = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
                 String devItemId58 = outline58.getOutlineDevItemid();
                 ManageSysDevelop develop58  = manageSysDevelopMapper.selectByPrimaryKey(devItemId58);
                 String projectList = develop58.getProjectList();
@@ -1961,7 +1961,7 @@ public class DependencyService {
         return JSON.toJSONString(jsonSchema);
     }
 
-    public void fillLaunchWorkStatus( JSONArray launchArray, int outlineId, String outlineData, String title, String schema, String data){
+    public void fillLaunchWorkStatus( JSONArray launchArray, String outlineDevItemId, String outlineData, String title, String schema, String data){
         JSONObject outlineData29Object = JSON.parseObject(outlineData, Feature.OrderedField);
         outlineData29Object.remove(title);
         String outlineSchema = manageSysSchemaMapper.selectCol(1, schema);
@@ -2037,7 +2037,7 @@ public class DependencyService {
             outlineSchemaObject.getJSONObject("properties").getJSONObject(title).getJSONObject("items").getJSONObject("properties").getJSONObject("工作状态").put("properties", allWorkLaunch);
         }
         manageSysSchemaMapper.updateCol(1, schema, JSON.toJSONString(outlineSchemaObject));
-        manageSysOutlineMapper.updateCol(outlineId, data, JSON.toJSONString(outlineData29Object));
+        manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, data, JSON.toJSONString(outlineData29Object));
         System.out.println(schema+JSON.toJSONString(outlineSchemaObject));
     }
 
@@ -2114,8 +2114,8 @@ public class DependencyService {
         return jsonObject;
     }
 
-    public String getSubsysOrEqpHead(int outlineId) {
-        ManageSysOutline manageSysOutline = manageSysOutlineMapper.selectByPrimaryKey(outlineId);
+    public String getSubsysOrEqpHead(String outlineDevItemId) {
+        ManageSysOutline manageSysOutline = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
         String subsysEqpData = manageSysOutline.getOutlineDataSubsysEqp();
         JSONObject subsysEqpDataJson = JSON.parseObject(subsysEqpData);
         if (subsysEqpDataJson.size() == 0) {
@@ -2150,8 +2150,8 @@ public class DependencyService {
         return JSON.toJSONString(result);
     }
 
-    public void submitSubsysOrEqpHead(int outlineId, String subSysOrEqpData) throws Exception {
-        manageSysOutlineMapper.updateCol(outlineId, "outline_data_subsys_eqp", subSysOrEqpData);
+    public void submitSubsysOrEqpHead(String outlineDevItemId, String subSysOrEqpData) throws Exception {
+        manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, "outline_data_subsys_eqp", subSysOrEqpData);
     }
 
     private  boolean noPortSelect(JSONArray jsonArray){

@@ -6,16 +6,16 @@ package cn.gjb151b.outline.model;
 public class ViewProject {
     private String outlineName;
     private int outlineStatus;
-    private String outlineItemid;
+    private String outlineDevItemId;
     private int outlineId;
 
     public ViewProject() {
     }
 
-    public ViewProject(String outlineName, int outlineStatus, String outlineItemid, int outlineId) {
+    public ViewProject(String outlineName, int outlineStatus, String outlineDevItemId, int outlineId) {
         this.outlineName = outlineName;
         this.outlineStatus = outlineStatus;
-        this.outlineItemid = outlineItemid;
+        this.outlineDevItemId = outlineDevItemId;
         this.outlineId = outlineId;
     }
 
@@ -31,9 +31,9 @@ public class ViewProject {
         this.outlineStatus = outlineStatus;
     }
 
-    public String getOutlineItemid(){return outlineItemid;}
+    public String getOutlineDevItemId(){return outlineDevItemId;}
 
-    public void  setOutlineItemid(String outlineItemid){this.outlineItemid = outlineItemid;}
+    public void  setOutlineDevItemId(String outlineItemid){this.outlineDevItemId= outlineItemid;}
 
     public int getOutlineId(){return  outlineId;}
 

@@ -34,14 +34,14 @@ public class DBService {
      * @param prefix    列名前缀
      * @throws Exception
      */
-    public void submitData(int outlineID, int pageID, String prefix, String data) throws Exception {
+    public void submitData(String outlineDevItemId, int pageID, String prefix, String data) throws Exception {
         String colName = prefix + pageID;
         if (pageID < 1) {
             throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
         }
         if (pageID == 4) {
             JSONObject currentOutlineData4Object = JSON.parseObject(data);
-            String outlineData4 = manageSysOutlineMapper.selectCol(outlineID, "outline_data_4");
+            String outlineData4 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, "outline_data_4");
             JSONObject outlineDataObject = JSON.parseObject(outlineData4);
             JSONArray equipmentPicArray = outlineDataObject.getJSONArray("分系统/设备照片");
             JSONArray equipmentRelationPicArray = outlineDataObject.getJSONArray("分系统/设备关系图");
@@ -56,7 +56,7 @@ public class DBService {
 
         if (pageID >= 14 && pageID <= 34) {
             JSONObject currentOutlineData14To34Object = JSON.parseObject(data);
-            String outlineData14To34 = manageSysOutlineMapper.selectCol(outlineID, colName);
+            String outlineData14To34 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
             JSONObject outlineDataObject = JSON.parseObject(outlineData14To34);
             if (outlineDataObject.containsKey("项目试验图")) {
                 if (outlineDataObject.getString("项目试验图") != null) {
@@ -77,7 +77,7 @@ public class DBService {
         }
 
         data = data.replaceAll("\\\\", "\\\\\\\\");
-        manageSysOutlineMapper.updateCol(outlineID, colName, data);
+        manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, colName, data);
     }
 
     /**
@@ -86,14 +86,14 @@ public class DBService {
      * @param colName   列名
      * @throws Exception
      */
-    public void submitData(int outlineID, String colName, String data) throws Exception {
+    public void submitData(String outlineDevItemId, String colName, String data) throws Exception {
         data = data.replaceAll("\\\\", "\\\\\\\\");
-        manageSysOutlineMapper.updateCol(outlineID, colName, data);
+        manageSysOutlineMapper.updateColByOutlineDevItemId(outlineDevItemId, colName, data);
     }
 
 
-    public void updatePageNumber(int outlineID, String colName, int data) throws Exception {
-        manageSysOutlineMapper.updateCol2(outlineID, colName, data);
+    public void updatePageNumber(String outlineDevItemId, String colName, int data) throws Exception {
+        manageSysOutlineMapper.updateCol2ByOutlineDevItemId(outlineDevItemId, colName, data);
 
     }
 
@@ -103,8 +103,8 @@ public class DBService {
      * @param colName   列名
      * @throws Exception
      */
-    public void submitStatus(int outlineID, String colName, int data) throws Exception {
-        manageSysOutlineMapper.updateColInt(outlineID, colName, data);
+    public void submitStatus(String outlineDevItemId, String colName, int data) throws Exception {
+        manageSysOutlineMapper.updateCol2ByOutlineDevItemId(outlineDevItemId, colName, data);
 
     }
 
@@ -115,13 +115,13 @@ public class DBService {
      * @return data
      * @throws Exception
      */
-    public String fetchData(int outlineID, int pageID, String prefix) throws Exception {
+    public String fetchData(String outlineDevItemId, int pageID, String prefix) throws Exception {
         String colName = prefix + pageID;
         if (pageID < 1) {
             throw new ServiceException(ExceptionEnums.DB_FETCH_ERR);
         }
 
-        return manageSysOutlineMapper.selectCol(outlineID, colName);
+        return manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
     }
 
     public String fetchSchema(int pageID, String prefix) throws Exception {
@@ -149,12 +149,12 @@ public class DBService {
      * @return data
      * @throws Exception
      */
-    public String fetchData(int outlineID, String colName) throws Exception {
-        return manageSysOutlineMapper.selectCol(outlineID, colName);
+    public String fetchData(String outlineDevItemId, String colName) throws Exception {
+        return manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
     }
 
-    public Integer fetehPageNumber(int outlineID, String colName) throws Exception{
-        return  manageSysOutlineMapper.selectCol2(outlineID, colName);
+    public Integer fetehPageNumber(String outlineDevItemId, String colName) throws Exception{
+        return  manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId).getCurrentPageNumber();
     }
 
 }

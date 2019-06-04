@@ -42,7 +42,7 @@ function submitSubsysOrEqpHead(subsysOrEqpData) {
         type: "post",
         url: "dependency/submitSubsysOrEqpHead",
         data: {
-            outlineId: outlineId,
+            outlineDevItemId: outlineDevItemId,
             subsysOrEqpData: JSON.stringify(subsysOrEqpData)
         },
         success: function (data) {
@@ -62,7 +62,7 @@ function getSubsysOrEqpHead() {
         type: "post",
         url: "dependency/getSubsysOrEqpHead",
         data: {
-            outlineId: outlineId
+            outlineDevItemId: outlineDevItemId
         },
         success: function (data) {
             test = data;
@@ -119,7 +119,7 @@ function uploadPic() {
             url: "/outline/page_data/upload",
             fileElementId: "images",
             data: {
-                outlineID: outlineId,
+                outlineDevItemId: outlineDevItemId,
                 pageNumber: 4,
                 picNumber: 1,
             },
@@ -147,7 +147,7 @@ function uploadPic2() {
             url: "/outline/page_data/upload",
             fileElementId: "images2",
             data: {
-                outlineID: outlineId,
+                outlineDevItemId: outlineDevItemId,
                 pageNumber: 4,
                 picNumber: 2,
             },
@@ -175,7 +175,7 @@ function uploadPic3() {
             url: "/outline/page_data/upload",
             fileElementId: "images3",
             data: {
-                outlineID: outlineId,
+                outlineDevItemId: outlineDevItemId,
                 pageNumber: page_number,
             },
             success: function(data){
@@ -198,7 +198,7 @@ function downloadPic(){
         type: "post",
         url: "/outline/page_data/download",
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             currentPageNumber: 4,
             picNumber: 1,
         },
@@ -231,7 +231,7 @@ function downloadPic2(){
         type: "post",
         url: "/outline/page_data/download",
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             currentPageNumber: 4,
             picNumber: 2,
         },
@@ -265,7 +265,7 @@ function downloadPic3(){
         type: "post",
         url: "/outline/page_data/download",
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             currentPageNumber: page_number,
             picNumber: -1,
         },
@@ -299,7 +299,7 @@ function downloadText() {
         type: "post",
         url: "/outline/page_data/loadText",
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             currentPageNumber: page_number,
         },
         success: function (data) {
@@ -322,7 +322,7 @@ function deletePic1() {
             type: "post",
             url: "/outline/page_data/deletePic",
             data: {
-                outlineID: outlineId,
+                outlineDevItemId: outlineDevItemId,
                 PageNumber: 4,
                 picNumber: 1,
             },
@@ -347,7 +347,7 @@ function deletePic2() {
             type: "post",
             url: "/outline/page_data/deletePic",
             data: {
-                outlineID: outlineId,
+                outlineDevItemId: outlineDevItemId,
                 PageNumber: 4,
                 picNumber: 2,
             },
@@ -371,7 +371,7 @@ function submitText() {
         type: "post",
         url: "/outline/page_data/submitText",
         data: {
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             PageNumber: page_number,
             textNew1: textNew1,
             textNew2: textNew2,
@@ -391,7 +391,7 @@ function showEchartsPic1() {
         url: "/outline/page_data/load",
         data: {
             currentPageNumber: 57,
-            outlineID: outlineId,
+            outlineDevItemId: outlineDevItemId,
             pageAction: 1       // 1 表示下一页，2 表示上一页
         },
         success: function (data) {

@@ -21,6 +21,8 @@ public class DependencyAction {
 
     private String subsysOrEqpData;
 
+    private String outlineDevOutlineId;
+
     private BaseResponse<String> response = new BaseResponse<>();
 
     @Autowired
@@ -29,7 +31,7 @@ public class DependencyAction {
     public String getSubsysOrEqpHead() {
         String responseData;
         try {
-            responseData = dependencyService.getSubsysOrEqpHead(outlineId);
+            responseData = dependencyService.getSubsysOrEqpHead(outlineDevOutlineId);
         } catch (ServiceException e) {
             response.setError(e);
 
@@ -60,7 +62,7 @@ public class DependencyAction {
         }
 
         try {
-            dependencyService.submitSubsysOrEqpHead(outlineId, subsysOrEqpData);
+            dependencyService.submitSubsysOrEqpHead(outlineDevOutlineId, subsysOrEqpData);
         } catch (Exception e) {
             logger.info(String.format("submitSubsysOrEqpData error, outlineID:%d subsysOrEqpData:%s errInfo:%s", outlineId, subsysOrEqpData,
                     e.getMessage()));
@@ -96,5 +98,13 @@ public class DependencyAction {
 
     public void setResponse(BaseResponse<String> response) {
         this.response = response;
+    }
+
+    public String getOutlineDevOutlineId() {
+        return outlineDevOutlineId;
+    }
+
+    public void setOutlineDevOutlineId(String outlineDevOutlineId) {
+        this.outlineDevOutlineId = outlineDevOutlineId;
     }
 }

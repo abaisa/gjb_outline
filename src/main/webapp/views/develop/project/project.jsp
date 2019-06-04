@@ -91,6 +91,7 @@
                 dataType: "json", // 设置数据类型
                 success: function (data){
                     console.log("请求成功");
+                    console.log(data);
                     if(data.status === 'error')  {
                         // alert(data.message);
                         // $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});

@@ -114,8 +114,8 @@
         SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
     </select>
 
-    <select id="selectColByOutlineDevItemId" statementType="STATEMENT" resultType="string">
-        SELECT ${colName} FROM manage_sys_outline WHERE outline_dev_itemid = '${outlineDevItemId}';
+    <select id="selectColByOutlineDevItemId" resultType="string">
+        SELECT ${colName} FROM manage_sys_outline WHERE outline_dev_itemid = #{outlineDevItemId};
     </select>
 
     <select id="selectCol2" statementType="STATEMENT" resultType="Integer">

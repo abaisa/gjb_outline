@@ -21,7 +21,7 @@ public class DependencyAction {
 
     private String subsysOrEqpData;
 
-    private String outlineDevOutlineId;
+    private String outlineDevItemId;
 
     private BaseResponse<String> response = new BaseResponse<>();
 
@@ -31,7 +31,7 @@ public class DependencyAction {
     public String getSubsysOrEqpHead() {
         String responseData;
         try {
-            responseData = dependencyService.getSubsysOrEqpHead(outlineDevOutlineId);
+            responseData = dependencyService.getSubsysOrEqpHead(outlineDevItemId);
         } catch (ServiceException e) {
             response.setError(e);
 
@@ -62,7 +62,7 @@ public class DependencyAction {
         }
 
         try {
-            dependencyService.submitSubsysOrEqpHead(outlineDevOutlineId, subsysOrEqpData);
+            dependencyService.submitSubsysOrEqpHead(outlineDevItemId, subsysOrEqpData);
         } catch (Exception e) {
             logger.info(String.format("submitSubsysOrEqpData error, outlineID:%d subsysOrEqpData:%s errInfo:%s", outlineId, subsysOrEqpData,
                     e.getMessage()));
@@ -100,11 +100,12 @@ public class DependencyAction {
         this.response = response;
     }
 
-    public String getOutlineDevOutlineId() {
-        return outlineDevOutlineId;
+
+    public String getOutlineDevItemId() {
+        return outlineDevItemId;
     }
 
-    public void setOutlineDevOutlineId(String outlineDevOutlineId) {
-        this.outlineDevOutlineId = outlineDevOutlineId;
+    public void setOutlineDevItemId(String outlineDevItemId) {
+        this.outlineDevItemId = outlineDevItemId;
     }
 }

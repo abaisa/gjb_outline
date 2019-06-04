@@ -78,6 +78,7 @@ public class OutlinePageLoadAction  extends ActionSupport {
             response.setError(e);
             return SUCCESS;
         } catch (Exception e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
             response.setError("other service error");
             return SUCCESS;

@@ -175,6 +175,8 @@ function monitor() {
                         editor.getEditor('root.发射测试参数.' + i + '.最小测量时间(模拟式测量接收机)').disable();
                     }
                 }
+                $("input[name*='视频带宽']").addClass("hidden");
+                $("th:contains('视频带宽')").text("");
                 // editor.getEditor('root.发射测试参数.0.频率范围').disable();
                 // $("table button").addClass("hidden");
                 break;
@@ -350,7 +352,10 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                $("#editor_holder button").addClass("hidden");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
+                // $("#editor_holder button").addClass("hidden");
                 break;
 
             case '18':
@@ -388,6 +393,9 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '19':
@@ -467,6 +475,9 @@ function monitor() {
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
                 var testPortArray = load_data.试验端口及被试品工作状态;
                 // if(testPortArray != null) {
                     for (var i = 0; i < testPortArray.length; i++) {
@@ -512,6 +523,9 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '22':
@@ -549,6 +563,9 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
 
@@ -587,6 +604,9 @@ function monitor() {
                     editor.getEditor(editorName).disable();
                 }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '24':
@@ -707,6 +727,10 @@ function monitor() {
                 }
                 $("input[name*='施加电缆束']").attr("readonly", "readonly");
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='施加电缆束']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
 
@@ -753,6 +777,10 @@ function monitor() {
                 }
                 $("input[name*='施加电缆束']").attr("readonly", "readonly");
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='施加电缆束']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '28':
@@ -798,6 +826,10 @@ function monitor() {
                 }
                 $("input[name*='施加电缆束']").attr("readonly", "readonly");
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                editor.on('change',function() {
+                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='施加电缆束']").attr("readonly", "readonly");
+                });
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '29':
@@ -1327,58 +1359,84 @@ function monitor() {
                 // $("input[name='root[试验项目][1][试验项目序号]']").val(2);
 
 
-
                 $("#project_submit").addClass("hidden");
                 $("#next_page").removeClass("hidden");
                 $("#echartsPic1").removeClass("hidden");
-                var all_data = JSON.parse(pageData.data);
-                console.log('all_data'+":"+all_data);
-                var load_data_58 = all_data.data;+
-                console.log('load_data'+load_data_58);
-                var load_dataObj = JSON.parse(load_data_58);
-                var projectListObj = load_dataObj.试验项目;
-                for (var i = 0; i < projectListObj.length - 1; i++) {
-                    for (var j = 0; j < projectListObj.length - i - 1; j++) {
-                        var switchObj;
-                        var fStartTime = projectListObj[j].计划起始时间;
-                        var sStartTime = projectListObj[j + 1].计划起始时间;
-                        var farr = fStartTime.split("-");
-                        var sarr = sStartTime.split("-");
-                        var fyear = parseInt(farr[0]);
-                        var fmonth = parseInt(farr[1]);
-                        var fday = parseInt(farr[2]);
-                        var syear = parseInt(sarr[0])
-                        var smonth = parseInt(sarr[1]);
-                        var sday = parseInt(sarr[2]);
-                        if (fyear > syear) {
-                            switchObj = projectListObj[j];
-                            projectListObj[j] = projectListObj[j + 1];
-                            projectListObj[j + 1] = switchObj;
-                            continue;
-                        }
-                        if (fyear == syear && fmonth > smonth) {
-                            switchObj = projectListObj[j];
-                            projectListObj[j] = projectListObj[j + 1];
-                            projectListObj[j + 1] = switchObj;
-                            continue;
-                        }
-                        if (fyear == syear && fmonth == smonth && fday > sday) {
-                            switchObj = projectListObj[j];
-                            projectListObj[j] = projectListObj[j + 1];
-                            projectListObj[j + 1] = switchObj;
-                            continue;
-                        }
-
-                    }
-                }
-                // console.log("最早开始时间" + " " + projectListObj[0].计划起始时间);
-                // console.log("最晚结束时间" + " " + projectListObj[projectListObj.length  - 1].计划结束时间);
-                var mostEarlyTime = projectListObj[0].计划起始时间;
-                var mostLateTime = projectListObj[projectListObj.length - 1].计划结束时间;
-                console.log("最早开始时间" + " " + mostEarlyTime);
-                console.log("最晚结束时间" + " " + mostLateTime);
-                $("input[name='root[试验计划开始时间]']").val(mostEarlyTime);
-                $("input[name='root[试验计划结束时间]']").val(mostLateTime);
+                // var all_data = JSON.parse(pageData.data);
+                // console.log('all_data'+":"+all_data);
+                // var load_data_58 = all_data.data;+
+                // console.log('load_data'+load_data_58);
+                // var load_dataObj = JSON.parse(load_data_58);
+                // var projectListObj = load_dataObj.试验项目;
+                // var projectNumber = projectListObj.length;
+                // $("div[data-schemapath*='root.试验项目'] button:contains('添加')").on('click',
+                //     function () {
+                //         editor.getEditor('root.试验项目.' + projectNumber + '.序号').setValue(projectNumber+1);
+                //         projectNumber++;
+                //     });
+                // $("div[data-schemapath*='root.试验项目'] button:contains('最后一行')").on('click',
+                //     function () {
+                //         projectNumber-;
+                //     });
+                // $("div[data-schemapath*='root.试验项目'] button:contains('所有')").on('click',
+                //     function () {
+                //         projectNumber = 0;
+                //     });
+                // for (var i = 0; i < projectListObj.length - 1; i++) {
+                //     for (var j = 0; j < projectListObj.length - i - 1; j++) {
+                //         var switchObj;
+                //         var fStartTime = projectListObj[j].计划起始时间;
+                //         var sStartTime = projectListObj[j + 1].计划起始时间;
+                //         var farr = fStartTime.split("-");
+                //         var sarr = sStartTime.split("-");
+                //         var fyear = parseInt(farr[0]);
+                //         var fmonth = parseInt(farr[1]);
+                //         var fday = parseInt(farr[2]);
+                //         var syear = parseInt(sarr[0])
+                //         var smonth = parseInt(sarr[1]);
+                //         var sday = parseInt(sarr[2]);
+                //         if (fyear > syear) {
+                //             switchObj = projectListObj[j];
+                //             projectListObj[j] = projectListObj[j + 1];
+                //             projectListObj[j + 1] = switchObj;
+                //             continue;
+                //         }
+                //         if (fyear == syear && fmonth > smonth) {
+                //             switchObj = projectListObj[j];
+                //             projectListObj[j] = projectListObj[j + 1];
+                //             projectListObj[j + 1] = switchObj;
+                //             continue;
+                //         }
+                //         if (fyear == syear && fmonth == smonth && fday > sday) {
+                //             switchObj = projectListObj[j];
+                //             projectListObj[j] = projectListObj[j + 1];
+                //             projectListObj[j + 1] = switchObj;
+                //             continue;
+                //         }
+                //
+                //     }
+                // }
+                // // console.log("最早开始时间" + " " + projectListObj[0].计划起始时间);
+                // // console.log("最晚结束时间" + " " + projectListObj[projectListObj.length  - 1].计划结束时间);
+                // var mostEarlyTime = projectListObj[0].计划起始时间;
+                // var mostLateTime = projectListObj[projectListObj.length - 1].计划结束时间;
+                // console.log("最早开始时间" + " " + mostEarlyTime);
+                // console.log("最晚结束时间" + " " + mostLateTime);
+                // $("input[name='root[试验计划开始时间]']").val(mostEarlyTime);
+                // $("input[name='root[试验计划结束时间]']").val(mostLateTime);
+                // $("div[data-schemapath*='root.试验项目'] button:contains('添加')").on('click',
+                //     function () {
+                //         editor.getEditor('root.试验项目.' + projectNumber + '.序号').setValue(projectNumber+1);
+                //         projectNumber++;
+                //     });
+                // $("div[data-schemapath*='root.试验项目'] button:contains('最后一行')").on('click',
+                //     function () {
+                //         projectNumber-;
+                //     });
+                // $("div[data-schemapath*='root.试验项目'] button:contains('所有')").on('click',
+                //     function () {
+                //         projectNumber = 0;
+                //     });
 
                 break;
             case '59':

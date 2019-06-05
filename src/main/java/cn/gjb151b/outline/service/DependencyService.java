@@ -343,7 +343,7 @@ public class DependencyService {
                         String equipment = "CE101 测试设备";
                         int[] nums = {0, 1, 2, 3};
                         String keyName = "限值";
-                        resultData = generateLimitPic2(resultData, devCE101, equipment, nums, keyName );
+//                        resultData = generateLimitPic2(resultData, devCE101, equipment, nums, keyName );
 //                        根据新建10 单相、三相拉选所填，确定相应测试设备数量
                         JSONObject outlineData35Object = JSONObject.parseObject(resultData);
                         if (phasePosition.equals("两相")) {
@@ -357,14 +357,14 @@ public class DependencyService {
                             outlineData35Object.getJSONArray("CE101 测试设备").getJSONObject(7).put("数量", 4);
                         }
                         //根据manage_sys_develop中项目对应测试项目所填写的图片，确定限值的当前范围
-                        JSONObject devCE101JsonObject = JSONObject.parseObject(devCE101);
-                        JSONArray limitValueJsonArray = devCE101JsonObject.getJSONArray("limit_value");
-                        List<String> imgNumList = new ArrayList<>();
-                        for (int i = 0; i < limitValueJsonArray.size(); i++) {
-                            imgNumList.add((String)limitValueJsonArray.getJSONObject(i).get("pic"));
-                        }
-                        int[] positionNums = {0, 1, 2, 3, 6};
-                        outlineData35Object = putLimitRangeValue(outlineData35Object, positionNums, imgNumList, "CE101 测试设备");
+//                        JSONObject devCE101JsonObject = JSONObject.parseObject(devCE101);
+//                        JSONArray limitValueJsonArray = devCE101JsonObject.getJSONArray("limit_value");
+//                        List<String> imgNumList = new ArrayList<>();
+//                        for (int i = 0; i < limitValueJsonArray.size(); i++) {
+//                            imgNumList.add((String)limitValueJsonArray.getJSONObject(i).get("pic"));
+//                        }
+//                        int[] positionNums = {0, 1, 2, 3, 6};
+//                        outlineData35Object = putLimitRangeValue(outlineData35Object, positionNums, imgNumList, "CE101 测试设备");
                         resultData = JSON.toJSONString(outlineData35Object);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1264,15 +1264,17 @@ public class DependencyService {
                                 for (int k = 0; k < workStatusObject.size(); k++) {
                                     String workStatusKey = "工作状态" + (k + 1);
                                     JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                    if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                        int portNumber = j + 1;
-                                        int workStatusNumber = k + 1;
-                                        standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                        standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
+                                    if (workStatusObjectK.containsKey("状态是否实施")) {
+                                        if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                            int portNumber = j + 1;
+                                            int workStatusNumber = k + 1;
+                                            standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                            standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                        }
                                     }
                                 }
                             }

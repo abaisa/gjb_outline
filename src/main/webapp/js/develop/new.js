@@ -72,7 +72,15 @@ outlineStatus为项目自身状态同数据库同名含义
 function
 passResult(outlineStatus, result, userName){
     if(outlineStatus == 0){
-        turnPage(1);
+        pageAction = 1;
+        var isSubmit = beforeSubmit();
+        if(isSubmit) {
+            submitPageData(pageAction);
+        }
+        if (!submitSuccess){
+            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: "提交报告失败"});
+            return;
+        }
     }
     outlineStatusNow = -1;
     if(result == 1){

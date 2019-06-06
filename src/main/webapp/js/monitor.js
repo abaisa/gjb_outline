@@ -486,7 +486,7 @@ function monitor() {
                     }
                 // }
 
-                $("#editor_holder button").addClass("hidden");
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '21':
                 page21 = false;
@@ -526,7 +526,7 @@ function monitor() {
                 editor.on('change',function() {
                     $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 });
-                $("#editor_holder button").addClass("hidden");
+                // $("#editor_holder button").addClass("hidden");
                 break;
             case '22':
                 page22 = false;
@@ -566,7 +566,7 @@ function monitor() {
                 editor.on('change',function() {
                     $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 });
-                $("#editor_holder button").addClass("hidden");
+                // $("#editor_holder button").addClass("hidden");
                 break;
 
             case '23':

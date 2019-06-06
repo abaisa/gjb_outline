@@ -1,5 +1,6 @@
 package cn.gjb151b.outline.action;
 
+import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.service.CoreService;
 import cn.gjb151b.outline.service.DBService;
 import cn.gjb151b.outline.utils.BaseResponse;
@@ -48,6 +49,9 @@ public class OutlinePageSubmitAction extends ActionSupport {
     private CoreService coreService;
     @Autowired
     private DBService dbService;
+
+    @Autowired
+    private ManageSysOutlineMapper manageSysOutlineMapper;
 
     @Autowired
     OutlinePageSubmitAction(CoreService coreService) {
@@ -266,6 +270,7 @@ public class OutlinePageSubmitAction extends ActionSupport {
             }else{
                 coreService.submitAdvice(outlineDevItemId, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
             }
+            manageSysOutlineMapper.updateCol2ByOutlineDevItemId(outlineDevItemId, "current_page_number", 3);
 
         } catch (ServiceException e) {
             response.setError("service error");

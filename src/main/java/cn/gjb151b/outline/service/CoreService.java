@@ -70,6 +70,11 @@ public class CoreService {
             throw new ServiceException(ExceptionEnums.PARAM_PAGE_ID_ERR);
         }
 
+        if (pageNumber > 59) {
+            pageNumber = 3;
+            dbService.updatePageNumber(outlineDevItemId, "current_page_number", pageNumber);
+            return "";
+        }
         // 从db取出schema和data
         Map<String, String> result = new HashMap<>();
         String schema = dbService.fetchSchema( pageNumber, DbColnameEnums.SCHEMA_PREFIX.getValue());

@@ -1,5 +1,6 @@
 package cn.gjb151b.outline.service;
 
+import cn.gjb151b.outline.Constants.PathStoreEnum;
 import cn.gjb151b.outline.action.ItemAction;
 import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
 import cn.gjb151b.outline.model.*;
@@ -11,11 +12,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.tools.internal.xjc.outline.Outline;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -262,6 +268,121 @@ public class ItemService {
         this.updateItem(outlineItemId,"","","","");
         manageSysOutlineMapper.deleteItemByName(outlineName);
 
+    }
+
+    public BaseResponse importItem(File sqlTxt, String fileName) {
+        BaseResponse importItemResponse = new BaseResponse();
+        String localPath = "src/main/webapp/statics/imgs/";
+        String importSqlDataFinalPath = localPath + fileName;
+        try{
+            FileUtils.copyFile(sqlTxt, new File(localPath, fileName));
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        BufferedReader br = null;
+        StringBuffer sb = null;
+        try {
+            br = new BufferedReader(new InputStreamReader((new FileInputStream(importSqlDataFinalPath))));
+            sb = new StringBuffer();
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        String sqlDataStr = sb.toString();
+        JSONObject sqlDataObject = JSON.parseObject(sqlDataStr);
+        ManageSysDevelop manageSysDevelop= new ManageSysDevelop();
+        manageSysDevelop.setDevItemid(sqlDataObject.getString("devItemId"));
+        manageSysDevelop.setDevName(sqlDataObject.getString("devName"));
+        manageSysDevelop.setDevSubsysEqp(sqlDataObject.getInteger("devSubsysEqp"));
+        manageSysDevelop.setDevSubsysEqpName(sqlDataObject.getString("devSubsysEqpName"));
+        manageSysDevelop.setDevSubsysEqpModel(sqlDataObject.getString("devSubsysEqpModel"));
+        manageSysDevelop.setDevSubsysEqpNum(sqlDataObject.getString("devSubsysEqpNum"));
+        manageSysDevelop.setDevSupplier(sqlDataObject.getString("devSupplier"));
+        manageSysDevelop.setDevPrimaryPlatform(sqlDataObject.getInteger("devPrimaryPlatform"));
+        manageSysDevelop.setDevSecondaryPlatform(sqlDataObject.getInteger("devSecondaryPlatform"));
+        manageSysDevelop.setDevAttribute(sqlDataObject.getInteger("devAttribute"));
+        manageSysDevelop.setDevKey(sqlDataObject.getInteger("devKey"));
+        manageSysDevelop.setDevInstall(sqlDataObject.getInteger("devInstall"));
+        manageSysDevelop.setDevGnd(sqlDataObject.getInteger("devGnd"));
+        manageSysDevelop.setDevSpecial(sqlDataObject.getInteger("devSpecial"));
+        manageSysDevelop.setDevInterport(sqlDataObject.getInteger("devInterport"));
+        manageSysDevelop.setDevLowsensitive(sqlDataObject.getInteger("devLowsensitive"));
+        manageSysDevelop.setDevEmp(sqlDataObject.getInteger("devEmp"));
+        manageSysDevelop.setDevStatic(sqlDataObject.getInteger("devStatic"));
+        manageSysDevelop.setDevPowerport(sqlDataObject.getString("devPowerPort"));
+        manageSysDevelop.setDevPowersupply(sqlDataObject.getString("devPowersupply"));
+        manageSysDevelop.setDevVoltage(sqlDataObject.getString("devVoltage"));
+        manageSysDevelop.setDevVoltagenum(sqlDataObject.getString("devVoltagenum"));
+        manageSysDevelop.setDevAntenna(sqlDataObject.getInteger("devAntenna"));
+        manageSysDevelop.setDevReceiveLaunch(sqlDataObject.getInteger("devReceiveLaunch"));
+        manageSysDevelop.setDevModulation(sqlDataObject.getInteger("devModulation"));
+        manageSysDevelop.setDevFreqOptional(sqlDataObject.getString("devFreqOptional"));
+        manageSysDevelop.setDevFreqFhLow(sqlDataObject.getString("devFreqFHLow"));
+        manageSysDevelop.setDevFreqFhMid(sqlDataObject.getString("devFreqFHMid"));
+        manageSysDevelop.setDevFreqFhHigh(sqlDataObject.getString("devFreqFHHigh"));
+        manageSysDevelop.setDevFreqDsss(sqlDataObject.getString("devFreqDSSS"));
+        manageSysDevelop.setDevCe101(sqlDataObject.getString("devCe101"));
+        manageSysDevelop.setDevCe102(sqlDataObject.getString("devCe102"));
+        manageSysDevelop.setDevCe106(sqlDataObject.getString("devCe106"));
+        manageSysDevelop.setDevCe107(sqlDataObject.getString("devCe107"));
+        manageSysDevelop.setDevCs101(sqlDataObject.getString("devCs101"));
+        manageSysDevelop.setDevCs102(sqlDataObject.getString("devCs102"));
+        manageSysDevelop.setDevCs103(sqlDataObject.getString("devCs103"));
+        manageSysDevelop.setDevCs104(sqlDataObject.getString("devCs104"));
+        manageSysDevelop.setDevCs105(sqlDataObject.getString("devCs105"));
+        manageSysDevelop.setDevCs106(sqlDataObject.getString("devCs106"));
+        manageSysDevelop.setDevCs109(sqlDataObject.getString("devCs109"));
+        manageSysDevelop.setDevCs112(sqlDataObject.getString("devCs112"));
+        manageSysDevelop.setDevCs114(sqlDataObject.getString("devCs114"));
+        manageSysDevelop.setDevCs115(sqlDataObject.getString("devCs115"));
+        manageSysDevelop.setDevCs116(sqlDataObject.getString("devCs116"));
+        manageSysDevelop.setDevRe101(sqlDataObject.getString("devRe101"));
+        manageSysDevelop.setDevRe102(sqlDataObject.getString("devRe102"));
+        manageSysDevelop.setDevRe103(sqlDataObject.getString("devRe103"));
+        manageSysDevelop.setDevRs101(sqlDataObject.getString("devRs101"));
+        manageSysDevelop.setDevRs103(sqlDataObject.getString("devRs103"));
+        manageSysDevelop.setDevRs105(sqlDataObject.getString("devCs105"));
+        manageSysDevelop.setDevAdviceProofread(sqlDataObject.getString("devAdviceProofread"));
+        manageSysDevelop.setDevAdviceAudit(sqlDataObject.getString("devAdviceAudit"));
+        manageSysDevelop.setDevAdviceAuthorize(sqlDataObject.getString("devAdviceAuthorize"));
+        manageSysDevelop.setDevCreateTime(sqlDataObject.getDate("devCreateTime"));
+        manageSysDevelop.setDevNewTime(sqlDataObject.getDate("devNewTime"));
+        manageSysDevelop.setDevModifyTime(sqlDataObject.getDate("devModifyTime"));
+        manageSysDevelop.setDevProofreadTime(sqlDataObject.getDate("devProofreadTime"));
+        manageSysDevelop.setDevAuditTime(sqlDataObject.getDate("devAuditTime"));
+        manageSysDevelop.setDevAuthorizeTime(sqlDataObject.getDate("devAuthorizeTime"));
+        manageSysDevelop.setDevOpeator(sqlDataObject.getInteger("devOperator"));
+        manageSysDevelop.setDevStatus(sqlDataObject.getInteger("devStatus"));
+        manageSysDevelop.setProjectList(sqlDataObject.getString("projectList"));
+        manageSysDevelop.setDevFreSelect(sqlDataObject.getInteger("devFreSelect"));
+        if (this.manageSysDevelopMapper.selectByPrimaryKey(manageSysDevelop.getDevItemid()) == null) {
+            this.manageSysDevelopMapper.addItem(manageSysDevelop);
+            importItemResponse.setStatus("success");
+            importItemResponse.setMessage("项目导入成功 可选择新建此项目");
+        } else {
+            importItemResponse.setStatus("error");
+            importItemResponse.setMessage("该项目已存在 请勿重复导入！");
+        }
+        System.out.println("----------------");
+        System.out.println(manageSysDevelop.getDevName());
+        System.out.println("----------------------");
+        File file = new File(importSqlDataFinalPath);
+        try {
+            FileUtils.forceDelete(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return importItemResponse;
     }
 }
 

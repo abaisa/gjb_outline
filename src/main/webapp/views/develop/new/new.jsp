@@ -230,6 +230,7 @@
     outlineStatus = params['outlineStatus'];
     Status = params['Status'];
     var pageData;
+    var devAttribute = 0;
 
 
     //调用loadTargetPage(1)，后台设置了2的下一页为3，初始化此页面为第三页
@@ -246,7 +247,23 @@
             loadTargetPage(1);
         }
 
-    }),
+    });
+
+    $.ajax({
+        type: "post",
+        url: "/outline/page_data/getDevAttribute",
+        data: {
+            outlineDevItemId: outlineDevItemId,
+        },
+        success: function(data){
+            console.log(data);
+            devAttribute = data.data;
+            console.log('devAttribute'+' '+ devAttribute);
+        }
+
+    });
+
+
 
 
 

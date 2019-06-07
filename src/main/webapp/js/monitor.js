@@ -351,11 +351,18 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验电源端口';
                     editor.getEditor(editorName).disable();
                 }
-                $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                editor.on('change',function() {
+
+                if(devAttribute == 0){
                     $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                });
-                // $("#editor_holder button").addClass("hidden");
+                    editor.on('change',function() {
+                        $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    });
+                    $("#editor_holder button").addClass("hidden");
+                }
+                // else if(devAttribute == 1){
+                //     $("div[data-schemapath*='工作状态'] button").removeClass("hidden");
+                // }
+
                 break;
 
             case '18':

@@ -271,7 +271,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
                 coreService.submitAdvice(outlineDevItemId, "outline_advice_authorize", outlineAdvice, "outline_status", outlineStatus);
             }
             manageSysOutlineMapper.updateCol2ByOutlineDevItemId(outlineDevItemId, "current_page_number", 3);
-
         } catch (ServiceException e) {
             response.setError("service error");
 

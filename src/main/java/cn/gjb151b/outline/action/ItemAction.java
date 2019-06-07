@@ -1,15 +1,21 @@
 package cn.gjb151b.outline.action;
 
+import cn.gjb151b.outline.Constants.PathStoreEnum;
 import cn.gjb151b.outline.model.*;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.service.ItemService;
 import cn.gjb151b.outline.utils.BaseResponse;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +38,12 @@ public class ItemAction extends ActionSupport{
     private BaseResponse updateItemResponse = new BaseResponse<String>();
     private BaseResponse updateItemNameResponse = new BaseResponse<String>();
     private BaseResponse findAllResponse = new BaseResponse<List<OutlineUserInfo>>();
+    private BaseResponse importItemResponse = new BaseResponse();
     private List<String> list1;
     private BaseResponse getAllItemResponse;
+    private File sqlTxt;
+    private String sqlTxtContentType;
+    private String sqlTxtFileName;
 
     public String findAllItem(){
         findAllItemResponse = itemService.findAllItem();
@@ -73,8 +83,45 @@ public class ItemAction extends ActionSupport{
         updateItemResponse.setMessage("更新成功");
 
         return "success";
+    }
+
+    public String importItem() {
+        try {
+            this.importItemResponse = this.itemService.importItem(this.sqlTxt, this.sqlTxtFileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.importItemResponse.setStatus("error");
+            this.importItemResponse.setMessage("项目导入发生错误！");
+        }
+        return "success";
 
     }
+
+    public File getSqlTxt() {
+        return sqlTxt;
+    }
+
+    public void setSqlTxt(File sqlTxt) {
+        this.sqlTxt = sqlTxt;
+    }
+
+
+    public String getSqlTxtContentType() {
+        return sqlTxtContentType;
+    }
+
+    public void setSqlTxtContentType(String sqlTxtContentType) {
+        this.sqlTxtContentType = sqlTxtContentType;
+    }
+
+    public String getSqlTxtFileName() {
+        return sqlTxtFileName;
+    }
+
+    public void setSqlTxtFileName(String sqlTxtFileName) {
+        this.sqlTxtFileName = sqlTxtFileName;
+    }
+
 
 
 
@@ -166,6 +213,14 @@ public class ItemAction extends ActionSupport{
 
     public void setGetAllItemResponse(BaseResponse getAllItemResponse) {
         this.getAllItemResponse = getAllItemResponse;
+    }
+
+    public BaseResponse getImportItemResponse() {
+        return importItemResponse;
+    }
+
+    public void setImportItemResponse(BaseResponse importItemResponse) {
+        this.importItemResponse = importItemResponse;
     }
 
 }

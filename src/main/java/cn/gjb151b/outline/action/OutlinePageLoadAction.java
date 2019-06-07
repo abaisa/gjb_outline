@@ -1,5 +1,6 @@
 package cn.gjb151b.outline.action;
 
+import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
 import cn.gjb151b.outline.service.CoreService;
 import cn.gjb151b.outline.service.DBService;
 import cn.gjb151b.outline.utils.BaseResponse;
@@ -7,6 +8,7 @@ import cn.gjb151b.outline.utils.ServiceException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.xml.internal.rngom.parse.host.Base;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,8 +35,13 @@ public class OutlinePageLoadAction  extends ActionSupport {
 
     private BaseResponse<Integer> getCurrentPageNumberResponse;
 
+    private BaseResponse<Integer> getDevAttributeResponse;
+
     @Autowired
     private DBService dbService;
+
+    @Autowired
+    private ManageSysDevelopMapper manageSysDevelopMapper;
 
     @Autowired
     OutlinePageLoadAction(CoreService coreService) {
@@ -161,6 +168,21 @@ public class OutlinePageLoadAction  extends ActionSupport {
 
     }
 
+    public String getDevAttribute() {
+        Integer devAttribute = 0;
+        getDevAttributeResponse = new BaseResponse<>();
+        try{
+            devAttribute =  manageSysDevelopMapper.selectByPrimaryKey(outlineDevItemId).getDevAttribute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        this.getDevAttributeResponse.setStatus("success");
+        this.getDevAttributeResponse.setData(devAttribute);
+        return  SUCCESS;
+
+
+    }
+
     public String getOutlineDevItemId() {
         return outlineDevItemId;
     }
@@ -225,5 +247,14 @@ public class OutlinePageLoadAction  extends ActionSupport {
     public void setGetCurrentPageNumberResponse(BaseResponse<Integer> getCurrentPageNumberResponse) {
         this.getCurrentPageNumberResponse = getCurrentPageNumberResponse;
     }
+
+    public BaseResponse<Integer> getGetDevAttributeResponse() {
+        return getDevAttributeResponse;
+    }
+
+    public void setGetDevAttributeResponse(BaseResponse<Integer> getDevAttributeResponse) {
+        this.getDevAttributeResponse = getDevAttributeResponse;
+    }
+
 
 }

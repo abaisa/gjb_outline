@@ -69,6 +69,10 @@ public class CoreService {
         } else {
             throw new ServiceException(ExceptionEnums.PARAM_PAGE_ID_ERR);
         }
+        //如果取值大于59说明已经项目状态发生改变，直接跳到第3页
+        if (pageNumber > 59) {
+            pageNumber = 3;
+        }
 
         if (pageNumber > 59) {
             pageNumber = 3;
@@ -99,7 +103,9 @@ public class CoreService {
         result.put("schema", schema);
         result.put("data", data);
         result.put("page_id", String.valueOf(pageNumber));
-        dbService.updatePageNumber(outlineDevItemId, "current_page_number", pageNumber);
+        if (pageNumber >= 3 && pageNumber <= 58) {
+            dbService.updatePageNumber(outlineDevItemId, "current_page_number", pageNumber);
+        }
 //        result.put("outlineAdviceProofread", outlineAdviceProofread);
 //        result.put("outlineAdviceAudit", outlineAdviceAudit);
 //        result.put("outlineAdviceAuthorize", outlineAdviceAuthorize);

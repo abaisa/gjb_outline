@@ -31,6 +31,11 @@
             </div>
         </div>
     </div>
+        <%--导入外部项目--%>
+    <div id="importItem" align="right">
+        <input type="file" id="sqlTxt" name="sqlTxt" class="input-lg">
+        <button class="btn-primary" id="upload" onclick="importItem()">上传外部项目</button>
+    </div>
     <s:include value="../../_footer.jsp"/>
 </div>
 
@@ -105,6 +110,7 @@
 <script type="text/javascript" src="repack/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="repack/js/plugin/front.js"></script>
 <script type="text/javascript" src="js/develop/admin.js"></script>
+<script type="text/javascript" src="repack/js/jquery/ajaxfileupload.js"></script>
 <script>
     function findUserAndItem(){
         $('#user_new').empty();//先清空避免重复查询，此段也可省略
@@ -147,7 +153,39 @@
 
 
 
+
 }
+    function importItem() {
+        var fileInput = $('#sqlTxt').get(0).files[0];
+        if(!fileInput){
+            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '未选择任何图片'});
+
+        } else {
+            $.ajaxFileUpload({
+                type: "post",
+                url: "/outline/admin/importItem",
+                fileElementId: "sqlTxt",
+                dataType: "json",
+                success: function(data){
+                    console.log(data);
+                    if (data.status === 'success') {
+                        $.tipModal('confirm', 'info', data.message, function (result) {
+                        })
+                    } else {
+                        $.tipModal('confirm', 'info', data.message, function (result) {
+                        })
+                    }
+
+                },
+                error: function(data){
+                    console.log(data);
+                    $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: "系统繁忙"});
+                }
+
+            })
+
+        }
+    }
 </script>
 </body>
 </html>

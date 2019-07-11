@@ -1,6 +1,7 @@
 package cn.gjb151b.outline.action;
 
 
+import cn.gjb151b.outline.service.ItemService;
 import cn.gjb151b.outline.service.LoginService;
 import cn.gjb151b.outline.utils.BaseResponse;
 import com.opensymphony.xwork2.ActionContext;
@@ -24,6 +25,9 @@ public class LoginAction extends ActionSupport{
     private BaseResponse checkUserResponse = new BaseResponse<Integer>();
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private ItemService itemService;
 
 
     public String checkUser() {

@@ -2198,6 +2198,8 @@ public class DependencyService {
         JSONObject devFreqFHMid = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhMid());
         JSONObject devFreqFHHigh = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqFhHigh());
         JSONObject devFreqDSSS = (JSONObject)JSON.parse(manageSysDevelop.getDevFreqDsss());
+        JSONArray optList = (JSONArray)JSON.parse(manageSysDevelop.getDevFreqOptional());
+        int optListLength = optList.size();
         int devFreSelect = manageSysDevelop.getDevFreSelect();
         int devReceiveLaunch = manageSysDevelop.getDevReceiveLaunch();
 //        if(!devFreqOptional.isEmpty()){

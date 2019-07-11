@@ -118,14 +118,20 @@ function uploadPic() {
             type: "post",
             url: "/outline/page_data/upload",
             fileElementId: "images",
+            dataType: "json",
             data: {
                 outlineDevItemId: outlineDevItemId,
                 pageNumber: 4,
                 picNumber: 1,
             },
             success: function(data){
-                console.log(data)
-                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+                console.log(data);
+                if (data.status === "success") {
+                    $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+                } else {
+                    $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+
+                }
 
 
             }
@@ -146,14 +152,20 @@ function uploadPic2() {
             type: "post",
             url: "/outline/page_data/upload",
             fileElementId: "images2",
+            dataType: "json",
             data: {
                 outlineDevItemId: outlineDevItemId,
                 pageNumber: 4,
                 picNumber: 2,
             },
             success: function(data){
-                console.log(data)
-                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+                console.log(data);
+                if (data.status === "success") {
+                    $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+                } else {
+                    $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+
+                }
 
 
             }
@@ -174,13 +186,19 @@ function uploadPic3() {
             type: "post",
             url: "/outline/page_data/upload",
             fileElementId: "images3",
+            dataType: "json",
             data: {
                 outlineDevItemId: outlineDevItemId,
                 pageNumber: page_number,
             },
             success: function(data){
                 console.log(data)
-                $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+                if (data.status === "success") {
+                    $.fillTipBox({type: 'success', icon: 'glyphicon-exclamation-sign', content: '上传成功'});
+                } else {
+                    $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: data.message});
+
+                }
 
 
             }
@@ -205,12 +223,14 @@ function downloadPic(){
         success: function(data){
             console.log(data);
             var pic1List = data.data;
-            for(var i = 0; i<pic1List.length; i++){
+            var length = pic1List.length;
+            for(var i = 0; i < length - 1; i++){
                 var img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                // var url = "statics/imgs/"+pic1List[i];
-                var url = "/image/"+pic1List[i];
+                // pic1List[length - 1]中存储了这个项目名 作为一层目录结构
+                var url = "/image/gjb_outline/upload_img/" + pic1List[length - 1] + "/" + pic1List[i];
+                // var url = "/image/"+pic1List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
@@ -238,12 +258,12 @@ function downloadPic2(){
         success: function(data){
             console.log(data);
             var pic2List = data.data;
-            for(var i = 0; i<pic2List.length; i++){
+            for(var i = 0; i<pic2List.length - 1; i++){
                 var  img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                // var url = "statics/imgs/"+pic2List[i];
-                var url = "/image/"+pic2List[i];
+                var url = "/image/gjb_outline/upload_img/" + pic2List[pic2List.length - 1] + "/" + pic2List[i];
+                // var url = "/image/"+pic2List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;
@@ -272,12 +292,12 @@ function downloadPic3(){
         success: function(data){
             console.log(data);
             var pic3List = data.data;
-            for(var i = 0; i<pic3List.length; i++){
+            for(var i = 0; i<pic3List.length - 1; i++){
                 var  img = document.createElement("img");
                 var pictureNumber = document.createElement("span");
                 pictureNumber.innerHTML = i+1;
-                // var url = "statics/imgs/"+pic3List[i];
-                var url = "/image/"+pic3List[i];
+                var url = "/image/gjb_outline/upload_img/" + pic3List[pic3List.length - 1] + "/" + pic3List[i];
+                // var url = "/image/"+pic3List[i];
                 img.src = url;
                 img.className="image";
                 img.width=500;

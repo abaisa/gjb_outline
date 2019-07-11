@@ -517,6 +517,16 @@ public class ManageSysDevelop {
 
     private Integer devFreSelect;
 
+    private String devSubsysSource;
+
+    private String devSubsysComRef;
+
+    private String devSubsysQuantity;
+
+    private String devSubsysEnvironment;
+
+    private String devPowername;
+
     public Integer getDevFreSelect() {return  devFreSelect;}
 
     public  void setDevFreSelect(Integer devFreSelect) {this.devFreSelect = devFreSelect;}
@@ -2065,5 +2075,46 @@ public class ManageSysDevelop {
      */
     public void setDevAdviceAuthorize(String devAdviceAuthorize) {
         this.devAdviceAuthorize = devAdviceAuthorize == null ? null : devAdviceAuthorize.trim();
+    }
+
+
+    public String getDevSubsysSource() {
+        return devSubsysSource;
+    }
+
+    public void setDevSubsysSource(String devSubsysSource) {
+        this.devSubsysSource = devSubsysSource;
+    }
+
+    public String getDevSubsysComRef() {
+        return devSubsysComRef;
+    }
+
+    public void setDevSubsysComRef(String devSubsysComRef) {
+        this.devSubsysComRef = devSubsysComRef;
+    }
+
+    public String getDevSubsysQuantity() {
+        return devSubsysQuantity;
+    }
+
+    public void setDevSubsysQuantity(String devSubsysQuantity) {
+        this.devSubsysQuantity = devSubsysQuantity;
+    }
+
+    public String getDevSubsysEnvironment() {
+        return devSubsysEnvironment;
+    }
+
+    public void setDevSubsysEnvironment(String devSubsysEnvironment) {
+        this.devSubsysEnvironment = devSubsysEnvironment;
+    }
+
+    public String getDevPowername() {
+        return devPowername;
+    }
+
+    public void setDevPowername(String devPowername) {
+        this.devPowername = devPowername;
     }
 }

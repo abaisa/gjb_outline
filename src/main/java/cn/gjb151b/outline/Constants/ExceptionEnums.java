@@ -14,7 +14,8 @@ public enum ExceptionEnums {
     PARAM_PAGE_ID_ERR(2001, "param error, page id illegal"),
     ENUM_CODE_MISS_ERR(2002, "enum code not found"),
     PARAM_DATA_PARSE_ERR(2003, "param data parse fail"),
-    DEV_SYS_INPUT_DATA_ERR(2004, "data from pre system error");
+    DEV_SYS_INPUT_DATA_ERR(2004, "data from pre system error"),
+    UPLOAD_IMG_HAVE_EXISTED(2005,"图片名重复，请修改图片名称后再次上传！");
 
     private int errCode;
     private String errMsg;

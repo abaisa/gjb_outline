@@ -19,9 +19,18 @@
     <s:include value="_nav_admin.jsp">
     <s:param name="act">item</s:param>
     </s:include>
+    <%--导入外部项目--%>
+    <div class="container">
+        <div id="importItem" align="middle" class="panel panel-default front-panel">
+            <p align="center">外部项目导入</p>
+            <input type="file" id="sqlTxt" name="sqlTxt" class="filestyle pull-left" data-classButton="btn btn-primary" data-classInput="input-small" data-buttonBefore="true">
+            <button class="pull-right btn-primary" id="upload" onclick="importItem()">导入项目</button>
+        </div>
+    </div>
     <div class="container">
         <div style="margin-bottom:40px;">
             <a data-toggle="modal" data-target="#myModal"  class="pull-right btn btn-primary" onclick="findUserAndItem()">新建</a>
+            <%--<button class="pull-left btn btn-primary"  onclick="controlDiv()">导入外部项目</button>--%>
         </div>
         <div class="panel panel-default front-panel">
             <div class="panel-body front-no-padding">
@@ -30,11 +39,6 @@
                 </table>
             </div>
         </div>
-    </div>
-        <%--导入外部项目--%>
-    <div id="importItem" align="right">
-        <input type="file" id="sqlTxt" name="sqlTxt" class="input-lg">
-        <button class="btn-primary" id="upload" onclick="importItem()">上传外部项目</button>
     </div>
     <s:include value="../../_footer.jsp"/>
 </div>
@@ -108,6 +112,7 @@
 <!-- 若要使用本地的文件，请注释掉下面三行标记 -->
 <script type="text/javascript" src="repack/js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="repack/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="repack/bootstrap/js/filestyle.min.js"></script>
 <script type="text/javascript" src="repack/js/plugin/front.js"></script>
 <script type="text/javascript" src="js/develop/admin.js"></script>
 <script type="text/javascript" src="repack/js/jquery/ajaxfileupload.js"></script>
@@ -158,7 +163,7 @@
     function importItem() {
         var fileInput = $('#sqlTxt').get(0).files[0];
         if(!fileInput){
-            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '未选择任何图片'});
+            $.fillTipBox({type: 'warning', icon: 'glyphicon-exclamation-sign', content: '未选择任何文件'});
 
         } else {
             $.ajaxFileUpload({
@@ -185,6 +190,10 @@
             })
 
         }
+    }
+    function controlDiv() {
+        $("#importItem").toggle();
+
     }
 </script>
 </body>

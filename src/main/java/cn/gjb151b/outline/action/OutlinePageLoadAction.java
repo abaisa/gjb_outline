@@ -1,6 +1,7 @@
 package cn.gjb151b.outline.action;
 
 import cn.gjb151b.outline.dao.ManageSysDevelopMapper;
+import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.service.CoreService;
 import cn.gjb151b.outline.service.DBService;
 import cn.gjb151b.outline.utils.BaseResponse;
@@ -42,6 +43,9 @@ public class OutlinePageLoadAction  extends ActionSupport {
 
     @Autowired
     private ManageSysDevelopMapper manageSysDevelopMapper;
+
+    @Autowired
+    private ManageSysOutlineMapper manageSysOutlineMapper;
 
     @Autowired
     OutlinePageLoadAction(CoreService coreService) {
@@ -130,6 +134,8 @@ public class OutlinePageLoadAction  extends ActionSupport {
                 e.printStackTrace();
             }
         }
+        String devName = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, "outline_name");
+        picList.add(devName);
         downloadResponse = new BaseResponse<>();
         downloadResponse.setResponse(picList);
         return SUCCESS;

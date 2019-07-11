@@ -1,5 +1,7 @@
 package cn.gjb151b.outline.action;
 
+import cn.gjb151b.outline.Constants.ExceptionEnums;
+import cn.gjb151b.outline.Constants.PathStoreEnum;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.service.CoreService;
 import cn.gjb151b.outline.service.DBService;
@@ -108,9 +110,25 @@ public class OutlinePageSubmitAction extends ActionSupport {
 //        String uuid = UUIDUtils.getUUID();
 //        //得到组合的filename
 //        String filename = uuid+imagesFileName;
-        //图片存储的相对路径
-        String localPath = "src/main/webapp/statics/imgs/";
+        String devName = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, "outline_name");
+        //图片存储的绝对路径
+        String localPath = PathStoreEnum.WINDOWS_IMG_UPLOAD_DEST_PATH.getValue() + devName + "/";
 //        String localPath = "d://gjb_outline//img//";
+        String filename = imagesFileName;
+        //将照片copy到指定的相对路径下
+        try{
+            File file = new File(localPath + filename);
+            if (! file.exists()) {
+                FileUtils.copyFile(images, new File(localPath, filename));
+            } else {
+                response.setStatus("error");
+                response.setMessage(ExceptionEnums.UPLOAD_IMG_HAVE_EXISTED.getErrMsg());
+                return "success";
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         if(pageNumber == 4){
             if(picNumber == 1){
                 try{
@@ -118,18 +136,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     JSONObject jsonObject;
                     jsonObject = JSON.parseObject(outlineData4);
                     List<String> pic1List = (List<String>)jsonObject.get("分系统/设备照片");
-//                    人工指定唯一图片名称,防止重复
-                    String filename = imagesFileName;
-//                    String filename = "分系统设备照片"+ (pic1List.size() + 1) +":"+imagesFileName;
-                    //将照片copy到指定的相对路径下
-                    try{
-                        FileUtils.copyFile(images, new File(localPath, filename));
-
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-//                    //mysql中存储相应的图片路径
-//                    String sql = "statics/imgs"+"/"+filename;
                     logger.info(pageNumber);
 
                     pic1List.add(filename);
@@ -146,18 +152,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     JSONObject jsonObject;
                     jsonObject = JSON.parseObject(outlineData4);
                     List<String> pic2List = (List<String>)jsonObject.get("分系统/设备关系图");
-                    //                    人工指定唯一图片名称,防止重复
-                    String filename = imagesFileName;
-//                    String filename = "分系统设备关系图" + (pic2List.size() + 1) + ":" + imagesFileName;
-                    //将照片copy到指定的相对路径下
-                    try{
-                        FileUtils.copyFile(images, new File(localPath, filename));
-
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-//                    //mysql中存储相应的图片路径
-//                    String sql = "statics/imgs"+"/"+filename;
                     pic2List.add(filename);
                     jsonObject.put("分系统/设备关系图", pic2List);
                     outlineData4 = jsonObject.toJSONString();
@@ -174,24 +168,19 @@ public class OutlinePageSubmitAction extends ActionSupport {
                     String colName = "outline_data_" + pageNumber;
                     String outlineData14To34 = dbService.fetchData(outlineDevItemId, colName);
                     JSONObject jsonObject = JSON.parseObject(outlineData14To34);
-                    String filename = imagesFileName;
-                    try {
-                        FileUtils.copyFile(images, new File(localPath, filename));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     jsonObject.put("项目试验图", filename);
                     dbService.submitData(outlineDevItemId, colName, jsonObject.toJSONString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        response.setMessage("success");
+        response.setStatus("success");
         return SUCCESS;
     }
 
     public String deletePic(){
-        String pathsuff = "src/main/webapp/statics/imgs/";
+        String devName = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, "outline_name");
+        String pathsuff = PathStoreEnum.WINDOWS_IMG_UPLOAD_DEST_PATH.getValue() + devName + "/";
 //        String pathsuff = "d://gjb_outline//img//";
         List<String> pictureList = new ArrayList<>();
         if(pageNumber == 4){
@@ -204,7 +193,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         for (String filename : picList1) {
                             FileUtils.deleteQuietly(new File(pathsuff+filename));
                         }
-                        pictureList = (List<String>) jsonObject.get("分系统/设备照片");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备照片", picList);
                         dbService.submitData(outlineDevItemId, "outline_data_4", jsonObject.toJSONString());
@@ -221,8 +209,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
                         for (String filename : picList2) {
                             FileUtils.deleteQuietly(new File(pathsuff+filename));
                         }
-
-                        pictureList  = (List<String>) jsonObject.get("分系统/设备关系图");
                         List<String> picList = new ArrayList<>();
                         jsonObject.put("分系统/设备关系图", picList);
                         dbService.submitData(outlineDevItemId, "outline_data_4", jsonObject.toJSONString());
@@ -232,12 +218,6 @@ public class OutlinePageSubmitAction extends ActionSupport {
                 }
 
         }
-
-//        for(String filename : pictureList){
-//            String localPath = "d://gjb_outline//img//";
-//            File file = new File(localPath+filename);
-//            file.delete();
-//        }
         response.setMessage("success");
         return SUCCESS;
     }

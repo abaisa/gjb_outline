@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,10 +89,18 @@ public class ItemAction extends ActionSupport{
     public String importItem() {
         try {
             this.importItemResponse = this.itemService.importItem(this.sqlTxt, this.sqlTxtFileName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.importItemResponse.setStatus("error");
+            this.importItemResponse.setMessage("数据库访问异常！");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            this.importItemResponse.setStatus("error");
+            this.importItemResponse.setMessage("运行时发生错误！");
         } catch (Exception e) {
             e.printStackTrace();
             this.importItemResponse.setStatus("error");
-            this.importItemResponse.setMessage("项目导入发生错误！");
+            this.importItemResponse.setMessage("系统发生了其它未知错误！");
         }
         return "success";
 

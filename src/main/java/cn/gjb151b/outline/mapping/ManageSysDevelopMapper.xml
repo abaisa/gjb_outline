@@ -68,6 +68,11 @@
     <result column="dev_advice_authorize" jdbcType="LONGVARCHAR" property="devAdviceAuthorize" />
     <result column="project_list" jdbcType="LONGVARCHAR" property="projectList"/>
     <result column="dev_fre_select" jdbcType="LONGVARCHAR" property="devFreSelect"/>
+    <result column="dev_subsys_source" jdbcType="LONGVARCHAR" property="devSubsysSource"/>
+    <result column="dev_subsys_com_ref" jdbcType="LONGVARCHAR" property="devSubsysComRef"/>
+    <result column="dev_subsys_quantity" jdbcType="LONGVARCHAR" property="devSubsysQuantity"/>
+    <result column="dev_subsys_environment" jdbcType="LONGVARCHAR" property="devSubsysEnvironment"/>
+    <result column="dev_powername" jdbcType="LONGVARCHAR" property="devPowername"/>
   </resultMap>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -121,7 +126,10 @@
     dev_RE101, dev_RE102, dev_RE103,
     dev_RS101, dev_RS103, dev_RS105,
     dev_advice_proofread, dev_advice_audit,
-    dev_advice_authorize, project_list
+    dev_advice_authorize, project_list,
+    dev_subsys_source, dev_subsys_com_ref,
+    dev_subsys_quantity, dev_subsys_environment,
+    dev_powername
     )
     values (#{devId,jdbcType=INTEGER}, #{devItemid,jdbcType=VARCHAR}, #{devName,jdbcType=VARCHAR},
     #{devSubsysEqp,jdbcType=INTEGER}, #{devSubsysEqpName,jdbcType=VARCHAR}, #{devSubsysEqpModel,jdbcType=VARCHAR},
@@ -145,7 +153,14 @@
     #{devRe101,jdbcType=LONGVARCHAR}, #{devRe102,jdbcType=LONGVARCHAR}, #{devRe103,jdbcType=LONGVARCHAR},
     #{devRs101,jdbcType=LONGVARCHAR}, #{devRs103,jdbcType=LONGVARCHAR}, #{devRs105,jdbcType=LONGVARCHAR},
     #{devAdviceProofread,jdbcType=LONGVARCHAR}, #{devAdviceAudit,jdbcType=LONGVARCHAR},
-    #{devAdviceAuthorize,jdbcType=LONGVARCHAR}, #{projectList,jdbcType=LONGVARCHAR}
+    #{devAdviceAuthorize,jdbcType=LONGVARCHAR}, #{projectList,jdbcType=LONGVARCHAR},
+    #{devSubsysSource,jdbcType=LONGVARCHAR}, #{devSubsysComRef, jdbcType=LONGVARCHAR},
+    #{devSubsysQuantity, jdbcType=LONGVARCHAR}, #{devSubsysEnvironment, jdbcType=LONGVARCHAR},
+    #{devPowername, jdbcType=LONGVARCHAR}
     )
   </insert>
+
+  <select id="getProjectByDevName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from manage_sys_develop where dev_name = #{devName};
+  </select>
 </mapper>

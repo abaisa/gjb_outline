@@ -13,7 +13,7 @@
             <!-- 品牌图片大小为150 * 30：宽度不定，高度固定30px -->
             <!--<div class="nav-brand"><a href="#"><img src="/bootstrap-front/dev/img/logo.png" alt="brand" class="img-responsive"/></a></div>-->
             <!-- -->
-            <div class="nav-brand" style="font-size: 22px"><a href="#">GJB151B管理系统</a></div>
+            <div class="nav-brand" style="font-size: 22px"><a href="#">试验大纲.管理系统</a></div>
         </div>
         <div class="nav-collapse collapse" id="nav-collapse-demo">
             <ul class="nav navbar-nav">

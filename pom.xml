@@ -89,6 +89,11 @@
             <version>4.2.4.RELEASE</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.2</version>
+        </dependency>
         <!-- mysql连接  -->
         <dependency>
             <groupId>mysql</groupId>

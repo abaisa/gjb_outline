@@ -28,7 +28,7 @@ public class DBService {
     }
 
     /**
-     * @param outlineID 大纲id
+     * @param outlineDevItemId 大纲devItemId
      * @param pageID    页码
      * @param data      写入数据
      * @param prefix    列名前缀
@@ -81,7 +81,7 @@ public class DBService {
     }
 
     /**
-     * @param outlineID 大纲id
+     * @param outlineDevItemId 大纲id
      * @param data      写入数据
      * @param colName   列名
      * @throws Exception
@@ -98,7 +98,7 @@ public class DBService {
     }
 
     /**
-     * @param outlineID 大纲id
+     * @param outlineDevItemId 大纲id
      * @param data      写入整型数据
      * @param colName   列名
      * @throws Exception
@@ -109,7 +109,7 @@ public class DBService {
     }
 
     /**
-     * @param outlineID 大纲id
+     * @param outlineDevItemId 大纲id
      * @param pageID    页码
      * @param prefix    列名前缀,或者
      * @return data
@@ -144,7 +144,7 @@ public class DBService {
     }
 
     /**
-     * @param outlineID 大纲id
+     * @param outlineDevItemId 大纲id
      * @param colName   列名
      * @return data
      * @throws Exception

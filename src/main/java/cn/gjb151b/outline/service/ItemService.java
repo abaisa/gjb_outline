@@ -439,7 +439,7 @@ public class ItemService {
             copyFolder(oldPath, newPath2);
             FileUtils.copyFileToDirectory(new File(oldPath2), new File(newPath3));
             FileUtils.deleteDirectory(new File(oldPath));
-            FileUtils.forceDelete(new File(oldPath2));
+            FileUtils.deleteQuietly(new File(oldPath2));
             importItemResponse.setStatus("success");
             importItemResponse.setMessage("项目导入成功 可选择新建此项目");
         } else if (this.manageSysDevelopMapper.selectByPrimaryKey(manageSysDevelop.getDevItemid()) != null) {

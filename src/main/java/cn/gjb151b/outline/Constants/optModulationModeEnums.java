@@ -21,10 +21,10 @@ public enum optModulationModeEnums {
 
     public String getMsg() {return msg;}
 
-    public static optModulationModeEnums getMsgWithCode(String code) {
+    public static String getMsgWithCode(String code) {
         for(optModulationModeEnums enums : optModulationModeEnums.values()) {
-            if(enums.getCode() == code) {
-                return enums;
+            if(enums.getCode().equals(code)) {
+                return enums.getMsg();
             }
         }
 

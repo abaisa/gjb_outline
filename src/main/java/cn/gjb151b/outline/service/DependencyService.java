@@ -1228,11 +1228,29 @@ public class DependencyService {
                     String colName = "outline_data_" + i;
                     outlineData14To34 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
                     JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
+                    //项目试验图和试验方法相关修改
+                    if (outlineData14To34Object.containsKey("项目试验图")) {
+                        standardDeflect = projectName + "项目试验图修改";
+                        standardDeflectReason = outlineData14To34Object.getString("修改图形理由");
+                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                        newJsonObject.put("内容", standardDeflect);
+                        newJsonObject.put("理由", standardDeflectReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (outlineData14To34Object.containsKey("修改方法")) {
+                        standardDeflect = projectName + "试验方法修改";
+                        standardDeflectReason = "无";
+                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                        newJsonObject.put("内容", standardDeflect);
+                        newJsonObject.put("理由", standardDeflectReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    //试验端口及被试品工作状态偏离
                     if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
                         JSONArray testPortAndWorkStatusArray;
-                        if (i == 16 || i == 20 || i == 21 || i ==22) {
+                        if (i == 16 || i == 20 || i == 21 || i == 22) {
                             testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); i++) {
+                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
                                 JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
                                 if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
                                     if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
@@ -1322,22 +1340,6 @@ public class DependencyService {
                                 }
                             }
                         }
-                    }
-                    if (outlineData14To34Object.containsKey("项目试验图")) {
-                        standardDeflect = projectName + "项目试验图修改";
-                        standardDeflectReason = outlineData14To34Object.getString("修改图形理由");
-                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                        newJsonObject.put("内容", standardDeflect);
-                        newJsonObject.put("理由", standardDeflectReason);
-                        cutAndDeflectArray.add(newJsonObject);
-                    }
-                    if (outlineData14To34Object.containsKey("修改方法")) {
-                        standardDeflect = projectName + "试验方法修改";
-                        standardDeflectReason = "无";
-                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                        newJsonObject.put("内容", standardDeflect);
-                        newJsonObject.put("理由", standardDeflectReason);
-                        cutAndDeflectArray.add(newJsonObject);
                     }
                 }
                 jsonObject.put("标准剪裁与偏离说明", cutAndDeflectArray);

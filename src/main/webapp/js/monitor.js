@@ -60,6 +60,12 @@ function monitor() {
             case '6':
                 equipmentListNum = 0;
                 configurationListNum = 0;
+                $("input[name*='序号']").width(20);
+                $("table").removeAttr("style");
+                $("input[name*='设备名称']").removeAttr("style");
+                $("input[name*='型号']").removeAttr("style");
+                // console.log("设备名称长度："+$("input[name*='设备名称']").width());
+                // $("input[name*='设备名称']").css({"width":"100px" });
                 $("input[name*='连接电缆ID']").width(50);
                 $("input[name*='名称']").width(20);
                 $("input[name*='型号']").width(20);
@@ -148,12 +154,12 @@ function monitor() {
                     watchQuantity('root.电源端口', 10);
                     watchQuantity('root.互联端口', 20);
                 }
-                editor.watch('root.电源端口', function () {
+                // editor.watch('root.电源端口', function () {
                     modifyPage10 = true;
-                });
-                editor.watch('root.互联端口', function () {
+                // });
+                // editor.watch('root.互联端口', function () {
                     modifyPage10 = true;
-                });
+                // });
                 break;
             case '11':
                 watchQuantity('root.敏感度判据及检测方法', 10);
@@ -279,6 +285,11 @@ function monitor() {
                 break;
             case '16':
                 page16 = false;
+                $("button:contains('删除所有')").addClass("hidden");
+                $("button:contains('删除最后一行')").addClass("hidden");
+                $("input[name*='工作状态']").attr("readonly", "readonly");
+                $("input[name*='不实施理由']").removeAttr("readonly");
+                $("input[name*='备注']").removeAttr("readonly");
                 $("select[name*='是否实施']").on('change',
                     function () {
                         var selectName = $(this).children('option:selected').val();
@@ -311,9 +322,12 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
-                $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                // $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 editor.on('change',function() {
-                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    // $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='工作状态']").attr("readonly", "readonly");
+                    $("input[name*='不实施理由']").removeAttr("readonly");
+                    $("input[name*='备注']").removeAttr("readonly");
                 });
                 // $("#editor_holder button").addClass("hidden");
                 break;
@@ -454,6 +468,11 @@ function monitor() {
                 break;
             case '20':
                 page20 = false;
+                $("button:contains('删除所有')").addClass("hidden");
+                $("button:contains('删除最后一行')").addClass("hidden");
+                $("input[name*='工作状态']").attr("readonly", "readonly");
+                $("input[name*='不实施理由']").removeAttr("readonly");
+                $("input[name*='备注']").removeAttr("readonly");
                 $("select[name*='是否实施']").on('change',
                     function () {
                         var selectName = $(this).children('option:selected').val();
@@ -481,9 +500,10 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
-                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 editor.on('change',function() {
-                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='工作状态']").attr("readonly", "readonly");
+                    $("input[name*='不实施理由']").removeAttr("readonly");
+                    $("input[name*='备注']").removeAttr("readonly");
                 });
                 var testPortArray = load_data.试验端口及被试品工作状态;
                 // if(testPortArray != null) {
@@ -497,6 +517,11 @@ function monitor() {
                 break;
             case '21':
                 page21 = false;
+                $("button:contains('删除所有')").addClass("hidden");
+                $("button:contains('删除最后一行')").addClass("hidden");
+                $("input[name*='工作状态']").attr("readonly", "readonly");
+                $("input[name*='不实施理由']").removeAttr("readonly");
+                $("input[name*='备注']").removeAttr("readonly");
                 $("select[name*='是否实施']").on('change',
                     function () {
                         var selectName = $(this).children('option:selected').val();
@@ -529,14 +554,20 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
-                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 editor.on('change',function() {
-                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='工作状态']").attr("readonly", "readonly");
+                    $("input[name*='不实施理由']").removeAttr("readonly");
+                    $("input[name*='备注']").removeAttr("readonly");
                 });
                 // $("#editor_holder button").addClass("hidden");
                 break;
             case '22':
                 page22 = false;
+                $("button:contains('删除所有')").addClass("hidden");
+                $("button:contains('删除最后一行')").addClass("hidden");
+                $("input[name*='工作状态']").attr("readonly", "readonly");
+                $("input[name*='不实施理由']").removeAttr("readonly");
+                $("input[name*='备注']").removeAttr("readonly");
                 $("select[name*='是否实施']").on('change',
                     function () {
                         var selectName = $(this).children('option:selected').val();
@@ -569,9 +600,10 @@ function monitor() {
                     var editorName = 'root.试验端口及被试品工作状态.'+i+'.天线端口';
                     editor.getEditor(editorName).disable();
                 }
-                $("input[name*='工作状态描述']").attr("readonly", "readonly");
                 editor.on('change',function() {
-                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                    $("input[name*='工作状态']").attr("readonly", "readonly");
+                    $("input[name*='不实施理由']").removeAttr("readonly");
+                    $("input[name*='备注']").removeAttr("readonly");
                 });
                 // $("#editor_holder button").addClass("hidden");
                 break;

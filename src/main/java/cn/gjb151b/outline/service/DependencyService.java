@@ -1227,6 +1227,41 @@ public class DependencyService {
                     JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
                     if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
                         JSONArray testPortAndWorkStatusArray;
+                        if (i == 16 || i == 20 || i == 21 || i ==22) {
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
+                            for (int j = 0; j < testPortAndWorkStatusArray.size(); i++) {
+                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                        int number = j + 1;
+                                        standardDeflect = projectName + "试验端口" + number + "不实施";
+                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONArray workStatusArray = testPortAndWorkStatusObject.getJSONArray("工作状态");
+                                    for (int k = 0; k < workStatusArray.size(); k++) {
+                                        JSONObject workStatusObjectK = workStatusArray.getJSONObject(k);
+                                        if ("否".equals(workStatusArray.getJSONObject(k).getString("状态是否实施"))) {
+                                            int portNumber = j + 1;
+                                            int workStatusNumber = k + 1;
+                                            standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                            standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                        }
+                                    }
+                                }
+                            }
+                            continue;
+                        }
                         if (i == 17) {
                             testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
                             for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
@@ -1261,6 +1296,7 @@ public class DependencyService {
                                     newJsonObject.put("内容", standardDeflect);
                                     newJsonObject.put("理由", standardDeflectReason);
                                     cutAndDeflectArray.add(newJsonObject);
+                                    continue;
                                 }
                             }
                             if (testPortAndWorkStatusObject.containsKey("工作状态")) {

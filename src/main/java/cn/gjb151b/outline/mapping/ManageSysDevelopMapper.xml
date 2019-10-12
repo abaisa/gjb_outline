@@ -87,6 +87,12 @@
     WHERE dev_itemid = #{devItemId};
   </select>
 
+  <select id="selectByDevId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT *
+    FROM manage_sys_develop
+    WHERE dev_id = #{devId};
+  </select>
+
   <select id="findAllItem" statementType="STATEMENT" resultMap="BaseResultMap">
     select * from manage_sys_develop ;
   </select>

@@ -7,6 +7,7 @@ public class ItemOperater {
     private String userProofread;
     private String userAudit;
     private String userAuthorize;
+    private Integer devStatus;
 
 
     public String getItemId() {
@@ -55,5 +56,13 @@ public class ItemOperater {
 
     public void setUserAuthorize(String userAuthorize) {
         this.userAuthorize = userAuthorize;
+    }
+
+    public Integer getDevStatus() {
+        return devStatus;
+    }
+
+    public void setDevStatus(Integer devStatus) {
+        this.devStatus = devStatus;
     }
 }

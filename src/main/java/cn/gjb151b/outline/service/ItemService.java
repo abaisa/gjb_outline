@@ -84,6 +84,7 @@ public class ItemService {
                 } else {
                     itemOperater.setItemId(manageSysOutline.getOutlineDevItemid());
                     itemOperater.setItemName(manageSysOutline.getOutlineName());
+                    itemOperater.setDevStatus(manageSysOutline.getOutlineStatus());
                     itemList.add(itemOperater);
 
                 }

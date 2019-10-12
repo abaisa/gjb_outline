@@ -196,6 +196,11 @@
                 <param name="root">importItemResponse</param>
             </result>
         </action>
+        <action name="exportItem" class="cn.gjb151b.outline.action.ItemAction" method="exportItem">
+            <result name="success" type="json">
+                <param name="root">exportItemResponse</param>
+            </result>
+        </action>
 
     </package>
     <package name="manage" namespace="/manage" extends="default, json-default">

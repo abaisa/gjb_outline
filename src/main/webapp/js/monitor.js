@@ -60,19 +60,22 @@ function monitor() {
             case '6':
                 equipmentListNum = 0;
                 configurationListNum = 0;
-                $("input[name*='序号']").width(20);
+                $("input").removeAttr("style");
                 $("table").removeAttr("style");
-                $("input[name*='设备名称']").removeAttr("style");
-                $("input[name*='型号']").removeAttr("style");
+                $("input[name*='序号']").width(20);
+
+                // $("input[name*='设备名称']").width(200);
+                // $("input[name*='型号']").removeAttr("style");
                 // console.log("设备名称长度："+$("input[name*='设备名称']").width());
                 // $("input[name*='设备名称']").css({"width":"100px" });
-                $("input[name*='连接电缆ID']").width(50);
-                $("input[name*='名称']").width(20);
-                $("input[name*='型号']").width(20);
-                $("input[name*='生产厂']").width(50);
-                $("input[name*='长度']").width(50);
-                $("input[name*='连接端口ID']").width(50);
-                $("input[name*='备注']").width(50);
+
+                // $("input[name*='连接电缆ID']").width(50);
+                // $("input[name*='名称']").width(20);
+                // $("input[name*='型号']").width(20);
+                // $("input[name*='生产厂']").width(50);
+                // $("input[name*='长度']").width(50);
+                // $("input[name*='连接端口ID']").width(50);
+                // $("input[name*='备注']").width(50);
                 $("div[data-schemapath*='root.分系统主要设备清单'] button:contains('添加')").on('click',
                     function () {
                         editor.getEditor('root.分系统主要设备清单.' + equipmentListNum + '.序号').setValue(equipmentListNum+1);
@@ -100,12 +103,17 @@ function monitor() {
                         configurationListNum = 0;
                     });
                 $("#editor_holder button").click(function() {
+                    $("input[name*='序号']").width(20);
                     $("input[name*='连接电缆ID']").width(50);
-                    $("input[name*='名称']").width(20);
+                    $("input[name*='名称']").width(50);
                     $("input[name*='型号']").width(20);
-                    $("input[name*='生产厂']").width(50);
-                    $("input[name*='长度']").width(50);
+                    $("input[name*='生产厂']").width(70);
+                    $("input[name*='长度']").width(20);
                     $("input[name*='连接端口ID']").width(50);
+                    $("input[name*='是否屏蔽']").width(20);
+                    $("input[name*='是否双绞']").width(20);
+                    $("input[name*='接地方式']").width(20);
+                    $("input[name*='是否摸实']").width(20);
                     $("input[name*='备注']").width(50);
 
                 });

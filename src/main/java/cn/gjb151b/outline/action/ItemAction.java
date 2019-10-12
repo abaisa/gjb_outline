@@ -4,6 +4,7 @@ import cn.gjb151b.outline.Constants.PathStoreEnum;
 import cn.gjb151b.outline.model.*;
 import cn.gjb151b.outline.outlineDao.ManageSysOutlineMapper;
 import cn.gjb151b.outline.service.ItemService;
+import cn.gjb151b.outline.service.PdfService;
 import cn.gjb151b.outline.utils.BaseResponse;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.io.FileUtils;
@@ -26,6 +27,9 @@ public class ItemAction extends ActionSupport{
     @Autowired
     private ItemService itemService;
 
+    @Resource
+    private PdfService pdfService;
+
     private String devItemId;
     private String devName;
     private String user_new;
@@ -40,6 +44,7 @@ public class ItemAction extends ActionSupport{
     private BaseResponse updateItemNameResponse = new BaseResponse<String>();
     private BaseResponse findAllResponse = new BaseResponse<List<OutlineUserInfo>>();
     private BaseResponse importItemResponse = new BaseResponse();
+    private BaseResponse exportItemResponse = new BaseResponse();
     private List<String> list1;
     private BaseResponse getAllItemResponse;
     private File sqlTxt;
@@ -104,6 +109,19 @@ public class ItemAction extends ActionSupport{
         }
         return "success";
 
+    }
+
+    public String exportItem() {
+        try {
+            pdfService.createPdf(this.devItemId);
+            exportItemResponse.setMessage("项目导出成功！");
+            exportItemResponse.setStatus("success");
+        } catch (Exception e) {
+            exportItemResponse.setMessage("系统导出异常，请稍后重试！");
+            exportItemResponse.setStatus("error");
+            e.printStackTrace();
+        }
+        return "success";
     }
 
     public File getSqlTxt() {
@@ -230,6 +248,14 @@ public class ItemAction extends ActionSupport{
 
     public void setImportItemResponse(BaseResponse importItemResponse) {
         this.importItemResponse = importItemResponse;
+    }
+
+    public BaseResponse getExportItemResponse() {
+        return exportItemResponse;
+    }
+
+    public void setExportItemResponse(BaseResponse exportItemResponse) {
+        this.exportItemResponse = exportItemResponse;
     }
 
 }

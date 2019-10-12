@@ -1248,7 +1248,7 @@ public class DependencyService {
                     //试验端口及被试品工作状态偏离
                     if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
                         JSONArray testPortAndWorkStatusArray;
-                        if (i == 16 || i == 20 || i == 21 || i == 22) {
+                        if (i == 16 || i == 17 || i == 20 || i == 21 || i == 22) {
                             testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
                             for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
                                 JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
@@ -1283,7 +1283,98 @@ public class DependencyService {
                             }
                             continue;
                         }
-                        if (i == 17) {
+//                        if (i == 17) {
+//                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
+//                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+//                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+//                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+//                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+//                                        int number = j + 1;
+//                                        standardDeflect = projectName + "试验端口" + number + "不实施";
+//                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+//                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+//                                        newJsonObject.put("内容", standardDeflect);
+//                                        newJsonObject.put("理由", standardDeflectReason);
+//                                        cutAndDeflectArray.add(newJsonObject);
+//                                    }
+//                                }
+//                            }
+//                            continue;
+//                        }
+                        if (i >= 26 && i <= 28) {
+                            //有电源端口和互联端口
+                            JSONArray testPortAndConnectPortAndWorkStatusArray;
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("电源端口");
+                            testPortAndConnectPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("互联端口");
+                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                        int number = j + 1;
+                                        standardDeflect = projectName + "电源端口" + number + "不实施";
+                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                    for (int k = 0; k < workStatusObject.size(); k++) {
+                                        String workStatusKey = "工作状态" + (k + 1);
+                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                        if (workStatusObjectK.containsKey("状态是否实施")) {
+                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "电源端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            for (int j = 0; j < testPortAndConnectPortAndWorkStatusArray.size(); j++) {
+                                JSONObject testPortAndConnectPortAndWorkStatusObject = testPortAndConnectPortAndWorkStatusArray.getJSONObject(j);
+                                if (testPortAndConnectPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                    if (testPortAndConnectPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                        int number = j + 1;
+                                        standardDeflect = projectName + "互联端口" + number + "不实施";
+                                        standardDeflectReason = testPortAndConnectPortAndWorkStatusObject.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndConnectPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONObject workStatusObject = testPortAndConnectPortAndWorkStatusObject.getJSONObject("工作状态");
+                                    for (int k = 0; k < workStatusObject.size(); k++) {
+                                        String workStatusKey = "工作状态" + (k + 1);
+                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                        if (workStatusObjectK.containsKey("状态是否实施")) {
+                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "互联端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
                             testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
                             for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
                                 JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
@@ -1296,45 +1387,142 @@ public class DependencyService {
                                         newJsonObject.put("内容", standardDeflect);
                                         newJsonObject.put("理由", standardDeflectReason);
                                         cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                    for (int k = 0; k < workStatusObject.size(); k++) {
+                                        String workStatusKey = "工作状态" + (k + 1);
+                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                        if (workStatusObjectK.containsKey("状态是否实施")) {
+                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
+                                        }
                                     }
                                 }
                             }
-                            continue;
                         }
-                        if (i >= 26 && i <= 28) {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("电源端口");
-                        } else {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
-                        }
-                        for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                            JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                            if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                    int number = j + 1;
-                                    standardDeflect = projectName + "试验端口" + number + "不实施";
-                                    standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                    newJsonObject.put("内容", standardDeflect);
-                                    newJsonObject.put("理由", standardDeflectReason);
-                                    cutAndDeflectArray.add(newJsonObject);
-                                    continue;
+                    } else if (outlineData14To34Object.containsKey("试验位置及被试品工作状态")) {
+                        JSONArray testPortAndWorkStatusArray;
+                        if (i == 24 || i == 25 || i == 32) {
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验位置及被试品工作状态");
+                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                        int number = j + 1;
+                                        standardDeflect = projectName + "试验端口" + number + "不实施";
+                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                    for (int k = 0; k < workStatusObject.size(); k++) {
+                                        String workStatusKey = "工作状态" + (k + 1);
+                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                        if (workStatusObjectK.containsKey("状态是否实施")) {
+                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
+                                        }
+                                    }
                                 }
                             }
-                            if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                for (int k = 0; k < workStatusObject.size(); k++) {
-                                    String workStatusKey = "工作状态" + (k + 1);
-                                    JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                    if (workStatusObjectK.containsKey("状态是否实施")) {
-                                        if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                            int portNumber = j + 1;
-                                            int workStatusNumber = k + 1;
-                                            standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                            standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                            newJsonObject.put("内容", standardDeflect);
-                                            newJsonObject.put("理由", standardDeflectReason);
-                                            cutAndDeflectArray.add(newJsonObject);
+                        }
+                    } else if (outlineData14To34Object.containsKey("试验部位及被试品工作状态")) {
+                        JSONArray testPortAndWorkStatusArray;
+                        if (i == 29) {
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验部位及被试品工作状态");
+                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                        int number = j + 1;
+                                        standardDeflect = projectName + "试验端口" + number + "不实施";
+                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                    for (int k = 0; k < workStatusObject.size(); k++) {
+                                        String workStatusKey = "工作状态" + (k + 1);
+                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                        if (workStatusObjectK.containsKey("状态是否实施")) {
+                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if (outlineData14To34Object.containsKey("被试品工作状态")) {
+                        JSONArray testPortAndWorkStatusArray;
+                        if (i == 30 || i == 31) {
+                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("被试品工作状态");
+                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                        int number = j + 1;
+                                        standardDeflect = projectName + "试验端口" + number + "不实施";
+                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                        newJsonObject.put("内容", standardDeflect);
+                                        newJsonObject.put("理由", standardDeflectReason);
+                                        cutAndDeflectArray.add(newJsonObject);
+                                        continue;
+                                    }
+                                }
+                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                    for (int k = 0; k < workStatusObject.size(); k++) {
+                                        String workStatusKey = "工作状态" + (k + 1);
+                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                        if (workStatusObjectK.containsKey("状态是否实施")) {
+                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
                                         }
                                     }
                                 }

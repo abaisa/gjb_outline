@@ -10,6 +10,8 @@ import java.util.List;
 public interface ManageSysDevelopMapper {
     ManageSysDevelop selectByPrimaryKey(@Param("devItemId") String devItemId);
 
+    ManageSysDevelop selectByDevId(@Param("devId") Integer devId);
+
     List<ManageSysDevelop> findAllItem();
 
     String selectColByName(@Param("colName") String colName, @Param("devName") String devName);

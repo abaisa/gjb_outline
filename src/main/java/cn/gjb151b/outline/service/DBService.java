@@ -153,6 +153,10 @@ public class DBService {
         return manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
     }
 
+    public Integer fetchIntData(String outlineDevItemId, String colName) throws Exception {
+        return manageSysOutlineMapper.selectIntColByOutlineDevItemId(outlineDevItemId, colName);
+    }
+
     public Integer fetehPageNumber(String outlineDevItemId, String colName) throws Exception{
         return  manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId).getCurrentPageNumber();
     }

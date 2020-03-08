@@ -23,6 +23,8 @@ public interface ManageSysOutlineMapper {
 
     String selectColByOutlineDevItemId(@Param("outlineDevItemId") String outlineDevItemId, @Param("colName") String colName);
 
+    Integer selectIntColByOutlineDevItemId(@Param("outlineDevItemId") String outlineDevItemId, @Param("colName") String colName);
+
 //    Integer selectCol2(@Param("outlineID") int outlineID, @Param("colName") String colName);
 
 

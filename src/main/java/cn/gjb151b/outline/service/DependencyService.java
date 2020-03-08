@@ -71,6 +71,7 @@ public class DependencyService {
 
         ManageSysOutline outline = manageSysOutlineMapper.selectProjectByDevItemId(outlineDevItemId);
         String devItemId = outline.getOutlineDevItemid();
+//        int outlineStatus = outline.getOutlineStatus();
         ManageSysDevelop devObject = manageSysDevelopMapper.selectByPrimaryKey(devItemId);
         String outlineData10 = outline.getOutlineData10();
         JSONObject outlineData1Object = JSONObject.parseObject(outlineData10);
@@ -1022,267 +1023,275 @@ public class DependencyService {
                 } else {
                     resultData = data;
                 }
-                jsonObject = JSON.parseObject(resultData);
-                JSONArray cutAndDeflectArray = new JSONArray();
-                JSONObject standardCutObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(0);
-                JSONObject standardDeflectObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(1);
-                String outlineData14To34 = "";
-                String standardDeflect = "";
-                String standardDeflectReason = "";
-                String standardCut = "";
-                String standardCutReason = "";
-                ArrayList<String> projectList = new ArrayList<>();
-                projectList.add("CE101");
-                projectList.add("CE102");
-                projectList.add("CE106");
-                projectList.add("CE107");
-                projectList.add("CS101");
-                projectList.add("CS102");
-                projectList.add("CS103");
-                projectList.add("CS104");
-                projectList.add("CS105");
-                projectList.add("CS106");
-                projectList.add("CS109");
-                projectList.add("CS112");
-                projectList.add("CS114");
-                projectList.add("CS115");
-                projectList.add("CS116");
-                projectList.add("RE101");
-                projectList.add("RE102");
-                projectList.add("RE103");
-                projectList.add("RS101");
-                projectList.add("RS103");
-                projectList.add("RS105");
-                //添加每个项目的标准剪裁
-                if (! JSON.parseObject(devObject.getDevCe101()).getString("remark").equals("")) {
-                    standardCut = "试验项目CE101经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCe101()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
+                int outlineStatus = 0;
+                try {
+                    outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (! JSON.parseObject(devObject.getDevCe102()).getString("remark").equals("")) {
-                    standardCut = "试验项目CE102经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCe102()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCe106()).getString("remark").equals("")) {
-                    standardCut = "试验项目CE106经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCe106()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCe107()).getString("remark").equals("")) {
-                    standardCut = "试验项目CE107经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCe107()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs101()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS101经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs101()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs102()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS102经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs102()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs103()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS103经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs103()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs104()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS104经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs104()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs105()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS105经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs105()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs106()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS106经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs106()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs109()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS109经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs109()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs112()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS112经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs112()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs114()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS114经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs114()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs115()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS115经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs115()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevCs116()).getString("remark").equals("")) {
-                    standardCut = "试验项目CS116经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevCs116()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevRe101()).getString("remark").equals("")) {
-                    standardCut = "试验项目RE101经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevRe101()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevRe102()).getString("remark").equals("")) {
-                    standardCut = "试验项目RE102经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevRe102()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevRe103()).getString("remark").equals("")) {
-                    standardCut = "试验项目RE103经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevRe103()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevRs101()).getString("remark").equals("")) {
-                    standardCut = "试验项目RS101经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevRs101()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevRs103()).getString("remark").equals("")) {
-                    standardCut = "试验项目RS103经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevRs103()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                if (! JSON.parseObject(devObject.getDevRs105()).getString("remark").equals("")) {
-                    standardCut = "试验项目RS105经剪裁";
-                    standardCutReason = JSON.parseObject(devObject.getDevRs105()).getString("remark");
-                    JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
-                    newJsonObject.put("内容", standardCut);
-                    newJsonObject.put("理由", standardCutReason);
-                    cutAndDeflectArray.add(newJsonObject);
-                }
-                //添加每个项目的标准偏离
-                for (int i = 14; i <= 34; i++) {
-                    String projectName = projectList.get(i - 14);
-                    String colName = "outline_data_" + i;
-                    outlineData14To34 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
-                    JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
-                    //项目试验图和试验方法相关修改
-                    if (outlineData14To34Object.containsKey("项目试验图")) {
-                        standardDeflect = projectName + "项目试验图修改";
-                        standardDeflectReason = outlineData14To34Object.getString("修改图形理由");
-                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                        newJsonObject.put("内容", standardDeflect);
-                        newJsonObject.put("理由", standardDeflectReason);
+                System.out.println("0308test_outlineStatus="+outlineStatus);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    jsonObject = JSON.parseObject(resultData);
+                    JSONArray cutAndDeflectArray = new JSONArray();
+                    JSONObject standardCutObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(0);
+                    JSONObject standardDeflectObject = outlineStandardData59Object.getJSONArray("标准剪裁与偏离说明").getJSONObject(1);
+                    String outlineData14To34 = "";
+                    String standardDeflect = "";
+                    String standardDeflectReason = "";
+                    String standardCut = "";
+                    String standardCutReason = "";
+                    ArrayList<String> projectList = new ArrayList<>();
+                    projectList.add("CE101");
+                    projectList.add("CE102");
+                    projectList.add("CE106");
+                    projectList.add("CE107");
+                    projectList.add("CS101");
+                    projectList.add("CS102");
+                    projectList.add("CS103");
+                    projectList.add("CS104");
+                    projectList.add("CS105");
+                    projectList.add("CS106");
+                    projectList.add("CS109");
+                    projectList.add("CS112");
+                    projectList.add("CS114");
+                    projectList.add("CS115");
+                    projectList.add("CS116");
+                    projectList.add("RE101");
+                    projectList.add("RE102");
+                    projectList.add("RE103");
+                    projectList.add("RS101");
+                    projectList.add("RS103");
+                    projectList.add("RS105");
+                    //添加每个项目的标准剪裁
+                    if (!JSON.parseObject(devObject.getDevCe101()).getString("remark").equals("")) {
+                        standardCut = "试验项目CE101经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCe101()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
                         cutAndDeflectArray.add(newJsonObject);
                     }
-                    if (outlineData14To34Object.containsKey("修改方法")) {
-                        standardDeflect = projectName + "试验方法修改";
-                        standardDeflectReason = "无";
-                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                        newJsonObject.put("内容", standardDeflect);
-                        newJsonObject.put("理由", standardDeflectReason);
+                    if (!JSON.parseObject(devObject.getDevCe102()).getString("remark").equals("")) {
+                        standardCut = "试验项目CE102经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCe102()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
                         cutAndDeflectArray.add(newJsonObject);
                     }
-                    //试验端口及被试品工作状态偏离
-                    if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
-                        JSONArray testPortAndWorkStatusArray;
-                        if (i == 16 || i == 17 || i == 20 || i == 21 || i == 22) {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "试验端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
-                                    }
-                                }
-                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONArray workStatusArray = testPortAndWorkStatusObject.getJSONArray("工作状态");
-                                    for (int k = 0; k < workStatusArray.size(); k++) {
-                                        JSONObject workStatusObjectK = workStatusArray.getJSONObject(k);
-                                        if ("否".equals(workStatusArray.getJSONObject(k).getString("状态是否实施"))) {
-                                            int portNumber = j + 1;
-                                            int workStatusNumber = k + 1;
-                                            standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                            standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                    if (!JSON.parseObject(devObject.getDevCe106()).getString("remark").equals("")) {
+                        standardCut = "试验项目CE106经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCe106()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCe107()).getString("remark").equals("")) {
+                        standardCut = "试验项目CE107经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCe107()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs101()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS101经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs101()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs102()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS102经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs102()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs103()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS103经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs103()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs104()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS104经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs104()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs105()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS105经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs105()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs106()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS106经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs106()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs109()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS109经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs109()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs112()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS112经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs112()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs114()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS114经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs114()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs115()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS115经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs115()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevCs116()).getString("remark").equals("")) {
+                        standardCut = "试验项目CS116经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevCs116()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevRe101()).getString("remark").equals("")) {
+                        standardCut = "试验项目RE101经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevRe101()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevRe102()).getString("remark").equals("")) {
+                        standardCut = "试验项目RE102经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevRe102()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevRe103()).getString("remark").equals("")) {
+                        standardCut = "试验项目RE103经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevRe103()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevRs101()).getString("remark").equals("")) {
+                        standardCut = "试验项目RS101经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevRs101()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevRs103()).getString("remark").equals("")) {
+                        standardCut = "试验项目RS103经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevRs103()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    if (!JSON.parseObject(devObject.getDevRs105()).getString("remark").equals("")) {
+                        standardCut = "试验项目RS105经剪裁";
+                        standardCutReason = JSON.parseObject(devObject.getDevRs105()).getString("remark");
+                        JSONObject newJsonObject = (JSONObject) standardCutObject.clone();
+                        newJsonObject.put("内容", standardCut);
+                        newJsonObject.put("理由", standardCutReason);
+                        cutAndDeflectArray.add(newJsonObject);
+                    }
+                    //添加每个项目的标准偏离
+                    for (int i = 14; i <= 34; i++) {
+                        String projectName = projectList.get(i - 14);
+                        String colName = "outline_data_" + i;
+                        outlineData14To34 = manageSysOutlineMapper.selectColByOutlineDevItemId(outlineDevItemId, colName);
+                        JSONObject outlineData14To34Object = JSON.parseObject(outlineData14To34);
+                        //项目试验图和试验方法相关修改
+                        if (outlineData14To34Object.containsKey("项目试验图")) {
+                            standardDeflect = projectName + "项目试验图修改";
+                            standardDeflectReason = outlineData14To34Object.getString("修改图形理由");
+                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                            newJsonObject.put("内容", standardDeflect);
+                            newJsonObject.put("理由", standardDeflectReason);
+                            cutAndDeflectArray.add(newJsonObject);
+                        }
+                        if (outlineData14To34Object.containsKey("修改方法")) {
+                            standardDeflect = projectName + "试验方法修改";
+                            standardDeflectReason = "无";
+                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                            newJsonObject.put("内容", standardDeflect);
+                            newJsonObject.put("理由", standardDeflectReason);
+                            cutAndDeflectArray.add(newJsonObject);
+                        }
+                        //试验端口及被试品工作状态偏离
+                        if (outlineData14To34Object.containsKey("试验端口及被试品工作状态")) {
+                            JSONArray testPortAndWorkStatusArray;
+                            if (i == 16 || i == 17 || i == 20 || i == 21 || i == 22) {
+                                testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
+                                for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "试验端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
                                             JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
                                             newJsonObject.put("内容", standardDeflect);
                                             newJsonObject.put("理由", standardDeflectReason);
                                             cutAndDeflectArray.add(newJsonObject);
+                                            continue;
+                                        }
+                                    }
+                                    if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONArray workStatusArray = testPortAndWorkStatusObject.getJSONArray("工作状态");
+                                        for (int k = 0; k < workStatusArray.size(); k++) {
+                                            JSONObject workStatusObjectK = workStatusArray.getJSONObject(k);
+                                            if ("否".equals(workStatusArray.getJSONObject(k).getString("状态是否实施"))) {
+                                                int portNumber = j + 1;
+                                                int workStatusNumber = k + 1;
+                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                newJsonObject.put("内容", standardDeflect);
+                                                newJsonObject.put("理由", standardDeflectReason);
+                                                cutAndDeflectArray.add(newJsonObject);
+                                            }
                                         }
                                     }
                                 }
+                                continue;
                             }
-                            continue;
-                        }
 //                        if (i == 17) {
 //                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
 //                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
@@ -1301,227 +1310,228 @@ public class DependencyService {
 //                            }
 //                            continue;
 //                        }
-                        if (i >= 26 && i <= 28) {
-                            //有电源端口和互联端口
-                            JSONArray testPortAndConnectPortAndWorkStatusArray;
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("电源端口");
-                            testPortAndConnectPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("互联端口");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "电源端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
+                            if (i >= 26 && i <= 28) {
+                                //有电源端口和互联端口
+                                JSONArray testPortAndConnectPortAndWorkStatusArray;
+                                testPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("电源端口");
+                                testPortAndConnectPortAndWorkStatusArray = outlineData14To34Object.getJSONObject("试验端口及被试品工作状态").getJSONArray("互联端口");
+                                for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "电源端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                            continue;
+                                        }
+                                    }
+                                    if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                        for (int k = 0; k < workStatusObject.size(); k++) {
+                                            String workStatusKey = "工作状态" + (k + 1);
+                                            JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                            if (workStatusObjectK.containsKey("状态是否实施")) {
+                                                if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                    int portNumber = j + 1;
+                                                    int workStatusNumber = k + 1;
+                                                    standardDeflect = projectName + "电源端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                    standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                    newJsonObject.put("内容", standardDeflect);
+                                                    newJsonObject.put("理由", standardDeflectReason);
+                                                    cutAndDeflectArray.add(newJsonObject);
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                    for (int k = 0; k < workStatusObject.size(); k++) {
-                                        String workStatusKey = "工作状态" + (k + 1);
-                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                        if (workStatusObjectK.containsKey("状态是否实施")) {
-                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                                int portNumber = j + 1;
-                                                int workStatusNumber = k + 1;
-                                                standardDeflect = projectName + "电源端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                                newJsonObject.put("内容", standardDeflect);
-                                                newJsonObject.put("理由", standardDeflectReason);
-                                                cutAndDeflectArray.add(newJsonObject);
+                                for (int j = 0; j < testPortAndConnectPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndConnectPortAndWorkStatusObject = testPortAndConnectPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndConnectPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndConnectPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "互联端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndConnectPortAndWorkStatusObject.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                            continue;
+                                        }
+                                    }
+                                    if (testPortAndConnectPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONObject workStatusObject = testPortAndConnectPortAndWorkStatusObject.getJSONObject("工作状态");
+                                        for (int k = 0; k < workStatusObject.size(); k++) {
+                                            String workStatusKey = "工作状态" + (k + 1);
+                                            JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                            if (workStatusObjectK.containsKey("状态是否实施")) {
+                                                if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                    int portNumber = j + 1;
+                                                    int workStatusNumber = k + 1;
+                                                    standardDeflect = projectName + "互联端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                    standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                    newJsonObject.put("内容", standardDeflect);
+                                                    newJsonObject.put("理由", standardDeflectReason);
+                                                    cutAndDeflectArray.add(newJsonObject);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
+                                for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "试验端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                            continue;
+                                        }
+                                    }
+                                    if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                        for (int k = 0; k < workStatusObject.size(); k++) {
+                                            String workStatusKey = "工作状态" + (k + 1);
+                                            JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                            if (workStatusObjectK.containsKey("状态是否实施")) {
+                                                if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                    int portNumber = j + 1;
+                                                    int workStatusNumber = k + 1;
+                                                    standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                    standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                    newJsonObject.put("内容", standardDeflect);
+                                                    newJsonObject.put("理由", standardDeflectReason);
+                                                    cutAndDeflectArray.add(newJsonObject);
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                            for (int j = 0; j < testPortAndConnectPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndConnectPortAndWorkStatusObject = testPortAndConnectPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndConnectPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndConnectPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "互联端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndConnectPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
+                        } else if (outlineData14To34Object.containsKey("试验位置及被试品工作状态")) {
+                            JSONArray testPortAndWorkStatusArray;
+                            if (i == 24 || i == 25 || i == 32) {
+                                testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验位置及被试品工作状态");
+                                for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "试验端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                            continue;
+                                        }
                                     }
-                                }
-                                if (testPortAndConnectPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONObject workStatusObject = testPortAndConnectPortAndWorkStatusObject.getJSONObject("工作状态");
-                                    for (int k = 0; k < workStatusObject.size(); k++) {
-                                        String workStatusKey = "工作状态" + (k + 1);
-                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                        if (workStatusObjectK.containsKey("状态是否实施")) {
-                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                                int portNumber = j + 1;
-                                                int workStatusNumber = k + 1;
-                                                standardDeflect = projectName + "互联端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                                newJsonObject.put("内容", standardDeflect);
-                                                newJsonObject.put("理由", standardDeflectReason);
-                                                cutAndDeflectArray.add(newJsonObject);
+                                    if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                        for (int k = 0; k < workStatusObject.size(); k++) {
+                                            String workStatusKey = "工作状态" + (k + 1);
+                                            JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                            if (workStatusObjectK.containsKey("状态是否实施")) {
+                                                if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                    int portNumber = j + 1;
+                                                    int workStatusNumber = k + 1;
+                                                    standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                    standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                    newJsonObject.put("内容", standardDeflect);
+                                                    newJsonObject.put("理由", standardDeflectReason);
+                                                    cutAndDeflectArray.add(newJsonObject);
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        } else {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验端口及被试品工作状态");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "试验端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
+                        } else if (outlineData14To34Object.containsKey("试验部位及被试品工作状态")) {
+                            JSONArray testPortAndWorkStatusArray;
+                            if (i == 29) {
+                                testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验部位及被试品工作状态");
+                                for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "试验端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                            continue;
+                                        }
                                     }
-                                }
-                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                    for (int k = 0; k < workStatusObject.size(); k++) {
-                                        String workStatusKey = "工作状态" + (k + 1);
-                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                        if (workStatusObjectK.containsKey("状态是否实施")) {
-                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                                int portNumber = j + 1;
-                                                int workStatusNumber = k + 1;
-                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                                newJsonObject.put("内容", standardDeflect);
-                                                newJsonObject.put("理由", standardDeflectReason);
-                                                cutAndDeflectArray.add(newJsonObject);
+                                    if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                        for (int k = 0; k < workStatusObject.size(); k++) {
+                                            String workStatusKey = "工作状态" + (k + 1);
+                                            JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                            if (workStatusObjectK.containsKey("状态是否实施")) {
+                                                if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                    int portNumber = j + 1;
+                                                    int workStatusNumber = k + 1;
+                                                    standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                    standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                    newJsonObject.put("内容", standardDeflect);
+                                                    newJsonObject.put("理由", standardDeflectReason);
+                                                    cutAndDeflectArray.add(newJsonObject);
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                    } else if (outlineData14To34Object.containsKey("试验位置及被试品工作状态")) {
-                        JSONArray testPortAndWorkStatusArray;
-                        if (i == 24 || i == 25 || i == 32) {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验位置及被试品工作状态");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "试验端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
-                                    }
-                                }
-                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                    for (int k = 0; k < workStatusObject.size(); k++) {
-                                        String workStatusKey = "工作状态" + (k + 1);
-                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                        if (workStatusObjectK.containsKey("状态是否实施")) {
-                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                                int portNumber = j + 1;
-                                                int workStatusNumber = k + 1;
-                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                                newJsonObject.put("内容", standardDeflect);
-                                                newJsonObject.put("理由", standardDeflectReason);
-                                                cutAndDeflectArray.add(newJsonObject);
-                                            }
+                        } else if (outlineData14To34Object.containsKey("被试品工作状态")) {
+                            JSONArray testPortAndWorkStatusArray;
+                            if (i == 30 || i == 31) {
+                                testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("被试品工作状态");
+                                for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
+                                    JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
+                                    if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
+                                        if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
+                                            int number = j + 1;
+                                            standardDeflect = projectName + "试验端口" + number + "不实施";
+                                            standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
+                                            JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                            newJsonObject.put("内容", standardDeflect);
+                                            newJsonObject.put("理由", standardDeflectReason);
+                                            cutAndDeflectArray.add(newJsonObject);
+                                            continue;
                                         }
                                     }
-                                }
-                            }
-                        }
-                    } else if (outlineData14To34Object.containsKey("试验部位及被试品工作状态")) {
-                        JSONArray testPortAndWorkStatusArray;
-                        if (i == 29) {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("试验部位及被试品工作状态");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "试验端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
-                                    }
-                                }
-                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                    for (int k = 0; k < workStatusObject.size(); k++) {
-                                        String workStatusKey = "工作状态" + (k + 1);
-                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                        if (workStatusObjectK.containsKey("状态是否实施")) {
-                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                                int portNumber = j + 1;
-                                                int workStatusNumber = k + 1;
-                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                                newJsonObject.put("内容", standardDeflect);
-                                                newJsonObject.put("理由", standardDeflectReason);
-                                                cutAndDeflectArray.add(newJsonObject);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if (outlineData14To34Object.containsKey("被试品工作状态")) {
-                        JSONArray testPortAndWorkStatusArray;
-                        if (i == 30 || i == 31) {
-                            testPortAndWorkStatusArray = outlineData14To34Object.getJSONArray("被试品工作状态");
-                            for (int j = 0; j < testPortAndWorkStatusArray.size(); j++) {
-                                JSONObject testPortAndWorkStatusObject = testPortAndWorkStatusArray.getJSONObject(j);
-                                if (testPortAndWorkStatusObject.containsKey("端口是否实施")) {
-                                    if (testPortAndWorkStatusObject.getString("端口是否实施").equals("否")) {
-                                        int number = j + 1;
-                                        standardDeflect = projectName + "试验端口" + number + "不实施";
-                                        standardDeflectReason = testPortAndWorkStatusObject.getString("不实施理由");
-                                        JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                        newJsonObject.put("内容", standardDeflect);
-                                        newJsonObject.put("理由", standardDeflectReason);
-                                        cutAndDeflectArray.add(newJsonObject);
-                                        continue;
-                                    }
-                                }
-                                if (testPortAndWorkStatusObject.containsKey("工作状态")) {
-                                    JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
-                                    for (int k = 0; k < workStatusObject.size(); k++) {
-                                        String workStatusKey = "工作状态" + (k + 1);
-                                        JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
-                                        if (workStatusObjectK.containsKey("状态是否实施")) {
-                                            if (workStatusObjectK.getString("状态是否实施").equals("否")) {
-                                                int portNumber = j + 1;
-                                                int workStatusNumber = k + 1;
-                                                standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
-                                                standardDeflectReason = workStatusObjectK.getString("不实施理由");
-                                                JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
-                                                newJsonObject.put("内容", standardDeflect);
-                                                newJsonObject.put("理由", standardDeflectReason);
-                                                cutAndDeflectArray.add(newJsonObject);
+                                    if (testPortAndWorkStatusObject.containsKey("工作状态")) {
+                                        JSONObject workStatusObject = testPortAndWorkStatusObject.getJSONObject("工作状态");
+                                        for (int k = 0; k < workStatusObject.size(); k++) {
+                                            String workStatusKey = "工作状态" + (k + 1);
+                                            JSONObject workStatusObjectK = workStatusObject.getJSONObject(workStatusKey);
+                                            if (workStatusObjectK.containsKey("状态是否实施")) {
+                                                if (workStatusObjectK.getString("状态是否实施").equals("否")) {
+                                                    int portNumber = j + 1;
+                                                    int workStatusNumber = k + 1;
+                                                    standardDeflect = projectName + "试验端口" + portNumber + "的工作状态" + workStatusNumber + "不实施";
+                                                    standardDeflectReason = workStatusObjectK.getString("不实施理由");
+                                                    JSONObject newJsonObject = (JSONObject) standardDeflectObject.clone();
+                                                    newJsonObject.put("内容", standardDeflect);
+                                                    newJsonObject.put("理由", standardDeflectReason);
+                                                    cutAndDeflectArray.add(newJsonObject);
+                                                }
                                             }
                                         }
                                     }
@@ -1529,9 +1539,9 @@ public class DependencyService {
                             }
                         }
                     }
+                    jsonObject.put("标准剪裁与偏离说明", cutAndDeflectArray);
+                    resultData = jsonObject.toJSONString();
                 }
-                jsonObject.put("标准剪裁与偏离说明", cutAndDeflectArray);
-                resultData = jsonObject.toJSONString();
                 break;
 
             default:

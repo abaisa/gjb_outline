@@ -156,6 +156,7 @@
         <result column="outline_advice_authorize" jdbcType="LONGVARCHAR" property="outlineAdviceAuthorize" />
         <result column="outline_data_59" jdbcType="LONGVARCHAR" property="outlineData59" />
         <result column="outline_schema_59" jdbcType="LONGVARCHAR" property="outlineSchema59" />
+        <result column="outline_status" jdbcType="INTEGER" property="outlineStatus" />
     </resultMap>
 
     <update id="updateCol" statementType="STATEMENT">
@@ -187,8 +188,8 @@
         SELECT ${colName} FROM manage_sys_outline WHERE outline_dev_itemid = #{outlineDevItemId};
     </select>
 
-    <select id="selectCol2" statementType="STATEMENT" resultType="Integer">
-        SELECT ${colName} FROM manage_sys_outline WHERE outline_id = ${outlineID};
+    <select id="selectIntColByOutlineDevItemId"  resultType="Integer">
+        SELECT ${colName} FROM manage_sys_outline WHERE outline_dev_itemid = #{outlineDevItemId};
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

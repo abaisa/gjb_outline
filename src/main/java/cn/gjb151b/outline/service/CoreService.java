@@ -92,12 +92,21 @@ public class CoreService {
         if (Strings.isNullOrEmpty(schema) || Strings.isNullOrEmpty(data)) {
             throw new ServiceException(ExceptionEnums.DB_EMPTY_ERR);
         }
+        //获取项目当前状态值
+        int outlineStatus = 0;
+        try {
+            outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //处理有依赖关系的schema
         schema = dependencyService.generateDependencySchema(outlineDevItemId, pageNumber, schema);
 
-        //处理有依赖关系的数据信息
-        data = dependencyService.generateDependencyData(outlineDevItemId, pageNumber, data);
+        if(outlineStatus == 0 || outlineStatus == 4) {
+            //处理有依赖关系的数据信息
+            data = dependencyService.generateDependencyData(outlineDevItemId, pageNumber, data);
+        }
 
         // 打包返回数据
         result.put("schema", schema);
@@ -139,8 +148,17 @@ public class CoreService {
 
     public void submitPageData(String outlineDevItemId, Integer sourcePageNumber, Integer pageAction, String data, int changeLocation) throws Exception {
         dbService.submitData(outlineDevItemId, sourcePageNumber, DbColnameEnums.DATA_PREFIX.getValue(), data);
-        if(pageAction == 3) {
-            dependencyService.generateDataAfterSubmit(outlineDevItemId, sourcePageNumber, data, changeLocation);
+        //获取项目当前状态值
+        int outlineStatus = 0;
+        try {
+            outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(outlineStatus == 0 || outlineStatus == 4) {
+            if (pageAction == 3) {
+                dependencyService.generateDataAfterSubmit(outlineDevItemId, sourcePageNumber, data, changeLocation);
+            }
         }
     }
 }

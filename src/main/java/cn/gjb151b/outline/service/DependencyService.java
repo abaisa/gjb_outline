@@ -89,6 +89,12 @@ public class DependencyService {
                 phasePosition = "两相";
             }
         }
+//        int outlineStatus = 0;
+//        try {
+//            outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         switch (pageNumber) {
@@ -1029,7 +1035,7 @@ public class DependencyService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println("0308test_outlineStatus="+outlineStatus);
+//                System.out.println("0308test_outlineStatus="+outlineStatus);
                 if(outlineStatus == 0 || outlineStatus == 4) {
                     jsonObject = JSON.parseObject(resultData);
                     JSONArray cutAndDeflectArray = new JSONArray();

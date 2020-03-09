@@ -4220,7 +4220,7 @@ public class PdfService {
     }
 
     /** 多个空格*/
-    public String multispace(int n){
+    public String multispace(int n) {
         String space = "";
         for (int i = 0; i < n; i++){
             space = space.concat(" ");

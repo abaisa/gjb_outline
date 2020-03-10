@@ -185,7 +185,7 @@ public class PageDispatcher {
 //            nextPageRouter.put(1005, 1006);
 //            nextPageRouter.put(1006, 10);
         }
-        nextPageRouter.put(13, pageNumberList.get(0));
+        nextPageRouter.put(12, pageNumberList.get(0));
         for (int i = 0; i < pageNumberList.size() - 1; i++) {
             nextPageRouter.put(pageNumberList.get(i), pageNumberList.get(i + 1));
         }
@@ -301,7 +301,7 @@ public class PageDispatcher {
         for (int i = pageNumberList.size() - 1; i > 0; i--) {
             previousPageRouter.put(pageNumberList.get(i), pageNumberList.get(i - 1));
         }
-        previousPageRouter.put(pageNumberList.get(0), 13);
+        previousPageRouter.put(pageNumberList.get(0), 12);
         if (projectJsonArray.contains("1")) {
             previousPageRouter.put(10, 8);
         } else {
@@ -315,6 +315,7 @@ public class PageDispatcher {
         }
         return previous(sourcePageNumber);
     }
+
 
 
 }

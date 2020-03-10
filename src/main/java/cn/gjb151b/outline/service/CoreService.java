@@ -155,7 +155,7 @@ public class CoreService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(outlineStatus == 0 || outlineStatus == 4) {
+        if(outlineStatus == 0) {
             if (pageAction == 3) {
                 dependencyService.generateDataAfterSubmit(outlineDevItemId, sourcePageNumber, data, changeLocation);
             }

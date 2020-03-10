@@ -89,12 +89,12 @@ public class DependencyService {
                 phasePosition = "两相";
             }
         }
-//        int outlineStatus = 0;
-//        try {
-//            outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        int outlineStatus = 0;
+        try {
+            outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         switch (pageNumber) {
@@ -1029,12 +1029,12 @@ public class DependencyService {
                 } else {
                     resultData = data;
                 }
-                int outlineStatus = 0;
-                try {
-                    outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                int outlineStatus = 0;
+//                try {
+//                    outlineStatus = dbService.fetchIntData(outlineDevItemId, "outline_status");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 //                System.out.println("0308test_outlineStatus="+outlineStatus);
                 if(outlineStatus == 0 || outlineStatus == 4) {
                     jsonObject = JSON.parseObject(resultData);
@@ -1555,6 +1555,9 @@ public class DependencyService {
                 break;
         }
         String colName = "outline_data_"+pageNumber;
+        if(outlineStatus == 4 && pageNumber != 59){
+            resultData = data;
+        }
         dbService.submitData(outlineDevItemId, colName, resultData);
 
 

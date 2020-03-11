@@ -418,15 +418,15 @@ function monitor() {
                 editor.getEditor('root.限值').disable();
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测定结果评定准则').disable();
-                var testPortArray = load_data.试验端口及被试品工作状态;
-                for(var i = 0; i < testPortArray.length; i++) {
-                    var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
-                    editor.getEditor(editorName).disable();
-                }
-                $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                editor.on('change',function() {
-                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                });
+                // var testPortArray = load_data.试验端口及被试品工作状态;
+                // for(var i = 0; i < testPortArray.length; i++) {
+                //     var editorName = 'root.试验端口及被试品工作状态.'+i+'.试验端口';
+                //     editor.getEditor(editorName).disable();
+                // }
+                // $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                // editor.on('change',function() {
+                //     $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                // });
                 $("#editor_holder button").addClass("hidden");
                 break;
             case '19':

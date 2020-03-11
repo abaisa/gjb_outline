@@ -198,10 +198,12 @@ function monitor() {
                 $("#upload3").hide();
                 $("#editor_holder button").addClass("hidden");
                 editor.getEditor('root').disable();
-                var stayTime = load_data.敏感度测试参数;
-                for(var i = 0; i < stayTime.length; i++) {
-                    var editorName = 'root.敏感度测试参数.'+i+'.驻留时间';
-                    editor.getEditor(editorName).enable();
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    var stayTime = load_data.敏感度测试参数;
+                    for (var i = 0; i < stayTime.length; i++) {
+                        var editorName = 'root.敏感度测试参数.' + i + '.驻留时间';
+                        editor.getEditor(editorName).enable();
+                    }
                 }
                 break;
             case '14':
@@ -1096,15 +1098,17 @@ function monitor() {
             case '35':
                 editor.getEditor('root.CE101 测试设备').disable();
                 $("div[data-schemapath='root.CE101 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CE101 测试设备][5][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE101 测试设备][7][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CE101 测试设备][5][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE101 测试设备][7][备注]']").prop('disabled', false);
+                }
                 // for (var i = 0; i < 8; i++) {
                 //     var limitName = 'root.CE101 测试设备.' + i + '.限值';
                 //     editor.getEditor(limitName).hide();
@@ -1115,265 +1119,305 @@ function monitor() {
             case '36':
                 editor.getEditor('root.CE102 测试设备').disable();
                 $("div[data-schemapath='root.CE102 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CE102 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE102 测试设备][7][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CE102 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE102 测试设备][7][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '37':
                 editor.getEditor('root.CE106 测试设备').disable();
                 $("div[data-schemapath='root.CE106 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CE106 测试设备][2][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][5][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE106 测试设备][7][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CE106 测试设备][2][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][5][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE106 测试设备][7][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '38':
                 editor.getEditor('root.CE107 测试设备').disable();
                 $("div[data-schemapath='root.CE107 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CE107 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE107 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE107 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CE107 测试设备][3][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CE107 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE107 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE107 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CE107 测试设备][3][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '39':
                 editor.getEditor('root.CS101 测试设备').disable();
                 $("div[data-schemapath='root.CS101 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS101 测试设备][8][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][7][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS101 测试设备][8][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS101 测试设备][8][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][7][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS101 测试设备][8][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '40':
                 editor.getEditor('root.CS102 测试设备').disable();
                 $("div[data-schemapath='root.CS102 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS102 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS102 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS102 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS102 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS102 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS102 测试设备][5][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS102 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS102 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS102 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS102 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS102 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS102 测试设备][5][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '41':
                 editor.getEditor('root.CS103 测试设备').disable();
                 $("div[data-schemapath='root.CS103 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS103 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS103 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS103 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS103 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS103 测试设备][4][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS103 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS103 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS103 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS103 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS103 测试设备][4][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '42':
                 editor.getEditor('root.CS104 测试设备').disable();
                 $("div[data-schemapath='root.CS104 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS104 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS104 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS104 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS104 测试设备][3][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS104 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS104 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS104 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS104 测试设备][3][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '43':
                 editor.getEditor('root.CS105 测试设备').disable();
                 $("div[data-schemapath='root.CS105 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS105 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS105 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS105 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS105 测试设备][3][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS105 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS105 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS105 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS105 测试设备][3][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '44':
                 editor.getEditor('root.CS106 测试设备').disable();
                 $("div[data-schemapath='root.CS106 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS106 测试设备][6][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS106 测试设备][6][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS106 测试设备][6][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS106 测试设备][6][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '45':
                 editor.getEditor('root.CS109 测试设备').disable();
                 $("div[data-schemapath='root.CS109 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS109 测试设备][5][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[CS109 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS109 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS109 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS109 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS109 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS109 测试设备][5][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS109 测试设备][5][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[CS109 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS109 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS109 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS109 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS109 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS109 测试设备][5][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '46':
                 editor.getEditor('root.CS112 测试设备').disable();
                 $("div[data-schemapath='root.CS112 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS112 测试设备][0][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS112 测试设备][0][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '47':
                 editor.getEditor('root.CS114 测试设备').disable();
                 $("div[data-schemapath='root.CS114 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS114 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][7][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][8][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][9][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][10][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS114 测试设备][11][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS114 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][7][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][8][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][9][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][10][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS114 测试设备][11][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '48':
                 editor.getEditor('root.CS115 测试设备').disable();
                 $("div[data-schemapath='root.CS115 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS115 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][7][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][8][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS115 测试设备][9][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS115 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][7][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][8][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS115 测试设备][9][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '49':
                 editor.getEditor('root.CS116 测试设备').disable();
                 $("div[data-schemapath='root.CS116 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[CS116 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][7][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][8][备注]']").prop('disabled', false);
-                $("textarea[name='root[CS116 测试设备][9][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[CS116 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][7][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][8][备注]']").prop('disabled', false);
+                    $("textarea[name='root[CS116 测试设备][9][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '50':
                 editor.getEditor('root.RE101 测试设备').disable();
                 $("div[data-schemapath='root.RE101 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[RE101 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE101 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE101 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE101 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE101 测试设备][4][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[RE101 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE101 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE101 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE101 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE101 测试设备][4][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '51':
                 editor.getEditor('root.RE102 测试设备').disable();
                 $("div[data-schemapath='root.RE102 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[RE102 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE102 测试设备][7][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[RE102 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE102 测试设备][7][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '52':
                 editor.getEditor('root.RE103 测试设备').disable();
                 $("div[data-schemapath='root.RE103 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[RE103 测试设备][7][主要性能指标]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][7][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][8][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][9][备注]']").prop('disabled', false);
-                $("textarea[name='root[RE103 测试设备][10][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[RE103 测试设备][7][主要性能指标]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][7][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][8][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][9][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RE103 测试设备][10][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '53':
                 editor.getEditor('root.RS101 测试设备').disable();
                 $("div[data-schemapath='root.RS101 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[RS101 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][6][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS101 测试设备][7][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[RS101 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][6][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS101 测试设备][7][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '54':
                 editor.getEditor('root.RS103 测试设备').disable();
                 $("div[data-schemapath='root.RS103 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[RS103 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS103 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS103 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS103 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS103 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS103 测试设备][5][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[RS103 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS103 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS103 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS103 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS103 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS103 测试设备][5][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;
             case '55':
                 editor.getEditor('root.RS105 测试设备').disable();
                 $("div[data-schemapath='root.RS105 测试设备'] button").addClass("hidden");
-                $("textarea[name='root[RS105 测试设备][0][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS105 测试设备][1][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS105 测试设备][2][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS105 测试设备][3][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS105 测试设备][4][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS105 测试设备][5][备注]']").prop('disabled', false);
-                $("textarea[name='root[RS105 测试设备][6][备注]']").prop('disabled', false);
+                if(outlineStatus == 0 || outlineStatus == 4) {
+                    $("textarea[name='root[RS105 测试设备][0][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS105 测试设备][1][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS105 测试设备][2][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS105 测试设备][3][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS105 测试设备][4][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS105 测试设备][5][备注]']").prop('disabled', false);
+                    $("textarea[name='root[RS105 测试设备][6][备注]']").prop('disabled', false);
+                }
                 $("textarea[name*='限值']").addClass("hidden");
                 $("th:contains('限值')").text("");
                 break;

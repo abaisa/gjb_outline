@@ -339,7 +339,7 @@ function monitor() {
                     $("input[name*='不实施理由']").removeAttr("readonly");
                     $("input[name*='备注']").removeAttr("readonly");
                 });
-                // $("#editor_holder button").addClass("hidden");
+                $("#editor_holder button").addClass("hidden");
                 break;
             case '17':
                 page17 = false;
@@ -523,7 +523,7 @@ function monitor() {
                     }
                 // }
 
-                // $("#editor_holder button").addClass("hidden");
+                $("#editor_holder button").addClass("hidden");
                 break;
             case '21':
                 page21 = false;
@@ -569,7 +569,7 @@ function monitor() {
                     $("input[name*='不实施理由']").removeAttr("readonly");
                     $("input[name*='备注']").removeAttr("readonly");
                 });
-                // $("#editor_holder button").addClass("hidden");
+                $("#editor_holder button").addClass("hidden");
                 break;
             case '22':
                 page22 = false;
@@ -615,7 +615,7 @@ function monitor() {
                     $("input[name*='不实施理由']").removeAttr("readonly");
                     $("input[name*='备注']").removeAttr("readonly");
                 });
-                // $("#editor_holder button").addClass("hidden");
+                $("#editor_holder button").addClass("hidden");
                 break;
 
             case '23':
@@ -688,14 +688,14 @@ function monitor() {
                 editor.getEditor('root.数据处理方法').disable();
                 editor.getEditor('root.测试结果评定准则').disable();
                 var testPortArray = load_data.试验位置及被试品工作状态;
-                for(var i = 0; i < testPortArray.length; i++) {
-                    var editorName = 'root.试验位置及被试品工作状态.'+i+'.试验位置';
-                    editor.getEditor(editorName).disable();
-                }
+                // for(var i = 0; i < testPortArray.length; i++) {
+                //     var editorName = 'root.试验位置及被试品工作状态.'+i+'.试验位置';
+                //     editor.getEditor(editorName).disable();
+                // }
                 $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                editor.on('change',function() {
-                    $("input[name*='工作状态描述']").attr("readonly", "readonly");
-                });
+                // editor.on('change',function() {
+                //     $("input[name*='工作状态描述']").attr("readonly", "readonly");
+                // });
                 // $("#editor_holder button").addClass("hidden");
                 break
             case '25':

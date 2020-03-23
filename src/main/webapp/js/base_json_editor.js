@@ -124,6 +124,10 @@ function loadTargetPage(action) {
                 if (load_data != null && load_data.length != 0 && !$.isEmptyObject(load_data)) {
                     editor.setValue(load_data);
                 }
+                //删除最后一页的下一页按钮问题
+                if(page_number == 59){
+                    $("button[id*='next_page']").addClass("hidden");
+                }
 
                 //设置当前页的监听事件
                 monitor();
